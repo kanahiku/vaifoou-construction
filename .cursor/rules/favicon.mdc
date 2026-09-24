@@ -22,16 +22,8 @@ Never update one file and leave the others stale.
 
 ## Source of truth for the icon shape
 
-Figma node `1:226` (Aloha Salads file). Compound cream badge with hibiscus + **AS** as even-odd holes. Local copy: `public/favicon.svg`.
-
-Sit the path on `brand.colors.navy` (`#3C2718`) so the cut-outs read as cacao, not as transparent holes. Do not leave the Figma MCP localhost SVG URL in production files.
-
-```xml
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92.0174 92.0174" width="32" height="32">
-  <rect width="92.0174" height="92.0174" fill="[brand.colors.navy]"/>
-  <path fill="[brand.colors.page]" fill-rule="evenodd" d="…"/>
-</svg>
-```
+Use the client logo or favicon shape from the active Figma design system. Local copy: `public/favicon.svg`.
+Do not leave Figma MCP localhost image URLs in production files.
 
 ## Regeneration script
 
@@ -46,11 +38,11 @@ node scripts/gen-icons.mjs
 ```yaml
 metadata:
   title:
-    default: Aloha Salads
-    template: '%s | Aloha Salads'
+    default: Vaifoou Construction
+    template: '%s | Vaifoou Construction'
   description: '…'                     # ← from Figma / SEO brief
   openGraph:
-    site_name: Aloha Salads
+    site_name: Vaifoou Construction
     images:
       - url: '~/assets/images/og-image.jpg'
         width: 1200
@@ -67,7 +59,7 @@ Always use the brand accent colour (`brand.colors.accent` from `src/brand.ts`), 
 ## Do not
 
 - Update only `favicon.svg` and leave `.ico` / `apple-touch-icon.png` stale
-- Reference `logo.webp` (old R&C Roofing asset — deleted) anywhere in `config.yaml` or meta tags
+- Reference an old client logo anywhere in `config.yaml` or meta tags
 - Hardcode a non-brand colour in `mask-icon`
 - Use the Figma MCP localhost image server URLs in any production asset
 - Commit a 1024 × 124 logo as the OG image — OG cards must be 1200 × 630

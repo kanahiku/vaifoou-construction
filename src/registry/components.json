@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "name": "aloha-salads-patterns",
+  "name": "vaifoou-construction-patterns",
   "description": "Inventory of reusable widgets. Restyle these after brand.ts and atoms; do not fork per page.",
   "sourceOfTruth": {
     "tokens": "src/brand.ts",
@@ -190,10 +190,10 @@
       "id": "P-17",
       "name": "Site footer",
       "figmaNames": ["Footer", "Frame 1707478621", "Frame 1707478619"],
-      "shape": "cream band: circular stamp + 4 Norca-Rough columns, then full-bleed wordmark",
+      "shape": "footer band with logo, link columns, social links, legal links, and copyright",
       "component": "Footer",
       "import": "~/components/widgets/Footer.astro",
-      "notes": "Homepage 59:577 (stamp + menu/catering/locations/about) and 66:833 (ALOHA SALADS wordmark). Grey placeholders for both images. Do not fork a HomeFooter."
+      "notes": "Shared footer chrome. Do not fork a HomeFooter."
     },
     {
       "id": "P-13",
@@ -516,15 +516,6 @@
       "notes": "Figma node 121:1286 (light, page bg) and 121:916 (dark, tan bg-cta/60). Uses Card variant='podcast' (A-05) — cream card, dark type, same on both tones. Pass one episode while the grid is still a template."
     },
     {
-      "id": "P-37",
-      "name": "About Story",
-      "figmaNames": ["My Story & Philosophy", "image-text split", "121:1730"],
-      "shape": "bg-page split: image left (flex-1, aspect 545/564, rounded-bl/tl-[32px]) + text right (591px fixed) — eyebrow, h2 with accent span, body paragraphs. Right-edge fade gradient on image.",
-      "component": "AboutStory",
-      "import": "~/components/widgets/AboutStory.astro",
-      "notes": "Figma node 121:1730. About page only — the right-fade gradient on the image is unique to this section. Image is a grey placeholder until asset is ready."
-    },
-    {
       "id": "P-38",
       "name": "Single Quote",
       "figmaNames": ["You are only as young as your oldest parts", "SingleTestimonialCardSection", "121:1715"],
@@ -593,23 +584,6 @@
       "notes": "Homepage 66:2. 32px Wreck Script (type-ticker), cream type, 42×42 grey icon placeholders, CSS marquee. Do not fork per page."
     },
     {
-      "id": "P-43",
-      "name": "Featured dishes",
-      "figmaNames": ["Featured dishes", "Frame 2", "The ones people come back for."],
-      "shape": "Header row (eyebrow + h2 + lede | primary CTA) + 3 photo tiles with overlay titles.",
-      "component": "FeaturedDishes",
-      "import": "~/components/widgets/FeaturedDishes.astro",
-      "props": {
-        "eyebrow": "Wreck Script label",
-        "title": "h2",
-        "subtitle": "body-lg lede",
-        "ctaText": "primary button label",
-        "ctaHref": "button href",
-        "dishes": "Array<{ title, description }> — 3 overlay photo cards"
-      },
-      "notes": "Homepage 59:66. Cream bg-page, 64px pad, 120/64 vertical. Cards 457×514 grey placeholders, black/30 + blur overlay, cream h3 + body. Decorative leaf vectors omitted (image pass). Do not fork per page."
-    },
-    {
       "id": "P-44",
       "name": "Local sourcing",
       "figmaNames": ["Our ingredients & local sourcing", "Sourced close to home, on purpose.", "Frame 35"],
@@ -627,71 +601,6 @@
       "notes": "Homepage 59:106. Transparent section so the page gradient + leaf motif show through. Cream fact cards stay filled. Cards overlap the intro by 42px. Basket icons are grey placeholders until the image pass. Do not fork per page."
     },
     {
-      "id": "P-45",
-      "name": "Locations",
-      "figmaNames": ["Six spots across O'ahu", "Locations section", "59:155"],
-      "shape": "bg-page cream. 2-col: left = eyebrow+h2+body-lg+primary CTA then 2×2 blueberry location cards (name+address row + blueberry-light view-store button with pin icon) / right = square photo placeholder.",
-      "component": "Locations",
-      "import": "~/components/widgets/Locations.astro",
-      "props": {
-        "eyebrow": "Wreck Script label",
-        "title": "h2",
-        "subtitle": "body-lg lede",
-        "ctaText": "primary button label",
-        "ctaHref": "button href",
-        "locations": "Location[] — { name, shopName, addressLine1, addressLine2, href? }",
-        "id": "section anchor"
-      },
-      "notes": "Homepage 59:155. Location card bg is bg-section-dark (blueberry #798991). View store button bg is bg-card-dark (blueberry-light #8FA1AB) with inline pin SVG icon. Right column is a square grey placeholder until photo asset is ready."
-    },
-    {
-      "id": "P-46",
-      "name": "Salad Builder",
-      "figmaNames": ["Build your own salad, your way.", "Design Your Own Salad", "59:1868"],
-      "shape": "Transparent outer. Inner gradient band from-transparent from-[24%] to-page/90. 2-col: left = eyebrow+h2+body-lg+primary CTA / right = salad bowl illustration placeholder (562×624) with 3 floating bg-cta tags (Healthy -6.74°, Local, Fresh +8.09°) each with icon placeholder + 32px Wreck Script cream text.",
-      "component": "SaladBuilder",
-      "import": "~/components/widgets/SaladBuilder.astro",
-      "props": {
-        "eyebrow": "Wreck Script label (text-eyebrow/80)",
-        "title": "h2",
-        "subtitle": "body-lg lede",
-        "ctaText": "primary button label",
-        "ctaHref": "button href",
-        "id": "section anchor"
-      },
-      "notes": "Homepage 59:1868. Section is transparent — page gradient + leaf motif show through. Salad bowl is a grey placeholder until illustration asset is ready. Floating tags use bg-cta (accent/green-light #9B9D47). Icons inside tags are grey placeholders (Streamline Freehand icons from Figma). Do not fork per page."
-    },
-    {
-      "id": "P-47",
-      "name": "Our Story",
-      "figmaNames": ["Kailua roots, island-wide.", "Our story", "59:1765"],
-      "shape": "Centered 1440px dark blueberry panel with 20px blueberry border and subtle leaf motif. 2-col: left = eyebrow+h2+body-lg + staggered cream action cards; right = cream polaroid photo placeholder with primary CTA below image.",
-      "component": "OurStory",
-      "import": "~/components/widgets/OurStory.astro",
-      "props": {
-        "eyebrow": "Wreck Script label, mix-blend-overlay on dark panel",
-        "title": "h2 cream",
-        "subtitle": "body-lg cream",
-        "ctaText": "primary button label",
-        "ctaHref": "button href",
-        "actions": "StoryAction[] — { title, description, iconLabel }",
-        "id": "section anchor"
-      },
-      "notes": "Homepage 59:1765. Uses MotifLayer over bg-section-dark. Action cards are bg-page with border-card-dark. Photo and Streamline icons are placeholders until the image pass."
-    },
-    {
-      "id": "P-48",
-      "name": "Interior page shell",
-      "figmaNames": ["Page Hero", "Interior"],
-      "shape": "Hero2 page variant + optional section lists/links until Figma for that route arrives",
-      "component": "InteriorPage",
-      "import": "~/components/widgets/InteriorPage.astro",
-      "props": {
-        "page": "InteriorPageContent from src/data/pages/interior.ts"
-      },
-      "notes": "Temporary composition widget for sitemap routes. Replace per page when Figma is designed. Do not fork per route."
-    },
-    {
       "id": "P-49",
       "name": "Pre-footer conversion band",
       "figmaNames": ["Conversion band", "Pre-footer"],
@@ -699,121 +608,6 @@
       "component": "ConversionBand",
       "import": "~/components/widgets/ConversionBand.astro",
       "notes": "Former pre-footer CTA row. Removed from PageLayout — do not reintroduce per page."
-    },
-    {
-      "id": "P-08",
-      "name": "Menu categories editorial grid",
-      "figmaNames": ["Menu Categories", "Menu Grid", "Menu Bento"],
-      "shape": "Sticky quick-nav pill strip + 3-row editorial bento grid (12-col). Row 1: hero 8+4 cols; Row 2: 3×4 cols; Row 3: 4×3 cols. Each card: image placeholder + category name + description + explore arrow.",
-      "component": "MenuCategories",
-      "import": "~/components/widgets/MenuCategories.astro",
-      "props": {
-        "eyebrow": "string",
-        "title": "string",
-        "subtitle": "optional body-lg under the heading",
-        "ctaText": "header CTA label — empty string hides it; default is catering",
-        "ctaHref": "header CTA href",
-        "excludeHref": "optional category href to omit (reflows to an even 4-col grid)"
-      },
-      "notes": "Bento on /menu. Even 4-col grid on menu subpages via excludeHref. Card heights set via data-row CSS: 480px / 360px / 260px; grid layout uses 300px."
-    },
-    {
-      "id": "P-55",
-      "name": "Full menu section",
-      "figmaNames": ["Full Menu", "Goop-style menu listing", "Menu products"],
-      "shape": "Cream menu page section with sticky category anchor strip and grouped product-card grids. Each dish card has a 4:3 grey image placeholder, rough title, and short description.",
-      "component": "FullMenuSection",
-      "import": "~/components/widgets/FullMenuSection.astro",
-      "props": {
-        "eyebrow": "optional Wreck Script label",
-        "title": "h2 section heading",
-        "subtitle": "optional body-lg intro",
-        "categories": "Array<{ title, href?, description?, items: Array<{ title, description? }> }>",
-        "ctaText": "optional primary button label",
-        "ctaHref": "CTA href",
-        "id": "section anchor"
-      },
-      "notes": "Used on /menu to show the complete menu in one page. Keep images as HeroImagePlaceholder until the menu photo pass."
-    },
-    {
-      "id": "P-50",
-      "name": "Build steps",
-      "figmaNames": ["How to Build Your Own Salad", "Build Steps", "What's included"],
-      "shape": "Split: left eyebrow+h2+lede+numbered steps+note+CTA / right bowl illustration. Numbered recipe for custom builds.",
-      "component": "BuildSteps",
-      "import": "~/components/widgets/BuildSteps.astro",
-      "props": {
-        "eyebrow": "Wreck Script label",
-        "title": "h2",
-        "subtitle": "body-lg lede",
-        "note": "small footnote under the steps",
-        "ctaText": "primary button label",
-        "ctaHref": "button href",
-        "steps": "BuildStep[] — { title, description }"
-      },
-      "notes": "Used on Design Your Own Salad. Pass steps from the page. Default image is own-salad.png; override with the image slot."
-    },
-    {
-      "id": "P-51",
-      "name": "Menu item list",
-      "figmaNames": ["Our Salad Menu", "Our Wraps & Subs Menu", "Our Vegan Menu", "Our Vegetarian Menu", "Our Soup Menu", "Our Keiki Menu"],
-      "shape": "Cream menu-paper list. Script index, ghosted number, h3 title, description column. Hover fills the row blueberry.",
-      "component": "MenuItemsSection",
-      "import": "~/components/widgets/MenuItemsSection.astro",
-      "props": {
-        "eyebrow": "optional Wreck Script label",
-        "title": "h2 section heading",
-        "intro": "optional body-lg intro",
-        "items": "MenuItem[] — { title, description }",
-        "ctaText": "optional primary button after the list",
-        "ctaHref": "CTA href",
-        "id": "section anchor"
-      },
-      "notes": "Used by menu category pages and location subpages. Keep dish data in route files until a CMS/menu model is introduced. Same list rhythm for short and long menus."
-    },
-    {
-      "id": "P-52",
-      "name": "Location directory",
-      "figmaNames": ["Find a Fresh, Local Meal Near You", "Location cards", "Store directory"],
-      "shape": "Cream section with peach + big-leaf motifs. Header + 3-col blueberry cards (name, intro, address, phone, View Location). Hours omitted on purpose.",
-      "component": "LocationDirectory",
-      "import": "~/components/widgets/LocationDirectory.astro",
-      "props": {
-        "eyebrow": "optional Wreck Script label",
-        "title": "h2 section heading",
-        "subtitle": "optional body-lg under the heading",
-        "excludeHref": "optional store href to omit (for location subpages)",
-        "excludeHrefs": "optional extra store hrefs to omit",
-        "id": "section anchor"
-      },
-      "notes": "Hub on /locations. Reuse on location subpages with excludeHref so the current store drops out. Card chrome matches homepage Locations (P-45). Do not list hours here."
-    },
-    {
-      "id": "P-54",
-      "name": "Catering sub-page nav",
-      "figmaNames": ["More Catering Options", "Catering cross-links"],
-      "shape": "Sage-grey band. Eyebrow + h3 heading + wrapping pill-link row, one pill per catering occasion. Suppresses current page via excludeHref.",
-      "component": "CateringSubNav",
-      "import": "~/components/widgets/CateringSubNav.astro",
-      "props": {
-        "excludeHref": "href of the current sub-page to omit from the list",
-        "id": "section anchor"
-      },
-      "notes": "Appears on all 7 catering sub-pages (corporate, office-lunches, meetings, events, parties, schools, large-groups). Always placed before FAQs."
-    },
-    {
-      "id": "P-53",
-      "name": "Store visit",
-      "figmaNames": ["Location, Hours, and Contact", "Store details", "Google Maps"],
-      "shape": "Split: blueberry visit card (address, phone, hours, Get Directions) / Google Maps embed.",
-      "component": "StoreVisit",
-      "import": "~/components/widgets/StoreVisit.astro",
-      "props": {
-        "store": "StoreLocation from src/data/locations.ts",
-        "title": "h2 section heading",
-        "id": "section anchor"
-      },
-      "notes": "Used on location subpages. Hours live here, not in LocationDirectory. Pass mapsEmbedSrc on the store when the brief includes an embed URL."
     }
   ]
 }

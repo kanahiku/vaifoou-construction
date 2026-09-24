@@ -30,7 +30,6 @@ import {
 import { blogPosts as localBlogPosts } from '../../data/pages/blogPosts';
 /* contact page removed */
 import { navigationData } from '../../data/navigation';
-import { interiorPaths } from '../../data/pages/interior';
 
 export async function getHomeContent(): Promise<HomePageContent> {
   const page = await getSanityHomeContent();
@@ -159,7 +158,6 @@ const STATIC_PATHS = [
   '/terms',
   '/accessibility',
   '/contact',
-  ...interiorPaths,
 ];
 
 export async function getPublicContentPaths(): Promise<string[]> {

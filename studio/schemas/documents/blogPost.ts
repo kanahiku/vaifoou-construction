@@ -49,7 +49,7 @@ export const blogPost = defineType({
       title: 'Author',
       type: 'string',
       group: 'content',
-      initialValue: 'Aloha Salads',
+      initialValue: 'Vaifoou Construction',
     }),
     defineField({
       name: 'image',

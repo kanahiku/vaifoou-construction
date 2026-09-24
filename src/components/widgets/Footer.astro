@@ -5,9 +5,9 @@
  *
  */
 import { Icon } from 'astro-icon/components';
-import alohaWordsMotif from '~/assets/images/aloha-words-motif.svg?url';
-import circleMotif from '~/assets/images/circle-motif.svg?url';
+import Logo from '~/components/Logo.astro';
 import { getHomePermalink } from '~/utils/permalinks';
+import { site } from '~/config/site';
 
 interface Link {
   text?: string;
@@ -43,17 +43,8 @@ const {
     class="mx-auto flex w-full max-w-container flex-col px-5 pt-16 sm:px-8 md:px-16"
   >
     <div class="flex w-full flex-col items-start justify-between gap-12 md:flex-row md:items-center">
-      <a href={getHomePermalink()} class="shrink-0" aria-label="Aloha Salads">
-        <img
-          src={circleMotif}
-          alt=""
-          width="235"
-          height="234"
-          class="block h-auto"
-          style="width: min(242px, 70vw);"
-          loading="lazy"
-          decoding="async"
-        />
+      <a href={getHomePermalink()} class="shrink-0" aria-label={site.name}>
+        <Logo class="max-w-[260px] text-[28px]" />
       </a>
 
       <nav class="grid w-full grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-16 md:w-auto md:grid-cols-4" aria-label="Footer">
@@ -130,16 +121,4 @@ const {
       )}
     </div>
   )}
-
-  <div class="mx-auto w-full max-w-container pt-6">
-    <img
-      src={alohaWordsMotif}
-      alt="Aloha Salads"
-      width="1440"
-      height="160"
-      class="block h-auto w-full"
-      loading="lazy"
-      decoding="async"
-    />
-  </div>
 </footer>

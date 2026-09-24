@@ -21,13 +21,13 @@ export const CONTACT = {
   },
 
   /** Primary contact email shown in legal pages and schema.org. */
-  email: 'info@alohasalads.com',
+  email: 'hello@example.com',
 
   address: {
-    street: '600 Kailua Road #103',
-    city: 'Kailua',
-    state: 'HI',
-    zip: '96734',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
     country: 'US',
     /** "City, ST ZIP" — used in footer and CTABanner one-liner. */
     get cityLine() {
@@ -57,5 +57,5 @@ export const CONTACT = {
     },
   ],
 
-  areaServed: 'O‘ahu',
+  areaServed: 'Service Area',
 } as const;

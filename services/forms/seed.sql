@@ -3,10 +3,10 @@
 -- After DNS is verified, update from_email to: hello@client-domain.com
 INSERT OR REPLACE INTO sites (slug, name, notify_email, from_email, from_name, allowed_origins)
 VALUES (
-  'aloha-salads',
-  'Aloha Salads',
+  'vaifoou-construction',
+  'Vaifoou Construction',
   'hello@example.com',
-  'Aloha Salads <onboarding@resend.dev>',
-  'Aloha Salads',
+  'Vaifoou Construction <onboarding@resend.dev>',
+  'Vaifoou Construction',
   '["http://localhost:4321","https://*.vercel.app","https://example.com","https://www.example.com"]'
 );

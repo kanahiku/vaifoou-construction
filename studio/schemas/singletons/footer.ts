@@ -29,7 +29,7 @@ export const siteFooter = defineType({
       name: 'footNote',
       title: 'Footer Note (copyright)',
       type: 'string',
-      description: 'e.g. © 2026 Aloha Salads. All rights reserved.',
+      description: 'e.g. © 2026 Vaifoou Construction. All rights reserved.',
     }),
   ],
   preview: {

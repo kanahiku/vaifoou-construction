@@ -1,22 +1,14 @@
 ---
 import { twMerge } from 'tailwind-merge';
-import alohaLogo from '~/assets/images/aloha-logo.svg?url';
 import { CONTACT } from '~/config/contact';
 
 interface Props {
   class?: string;
-  width?: number;
-  height?: number;
 }
 
-const { class: className, width = 174, height = 20 } = Astro.props;
+const { class: className } = Astro.props;
 ---
 
-<img
-  src={alohaLogo}
-  alt={CONTACT.businessName}
-  width={width}
-  height={height}
-  class={twMerge('block h-auto shrink-0', className)}
-  decoding="async"
-/>
+<span class={twMerge('block shrink-0 font-heading text-[20px] leading-none text-heading', className)}>
+  {CONTACT.businessName}
+</span>

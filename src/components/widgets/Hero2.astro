@@ -17,6 +17,7 @@ import smallLeafMotif from '~/assets/images/small-leaf-motif.webp';
 import Heading from '~/components/ui/Heading.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import type { ContentImage } from '~/lib/content/types';
+import { site } from '~/config/site';
 
 import type { Hero as Props } from '~/types';
 
@@ -263,7 +264,7 @@ const isLocalOverlayImage =
                 fill
                 class="w-full rounded-[32px]"
                 style="aspect-ratio: 1200 / 400;"
-                label="Aloha Salads page hero placeholder"
+                label={`${site.name} page hero placeholder`}
               />
             )}
           </div>

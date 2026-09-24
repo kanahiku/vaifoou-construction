@@ -2,7 +2,7 @@
 # Edit src/config/site.ts for name, URL, GTM, and Search Console.
 
 site:
-  name: Aloha Salads
+  name: Vaifoou Construction
   site: 'https://example.com'
   base: '/'
   trailingSlash: false
@@ -11,14 +11,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: Aloha Salads
-    template: '%s | Aloha Salads'
-  description: 'Island-grown produce, never-frozen local ahi, and bowls built the way you like them. Kailua-born since 2006 — six spots on O‘ahu.'
+    default: Vaifoou Construction
+    template: '%s | Vaifoou Construction'
+  description: 'Vaifoou Construction is a construction company website starter ready for the new design system.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: Aloha Salads
+    site_name: Vaifoou Construction
     images:
       - url: '~/assets/images/og-image.jpg'
         width: 1200

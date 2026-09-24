@@ -2,19 +2,19 @@
 export const PRIMARY_CTA_NOTE = '';
 
 /** Primary conversion button label + destination sitewide. */
-export const PRIMARY_CTA_LABEL = 'order online';
-export const PRIMARY_CTA_HREF = '/order-online';
+export const PRIMARY_CTA_LABEL = 'request a quote';
+export const PRIMARY_CTA_HREF = '/contact';
 
-export const LOCATION_CTA_LABEL = 'find a location';
-export const LOCATION_CTA_HREF = '/locations';
+export const LOCATION_CTA_LABEL = 'contact us';
+export const LOCATION_CTA_HREF = '/contact';
 
-export const CATERING_CTA_LABEL = 'order catering';
-export const CATERING_CTA_HREF = '/catering';
+export const CATERING_CTA_LABEL = 'request a quote';
+export const CATERING_CTA_HREF = '/contact';
 
 /** Footer conversion card. */
-export const FOOTER_CTA_EYEBROW = 'Hungry?';
-export const FOOTER_CTA_TITLE = 'Order ahead.<br />Skip the line.';
+export const FOOTER_CTA_EYEBROW = 'Start a project';
+export const FOOTER_CTA_TITLE = 'Ready to build?';
 export const FOOTER_CTA_BODY =
-  'Pickup or delivery from any of our six spots on O‘ahu. Island-grown produce, never-frozen local ahi.';
-export const FOOTER_CTA_LABEL = 'order online';
-export const FOOTER_CTA_HREF = '/order-online';
+  'Share a few details and the team will follow up with the next steps.';
+export const FOOTER_CTA_LABEL = 'request a quote';
+export const FOOTER_CTA_HREF = '/contact';

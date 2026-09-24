@@ -1,5 +1,5 @@
-# Aloha Salads
+# Vaifoou Construction
 
-Island-grown produce, never-frozen local ahi, and bowls built the way you like them.
+Construction website starter. The design system and homepage will be rebuilt from the upcoming Figma MCP references.
 
 **Start here:** [ONBOARDING.md](./ONBOARDING.md)

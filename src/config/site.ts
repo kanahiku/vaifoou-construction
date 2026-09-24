@@ -11,16 +11,14 @@
  *   src/config/schema/business.ts  schema.org extras (price range, credentials)
  */
 export const site = {
-  name: 'Aloha Salads',
+  name: 'Vaifoou Construction',
   url: 'https://example.com',
-  description:
-    'Island-grown produce, never-frozen local ahi, and bowls built the way you like them. Kailua-born since 2006 — six spots on O‘ahu.',
-  footerTagline:
-    'Fresh, healthy food that tastes worth coming back for — and feels like home. Six locations across O‘ahu.',
+  description: 'Vaifoou Construction is a construction company website starter ready for the new design system.',
+  footerTagline: 'Construction services built around clear communication, careful planning, and quality work.',
   trailingSlash: false,
 
   /** Cloudflare Worker `sites.slug`. `PUBLIC_SITE_SLUG` in env overrides this. */
-  formSlug: 'aloha-salads',
+  formSlug: 'vaifoou-construction',
 
   analytics: {
     /** Google Tag Manager container. Empty until the client GTM is created. */

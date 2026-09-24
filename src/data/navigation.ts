@@ -4,53 +4,11 @@ import { CONTACT, PRIMARY_CTA_LABEL, PRIMARY_CTA_HREF, SOCIAL } from '~/config';
 export const navigationData: NavigationContent = {
   header: {
     links: [
-      {
-        text: 'menu',
-        href: '/menu',
-        links: [
-          { text: 'Salads', href: '/menu/salads' },
-          { text: 'Wraps & Subs', href: '/menu/wraps-subs' },
-          { text: 'Soups', href: '/menu/soups' },
-          { text: 'Keiki / Kids', href: '/menu/kids' },
-          { text: 'Design Your Own Salad', href: '/menu/design-your-own-salad' },
-          { text: 'Vegan Options', href: '/menu/vegan' },
-          { text: 'Vegetarian Options', href: '/menu/vegetarian' },
-          { text: 'Healthy Options', href: '/menu/healthy-options' },
-          { text: 'Drinks', href: '/menu/drinks' },
-        ],
-      },
-      {
-        text: 'catering',
-        href: '/catering',
-        links: [
-          { text: 'Corporate Catering', href: '/catering/corporate' },
-          { text: 'Office Lunch Catering', href: '/catering/office-lunches' },
-          { text: 'Meeting Catering', href: '/catering/meetings' },
-          { text: 'Event Catering', href: '/catering/events' },
-          { text: 'Large Group Catering', href: '/catering/large-groups' },
-        ],
-      },
-      {
-        text: 'locations',
-        href: '/locations',
-        links: [
-          { text: 'Kailua', href: '/locations/kailua' },
-          { text: 'Kahala', href: '/locations/kahala' },
-          { text: 'Kaneohe', href: '/locations/kaneohe' },
-          { text: 'Kapolei', href: '/locations/kapolei' },
-          { text: 'Mililani', href: '/locations/mililani' },
-          { text: 'Pearlridge', href: '/locations/pearlridge' },
-        ],
-      },
-      {
-        text: 'about',
-        href: '/about',
-        links: [
-          { text: 'Our Story', href: '/about' },
-          { text: 'Our Ingredients', href: '/ingredients' },
-        ],
-      },
+      { text: 'services', href: '/#services' },
+      { text: 'process', href: '/#process' },
+      { text: 'reviews', href: '/reviews' },
       { text: 'blog', href: '/blog' },
+      { text: 'contact', href: '/contact' },
     ],
     actions: [{ variant: 'primary', text: PRIMARY_CTA_LABEL, href: PRIMARY_CTA_HREF }],
   },
@@ -58,53 +16,27 @@ export const navigationData: NavigationContent = {
   footer: {
     links: [
       {
-        title: 'menu',
+        title: 'site',
         links: [
-          { text: 'Full Menu', href: '/menu' },
-          { text: 'Salads', href: '/menu/salads' },
-          { text: 'Wraps & Subs', href: '/menu/wraps-subs' },
-          { text: 'Soups', href: '/menu/soups' },
-          { text: 'Kids Menu', href: '/menu/kids' },
-          { text: 'Design Your Own Salad', href: '/menu/design-your-own-salad' },
-          { text: 'Vegan Options', href: '/menu/vegan' },
-          { text: 'Vegetarian Options', href: '/menu/vegetarian' },
-          { text: 'Nutrition & Allergens', href: '/nutrition-allergens' },
+          { text: 'Home', href: '/' },
+          { text: 'Services', href: '/#services' },
+          { text: 'Process', href: '/#process' },
         ],
       },
       {
-        title: 'catering',
+        title: 'company',
         links: [
-          { text: 'Catering', href: '/catering' },
-          { text: 'Corporate Catering', href: '/catering/corporate' },
-          { text: 'Office Lunch Catering', href: '/catering/office-lunches' },
-          { text: 'Meeting Catering', href: '/catering/meetings' },
-          { text: 'Event Catering', href: '/catering/events' },
-          { text: 'Large Group Catering', href: '/catering/large-groups' },
-        ],
-      },
-      {
-        title: 'locations',
-        links: [
-          { text: 'All Locations', href: '/locations' },
-          { text: 'Kailua', href: '/locations/kailua' },
-          { text: 'Kahala', href: '/locations/kahala' },
-          { text: 'Kaneohe', href: '/locations/kaneohe' },
-          { text: 'Kapolei', href: '/locations/kapolei' },
-          { text: 'Mililani', href: '/locations/mililani' },
-          { text: 'Pearlridge', href: '/locations/pearlridge' },
-        ],
-      },
-      {
-        title: 'aloha salads',
-        links: [
-          { text: 'Our Story', href: '/about' },
-          { text: 'Our Ingredients', href: '/ingredients' },
-          { text: 'Order Online', href: PRIMARY_CTA_HREF },
-          { text: 'Gift Cards', href: '/gift-cards' },
-          { text: 'Press & Media', href: '/press' },
-          { text: 'Work With Us', href: '/careers' },
+          { text: 'Reviews', href: '/reviews' },
           { text: 'Blog', href: '/blog' },
           { text: 'Contact', href: '/contact' },
+        ],
+      },
+      {
+        title: 'contact',
+        links: [
+          { text: CONTACT.phone.display, href: CONTACT.phone.href },
+          { text: CONTACT.email, href: `mailto:${CONTACT.email}` },
+          { text: 'Request a Quote', href: PRIMARY_CTA_HREF },
         ],
       },
     ],

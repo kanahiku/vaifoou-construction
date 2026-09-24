@@ -30,6 +30,7 @@ import type { HTMLAttributes } from 'astro/types';
 import { transformUrl, parseUrl } from 'unpic';
 import { findImage } from '~/utils/images';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import { site } from '~/config/site';
 
 type Layout = 'constrained' | 'full-width' | 'fixed' | 'cover' | 'none';
 type Format = 'avif' | 'jpeg' | 'jpg' | 'png' | 'webp';
@@ -231,7 +232,7 @@ const _resolvedImageState = { AstroImage, resolved, cdnSrc, cdnSrcSet, nativeLay
 {
   _resolvedImageState && (
     <HeroImagePlaceholder
-      label={alt ? `${alt} placeholder` : 'Aloha Salads photo placeholder'}
+      label={alt ? `${alt} placeholder` : `${site.name} photo placeholder`}
       fill={layout === 'cover' || layout === 'full-width' || layout === 'none'}
       class={className ?? undefined}
       style={placeholderStyle}

@@ -1,9 +1,10 @@
 /**
  * Per-site motif (background pattern).
  *
- * Aloha Salads uses a page-level wallpaper (`PageBg` in Layout): green–blue
- * gradient + this tile. Sections that should show it stay transparent;
- * sections that should not, keep a solid fill (`bg-page`, `bg-card`, …).
+ * Temporary starter uses a page-level wallpaper (`PageBg` in Layout).
+ * Replace the pattern and colors when the new Figma design system arrives.
+ * Sections that should show it stay transparent; sections that should not,
+ * keep a solid fill (`bg-page`, `bg-card`, ...).
  *
  * Per-section `<SectionBg>` still works — leave `sections` off so the motif
  * is not painted twice.

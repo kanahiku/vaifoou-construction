@@ -58,7 +58,7 @@ const MAX = { name: 120, email: 254, phone: 40, message: 5000 };
 const MAX_PDF_B64 = 3_500_000;
 const DEFAULT_RESEND_DAILY_LIMIT = 20;
 const PDF_KIND = 'checkup-pdf';
-const DEFAULT_PDF_FILENAME = 'aloha-salads-order.pdf';
+const DEFAULT_PDF_FILENAME = 'vaifoou-construction-submission.pdf';
 
 /** Always allowed so local + Vercel preview/prod work before a custom domain exists. */
 const DEFAULT_ORIGIN_PATTERNS = [

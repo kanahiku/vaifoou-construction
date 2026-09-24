@@ -1,18 +1,6 @@
 ---
 /**
  * CTABanner — page CTA closer.
- *
- * Restaurant-grade redesign:
- *   - Full-width deep cacao section (bg-dark, #3C2718) — the most premium
- *     brand dark, used as the closing act before the footer.
- *   - Centered column layout: ornamental rule → eyebrow → display headline
- *     → subtitle → primary CTA button → ornamental rule.
- *   - Headline uses h1 scale (Norca Rough) — takes maximum visual weight.
- *   - CTA is primary (hibiscus fill, cream text) — not ghost/outline.
- *   - No blob shapes, no pill containers, no gradient pills.
- *
- * Sequence on page: LocalSourcing (sage) → FAQs (blueberry) → CTABanner (cacao)
- * → Footer (cream).
  */
 
 import Button from '~/components/ui/Button.astro';
@@ -43,8 +31,8 @@ const {
   eyebrow,
   title,
   subtitle,
-  ctaText = 'Order Online',
-  ctaHref = '/order-online',
+  ctaText = 'Request a Quote',
+  ctaHref = '/contact',
   secondaryCtaText,
   secondaryCtaHref,
   id,
@@ -55,7 +43,7 @@ const {
   {...id ? { id } : {}}
   class="not-prose relative w-full overflow-hidden bg-section-dark py-20 md:py-32 lg:py-40"
 >
-  {/* ── Leaf motif — same as OurStory section ── */}
+  {/* ── Decorative motif overlay ── */}
   <div
     class="pointer-events-none absolute inset-0 opacity-45"
     style={`background-image: url('${smallLeafMotif.src}'); background-size: 1700px auto; background-position: top left; background-repeat: repeat;`}

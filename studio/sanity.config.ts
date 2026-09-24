@@ -6,10 +6,10 @@ import { schemaTypes } from './schemas';
 import { structure } from './structure';
 
 export default defineConfig({
-  name: 'aloha-salads',
-  title: 'Aloha Salads',
+  name: 'vaifoou-construction',
+  title: 'Vaifoou Construction',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? 'sys9vj6r',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID ?? '2481svtr',
   dataset: process.env.SANITY_STUDIO_DATASET ?? 'production',
 
   plugins: [

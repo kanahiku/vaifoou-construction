@@ -9,7 +9,7 @@ import { CATERING_CTA_HREF } from '~/config/cta';
 
 const metadata = {
   title: `Contact | ${site.name}`,
-  description: `Get in touch with ${CONTACT.businessName} — catering, locations, and general questions.`,
+  description: `Get in touch with ${CONTACT.businessName} for project questions and quote requests.`,
   ignoreTitleTemplate: true,
 };
 ---
@@ -21,16 +21,16 @@ const metadata = {
     hideImage
     tagline="Contact"
     title="Get in Touch"
-    content="Questions about an order, catering, or a store? Send a note and we'll follow up soon."
+    content="Questions about a project or the upcoming website build? Send a note and we will follow up soon."
     actions={[
       { variant: 'primary', text: 'Email Us', href: `mailto:${CONTACT.email}` },
-      { variant: 'ghost-dark', text: 'Order Catering', href: CATERING_CTA_HREF },
+      { variant: 'ghost-dark', text: 'Request a Quote', href: CATERING_CTA_HREF },
     ]}
   />
 
   <Contact
     title="Send a message"
-    subtitle={`Tell us what you need and the right person from Aloha Salads will get back to you.`}
+    subtitle={`Tell us what you need and the right person from ${CONTACT.businessName} will get back to you.`}
     button="Send message"
     inputs={[
       { type: 'text', name: 'name', label: 'Name', autocomplete: 'name', placeholder: 'Your name', required: true },

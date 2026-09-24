@@ -1,106 +1,104 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
-import BrandBar from '~/components/widgets/BrandBar.astro';
-import MenuCategories from '~/components/widgets/MenuCategories.astro';
-import LocalSourcing from '~/components/widgets/LocalSourcing.astro';
-import SaladBuilder from '~/components/widgets/SaladBuilder.astro';
-import Locations from '~/components/widgets/Locations.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
-import OurStory from '~/components/widgets/OurStory.astro';
-import Heading from '~/components/ui/Heading.astro';
-import Text from '~/components/ui/Text.astro';
-import Button from '~/components/ui/Button.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import InfoCard from '~/components/ui/InfoCard.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+import CTABanner from '~/components/widgets/CTABanner.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
 import { site } from '~/config/site';
 import { PRIMARY_CTA_LABEL, PRIMARY_CTA_HREF } from '~/config/cta';
-import heroCover from '~/assets/images/hero-cover.webp';
 
 const metadata = {
-  title: 'Aloha Salads | Fresh Salads & Local Ahi on Oahu',
-  description:
-    "Founded in Kailua in 2006, Aloha Salads serves fresh island-grown produce and never-frozen local ahi across six Oahu locations. Order online for pickup.",
+  title: site.name,
+  description: site.description,
   ignoreTitleTemplate: true,
 };
+
+const services = [
+  {
+    title: 'Residential Construction',
+    description: 'Placeholder service copy for the upcoming design and content pass.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Commercial Projects',
+    description: 'A reusable card section ready to be restyled once the Figma system lands.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'Renovations',
+    description: 'Keep this starter content light so the real site can be composed from Figma.',
+    icon: 'tabler:tool',
+  },
+];
+
+const processSteps = [
+  {
+    title: 'Consultation',
+    description: 'Gather project goals, site details, budget range, and timeline.',
+    icon: 'tabler:messages',
+  },
+  {
+    title: 'Planning',
+    description: 'Define scope, materials, approvals, and the build schedule.',
+    icon: 'tabler:clipboard-list',
+  },
+  {
+    title: 'Construction',
+    description: 'Coordinate the work with clear updates from kickoff through handoff.',
+    icon: 'tabler:hammer',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  {/* ── 1. Hero ───────────────────────────────────────────── */}
   <Hero2
     id="home-hero"
-    variant="overlay"
+    variant="split-dark"
     overlapHeader={false}
-    tagline="Kailua-born since 2006 · Six spots on O'ahu"
-    title="Aloha Salads: Fresh Food<br/>Crafted Daily on Oahu."
-    subtitle="Founded in Kailua in May 2006, Aloha Salads provides fresh, locally grown food tailored to active island lifestyles. Voted First Place Hawaii's Best 2024 in the People's Choice Awards by the Star Advertiser, we operate six neighborhood restaurants across O'ahu."
-    image={{ ...heroCover, alt: 'Fresh ahi salad with island greens and avocado' }}
+    hideImage
+    tagline="New client starter"
+    title="Vaifoou Construction"
+    content="A clean starter site for the new construction project. The design system, homepage sections, and final content will be rebuilt from the Figma MCP references."
     actions={[
-      { variant: 'primary', text: 'Order Online', href: PRIMARY_CTA_HREF },
-      { variant: 'ghost', text: 'Find a Location', href: '/locations' },
+      { variant: 'primary', text: PRIMARY_CTA_LABEL, href: PRIMARY_CTA_HREF },
+      { variant: 'ghost-dark', text: 'View starter sections', href: '#services' },
     ]}
   />
 
-  {/* ── 2. Brand bar ─────────────────────────────────────── */}
-  <BrandBar />
-
-  {/* ── 3. Menu categories ───────────────────────────────── */}
-  <MenuCategories
-    eyebrow="Our menu"
-    title="Explore Our Full Menu"
-    subtitle="We prepare meals from scratch daily across our six Oahu locations. Browse our core categories below to find your meal or order ahead for fast pickup."
-    ctaText="View Full Menu"
-    ctaHref="/menu"
-  />
-
-  {/* ── 4. Local sourcing — SaladBuilder-style gradient split ── */}
-  <section class="not-prose relative w-full overflow-hidden">
-    <div class="mx-auto max-w-container px-4 pb-12 md:px-8">
-      <div class="flex min-h-[610px] w-full flex-col items-center justify-center gap-10 bg-gradient-to-b from-transparent from-[24%] to-page/90 px-4 pt-10 pb-4 md:flex-row md:gap-16 md:pt-16 md:pb-6 md:px-16">
-
-        {/* Left — text + CTA */}
-        <div class="flex min-w-0 flex-1 flex-col items-start gap-6">
-          <div class="flex w-full flex-col gap-6">
-            <Heading variant="eyebrow" color="inherit" class="text-eyebrow opacity-80">
-              Local sourcing
-            </Heading>
-            <Heading variant="h2">Our Local Sourcing</Heading>
-            <Text variant="body-lg" color="default">
-              We partner with Hawaii growers and suppliers to bring quality ingredients into our kitchens. We feature vine-ripe tomatoes from Hau'ula and exclusively use never-frozen local ahi sourced through a Honolulu seafood supplier with vessel-level catch traceability.
-            </Text>
-          </div>
-          <Button variant="primary" text="Our Ingredients" href="/ingredients" hideNote={true} />
-        </div>
-
-        {/* Right — food photo placeholder */}
-        <div class="relative w-full max-w-[400px] shrink-0" style="aspect-ratio: 562 / 624;">
-          <!-- TODO: replace with <Image> when asset is ready -->
-          <HeroImagePlaceholder fill class="absolute inset-0" />
-        </div>
-
-      </div>
+  <WidgetWrapper id="services">
+    <Headline
+      tagline="Starter content"
+      title="Reusable Service Cards"
+      subtitle="These are placeholders only. The real service structure should come from the Figma homepage."
+    />
+    <div class="grid gap-5 md:grid-cols-3">
+      {services.map((item) => <InfoCard {...item} variant="light" />)}
     </div>
-  </section>
+    <Fragment slot="bg">
+      <SectionBg variant="white" />
+    </Fragment>
+  </WidgetWrapper>
 
-  {/* ── 5. Testimonials — fetched from Sanity ────────────── */}
-  <Testimonials
-    id="reviews"
-    eyebrow="Reviews"
-    heading="What Our Customers Say"
+  <WidgetWrapper id="process">
+    <Headline
+      tagline="Starter flow"
+      title="Simple Project Process"
+      subtitle="This keeps a reusable timeline pattern available without carrying over old project copy."
+    />
+    <Timeline items={processSteps} defaultIcon="tabler:circle-check" surface="grey" />
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <CTABanner
+    eyebrow="Next step"
+    title="Ready for the Figma build."
+    subtitle="Send the design system and homepage MCP links and this starter can be reshaped into the new site."
+    ctaText={PRIMARY_CTA_LABEL}
+    ctaHref={PRIMARY_CTA_HREF}
   />
-
-  {/* ── 6. Locations ─────────────────────────────────────── */}
-  <Locations
-    id="locations"
-    eyebrow="Locations"
-    title="Visit a Store Near You"
-    subtitle="Stop by any of our six O'ahu locations in Kailua, Kahala, Kaneohe, Kapolei, Mililani, or Pearlridge."
-    ctaText="View All Locations"
-    ctaHref="/locations"
-  />
-
-  {/* ── 7. Salad builder — hidden (not in copy brief) ───── */}
-  {/* <SaladBuilder id="salad-builder" /> */}
-
-  {/* ── 8. Our story — hidden (not in copy brief) ─────── */}
-  {/* <OurStory id="our-story" /> */}
 </Layout>
