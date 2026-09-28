@@ -1,0 +1,61 @@
+---
+/**
+ * Concrete Patios — /services/concrete/patios/
+ * Content: docs/service/concrete-service/…Concrete Patios.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Concrete Patios & Lanai Extensions | ${site.name}`,
+  description: `Vaifoou Construction pours custom concrete patios and lanai extensions for properties across O\u02BBahu. Contact us to schedule a site estimate.`,
+};
+
+const tableRows = [
+  { feature: 'Application',    val1: 'Independent outdoor seating space',     val2: 'Expanding existing covered living areas' },
+  { feature: 'Location',       val1: 'Open backyard or garden',               val2: 'Attached directly to the home structure' },
+  { feature: 'Finish Options', val1: 'Standard broom finish or decorative',   val2: 'Custom matched to existing property style' },
+];
+
+const links = [
+  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
+  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
+  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+];
+
+const faqs = [
+  { title: 'Do you pour concrete for lanai extensions?', description: 'Yes. We regularly pour concrete for lanai extensions to expand your existing living footprint.' },
+  { title: 'What materials do you use?',                 description: 'We use high-quality concrete mixtures designed for structural longevity.' },
+  { title: 'Are your installations guaranteed?',         description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Concrete Services"
+    title="Concrete Patios"
+    body="We pour concrete patios to expand your usable outdoor living space. Our crews handle everything from standard backyard patios to structural lanai extensions. We bring our family's 25+ year trade legacy to every project across O\u02BBahu. Every installation is backed by our workmanship guarantee."
+    imagePlaceholder="Concrete patio pour photo"
+  />
+  <ServiceTable
+    eyebrow="Comparison"
+    heading="Standard Patios vs. Lanai Extensions"
+    col1="Standard Concrete Patio"
+    col2="Lanai Extension"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Concrete Services" items={links} />
+  <FAQs title="Concrete Patio FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading={`Start Your O\u02BBahu Patio Project`} />
+</Layout>

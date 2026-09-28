@@ -1,34 +1,115 @@
 ---
-description: One component per pattern. Restyle atoms first, then shared sections. Never fork per page.
+description: Variant-first rule — add a prop before adding a file. One component per visual pattern.
 alwaysApply: true
 ---
 
-# Component reuse
+# Component reuse — variant-first rule
 
 Figma build order: design system → atoms → sections → pages.
 
-Before creating a component, check `src/registry/components.json` and `src/components/`.
+**Before creating any component**, check `src/registry/components.json` and `src/components/`. If the shape already exists and you only need a small visual difference (color, size, layout flip, dark/light), add a **prop** to the existing file. Never create a second file for the same visual pattern.
 
-## Atoms (`src/components/ui/`)
+---
 
-Restyle the existing primitive to match Figma (Button, Headline, Form, InfoCard, ServiceCard, IconPoint). Do not add a second button or a page-specific heading component.
+## Decision tree — variant or new file?
 
-## Sections (`src/components/widgets/`)
+```
+Does a component with this visual shape already exist?
+│
+├─ YES → Is the difference only color, dark/light, size, or copy?
+│        ├─ YES → Add/extend a prop (variant, isDark, size, tone…). Do NOT create a new file.
+│        └─ NO  → Is the structure meaningfully different (new DOM shape, different layout)?
+│                 ├─ YES → Create ONE new component. Register it in components.json.
+│                 └─ NO  → It's still a variant. Add a prop.
+│
+└─ NO → Create ONE new component. Register it. Never paste one-off markup into a page file.
+```
 
-One pattern = one widget for the whole site:
+---
 
-- FAQ accordion → `FAQs` (every page that has FAQs)
-- Hero → `Hero2`
-- Page CTA band → `CTABanner`
-- Quotes → `Testimonials`
-- Split + image → `Content`
+## Atoms (`src/components/ui/`) — existing variant props
 
-If Figma’s FAQ (or hero, CTA, …) looks different, restyle **that** widget. Pass copy and `isDark` as props. Do not create `HomeFAQ.astro` / `ServicesFAQ.astro`.
+| Component | Existing variants / props to use |
+|---|---|
+| `Button` | `variant`: primary / ghost / secondary / link · `tone`: dark / light · `size`: lg / md / sm |
+| `Heading` | `variant`: h1 / h2 / h3 / h4 / eyebrow · `color`: default / white / muted / inherit |
+| `Text` | `variant`: body-lg / body / small / caption / button · `color`: default / muted / white / inherit |
+| `Card` | `variant`: bordered / dark / outlined / glass |
+| `IconPoint` | `variant`: dark / light · `orientation`: inline / stacked · `align`: start / center |
+| `ReviewCard` | `variant`: dark / light · `showLink`: bool |
+| `BlogCard` | `variant`: dark / light |
+| `InfoCard` | `variant`: light / dark |
+| `WidgetWrapper` | `isDark`: bool · `containerClass`: string · `as`: element override |
+| `ServiceLinks` | `categoryLabel`: string — reused for both "Services" and "Service Areas" cross-link grids |
 
-## New UI
+**Do not** add a second Button, a page-specific heading component, or a `DarkCard.astro` alongside `Card.astro`.
+Extend the prop surface of the existing file instead.
 
-New unique Figma shape → **one** new component, then add it to `src/registry/components.json` (`id`, `figmaNames`, `shape`, `component`, `import`). Never paste one-off markup into a page file.
+---
 
-Do not pick layouts from item counts (band vs grid vs cards). Figma already decided.
+## Sections (`src/components/widgets/`) — one widget per pattern
 
-Cards with a link or button: card `flex flex-col h-full`, body `flex-1`, CTA `mt-auto` so links line up regardless of copy length.
+| Pattern | Widget | Key props |
+|---|---|---|
+| Sub-page hero (service & area pages) | `SubServiceHero` | eyebrow, title, body, imagePlaceholder |
+| Page hero | `Hero2` | variant: overlay / split / split-dark / page / title |
+| Dark CTA closer | `CTABanner` | heading, note |
+| Light brick-motif CTA closer | `BrickMotifCTA` | heading, eyebrow, note |
+| FAQ accordion | `FAQs` | title, tagline, items · `<div slot="bg">` controls surface color |
+| Split + image | `Content` | isReversed, isDark |
+| Testimonials / quotes | `Testimonials` | — |
+| Google reviews grid | `ReviewsGrid` | — |
+| Service / area cross-links | `ServiceLinks` | categoryLabel, items |
+| Service scope table | `ServiceTable` | eyebrow, heading, col1, col2, rows |
+| Stats band | `Stats` | — |
+| Projects gallery | `ProjectsSection` | — |
+| Contact form | `Contact` | — |
+
+If Figma's FAQ (or hero, CTA…) looks slightly different on one page, **restyle that widget and pass the difference as a prop**.
+Do not create `HomeFAQ.astro`, `ServicesCTA.astro`, `AboutHero.astro`, etc.
+
+---
+
+## Surface / background — use `slot="bg"` or `isDark`, not a new component
+
+When the same section needs a different background on different pages, pass the surface inline:
+
+```astro
+<!-- ✅ correct — one FAQs widget, surface swapped via slot -->
+<FAQs title="…" items={faqs}>
+  <div slot="bg" class="absolute inset-0 bg-card"></div>
+</FAQs>
+
+<!-- ✅ correct — dark vs light toggle via prop -->
+<CTABanner isDark={false} heading="…" />
+
+<!-- ❌ wrong — new file just to change background color -->
+<ServiceFAQs title="…" items={faqs} />
+<LightCTABanner heading="…" />
+```
+
+---
+
+## Registering new components
+
+Any genuinely new visual shape (different DOM structure, not just different styles) → create **one** file, then add an entry to `src/registry/components.json`:
+
+```json
+{
+  "id": "P-XX",
+  "name": "Human-readable name",
+  "figmaNames": ["Figma frame or component name"],
+  "shape": "One-sentence description of the DOM shape",
+  "component": "ComponentName",
+  "import": "~/components/widgets/ComponentName.astro",
+  "props": { "propName": "type — description" },
+  "notes": "When to use vs the nearest existing pattern"
+}
+```
+
+---
+
+## Layout and card rules
+
+- Do **not** pick a layout (band vs grid vs cards) based on item count. Figma decides the layout.
+- Cards with a link or button: `flex flex-col h-full` on the card · `flex-1` on the body · `mt-auto` on the CTA → links line up regardless of copy length.

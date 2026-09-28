@@ -1,0 +1,61 @@
+---
+/**
+ * Concrete Sealing — /services/concrete/sealing/
+ * Content: docs/service/concrete-service/…Concrete Sealing.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Concrete Sealing | ${site.name}`,
+  description: `Protect your O\u02BBahu concrete surfaces with professional sealing by Vaifoou Construction. Contact us to schedule a site estimate.`,
+};
+
+const tableRows = [
+  { feature: 'Surface Protection',    val1: 'Sealed with a protective coating',     val2: 'Exposed to moisture and UV' },
+  { feature: 'Maintenance Frequency', val1: 'Re-sealing every few years',           val2: 'Reactive repairs and patching' },
+  { feature: 'Long-term Cost',        val1: 'Lower with preventive maintenance',    val2: 'Higher due to unaddressed damage' },
+];
+
+const links = [
+  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
+  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
+];
+
+const faqs = [
+  { title: 'How often should I reseal my concrete surfaces?', description: 'We recommend re-sealing every few years depending on traffic and exposure to the elements.' },
+  { title: 'What surfaces can you seal?',                     description: 'We seal driveways, patios, sidewalks, steps, and other concrete surfaces across residential and commercial properties.' },
+  { title: 'Are your installations guaranteed?',              description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Concrete Services"
+    title="Concrete Sealing"
+    body="We apply professional concrete sealer to protect your surfaces from moisture, UV damage, and daily wear across O\u02BBahu. Routine sealing is one of the most cost-effective ways to preserve your concrete investment long-term. Every installation is backed by our workmanship guarantee."
+    imagePlaceholder="Concrete sealing application photo"
+  />
+  <ServiceTable
+    eyebrow="Comparison"
+    heading="Routine Sealing vs. Unsealed Concrete"
+    col1="Routine Sealing"
+    col2="Unsealed Concrete"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Concrete Services" items={links} />
+  <FAQs title="Concrete Sealing FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading="Schedule Your Concrete Sealing" />
+</Layout>

@@ -1,0 +1,56 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `Ewa Beach Masonry & Concrete Contractor | ${site.name}`,
+    description: `Vaifoou Construction provides structural masonry and concrete flatwork for Ewa Beach properties. We build custom rock walls and pour new foundations.`,
+  }}
+  hero={{
+    eyebrow: `West O\u02BBahu`,
+    title: `Ewa Beach Masonry & Concrete Construction`,
+    body: `Driveway extensions, backyard patio slabs, and CMU boundary walls across the Ewa plain.`,
+    imagePlaceholder: 'Ewa Beach masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'Ewa Beach',
+    heading: `Ewa Beach Masonry & Concrete`,
+    body: `Ewa Beach sits on a flat, dry coral plain filled with master-planned neighborhoods and expanding commercial sites. Local homeowners most often hire us to pour wider concrete driveways, add backyard lanai slabs, and build clean CMU perimeter fences. Our family crew dispatches directly from Wahiawa, backing every job with 25+ years of trade experience.`,
+  }}
+  services={[
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'Driveway extensions, backyard patio slabs, and new structural foundations poured for flat Ewa Beach lots.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Reinforced hollow tile fences built to enclose residential tract yards and match neighborhood standards.' },
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Custom property boundaries and front entry accents constructed with hand-selected volcanic basalt.' },
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: 'Low-profile structural masonry built to level out grade transitions between neighboring lots.' },
+  ]}
+  servicesHeading="Ewa Beach Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work in Ewa Beach',
+    description: `Our crew recently graded and poured a new structural foundation for a ground-up residential build in Ewa Beach, working ahead of the framing crew and coordinating the pour timing around the site's coral base to ensure a flat, level slab throughout.`,
+    imagePlaceholder: 'Recent Ewa Beach project photo',
+  }}
+  otherAreas={[
+    { title: 'Wahiawa',               href: '/service-areas/wahiawa/' },
+    { title: 'Honolulu',              href: '/service-areas/honolulu/' },
+    { title: 'Mililani',              href: '/service-areas/mililani/' },
+    { title: 'Kaneohe',               href: '/service-areas/kaneohe/' },
+    { title: 'Kailua',                href: '/service-areas/kailua/' },
+    { title: 'Kapolei',               href: '/service-areas/kapolei/' },
+    { title: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+    { title: 'Aiea & Pearl City',     href: '/service-areas/aiea-pearl-city/' },
+    { title: 'Waipahu',               href: '/service-areas/waipahu/' },
+  ]}
+  faqs={{
+    title: 'Ewa Beach Masonry FAQs',
+    items: [
+      { title: 'Do you maintain a branch office in Ewa Beach?', description: 'No. All crews travel directly from our Wahiawa yard down the H-1 and Fort Weaver Road to service Ewa Beach job sites.' },
+      { title: 'Can you pour a backyard patio slab or widen my tract driveway?', description: 'Yes. Many Ewa Beach homes come with narrow driveways or small lanais. We handle full site preparation, grade the flat coral soil, and pour durable new concrete driveways, walkways, and patio slabs.' },
+      { title: 'Do you patch cracks in old concrete driveways?', description: 'No. We do not patch or repair existing slabs. When an older slab cracks or settles, we manage complete demolition and pour brand new concrete.' },
+      { title: 'Will you build a block fence or rock wall for my property line?', description: 'Yes. We construct reinforced CMU block walls and hand-selected basalt walls for privacy and security. If your HOA needs to review the work first, we provide a written estimate with the scope, materials and dimensions.' },
+      { title: 'Are foundation repairs included in your Ewa Beach services?', description: 'We do not provide structural foundation repair. We specialize strictly in pouring new foundations for home additions, ground-up residential builds, and commercial contractors.' },
+    ],
+  }}
+  ctaHeading="Start Your Ewa Beach Masonry Project"
+/>

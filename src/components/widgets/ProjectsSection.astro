@@ -2,7 +2,7 @@
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Button from '~/components/ui/Button.astro';
-import Image from '~/components/common/Image.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 
 export interface Project {
   title: string;
@@ -51,8 +51,6 @@ const cardBg = isDark ? 'bg-projects-card-dark' : 'bg-projects-card-light';
 const cardBorder = isDark ? 'border-projects-card-dark' : 'border-projects-card-light';
 const titleColor = isDark ? 'text-projects-title-dark' : 'text-projects-title-light';
 const descColor = isDark ? 'text-projects-desc-dark' : 'text-projects-desc-light';
-const placeholderBg = isDark ? 'bg-black/40' : 'bg-gray-100 dark:bg-slate-800';
-const placeholderText = isDark ? 'text-white/20' : 'text-gray-300 dark:text-slate-600';
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-container mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -63,22 +61,12 @@ const placeholderText = isDark ? 'text-white/20' : 'text-gray-300 dark:text-slat
   <div class={`grid grid-cols-1 ${gridClass} gap-4 md:gap-6`}>
     {projects.map((project) => (
       <div class={`rounded-lg border ${cardBorder} ${cardBg} p-4 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter`}>
-        {project.image ? (
-          <Image
-            class="w-full h-36 object-cover rounded mb-3"
-            width={400}
-            height={144}
-            format="webp"
-            src={project.image.src}
-            alt={project.image.alt}
-          />
-        ) : (
-          <div class={`w-full h-36 ${placeholderBg} rounded mb-3 flex items-center justify-center ${placeholderText}`}>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-        )}
+        <!-- TODO: replace with <Image> when asset is ready -->
+        <HeroImagePlaceholder
+          fill
+          label={project.image?.alt || `${project.title} image placeholder`}
+          class="mb-3 h-36 w-full rounded"
+        />
         {project.location && (
           <p class={`text-[13px] md:text-[14px] font-medium ${titleColor} mb-1`}>
             {project.location}

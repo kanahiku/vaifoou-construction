@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "name": "vaifoou-construction-patterns",
   "description": "Inventory of reusable widgets. Restyle these after brand.ts and atoms; do not fork per page.",
   "sourceOfTruth": {
@@ -7,24 +7,26 @@
     "buildDoc": "ONBOARDING.md",
     "theme": "src/config/theme.ts"
   },
+
   "atoms": [
     {
       "id": "A-01",
       "name": "Button",
-      "figmaNames": ["Button / Primary", "Button / Ghost", "CTA Primary", "CTA Ghost", "Button / Secondary"],
+      "figmaNames": ["Button / Primary", "Button / Ghost", "CTA Primary", "Button / Secondary", "Button / Link"],
       "shape": "Single button atom with variant + tone props",
       "component": "Button",
       "import": "~/components/ui/Button.astro",
       "props": {
         "variant": "primary | ghost | secondary | link",
-        "tone": "dark (default) | light  — only applies when variant=ghost"
+        "tone": "dark (default) | light — only applies when variant=ghost",
+        "size": "lg (default, 16×40) | md (8×24) | sm (8×16)"
       },
-      "notes": "Style Guide 110:2377 button = Norca-Rough 14px. primary = square hibiscus fill, cream type. ghost tone=dark = 2px cream outline on photos. ghost tone=light = 2px cacao outline on cream."
+      "notes": "primary = filled accent (terracotta), cream type. ghost tone=dark = cream outline on photos/dark. ghost tone=light = dark outline on light sections. link = inline accent text link. Font: Barlow Condensed 14px."
     },
     {
-      "id": "A-03",
+      "id": "A-02",
       "name": "Heading",
-      "figmaNames": ["Heading / H1", "Heading / H2", "Heading / H3", "Section Title", "Eyebrow", "Label / Eyebrow"],
+      "figmaNames": ["Heading / H1", "Heading / H2", "Heading / H3", "Heading / H4", "Section Title", "Eyebrow", "Label / Eyebrow"],
       "shape": "All heading levels and the eyebrow label — one component",
       "component": "Heading",
       "import": "~/components/ui/Heading.astro",
@@ -34,27 +36,10 @@
         "as": "optional semantic-element override",
         "html": "string (set:html shorthand)"
       },
-      "notes": "Style Guide 110:2377: h1=72 / h2=52 / h3=26 Norca-Rough. h4=24px Norca (extra). tag/eyebrow=16px Wreck Script. color=white is text/contrast cream."
+      "notes": "Barlow Condensed for h1–h4 and eyebrow. Sizes from brand.ts type{}. color=white renders the warm off-white page color. color=default = near-black heading token."
     },
     {
-      "id": "A-05",
-      "name": "Card",
-      "figmaNames": ["Card", "Bucket Card", "Card / Bordered", "Info Card"],
-      "shape": "Card shell with optional coloured header band and configurable shadow",
-      "component": "Card",
-      "import": "~/components/ui/Card.astro",
-      "props": {
-        "variant": "bordered (default) | pillar | schedule | testimonial | feature | dark | outlined | podcast",
-        "label": "optional header band eyebrow text",
-        "labelBg": "CSS class for header bg — e.g. bg-card-mist | bg-cta-pink",
-        "labelTextColor": "CSS class for header text — e.g. text-secondary | text-cta-pink",
-        "class": "override shadow utility: shadow-card (default) | shadow-card-mist | shadow-card-pink",
-        "tone": "light (default) | dark — only applies when variant=podcast"
-      },
-      "notes": "Shell only for bordered/pillar/dark/outlined — body in the default slot. variant='feature' also accepts title, description, cta, iconType, featured, and speaker (session body: people row + CTA bottom-right, Figma 64:1201). variant='podcast' is the episode card (Figma 121:916 / 121:1286): cream bg-page, tan tag, dark type, two grey listen placeholders, ghost-light CTA. Same card on tan and page sections."
-    },
-    {
-      "id": "A-04",
+      "id": "A-03",
       "name": "Text",
       "figmaNames": ["Body Text", "Paragraph", "Body / Large", "Body / Small", "Caption", "Button Label"],
       "shape": "All body and UI text — one component",
@@ -66,29 +51,107 @@
         "as": "optional semantic-element override",
         "html": "string (set:html shorthand)"
       },
-      "notes": "Style Guide 110:2377: body-lg=16 / body=14 / small=12 Host Grotesk, tracking -1%. button=14px Norca-Rough. color=white is text/contrast cream. Default color is muted (cacao); color=default is text/default cacao-brown."
+      "notes": "Work Sans for all body variants. button variant uses Barlow Condensed (display font). color=white renders the warm off-white page color."
+    },
+    {
+      "id": "A-04",
+      "name": "Card",
+      "figmaNames": ["Card", "Card / Bordered", "Info Card", "Testimonial Card"],
+      "shape": "Card shell with configurable variant and shadow",
+      "component": "Card",
+      "import": "~/components/ui/Card.astro",
+      "props": {
+        "variant": "bordered (default) | dark | outlined | glass",
+        "class": "override shadow utility: shadow-card (default)"
+      },
+      "notes": "Shell only — body in default slot. dark = forest green bg. outlined = white bg + subtle border. glass = frosted on dark sections."
+    },
+    {
+      "id": "A-05",
+      "name": "Form",
+      "figmaNames": ["Contact Form", "Enquiry Form", "Form"],
+      "shape": "Full contact form with Resend integration",
+      "component": "Form",
+      "import": "~/components/ui/Form.astro",
+      "notes": "Wired to Resend via /api/contact. Work Sans inputs. Primary button submit."
+    },
+    {
+      "id": "A-06",
+      "name": "IconPoint",
+      "figmaNames": ["Icon Point", "Feature Point", "Bullet Point with Icon"],
+      "shape": "Icon + title + description — one row",
+      "component": "IconPoint",
+      "import": "~/components/ui/IconPoint.astro",
+      "notes": "Used inside IconPointBand and IconPointGrid. Tabler icon, h4 title, body description."
+    },
+    {
+      "id": "A-07",
+      "name": "ServiceCard",
+      "figmaNames": ["Service Card", "Services Grid Card"],
+      "shape": "Card with icon, title, description, and optional link",
+      "component": "ServiceCard",
+      "import": "~/components/ui/ServiceCard.astro",
+      "notes": "Pin CTA with flex-col h-full + mt-auto so links line up regardless of copy length."
+    },
+    {
+      "id": "A-08",
+      "name": "InfoCard",
+      "figmaNames": ["Info Card", "Stat Card", "Quick Fact"],
+      "shape": "Compact icon + title + description card",
+      "component": "InfoCard",
+      "import": "~/components/ui/InfoCard.astro",
+      "notes": "Light or dark variant. Used for 2–4 item info rows."
+    },
+    {
+      "id": "A-09",
+      "name": "ProjectCard",
+      "figmaNames": ["Project Card", "Portfolio Card", "Work Card"],
+      "shape": "Project/portfolio card with image placeholder, title, description, tags",
+      "component": "ProjectCard",
+      "import": "~/components/ui/ProjectCard.astro",
+      "notes": "Image is a grey placeholder until the photo pass."
+    },
+    {
+      "id": "A-10",
+      "name": "ReviewCard",
+      "figmaNames": ["Review Card", "Testimonial Card"],
+      "shape": "Star rating + review text + author",
+      "component": "ReviewCard",
+      "import": "~/components/ui/ReviewCard.astro",
+      "notes": "Used inside ReviewsGrid. Stars from the Google Reviews API."
+    },
+    {
+      "id": "A-11",
+      "name": "Timeline",
+      "figmaNames": ["Timeline", "Process Steps", "How It Works Steps"],
+      "shape": "Ordered steps with icon, title, description",
+      "component": "Timeline",
+      "import": "~/components/ui/Timeline.astro",
+      "notes": "Surface prop: grey | white | dark. Used for process/how-it-works sections."
     }
   ],
+
   "patterns": [
     {
       "id": "P-01",
       "name": "Hero",
       "figmaNames": ["Hero", "Hero / Split", "Page Hero", "Hero Section", "Masthead"],
-      "shape": "h1 + paragraphs + optional CTA + optional side image + optional badges",
+      "shape": "h1 + paragraphs + optional CTA + optional side image",
       "component": "Hero2",
       "import": "~/components/widgets/Hero2.astro",
-      "props": { "variant": "overlay | split | words | page | title" },
+      "props": { "variant": "overlay | split | split-dark | words | page | title" },
       "slots": ["title", "subtitle", "content", "image", "bg", "nav"],
-      "notes": "Overlay (Homepage 59:1341): 760px full-bleed, grey placeholder until the photo is ready, left-to-right black/60 gradient, 64px pad, left column max-w 604 (eyebrow → h1 → body-lg → CTAs). Words/page/title variants unchanged. Do not embed Header in the home hero — PageLayout chrome sits above."
+      "notes": "One hero component for the whole site. Do not fork per page. Pass copy and variant from the page file."
     },
     {
       "id": "P-02",
-      "name": "Intro + columns",
-      "figmaNames": ["Features", "Benefits", "Intro Columns", "Value Props"],
-      "shape": "h2 + intro + 2–4 item columns, no image",
-      "component": "WidgetWrapper + Headline + InfoCard",
-      "import": "~/components/ui/InfoCard.astro",
-      "itemCount": [2, 3, 4]
+      "name": "Feature columns",
+      "figmaNames": ["Features", "Benefits", "Intro Columns", "Value Props", "Why Choose Us"],
+      "shape": "h2 + intro + 2–4 item columns or icon-point band",
+      "component": "Features / Features2 / Features3",
+      "import": "~/components/widgets/Features.astro",
+      "itemCount": [2, 3, 4],
+      "notes": "Pick the Features variant that matches Figma item count."
     },
     {
       "id": "P-03",
@@ -98,28 +161,10 @@
       "component": "Content",
       "import": "~/components/widgets/Content.astro",
       "slots": ["content", "bg"],
-      "notes": "Image side comes from the Figma frame."
+      "notes": "Image side comes from Figma. Use for about, service detail, and any text+photo split."
     },
     {
       "id": "P-04",
-      "name": "Heading + CTA row",
-      "figmaNames": ["Section Header CTA", "Heading Row"],
-      "shape": "h2 sharing a row with a button",
-      "component": "Headline + Button",
-      "composable": true
-    },
-    {
-      "id": "P-05",
-      "name": "Linked service cards",
-      "figmaNames": ["Service Cards", "Card Grid", "Services Grid"],
-      "shape": "2, 3, 4, or 6 cards with per-card links",
-      "component": "ServiceCard",
-      "import": "~/components/ui/ServiceCard.astro",
-      "itemCount": [2, 3, 4, 6],
-      "notes": "Pin CTA with flex-col h-full + mt-auto."
-    },
-    {
-      "id": "P-06",
       "name": "Icon-point band",
       "figmaNames": ["Icon Band", "Icon Row", "Three Points", "Five Points"],
       "shape": "3 or 5 unlinked icon + title + desc, one row",
@@ -128,16 +173,25 @@
       "itemCount": [3, 5]
     },
     {
-      "id": "P-07",
-      "name": "Compact info cards",
-      "figmaNames": ["Spec Cards", "Stats Cards", "Quick Facts"],
-      "shape": "4 compact info cards, one row",
-      "component": "InfoCard",
-      "import": "~/components/ui/InfoCard.astro",
+      "id": "P-05",
+      "name": "Icon-point grid",
+      "figmaNames": ["Icon Grid", "2x2 Points", "Four Points"],
+      "shape": "4 unlinked icon + title + desc, 2×2 grid",
+      "component": "IconPointGrid",
+      "import": "~/components/ui/IconPointGrid.astro",
       "itemCount": [4]
     },
     {
-      "id": "P-08",
+      "id": "P-06",
+      "name": "Service cards grid",
+      "figmaNames": ["Service Cards", "Card Grid", "Services Grid"],
+      "shape": "2, 3, or 4 service cards with links",
+      "component": "ServiceCard",
+      "import": "~/components/ui/ServiceCard.astro",
+      "itemCount": [2, 3, 4]
+    },
+    {
+      "id": "P-07",
       "name": "Process / timeline",
       "figmaNames": ["Timeline", "Process", "Steps", "How It Works"],
       "shape": "h2 + ordered steps + optional image",
@@ -145,469 +199,140 @@
       "import": "~/components/ui/Timeline.astro"
     },
     {
+      "id": "P-08",
+      "name": "Stats band",
+      "figmaNames": ["Stats", "Numbers", "By The Numbers", "Key Figures"],
+      "shape": "Row of large stat numbers with labels",
+      "component": "Stats",
+      "import": "~/components/widgets/Stats.astro"
+    },
+    {
       "id": "P-09",
-      "name": "Gallery / projects",
-      "figmaNames": ["Gallery", "Projects", "Portfolio", "Work Grid"],
-      "shape": "grid of project cards",
-      "component": "ProjectCard / ProjectsSection",
+      "name": "Projects / portfolio gallery",
+      "figmaNames": ["Gallery", "Projects", "Portfolio", "Our Work", "Work Grid"],
+      "shape": "Grid of project cards",
+      "component": "ProjectsSection",
       "import": "~/components/widgets/ProjectsSection.astro"
     },
     {
       "id": "P-10",
-      "name": "FAQ accordion",
-      "figmaNames": ["FAQ", "FAQs", "Accordion", "Questions"],
-      "shape": "list of Q&A pairs, no cards",
-      "component": "FAQs",
-      "import": "~/components/widgets/FAQs.astro"
-    },
-    {
-      "id": "P-11",
       "name": "Testimonials",
-      "figmaNames": ["Testimonials", "Reviews", "Quotes"],
-      "shape": "quotes with name and role",
+      "figmaNames": ["Testimonials", "Reviews", "Quotes", "What Clients Say"],
+      "shape": "Quote cards with name and role",
       "component": "Testimonials",
       "import": "~/components/widgets/Testimonials.astro"
     },
     {
+      "id": "P-11",
+      "name": "Google reviews grid",
+      "figmaNames": ["Reviews Grid", "Star Reviews", "Google Reviews"],
+      "shape": "Grid of star-rated review cards pulled from Google/Yelp API",
+      "component": "ReviewsGrid",
+      "import": "~/components/widgets/ReviewsGrid.astro"
+    },
+    {
       "id": "P-12",
-      "name": "Final CTA banner",
-      "figmaNames": ["CTA", "CTA Banner", "Contact Banner", "Get Started"],
-      "shape": "page-ending conversion card",
-      "component": "CTABanner",
-      "import": "~/components/widgets/CTABanner.astro",
-      "notes": "Use when Figma shows a standalone CTA band. Homepage footer (2:1508) already includes the tan assessment card — do not stack this above Footer."
-    },
-    {
-      "id": "P-18",
-      "name": "How Aging Works (Buckets)",
-      "figmaNames": ["Where Your Resources Go", "Buckets Section", "2:83"],
-      "shape": "2-col: left eyebrow+h2+body+dashed line+h3 pullquote / right 3 numbered bucket cards + body copy + CTA",
-      "component": "HowAgingWorks",
-      "import": "~/components/widgets/HowAgingWorks.astro",
-      "notes": "Figma node 2:83. Bucket card data is baked into the widget. Uses Card variant='bordered' + shadow-card | shadow-card-mist | shadow-card-pink per bucket priority. id='how-aging-works' (matches hero nav anchor)."
-    },
-    {
-      "id": "P-17",
-      "name": "Site footer",
-      "figmaNames": ["Footer", "Frame 1707478621", "Frame 1707478619"],
-      "shape": "footer band with logo, link columns, social links, legal links, and copyright",
-      "component": "Footer",
-      "import": "~/components/widgets/Footer.astro",
-      "notes": "Shared footer chrome. Do not fork a HomeFooter."
+      "name": "FAQ accordion",
+      "figmaNames": ["FAQ", "FAQs", "Accordion", "Questions"],
+      "shape": "List of Q&A pairs, no cards",
+      "component": "FAQs",
+      "import": "~/components/widgets/FAQs.astro"
     },
     {
       "id": "P-13",
-      "name": "Full-width editorial",
-      "figmaNames": ["Editorial", "Narrative", "Longform"],
-      "shape": "h2 + multiple paragraphs, no image or columns",
-      "component": "WidgetWrapper + Headline",
-      "notes": "Do not use for heading + para + CTA — that is P-03."
+      "name": "Final CTA banner",
+      "figmaNames": ["CTA", "CTA Banner", "Contact Banner", "Get Started", "Free Quote"],
+      "shape": "Page-ending conversion card — eyebrow + h2 + subtitle + CTA button",
+      "component": "CTABanner",
+      "import": "~/components/widgets/CTABanner.astro",
+      "notes": "One per page, always last section before Footer."
     },
     {
       "id": "P-14",
-      "name": "Icon-point text grid",
-      "figmaNames": ["Icon Grid", "2x2 Points", "Four Points"],
-      "shape": "4 unlinked icon + title + desc, 2 × 2 text, no cards",
-      "component": "IconPointGrid",
-      "import": "~/components/ui/IconPointGrid.astro",
-      "itemCount": [4]
+      "name": "Contact section",
+      "figmaNames": ["Contact", "Get In Touch", "Contact Us"],
+      "shape": "Contact form + map or address block",
+      "component": "Contact",
+      "import": "~/components/widgets/Contact.astro"
     },
     {
       "id": "P-15",
-      "name": "Blog cards",
-      "figmaNames": ["Blog List", "Articles", "Related Posts"],
-      "shape": "article cards in a wrapping grid",
-      "component": "BlogCard",
-      "import": "~/components/ui/BlogCard.astro"
+      "name": "Client logos / accreditations",
+      "figmaNames": ["Brands", "Partners", "Logos", "Certifications", "Accreditations"],
+      "shape": "Logo strip or grid",
+      "component": "Brands",
+      "import": "~/components/widgets/Brands.astro"
     },
     {
       "id": "P-16",
-      "name": "Blog article",
-      "figmaNames": ["Blog Post", "Article", "Journal Entry"],
-      "shape": "sidebar + sequential article body",
-      "component": "blog article template",
-      "import": "~/pages/blog/[slug]/index.astro"
+      "name": "Blog cards",
+      "figmaNames": ["Blog List", "Articles", "Related Posts", "Latest Posts"],
+      "shape": "Article cards in a wrapping grid",
+      "component": "BlogLatestPosts",
+      "import": "~/components/widgets/BlogLatestPosts.astro"
+    },
+    {
+      "id": "P-17",
+      "name": "Site header",
+      "figmaNames": ["Header", "Navigation", "Nav"],
+      "shape": "Fixed top nav with logo + links + CTA",
+      "component": "Header",
+      "import": "~/components/widgets/Header.astro",
+      "notes": "Shared chrome. Do not fork per page."
     },
     {
       "id": "P-19",
-      "name": "Gradient Card Split",
-      "figmaNames": ["Everything peaks. Then it slopes.", "Split with gradient card", "2:229"],
-      "shape": "2-col inside gradient card (rounded-tl/tr-[64px]): left eyebrow+h2+body slot+CTA / right image slot (grey placeholder until asset ready)",
-      "component": "EverythingPeaks",
-      "import": "~/components/widgets/EverythingPeaks.astro",
-      "props": {
-        "eyebrow": "optional eyebrow string",
-        "heading": "plain-text h2 (use headingHtml for accent spans)",
-        "headingHtml": "HTML string — takes precedence over heading",
-        "cta": "{ text, href } optional primary CTA button",
-        "id": "section anchor"
-      },
-      "slots": {
-        "body": "paragraph content (Text atoms)",
-        "image": "image or placeholder div — defaults to bg-section-grey grey box"
-      },
-      "notes": "Figma node 2:229. bg-gradient-to-t from-transparent to-section-grey. Reuse for any section with this gradient card treatment. Content always passed from the page file."
+      "name": "Sub-service hero",
+      "figmaNames": ["Service Sub Hero", "Sub Page Hero"],
+      "shape": "Dark-overlay photo hero with eyebrow chip, H1, lead body copy, dual CTAs, and trust bar",
+      "component": "SubServiceHero",
+      "import": "~/components/widgets/SubServiceHero.astro",
+      "props": { "eyebrow": "string", "title": "string", "body": "string", "imagePlaceholder?": "string" },
+      "notes": "Used on all rock-wall and concrete sub-pages. CTAs and trust bar are auto-wired from config."
     },
     {
       "id": "P-20",
-      "name": "Text Split",
-      "figmaNames": ["Half of this is not your problem.", "Then talk to your doctor about it.", "And then we stop.", "2-col text split", "2:271", "2:1297", "62:53"],
-      "shape": "2-col split: text-only (heading | body); withImage end (text stack | image); withImage under-heading (heading+image | body). rx 32.",
-      "component": "TextSplit",
-      "import": "~/components/widgets/TextSplit.astro",
+      "name": "Service table",
+      "figmaNames": ["Comparison Table", "Feature Table", "Service Scope Table"],
+      "shape": "2-col or 3-col feature/comparison table with eyebrow, heading, optional note",
+      "component": "ServiceTable",
+      "import": "~/components/widgets/ServiceTable.astro",
       "props": {
-        "eyebrow": "optional eyebrow string",
-        "heading": "plain-text h2",
-        "headingHtml": "HTML string — takes precedence (use for accent spans)",
-        "id": "section anchor",
-        "compact": "true = 64px vertical padding (Figma 64:983 Chapters); default 120px",
-        "withImage": "true = include image placeholder / slot",
-        "imageAspect": "CSS aspect-ratio for the default placeholder (Figma frame size)",
-        "imagePlacement": "end (default, image opposite text) or under-heading (Figma 62:53)",
-        "class": "extra classes on <section>"
-      },
-      "slots": {
-        "default": "body copy — right column, or under the heading when imagePlacement=end",
-        "image": "image or placeholder — defaults to bg-section-grey grey box at imageAspect"
-      },
-      "notes": "Figma 2:271 (portrait, end), 2:1297 (landscape, end), 62:53 (under-heading). Omit withImage for 50/50 text-only splits. Content always passed from the page file."
+        "eyebrow?": "string",
+        "heading": "string",
+        "note?": "string (HTML)",
+        "col1": "string",
+        "col2?": "string (omit for 2-col)",
+        "rows": "{ feature, val1, val2? }[]"
+      }
     },
     {
       "id": "P-21",
-      "name": "Chapters List",
-      "figmaNames": ["Our Locations", "Chapters selector", "Location rows", "2:323"],
-      "shape": "Full-rounded card (rounded-[64px]) with photo bg (placeholder), eyebrow, glassmorphism location rows, footer note",
-      "component": "ChaptersList",
-      "import": "~/components/widgets/ChaptersList.astro",
-      "props": {
-        "eyebrow": "label above the list",
-        "locations": "ChapterLocation[] — { name, memberCount?, href }",
-        "footerNote": "plain text below the list",
-        "footerLink": "{ text, href } — bold underlined link appended to footerNote",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 2:323. Each row: backdrop-blur glass pill, heading-size location name, members badge (bg-primary), arrow-circle icon. Background photo is a grey placeholder (bg-section-grey) until the image asset is provided."
+      "name": "Service cross-links",
+      "figmaNames": ["Related Services", "Other Services", "Service Links"],
+      "shape": "Labelled grid of arrow-link tiles pointing to sibling services",
+      "component": "ServiceLinks",
+      "import": "~/components/widgets/ServiceLinks.astro",
+      "props": { "categoryLabel?": "string", "items": "{ title, href }[]" }
     },
     {
       "id": "P-22",
-      "name": "Pillar Section",
-      "figmaNames": ["Bucket section", "Four pillars", "Feature cards on tan bg", "2:316"],
-      "shape": "bg-cta tan bg, rounded-tl/tr-[64px] top corners only. 2-col header (eyebrow+h2 | body text). 4-col grid of Card variant=pillar.",
-      "component": "PillarSection",
-      "import": "~/components/widgets/PillarSection.astro",
-      "props": {
-        "eyebrow": "section eyebrow label",
-        "heading": "h2 section heading",
-        "bodyHtml": "right-column body text, supports <strong> for bold span",
-        "cards": "PillarCardItem[] — { label, heading, description, iconSvg, iconBg? }",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 2:316. Uses Card variant='pillar' (A-05). Each card: label eyebrow top-left, 50×50 icon top-right, heading (28px Fraunces text-primary), description (12px sans text-default). Movement/Food icons carry own tan bg in SVG (iconBg=false). Sleep/Connection are small icons needing the bg-cta rounded-bl container (iconBg=true)."
+      "name": "Brick-motif CTA banner",
+      "figmaNames": ["CTA Banner Light", "Brick Motif CTA"],
+      "shape": "Light-background CTA closer with brick-texture SVG overlay, H2, dual CTAs, trust strip",
+      "component": "BrickMotifCTA",
+      "import": "~/components/widgets/BrickMotifCTA.astro",
+      "props": { "heading": "string", "eyebrow?": "string", "note?": "string (HTML)" },
+      "notes": "Distinct from the dark CTABanner widget. Used on all service pages as the last section."
     },
     {
-      "id": "P-23",
-      "name": "Schedule Section",
-      "figmaNames": ["Weekly schedule", "Information is not an adherence mechanism", "Day cards", "2:431"],
-      "shape": "bg-page section, 2-col header (eyebrow+h2 | body), 7-col grid of Card variant=schedule.",
-      "component": "ScheduleSection",
-      "import": "~/components/widgets/ScheduleSection.astro",
-      "props": {
-        "eyebrow": "section eyebrow label",
-        "heading": "h2 section heading",
-        "body": "right-column plain body text",
-        "days": "ScheduleDay[] — { day: string, events: ScheduleEvent[] }",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 2:431. Uses Card variant='schedule' (A-05). Each card: bg-card-light header band with calendar icon + day label (text-secondary). Events: time row (icon + time, opacity-40) + event name. shadow-mist-offset (flat 3px offset, no blur). icon='morning' = sun SVG, icon='evening' = moon/cloud SVG."
-    },
-    {
-      "id": "P-24",
-      "name": "Testimonials Carousel",
-      "figmaNames": ["Voices from the ohana", "Quote carousel", "Testimonials dark", "2:1305"],
-      "shape": "Dark navy→teal gradient bg. Centered header (eyebrow + h2 with optional inline span). Horizontal Swiper free-mode of Card variant=testimonial (512px each). CSS mask fade on edges.",
-      "component": "Testimonials",
-      "import": "~/components/widgets/Testimonials.astro",
-      "props": {
-        "eyebrow": "small uppercase label",
-        "headingHtml": "h2 HTML — supports <span class='text-secondary'> for accent words",
-        "heading": "plain-text h2 fallback",
-        "testimonials": "TestimonialItem[] — { testimonial, name, job? }",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 2:1375. Uses Card variant='feature' (A-05). Left col: eyebrow+h2 header + stacked compact cards (ghost CTA). Right col: tall featured card (grey image placeholder + solid primary CTA). bg-feature-card (#F1F5F8) + border-card-border-light + rounded-[16px]. iconType='calendar' renders 40×40 bg-card-light tile + 14px calendar icon; iconType='book' renders 40×40 SVG with built-in tile bg."
-    },
-    {
-      "id": "P-25",
-      "name": "Written Work Section",
-      "figmaNames": ["The written work", "Books + sessions cards", "2:1375"],
-      "shape": "bg-page section. 2-col gap-8: left=header+stacked compact feature cards, right=tall featured card with image placeholder.",
-      "component": "WrittenWorkSection",
-      "import": "~/components/widgets/WrittenWorkSection.astro",
-      "props": {
-        "eyebrow": "section eyebrow label",
-        "heading": "h2 section heading",
-        "cards": "FeatureCardItem[] for left column stacked compact cards",
-        "featuredCard": "FeatureCardItem for right column tall featured card",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 2:1375. Uses Card variant='feature' (A-05). Left col: eyebrow+h2 header + stacked compact cards (ghost CTA). Right col: tall featured card (grey image placeholder + solid primary CTA). bg-feature-card (#F1F5F8) + border-card-border-light + rounded-[16px]. iconType='calendar' renders 40×40 bg-card-light tile + 14px calendar icon; iconType='book' renders 40×40 SVG with built-in tile bg."
-    },
-    {
-      "id": "P-26",
-      "name": "Testimonials Carousel (moved from P-24)",
-      "notes": "Figma node 2:1305. Uses Card variant='testimonial' (A-05): quote mark SVG (mix-blend-overlay), Fraunces italic 22px quote, small uppercase attribution. Swiper v14 FreeMode, slidesPerView='auto', slidesOffsetBefore/After=80px. Edge fade via CSS mask-image gradient."
-    },
-    {
-      "id": "P-27",
-      "name": "Concept Split",
-      "figmaNames": ["You cannot stop the decline", "Concept cards + chart", "62:71", "62:553", "62:77"],
-      "shape": "bg-page section. TOP 2-col (28px heading | body+CTA, gap 64px). BOTTOM 2-col (2×2 pillar cards | image, gap 32px).",
-      "component": "ConceptSplit",
-      "import": "~/components/widgets/ConceptSplit.astro",
-      "props": {
-        "heading": "left-column 28px Fraunces heading",
-        "cta": "{ text, href } optional primary CTA under the body",
-        "cards": "ConceptCardItem[] — { label, title, description }",
-        "id": "section anchor"
-      },
-      "slots": {
-        "default": "right-column intro body (Text atoms)",
-        "image": "image or grey placeholder — defaults to bg-section-grey, aspect 1695/928, rounded-[32px]"
-      },
-      "notes": "Figma nodes 62:71 (frame), 62:553 (intro), 62:77 (cards + image). Uses Card variant='pillar' (A-05) without icons. Content always passed from the page file."
-    },
-    {
-      "id": "P-28",
-      "name": "Concept Cards",
-      "figmaNames": ["Four concept cards", "Trajectories row", "64:845"],
-      "shape": "bg-page section. 4-col row of Card variant=pillar (label + 28px title + 12px body), gap 32px, no header, no icons, no image.",
-      "component": "ConceptCards",
-      "import": "~/components/widgets/ConceptCards.astro",
-      "props": {
-        "cards": "ConceptCardItem[] — { label, title, description }",
-        "id": "section anchor"
-      },
-      "itemCount": [4],
-      "notes": "Figma node 64:845 (Four Pillars). Same Card variant='pillar' as ConceptSplit, laid out as a full-width 4-up row with no intro or image. Content always passed from the page file."
-    },
-    {
-      "id": "P-29",
-      "name": "Duo Cards",
-      "figmaNames": ["Start one.", "Activities directory", "Two cards", "64:1086"],
-      "shape": "2 equal promo cards, gap 32px. dark = navy→primary gradient + ghost CTA. outlined = 4px navy border + gradient h2 + primary CTA. rounded-[64px], p-48, CTA pinned mt-auto.",
-      "component": "DuoCards",
-      "import": "~/components/widgets/DuoCards.astro",
-      "props": {
-        "cards": "DuoCardItem[] — { variant: 'dark' | 'outlined', eyebrow?, heading, body, cta: { text, href } }",
-        "id": "section anchor"
-      },
-      "itemCount": [2],
-      "notes": "Figma node 64:1086 (Chapters). Uses Card variant='dark' | 'outlined' (A-05) plus Heading, Text, Button. Content always passed from the page file."
-    },
-    {
-      "id": "P-31",
-      "name": "Books Grid",
-      "figmaNames": ["Books with filter", "Books filter grid", "121:18"],
-      "shape": "Filter tabs (Textbook / Guidebook / Bargaining / Podcast) + 3×6 book-cover placeholder grid.",
-      "component": "BooksGrid",
-      "import": "~/components/widgets/BooksGrid.astro",
-      "props": {
-        "id": "section anchor",
-        "books": "Book[] from Sanity — cover image, slug, series"
-      },
-      "notes": "Figma node 121:18. Filter tabs are interactive (JS). Covers scroll to #book-{slug} on the same page. Grey placeholder until a cover is uploaded in Studio."
-    },
-    {
-      "id": "P-32",
-      "name": "Book Series Feature",
-      "figmaNames": ["Textbook Series", "Bargaining with Aging Series", "121:246", "121:532"],
-      "shape": "Dark navy→primary gradient. Header row (eyebrow+h2 | description). Glass card: book info+tags+buy buttons (left) | cover placeholder (right). Optional rounded-b-hero.",
-      "component": "BookSeriesFeature",
-      "import": "~/components/widgets/BookSeriesFeature.astro",
-      "props": {
-        "eyebrow": "section label (default 'Series')",
-        "heading": "h2 series title",
-        "description": "right-column header text",
-        "book": "BookFeatureItem — { subtitle, title, description, tags, buyButtons, publisherNote }",
-        "roundedBottom": "boolean — adds rounded-b-hero (Bargaining with Aging variant)",
-        "id": "section anchor"
-      },
-      "notes": "Figma nodes 121:246 (Textbook) and 121:532 (Bargaining with Aging). Same component, different props."
-    },
-    {
-      "id": "P-33",
-      "name": "GuideBook Grid",
-      "figmaNames": ["Rebellious Aging Guidebook Series", "Guidebook grid cards", "121:313"],
-      "shape": "bg-page section. Header (eyebrow+h2 | description). 3-col grid of book cards (cover placeholder + title + subtitle + description + tags + buy buttons).",
-      "component": "GuideBookGrid",
-      "import": "~/components/widgets/GuideBookGrid.astro",
-      "props": {
-        "eyebrow": "section label",
-        "heading": "h2 section heading",
-        "description": "right-column header text",
-        "books": "GuideBookItem[] — { slug, title, subtitle, description, image, tags, buyButtons, publisherNote, podcastHref }",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 121:313. Card bg is bg-card-light. Covers come from Sanity; grey placeholder if missing. Card id is book-{slug} for in-page jumps."
-    },
-    {
-      "id": "P-34",
-      "name": "Media Appearances",
-      "figmaNames": ["As Seen In", "Media appearances horizontal scroll", "121:566"],
-      "shape": "bg-page section. Centered header (eyebrow+h2+subtitle). Horizontal CSS marquee (same as Testimonials) of appearance cards (italic Fraunces quote + book cover placeholder on right). Optional CTA button.",
-      "component": "MediaAppearances",
-      "import": "~/components/widgets/MediaAppearances.astro",
-      "props": {
-        "eyebrow": "small uppercase label",
-        "heading": "h2",
-        "subtitle": "short body line below heading",
-        "appearances": "AppearanceItem[] — { quote }",
-        "cta": "{ text, href } optional CTA button",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 121:566. Cards duplicated for seamless CSS marquee loop. Pauses on hover. Edge fade mask."
-    },
-    {
-      "id": "P-30",
-      "name": "Session Cards",
-      "figmaNames": ["Spring 2026 calendar", "Guidebook sessions", "64:1201"],
-      "shape": "Optional eyebrow + 2-col grid of Card variant=feature with speaker row. Calendar header, 28px title, people+speaker, 12px body, ghost Explore CTA pinned bottom-right.",
-      "component": "SessionCards",
-      "import": "~/components/widgets/SessionCards.astro",
-      "props": {
-        "eyebrow": "optional section label",
-        "cards": "SessionCardItem[] — { label, title, speaker?, description, ctaText?, ctaHref? }",
-        "id": "section anchor"
-      },
-      "itemCount": [2, 4, 6],
-      "notes": "Figma node 64:1201 (Guidebooks). Uses Card variant='feature' (A-05) with speaker prop for the session body layout. Content always passed from the page file."
-    },
-    {
-      "id": "P-35",
-      "name": "Podcast Filter",
-      "figmaNames": ["The roadmap", "Podcast filter", "121:1169"],
-      "shape": "Centered eyebrow+h2+body, then wrapping uppercase filter pills (active = accent fill).",
-      "component": "PodcastFilter",
-      "import": "~/components/widgets/PodcastFilter.astro",
-      "props": {
-        "eyebrow": "small uppercase label",
-        "heading": "h2",
-        "description": "centered body under the heading",
-        "tabs": "FilterTab[] — { label, id }",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 121:1169. Filter tabs are interactive (JS). Content always passed from the page file."
-    },
-    {
-      "id": "P-36",
-      "name": "Podcast Episodes",
-      "figmaNames": ["Head & Senses", "Podcast category grid", "121:1286"],
-      "shape": "Centered eyebrow+h2+body, then 3-col grid of Card variant=podcast. tone=light | dark.",
-      "component": "PodcastEpisodes",
-      "import": "~/components/widgets/PodcastEpisodes.astro",
-      "props": {
-        "eyebrow": "episode count label",
-        "heading": "h2 category title",
-        "description": "centered body under the heading",
-        "episodes": "PodcastEpisodeItem[] — { slug?, title, tag?, description?, ctaText?, ctaHref?, status?, spotifyUrl?, youtubeUrl? }",
-        "tone": "light (default) | dark",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 121:1286 (light, page bg) and 121:916 (dark, tan bg-cta/60). Uses Card variant='podcast' (A-05) — cream card, dark type, same on both tones. Pass one episode while the grid is still a template."
-    },
-    {
-      "id": "P-38",
-      "name": "Single Quote",
-      "figmaNames": ["You are only as young as your oldest parts", "SingleTestimonialCardSection", "121:1715"],
-      "shape": "bg-page outer. Inner card: gradient from-transparent to-section-grey, rounded-tl/tr-[64px], p-[64px]. Large quote-mark SVG (mix-blend-overlay), h2 Fraunces quote, eyebrow attribution.",
-      "component": "SingleQuote",
-      "import": "~/components/widgets/SingleQuote.astro",
-      "props": {
-        "quote": "quote text",
-        "attribution": "— Author attribution string",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 121:1715. Not a carousel — one standalone pullquote card."
-    },
-    {
-      "id": "P-39",
-      "name": "Credentials Section",
-      "figmaNames": ["Medical Credentials", "Journey", "121:1861"],
-      "shape": "bg-cta (tan), rounded-tl/tr-[64px], p-[120px]. 2-col: left=eyebrow+h2+two credential cards / right=tall residencies timeline card.",
-      "component": "CredentialsSection",
-      "import": "~/components/widgets/CredentialsSection.astro",
-      "notes": "Figma node 121:1861. Uses Card variant='pillar' with iconBg so header icon tiles match homepage (36px mobile / 50px desktop). Residencies card: same chrome, timeline with dashed connector lines."
-    },
-    {
-      "id": "P-40",
-      "name": "Publications Section",
-      "figmaNames": ["Publications", "A body of work", "121:2085"],
-      "shape": "bg-page, centered eyebrow+h2 header, 3-col grid of publication cards. Each card: bg-feature-card, border-section-grey, rounded-[16px], book tile icon + count eyebrow + h4 title + small description.",
-      "component": "PublicationsSection",
-      "import": "~/components/widgets/PublicationsSection.astro",
-      "props": {
-        "eyebrow": "section label (default 'Publications')",
-        "heading": "h2 section heading",
-        "publications": "Publication[] — { count, title, description }",
-        "id": "section anchor"
-      },
-      "notes": "Figma node 121:2085. Three publication series cards in a row. Book icon is the same tile as Card variant=feature (36px mobile / 40px desktop, bookTileSvg)."
-    },
-    {
-      "id": "P-41",
-      "name": "Talk to Your Doctor",
-      "figmaNames": ["Talk to your doctor about it", "Athena Clinic packages", "176:259"],
-      "shape": "2-col: left icon+h3+body rows with muted dividers / right navy→primary packages card overlapping a heading-coloured disclosure tab.",
-      "component": "TalkToDoctor",
-      "import": "~/components/widgets/TalkToDoctor.astro",
-      "props": {
-        "items": "AdviceItem[] — { iconSvg, title, body }",
-        "clinicEyebrow": "uppercase label on the packages card",
-        "clinicHeading": "h2 on the packages card",
-        "packages": "PackageStep[] — { number, body }",
-        "addOnNote": "right-aligned muted note under the steps",
-        "disclosureEyebrow": "uppercase label on the overlapping tab",
-        "disclosure": "small disclosure copy"
-      },
-      "notes": "Figma nodes 176:243 (page hero via Hero2 variant=page) and 176:259 (this widget). Content always passed from the page file."
-    },
-    {
-      "id": "P-42",
-      "name": "Brand ticker bar",
-      "figmaNames": ["Brand Bar", "Frame 24", "Healthy Fresh Local"],
-      "shape": "Full-bleed seaweed strip. Looping icon + Wreck Script words.",
-      "component": "BrandBar",
-      "import": "~/components/widgets/BrandBar.astro",
-      "props": {
-        "items": "Array<{ text, tilt? }> — default Healthy / Fresh / Local"
-      },
-      "notes": "Homepage 66:2. 32px Wreck Script (type-ticker), cream type, 42×42 grey icon placeholders, CSS marquee. Do not fork per page."
-    },
-    {
-      "id": "P-44",
-      "name": "Local sourcing",
-      "figmaNames": ["Our ingredients & local sourcing", "Sourced close to home, on purpose.", "Frame 35"],
-      "shape": "Seaweed band. Inset intro panel (eyebrow+h2 | body-lg+primary CTA) with four overlapping 8px-border fact cards (icon placeholder + h3 + body).",
-      "component": "LocalSourcing",
-      "import": "~/components/widgets/LocalSourcing.astro",
-      "props": {
-        "eyebrow": "Wreck Script label (mix-blend-overlay)",
-        "title": "h2",
-        "subtitle": "body-lg lede",
-        "ctaText": "primary button label",
-        "ctaHref": "button href",
-        "facts": "Array<{ title, description }> — 4 icon+title cards"
-      },
-      "notes": "Homepage 59:106. Transparent section so the page gradient + leaf motif show through. Cream fact cards stay filled. Cards overlap the intro by 42px. Basket icons are grey placeholders until the image pass. Do not fork per page."
-    },
-    {
-      "id": "P-49",
-      "name": "Pre-footer conversion band",
-      "figmaNames": ["Conversion band", "Pre-footer"],
-      "shape": "Three global CTAs above the footer on every page",
-      "component": "ConversionBand",
-      "import": "~/components/widgets/ConversionBand.astro",
-      "notes": "Former pre-footer CTA row. Removed from PageLayout — do not reintroduce per page."
+      "id": "P-18",
+      "name": "Site footer",
+      "figmaNames": ["Footer"],
+      "shape": "Footer band with logo, link columns, legal links, copyright",
+      "component": "Footer",
+      "import": "~/components/widgets/Footer.astro",
+      "notes": "Shared chrome. Do not fork per page."
     }
   ]
 }

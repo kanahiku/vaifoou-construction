@@ -1,6 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import { twMerge } from 'tailwind-merge';
-import { CONTACT } from '~/config/contact';
+import logoSrc from '~/assets/icons/logo.png';
 
 interface Props {
   class?: string;
@@ -9,6 +10,9 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<span class={twMerge('block shrink-0 font-heading text-[20px] leading-none text-heading', className)}>
-  {CONTACT.businessName}
-</span>
+<Image
+  src={logoSrc}
+  alt="Vaifoou Construction"
+  height={40}
+  class={twMerge('h-10 w-auto object-contain', className)}
+/>

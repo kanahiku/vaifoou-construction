@@ -1,30 +1,55 @@
 ---
-description: Image placement — always use grey placeholder boxes during build; never embed real images
+description: Image placement — always use grey placeholder boxes; NEVER use Figma MCP image URLs
 alwaysApply: true
 ---
 
-# Image placeholders
+# Image placeholders — strict rule
 
-During the build phase, **never** import or embed real images. Use a grey placeholder `<div>` instead. Images are polished in a separate design pass.
+During the build phase, **never** import, download, or embed real images. Use a grey placeholder `<div>` instead.
+Images are provided by the client in a separate asset pass.
 
-## Rule
+## The Figma MCP image rule
 
-Every place Figma shows an image (photo, chart, illustration, icon background):
+When using the Figma MCP (`get_design_context`, `get_screenshot`, etc.) the server returns
+`http://localhost:*` image URLs. These are **temporary, local-only, and must NEVER appear in any
+source file, component, or page** — not even as a comment, an `src` attribute, a CSS `url()`, or a
+default prop value.
 
 ```astro
 <!-- ✅ CORRECT — grey box placeholder -->
 <div
-  class="w-full rounded-[32px] bg-section-grey"
+  class="w-full bg-section-grey"
   style="aspect-ratio: 16 / 9;"
   aria-hidden="true"
 />
+<!-- TODO: replace with <Image> when asset is ready -->
 
-<!-- ❌ WRONG — do not import or embed real images yet -->
-<Image src={chart} alt="…" class="w-full rounded-[32px]" />
+<!-- ❌ WRONG — Figma MCP localhost URL in production code -->
+<img src="http://localhost:3845/..." alt="hero" />
+
+<!-- ❌ WRONG — real image import -->
+<Image src={heroPhoto} alt="…" />
 ```
 
-- Set `aspect-ratio` to the Figma image's exact ratio (e.g. `1695 / 928`, `4 / 3`, `1 / 1`).
-- Use `bg-section-grey` as the fill color (token already available).
-- Add `rounded-*` to match the Figma corner radius of the image frame.
-- Leave a `<!-- TODO: replace with <Image> when asset is ready -->` comment so it's easy to find later.
-- Do **not** download, save, or reference image files from the Figma MCP localhost server in production code.
+## How to handle every image in Figma
+
+1. Note the frame's width × height to compute the correct `aspect-ratio`.
+2. Note the corner radius and apply a matching `rounded-*` class.
+3. Render the grey box — **do not reach for the Figma-provided localhost URL**.
+4. Leave the `<!-- TODO: replace with <Image> -->` comment on the placeholder.
+
+## Correct placeholder shapes
+
+| Figma image type | Placeholder classes |
+|---|---|
+| Full-bleed hero photo | `w-full h-full absolute inset-0 bg-section-grey` |
+| Side image in a split | `w-full bg-section-grey rounded-[Xpx]` + `style="aspect-ratio: W/H"` |
+| Card thumbnail | `w-full bg-section-grey rounded-t-[Xpx]` + `style="aspect-ratio: 4/3"` |
+| Icon / small asset | `w-12 h-12 bg-section-grey rounded-full` |
+
+## Do not
+
+- Save or reference any `localhost:*` URL from the Figma MCP server
+- Import a photo, illustration, or icon from `src/assets/images/` until the client provides the file
+- Leave a Figma screenshot URL inside an `<img>` or `background-image`
+- Use a real OG image from Figma as `<Image>` — OG images are generated separately

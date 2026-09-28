@@ -1,0 +1,62 @@
+---
+/**
+ * Concrete Driveways — /services/concrete/driveways/
+ * Content: docs/service/concrete-service/…Concrete Driveways.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Concrete Driveways | ${site.name}`,
+  description: `Vaifoou Construction pours durable concrete driveways for properties on O\u02BBahu. Contact us to schedule a site estimate.`,
+};
+
+// 2-col cost factors table (no col2)
+const tableRows = [
+  { feature: 'Square Footage',   val1: 'The total surface area required for the pour.' },
+  { feature: 'Site Preparation', val1: 'Ground grading and demolition of existing concrete.' },
+  { feature: 'Finish Selection', val1: 'Standard broom finish or decorative stamped patterns.' },
+];
+
+const links = [
+  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
+  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+];
+
+const faqs = [
+  { title: 'What factors affect the cost of a new driveway?', description: 'Costs are determined by total square footage and required site preparation. Your chosen concrete finish also impacts the final estimate.' },
+  { title: 'What materials do you use?',                      description: 'We use high-quality concrete mixtures designed for structural longevity.' },
+  { title: 'Are your installations guaranteed?',              description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Concrete Services"
+    title="Concrete Driveways"
+    body="We pour concrete driveways for residential and commercial properties across O\u02BBahu. Our family brings a 25+ year trade legacy to every project. Your new driveway is built to handle heavy vehicle traffic. Every installation is backed by our workmanship guarantee."
+    imagePlaceholder="Concrete driveway pour photo"
+  />
+  <ServiceTable
+    eyebrow="Estimating"
+    heading="Driveway Cost Factors"
+    note="Estimating the cost of a new concrete driveway requires an on-site consultation. We evaluate specific variables to determine the final project scope."
+    col1="Description"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Concrete Services" items={links} />
+  <FAQs title="Concrete Driveway FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading="Start Your Concrete Driveway Project" />
+</Layout>

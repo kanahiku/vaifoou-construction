@@ -2,145 +2,75 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { CONTACT } from '~/config/contact';
-import { PRIMARY_CTA_LABEL } from '~/config/cta';
 
 const metadata = {
   title: `Privacy Policy | ${CONTACT.businessName}`,
-  description: `How ${CONTACT.businessName} collects, uses, and protects information from the website, contact form, and messaging programs.`,
+  description: `Learn how ${CONTACT.businessName} collects and protects your personal information on our website.`,
   ignoreTitleTemplate: true,
 };
 
-const headingClass =
-  'text-[22px] md:text-[26px] font-normal leading-[130%] tracking-tight font-heading text-heading mb-4';
-const bodyClass = 'text-[16px] md:text-[17px] font-normal leading-[160%] text-muted';
-const listClass = `${bodyClass} mt-4 space-y-1 list-disc pl-5`;
-const linkClass = 'btn-link';
+const h2 = 'font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[24px]';
+const body = 'mt-2 font-body text-[15px] leading-7 text-banner-note md:text-[16px]';
+const linkClass = 'text-nav-cta underline underline-offset-2 hover:text-accent';
 ---
 
 <Layout metadata={metadata}>
-  <Hero2>
-    <Fragment slot="title">Privacy Policy</Fragment>
-    <Fragment slot="subtitle">
-      {CONTACT.businessName} values your privacy and is committed to handling customer information and communications
-      responsibly. This Privacy Policy explains how we collect, use, and protect your information when you visit our
-      website, submit a contact form, or opt into our messaging programs.
-    </Fragment>
-    <Fragment slot="bg">
-      <SectionBg variant="hero" />
-    </Fragment>
-  </Hero2>
 
+  {/* ── Page hero ─────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-heading py-14 md:py-20">
+    <div class="site-frame flex flex-col gap-1">
+      <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-page/50 uppercase">
+        <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+        Legal
+      </p>
+      <h1 class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[56px]">
+        Privacy Policy
+      </h1>
+    </div>
+  </section>
+
+  {/* ── Body ───────────────────────────────────────────────────── */}
   <WidgetWrapper containerClass="max-w-container mx-auto">
     <div class="max-w-3xl space-y-10 md:space-y-14">
-      <section>
-        <h2 class={headingClass}>Information We Collect</h2>
-        <p class={bodyClass}>
-          When you contact us through our website, we collect personal information that you voluntarily provide. This
-          information includes:
-        </p>
-        <ul class={listClass}>
-          <li>Name</li>
-          <li>Email address</li>
-          <li>Phone number</li>
-          <li>ZIP code</li>
-        </ul>
-      </section>
 
       <section>
-        <h2 class={headingClass}>How We Use Your Information</h2>
-        <p class={bodyClass}>
-          The information you provide is used to fulfill your requests and facilitate our services. We use this data to
-          respond to your inquiries, provide estimates, schedule visits, and communicate with you about your project.
+        <p class={body}>
+          {CONTACT.businessName} respects your privacy. This policy outlines how we handle the information collected through vaifoouconstruction.com.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>Cookies and Website Analytics</h2>
-        <p class={bodyClass}>
-          Our website uses cookies and standard web analytics tools (including Google Tag Manager when configured) to
-          help us understand how visitors interact with our site. These tools may collect non-identifying information
-          such as your browser type, device information, and page views. You can manage or disable cookies through your
-          web browser settings.
+        <h2 class={h2}>Information Collection</h2>
+        <p class={body}>
+          We collect personal data when you submit an estimate request or contact our team directly. This information includes your name and phone number. We also collect your project address and specific site details. Our website also collects basic browsing analytics to monitor site performance.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>Privacy Commitment and Data Sharing</h2>
-        <p class={bodyClass}>
-          End-user information, including personal details and phone numbers collected through our website, will not be
-          shared with, sold to, or traded with third parties or affiliates for marketing or promotional purposes.
-          Information is only used for the purposes described in this policy and in connection with the services you
-          request from us.
+        <h2 class={h2}>Data Usage</h2>
+        <p class={body}>
+          We use your submitted information exclusively to review your project requirements and schedule site consultations. We do not sell your personal data to marketing agencies or third parties.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>SMS Messaging Consent</h2>
-        <p class={bodyClass}>
-          By agreeing to receive SMS messages from {CONTACT.businessName}, you consent to receive text messages that may
-          include:
-        </p>
-        <ul class={listClass}>
-          <li>Appointment-related communications</li>
-          <li>Customer service communications</li>
-          <li>Billing-related communications</li>
-          <li>Marketing communications</li>
-          <li>Other communications related to your interaction with {CONTACT.businessName}</li>
-        </ul>
-        <p class={`${bodyClass} mt-4`}>
-          Message frequency may vary depending on the type of communication and your interaction with us.
+        <h2 class={h2}>Contact Us</h2>
+        <p class={body}>
+          For questions regarding your data or to request record removal, contact us at{' '}
+          <a href="mailto:vaifoou4@gmail.com" class={linkClass}>vaifoou4@gmail.com</a>{' '}
+          or call{' '}
+          <a href={CONTACT.phone.href} class={linkClass}>{CONTACT.phone.display}</a>.
         </p>
       </section>
 
-      <section>
-        <h2 class={headingClass}>How to Opt Out of SMS Messages</h2>
-        <p class={bodyClass}>
-          You can cancel the SMS messaging service at any time. Reply STOP to the number that sent you the message.
-          After sending STOP, you will receive a confirmation and will no longer receive SMS messages from that
-          messaging program. You may opt in again later through the applicable sign-up process.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>Carrier and Message Cost Disclosures</h2>
-        <p class={bodyClass}>
-          Wireless carriers are not responsible for delayed or undelivered messages. Message and data rates may apply to
-          messages sent to or received from {CONTACT.businessName}. For questions about your text messaging or data
-          plan, contact your wireless service provider.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>Questions About Your Privacy</h2>
-        <div class={`${bodyClass} space-y-5`}>
-          <p>
-            If you are experiencing an issue with our messaging program, reply HELP to any text message for assistance.
-          </p>
-          <p>
-            If you have questions about how your information is handled, or need to update your contact preferences,
-            please contact us:
-          </p>
-          <p>
-            {CONTACT.businessName}<br />
-            {CONTACT.address.street}<br />
-            {CONTACT.address.cityLine}<br />
-            Email: <a class={linkClass} href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><br />
-            Phone: <a class={linkClass} href={CONTACT.phone.href}>{CONTACT.phone.display}</a>
-          </p>
-        </div>
-      </section>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <CTABanner
-    title="Questions?"
-    subtitle={`If you have questions about this policy or about working with ${CONTACT.businessName}, contact us.`}
-    ctaText={PRIMARY_CTA_LABEL}
-  />
+  <BrickMotifCTA heading="Questions About Your Data?" />
+
 </Layout>

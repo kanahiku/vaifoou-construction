@@ -1,0 +1,56 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `North Shore & Haleiwa Masonry & Concrete | ${site.name}`,
+    description: `Vaifoou Construction provides structural masonry and concrete flatwork for North Shore properties. We build custom rock walls and pour new concrete foundations.`,
+  }}
+  hero={{
+    eyebrow: `North Shore O\u02BBahu`,
+    title: `North Shore & Haleiwa Masonry & Concrete Construction`,
+    body: `Custom basalt rock walls, coastal driveway pours, and structural masonry across Haleiwa and the North Shore.`,
+    imagePlaceholder: 'North Shore masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'North Shore & Haleiwa',
+    heading: `North Shore & Haleiwa Masonry & Concrete`,
+    body: `North Shore properties face constant salt air, sandy coastal soils, and heavy winter rain. Located just up Kamehameha Highway in Wahiawa, our crews head down to Haleiwa to build heavy-duty basalt boundary walls and pour durable concrete flatwork. A 25+ year family legacy stands behind every wall and every pour.`,
+  }}
+  services={[
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Custom entry pillars and perimeter walls built with hand-selected volcanic basalt for coastal and country lots.' },
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'New structural foundations and replacement concrete driveways poured over properly compacted sub-bases.' },
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: 'Heavy-duty rock and block structures built to hold back soil on sloped Pupukea and hillside properties.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Structural hollow tile walls and privacy fences built to secure residential and commercial property lines.' },
+  ]}
+  servicesHeading="North Shore & Haleiwa Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work on the North Shore',
+    description: `Our crews recently built a long basalt boundary wall for an agricultural lot off Kamehameha Highway outside Haleiwa, hand-selecting coastal volcanic stone and setting each course to manage the sandy soil shift that comes with winter surf season.`,
+    imagePlaceholder: 'Recent North Shore project photo',
+  }}
+  otherAreas={[
+    { title: 'Wahiawa',         href: '/service-areas/wahiawa/' },
+    { title: 'Honolulu',        href: '/service-areas/honolulu/' },
+    { title: 'Mililani',        href: '/service-areas/mililani/' },
+    { title: 'Kaneohe',         href: '/service-areas/kaneohe/' },
+    { title: 'Kailua',          href: '/service-areas/kailua/' },
+    { title: 'Kapolei',         href: '/service-areas/kapolei/' },
+    { title: 'Aiea & Pearl City', href: '/service-areas/aiea-pearl-city/' },
+    { title: 'Waipahu',         href: '/service-areas/waipahu/' },
+    { title: 'Ewa Beach',       href: '/service-areas/ewa-beach/' },
+  ]}
+  faqs={{
+    title: 'North Shore Masonry FAQs',
+    items: [
+      { title: 'Is your equipment yard located in Haleiwa?', description: 'No. Our crews deploy directly down Kamehameha Highway from our central Wahiawa yard to all North Shore locations.' },
+      { title: 'Can you repair a cracked concrete slab on my coastal property?', description: 'We do not patch or repair existing concrete. When salt air or shifting sand cracks an older slab, we handle complete demolition and pour brand new concrete.' },
+      { title: 'Do you build boundary walls for larger country lots in Haleiwa?', description: 'Yes. We construct structural CMU block walls and hand-selected volcanic basalt walls for residential boundaries, agricultural lots, and local businesses.' },
+      { title: 'Will you build a retaining wall to manage sloped terrain?', description: 'Yes. We construct heavy basalt and CMU retaining walls designed to hold back soil on sloped lots, though we do not install micropiles or tiebacks.' },
+      { title: 'Do you clear the land before building a wall or pouring concrete?', description: 'We only remove trees and brush necessary to complete the concrete or masonry installation. We do not provide general landscape design.' },
+    ],
+  }}
+  ctaHeading="Start Your North Shore Masonry Project"
+/>

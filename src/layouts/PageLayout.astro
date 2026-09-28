@@ -2,9 +2,8 @@
 import Layout from '~/layouts/Layout.astro';
 import Header from '~/components/widgets/Header.astro';
 import Footer from '~/components/widgets/Footer.astro';
-import Announcement from '~/components/widgets/Announcement.astro';
-
 import { navigationData } from '~/data/navigation';
+import { CONTACT } from '~/config/contact';
 
 import type { MetaData } from '~/types';
 
@@ -17,11 +16,14 @@ const footer = navigationData.footer;
 ---
 
 <Layout metadata={metadata}>
-  <slot name="announcement">
-    <Announcement />
-  </slot>
+  <slot name="announcement" />
   <slot name="header">
-    <Header links={navigationData.header.links} actions={navigationData.header.actions} isSticky />
+    <Header
+        links={navigationData.header.links}
+        actions={navigationData.header.actions}
+        phone={{ text: CONTACT.phone.display, href: CONTACT.phone.href }}
+        isSticky
+      />
   </slot>
   <div>
     <main>

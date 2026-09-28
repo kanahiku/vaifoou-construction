@@ -1,104 +1,491 @@
 ---
+/**
+ * Homepage — Figma node 4:2 (1280 × 5724 px).
+ * 6 sections: Hero · Intro · Services · Service Areas · Reviews · CTA
+ */
 import Layout from '~/layouts/PageLayout.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
-import InfoCard from '~/components/ui/InfoCard.astro';
-import Timeline from '~/components/ui/Timeline.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import { Icon } from 'astro-icon/components';
+import PhoneIcon from '~/components/ui/PhoneIcon.astro';
+import { Image } from 'astro:assets';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import brickMotif from '~/assets/brick-motif-wide-light.svg';
+import iconRockWall from '~/assets/icons/rock-wall.svg';
+import iconWalls from '~/assets/icons/walls.svg';
+import iconHammer from '~/assets/icons/hammer.svg';
 import { site } from '~/config/site';
-import { PRIMARY_CTA_LABEL, PRIMARY_CTA_HREF } from '~/config/cta';
+import { CONTACT } from '~/config/contact';
+import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
 
-const metadata = {
-  title: site.name,
-  description: site.description,
-  ignoreTitleTemplate: true,
+const meta = {
+  title: "Vaifoou Construction | O\u2019ahu Masonry & Concrete Contractor",
+  description:
+    "Family-owned masonry and concrete contractor serving all of O\u2019ahu. Backed by a 25+ year family legacy in the trade. Request your free estimate today.",
 };
 
+/* ── Service card icons — left of each title ── */
 const services = [
   {
-    title: 'Residential Construction',
-    description: 'Placeholder service copy for the upcoming design and content pass.',
-    icon: 'tabler:home',
+    title: 'Rock Walls',
+    description: 'Custom boundaries built with hand-selected volcanic basalt.',
+    cta: 'View Rock Wall Services',
+    href: '/services/rock-walls',
+    icon: iconRockWall,
+    iconW: 22,
+    iconH: 12,
   },
   {
-    title: 'Commercial Projects',
-    description: 'A reusable card section ready to be restyled once the Figma system lands.',
-    icon: 'tabler:building',
+    title: 'CMU & Block Walls',
+    description: 'Retaining walls and block fences built for long-term stability.',
+    cta: 'View CMU & Block Walls',
+    href: '/services/cmu-block-walls',
+    icon: iconWalls,
+    iconW: 18,
+    iconH: 14,
   },
   {
-    title: 'Renovations',
-    description: 'Keep this starter content light so the real site can be composed from Figma.',
-    icon: 'tabler:tool',
+    title: 'Concrete Services',
+    description: 'Custom driveways, sidewalks, and flatwork poured for long-term durability.',
+    cta: 'View Concrete Services',
+    href: '/services/concrete',
+    icon: iconHammer,
+    iconW: 16,
+    iconH: 18,
   },
 ];
 
-const processSteps = [
+const serviceAreas = [
+  'Wahiawa',
+  'Mililani',
+  'Honolulu',
+  'Aiea & Pearl City',
+  'Waipahu',
+  'Ewa Beach',
+  'Kapolei',
+  'Kailua',
+  'Kaneohe',
+  'North Shore & Haleiwa',
+];
+
+/* 3 placeholder reviews — replace with real copy when available */
+const reviews = [
   {
-    title: 'Consultation',
-    description: 'Gather project goals, site details, budget range, and timeline.',
-    icon: 'tabler:messages',
+    quote: 'REVIEW PLACEHOLDER — Replace with a real 5-star customer review referencing rock walls, concrete work, or demolition.',
+    name: 'Customer Name',
+    location: 'Kailua, O\u02BBahu',
   },
   {
-    title: 'Planning',
-    description: 'Define scope, materials, approvals, and the build schedule.',
-    icon: 'tabler:clipboard-list',
+    quote: 'REVIEW PLACEHOLDER — Replace with a real 5-star customer review referencing rock walls, concrete work, or demolition.',
+    name: 'Customer Name',
+    location: 'Mililani, O\u02BBahu',
   },
   {
-    title: 'Construction',
-    description: 'Coordinate the work with clear updates from kickoff through handoff.',
-    icon: 'tabler:hammer',
+    quote: 'REVIEW PLACEHOLDER — Replace with a real 5-star customer review referencing rock walls, concrete work, or demolition.',
+    name: 'Customer Name',
+    location: 'Ewa Beach, O\u02BBahu',
   },
 ];
 ---
 
-<Layout metadata={metadata}>
-  <Hero2
-    id="home-hero"
-    variant="split-dark"
-    overlapHeader={false}
-    hideImage
-    tagline="New client starter"
-    title="Vaifoou Construction"
-    content="A clean starter site for the new construction project. The design system, homepage sections, and final content will be rebuilt from the Figma MCP references."
-    actions={[
-      { variant: 'primary', text: PRIMARY_CTA_LABEL, href: PRIMARY_CTA_HREF },
-      { variant: 'ghost-dark', text: 'View starter sections', href: '#services' },
-    ]}
-  />
+<Layout metadata={meta}>
+  {/* ═══════════════════════════════════════════════════════════
+      SECTION 1 — HERO
+      Figma node 4:5 · h=571 · full-bleed image + gradient overlay
+  ════════════════════════════════════════════════════════════ */}
+  <section class="relative w-full overflow-hidden border-b border-banner-line min-h-[480px] md:min-h-[571px]">
 
-  <WidgetWrapper id="services">
-    <Headline
-      tagline="Starter content"
-      title="Reusable Service Cards"
-      subtitle="These are placeholders only. The real service structure should come from the Figma homepage."
+    {/* Hero photo — placeholder until the asset pass */}
+    <HeroImagePlaceholder
+      fill
+      hideLabel
+      class="absolute inset-0"
+      label="Hero image placeholder"
     />
-    <div class="grid gap-5 md:grid-cols-3">
-      {services.map((item) => <InfoCard {...item} variant="light" />)}
+    <span
+      class="pointer-events-none absolute right-6 top-6 z-[5] font-display text-[13px] font-semibold uppercase leading-none tracking-[0.14em] text-page-end/70 md:right-16 md:top-1/2 md:-translate-y-1/2 md:text-[18px]"
+    >
+      Placeholder
+    </span>
+
+    {/* Gradient overlay: dark on left, fades right */}
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(90deg, rgb(28 27 26 / 88%) 0%, rgb(28 27 26 / 68%) 55%, rgb(28 27 26 / 25%) 100%);"
+      aria-hidden="true"
+    ></div>
+
+    {/* Content */}
+    <div class="site-frame relative z-10 flex flex-col items-start gap-4 pb-16 pt-16 md:pb-24 md:pt-24">
+      <p class="bg-section-dark px-2 py-1 font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)]">
+        O&#x2019;ahu Masonry &amp; Concrete Specialists
+      </p>
+
+      <h1 class="max-w-[896px] font-display text-[40px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[80px] md:tracking-[-0.8px]">
+        Concrete &ndash; Rockwall &ndash; CMU
+      </h1>
+
+      <p class="max-w-[672px] font-display text-[18px] font-semibold leading-snug tracking-[0.22px] text-page/80 md:text-[28px] md:leading-[38.5px] md:tracking-[0.28px]">
+        Backed by a 25+ year family legacy in the masonry trade.
+      </p>
+
+      <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
+        <a
+          href={PRIMARY_CTA_HREF}
+          class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+        >
+          {PRIMARY_CTA_LABEL}
+        </a>
+        <a
+          href={CONTACT.phone.href}
+          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+        >
+          <PhoneIcon />
+          {CONTACT.phone.display}
+        </a>
+      </div>
+
+      {/* Trust bar — plain text + dot separators, no icons */}
+      <p class="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-muted/30 pt-6">
+        <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">
+          Serving all of O&#x2019;ahu
+        </span>
+        <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
+        <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">
+          Licensed &amp; Insured
+        </span>
+        <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
+        <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">
+          {CONTACT.license}
+        </span>
+      </p>
     </div>
-    <Fragment slot="bg">
-      <SectionBg variant="white" />
-    </Fragment>
-  </WidgetWrapper>
+  </section>
 
-  <WidgetWrapper id="process">
-    <Headline
-      tagline="Starter flow"
-      title="Simple Project Process"
-      subtitle="This keeps a reusable timeline pattern available without carrying over old project copy."
-    />
-    <Timeline items={processSteps} defaultIcon="tabler:circle-check" surface="grey" />
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
 
-  <CTABanner
-    eyebrow="Next step"
-    title="Ready for the Figma build."
-    subtitle="Send the design system and homepage MCP links and this starter can be reshaped into the new site."
-    ctaText={PRIMARY_CTA_LABEL}
-    ctaHref={PRIMARY_CTA_HREF}
-  />
+  {/* ═══════════════════════════════════════════════════════════
+      SECTION 2 — INTRO / PATHWAYS
+      Figma node 4:39 · h=992
+      Eyebrow + H2 + body + 2 audience pathway cards
+  ════════════════════════════════════════════════════════════ */}
+  <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-12 md:gap-16">
+      <div class="flex max-w-[896px] flex-col gap-1">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          Company Heritage
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
+          Built to last. Built right.
+        </h2>
+        <p class="max-w-[896px] pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
+          We are a locally owned family business specializing in concrete and masonry. Our work rests on a 25+ year family legacy in the masonry trade that goes back to around 2000. We build rock walls, CMU and block walls, and concrete for O&#x2019;ahu homeowners, property owners and contractors. Every project comes with our workmanship guarantee.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10">
+        {[
+          {
+            label: 'Residential',
+            title: 'Working on your home?',
+            cta: 'View Residential Masonry & Concrete',
+            href: '/residential',
+          },
+          {
+            label: 'Commercial & civil',
+            title: 'Managing a commercial property, an HOA or a job site?',
+            cta: 'View Commercial Masonry & Concrete',
+            href: '/commercial',
+          },
+        ].map(({ label, title, cta, href }) => (
+          <article class="flex h-full flex-col overflow-hidden border border-banner-line bg-card">
+            <div class="relative h-56 w-full shrink-0 md:h-[288px]">
+              <!-- TODO: replace with <Image> when asset is ready -->
+              <HeroImagePlaceholder fill class="absolute inset-0" label={`${label} image placeholder`} />
+              <span class="absolute left-2 top-2 z-10 bg-section-dark px-2 py-1 font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)]">
+                {label}
+              </span>
+            </div>
+            <div class="flex flex-1 flex-col p-6 md:p-10">
+              <h3 class="font-display text-[24px] font-semibold leading-8 tracking-[0.24px] text-heading uppercase md:text-[28px] md:leading-8 md:tracking-[0.28px]">
+                {title}
+              </h3>
+              <div class="mt-auto pt-8 md:pt-10">
+                <a
+                  href={href}
+                  class="cta-md inline-flex w-fit items-center justify-center gap-2 bg-nav-cta text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[20px]"
+                >
+                  {cta}
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+                    <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  {/* ═══════════════════════════════════════════════════════════
+      SECTION 3 — CORE SERVICES
+      Figma node 4:84 · h=1106
+      Eyebrow + H2 + 3 service cards + veneer highlight + "View Our Work"
+  ════════════════════════════════════════════════════════════ */}
+  <section id="services" class="w-full border-b border-banner-line bg-card py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-12 md:gap-16">
+
+      {/* Section header */}
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          Trade Capabilities
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
+          Core masonry services
+        </h2>
+      </div>
+
+      {/* 3 service cards — icon inline left of title, text link at bottom */}
+      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8">
+        {services.map(({ icon, iconW, iconH, title, description, cta, href }) => (
+          <article class="flex h-full flex-col border border-banner-line bg-white p-4 md:p-10">
+            <div class="flex flex-col gap-3 flex-1">
+              {/* Icon inline left of title */}
+              <h3 class="flex items-center gap-2.5 font-display text-[24px] font-semibold leading-none tracking-[0.24px] text-heading uppercase md:text-[26px]">
+                <Image
+                  src={icon}
+                  alt=""
+                  width={iconW}
+                  height={iconH}
+                  class="h-[18px] w-auto shrink-0"
+                  aria-hidden="true"
+                />
+                {title}
+              </h3>
+              <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>
+            </div>
+            {/* Text link at bottom */}
+            <a
+              href={href}
+              class="mt-8 inline-flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-heading"
+            >
+              {cta}
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+                <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/>
+              </svg>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      {/* "View Our Work" button */}
+      <div class="flex justify-center">
+        <a
+          href="/projects/"
+          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
+        >
+          View Our Work
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
+          </svg>
+        </a>
+      </div>
+
+      {/* Featured highlight — below cards and "View Our Work" */}
+      <div class="border border-banner-line bg-section-grey p-2">
+        <div class="relative flex min-h-[360px] flex-col justify-between overflow-hidden p-6 md:h-[420px]">
+          <!-- TODO: replace with <Image> when asset is ready — real photo of completed veneer rock wall project on O'ahu -->
+          <HeroImagePlaceholder
+            fill
+            align="start"
+            class="absolute inset-0"
+            label="Custom veneer rock walls image placeholder"
+          />
+          <span class="relative z-10 w-fit self-start bg-section-dark px-4 py-1 font-display text-[13px] font-bold leading-4 tracking-[1.3px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)]">
+            Featured trade highlight
+          </span>
+          <div class="relative z-10 mt-8 flex max-w-[896px] flex-col items-start justify-between gap-6 bg-heading/90 p-6 md:flex-row md:items-end">
+            <div class="max-w-[672px]">
+              <h3 class="font-display text-[24px] font-semibold leading-8 tracking-[0.24px] text-page-end uppercase md:text-[28px] md:tracking-[0.28px]">
+                Custom veneer rock walls
+              </h3>
+              <p class="mt-1 font-body text-[16px] font-normal leading-[26px] text-page/80">
+                Veneer rock walls arrive on pallets and feature flat corners for a clean finish. The material is lighter to carry, and compared with standard block, it can save roughly two feet of property space.
+              </p>
+            </div>
+            <a
+              href="/services/rock-walls/veneer/"
+              class="inline-flex shrink-0 items-center justify-center gap-2 bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
+            >
+              View Veneer Rock Walls
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+                <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  {/* ═══════════════════════════════════════════════════════════
+      SECTION 4 — SERVICE AREAS
+      Figma node 4:149 · h=806
+  ════════════════════════════════════════════════════════════ */}
+  <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
+    <div class="site-frame flex flex-col">
+      <div class="mb-12 flex max-w-[896px] flex-col gap-1 md:mb-16">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          Island-wide coverage
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
+          Serving all of O&#x2019;ahu
+        </h2>
+        <p class="max-w-[896px] pb-1 pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
+          Our crews manage residential and commercial masonry projects across the entire island. We work in Wahiawa, Mililani, Honolulu, Aiea and Pearl City, Waipahu, Ewa Beach, Kapolei, Kailua, Kaneohe, and the North Shore and Haleiwa.
+        </p>
+        <a
+          href="/contact/"
+          class="mt-4 inline-flex w-fit items-center justify-center border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
+        >
+          View all O&#x2019;ahu service areas
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-6 border border-banner-line bg-card p-6 md:p-10">
+        <p class="border-b border-banner-line pb-4 font-display text-[13px] font-bold leading-4 tracking-[1.3px] text-muted uppercase">
+          Active service regions
+        </p>
+        <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+          {serviceAreas.map((area) => (
+            <li class="flex h-16 items-center justify-center border border-banner-line bg-section-grey px-2 text-center font-display text-[16px] font-semibold leading-6 tracking-[0.5px] text-heading uppercase md:text-[20px] md:leading-[25px]">
+              {area}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  {/* ═══════════════════════════════════════════════════════════
+      SECTION 5 — REVIEWS / TESTIMONIALS
+      3 cards in a grid
+  ════════════════════════════════════════════════════════════ */}
+  <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-12 md:gap-16">
+      <div class="flex flex-col gap-1 border-b border-banner-line pb-4">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          Client testimonials
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
+          Trusted by O&#x2019;ahu property owners
+        </h2>
+      </div>
+
+      {/* 3-column review grid */}
+      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8">
+        {reviews.map(({ quote, name, location }) => (
+          <article class="flex h-full flex-col justify-between border border-banner-line bg-white p-4 md:p-8">
+            <div class="flex flex-col gap-4 pb-8">
+              <div class="flex items-center gap-0.5 text-nav-cta" aria-label="5 stars">
+                {Array.from({ length: 5 }).map(() => (
+                  <Icon name="tabler:star-filled" class="size-4" aria-hidden="true" />
+                ))}
+              </div>
+              <p class="font-body text-[15px] font-normal italic leading-[26px] text-heading">&ldquo;{quote}&rdquo;</p>
+            </div>
+            <div class="border-t border-banner-line pt-4">
+              <p class="font-display text-[18px] font-bold leading-5 tracking-[0.5px] text-heading uppercase">{name}</p>
+              <p class="mt-1 font-body text-[13px] font-normal leading-4 text-muted">{location}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="flex justify-center">
+        <a
+          href="/reviews/"
+          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
+        >
+          Read reviews
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  {/* ═══════════════════════════════════════════════════════════
+      SECTION 6 — CTA BANNER
+      Figma node 4:272 · h=765
+  ════════════════════════════════════════════════════════════ */}
+  <section class="w-full bg-card py-6 md:py-24">
+    <div class="site-frame">
+      <div class="@container relative w-full overflow-hidden border border-banner-line bg-section-grey p-4 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.1),0_8px_10px_-6px_rgb(0_0_0/0.1)] md:p-24">
+        {/* Brick motif background */}
+        <Image
+          src={brickMotif}
+          alt=""
+          width={2560}
+          height={1200}
+          class="pointer-events-none absolute inset-0 h-full w-full object-cover object-left-top"
+          aria-hidden="true"
+        />
+
+        <div class="relative z-10 flex max-w-[768px] flex-col items-start">
+          <p class="mb-1 flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+            <span class="h-3 w-1.5 shrink-0 rounded-full bg-nav-cta" aria-hidden="true"></span>
+            Start your foundation
+          </p>
+          <h2 class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
+            Start your O&#x2019;ahu masonry project
+          </h2>
+          <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
+            Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays to put God first.
+          </p>
+        </div>
+
+        <div class="relative z-10 flex flex-wrap items-center gap-4 py-16">
+          <a
+            href={PRIMARY_CTA_HREF}
+            class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          >
+            {PRIMARY_CTA_LABEL}
+          </a>
+          <a
+            href={CONTACT.phone.href}
+            class="inline-flex items-center justify-center gap-2 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          >
+            <PhoneIcon />
+            {CONTACT.phone.display}
+          </a>
+        </div>
+
+        <p class="relative z-10 flex w-full flex-wrap items-center gap-x-5 gap-y-2 pt-6">
+          {[
+            `Licence ${CONTACT.license}`,
+            'Licensed & Insured',
+            'Workmanship Guarantee',
+            'BBB Accredited',
+            '25+ Year Family Legacy',
+          ].map((item, index) => (
+            <>
+              {index > 0 && (
+                <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
+              )}
+              <span class="whitespace-nowrap font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-note uppercase">{item}</span>
+            </>
+          ))}
+        </p>
+      </div>
+    </div>
+  </section>
 </Layout>

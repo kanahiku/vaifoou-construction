@@ -12,7 +12,7 @@ const { links = [], class: className = '' } = Astro.props;
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 const navLinkClass =
-  'inline-flex min-h-11 items-center font-rough text-[14px] leading-none text-heading hover:text-accent whitespace-nowrap';
+  'inline-flex items-center font-body text-[14px] font-semibold leading-[18px] tracking-[0.7px] text-banner-note uppercase whitespace-nowrap hover:text-accent';
 ---
 
 <ul class={className}>
@@ -22,7 +22,7 @@ const navLinkClass =
       if (!isDropdown) {
         return (
           <li>
-            <a class:list={[navLinkClass, { 'aw-link-active text-heading': href === currentPath }]} href={href}>
+            <a class:list={[navLinkClass, { 'aw-link-active': href === currentPath }]} href={href}>
               {text}
             </a>
           </li>
@@ -32,22 +32,77 @@ const navLinkClass =
       return (
         <li class="dropdown relative">
           <div>
-            <a class:list={[navLinkClass, 'inline-flex items-center gap-1']} href={href}>
-              {text}
-              <Icon name="tabler:chevron-down" class="size-3.5" aria-hidden="true" />
-            </a>
+            {href ? (
+              <a class:list={[navLinkClass, 'inline-flex items-center gap-1']} href={href}>
+                {text}
+                <Icon name="tabler:chevron-down" class="size-3.5" aria-hidden="true" />
+              </a>
+            ) : (
+              <span class:list={[navLinkClass, 'inline-flex cursor-default items-center gap-1 select-none']}>
+                {text}
+                <Icon name="tabler:chevron-down" class="size-3.5" aria-hidden="true" />
+              </span>
+            )}
           </div>
+
           <ul class="dropdown-menu" role="list">
-            {childLinks!.map(({ text: childText, href: childHref }) => (
-              <li>
-                <a
-                  class:list={[{ 'aw-link-active': childHref === currentPath }]}
-                  href={childHref}
-                >
-                  {childText}
-                </a>
-              </li>
-            ))}
+            {childLinks!.map(({ text: childText, href: childHref, links: grandChildLinks }) => {
+              const hasSub = Boolean(grandChildLinks?.length);
+
+              if (!hasSub) {
+                return (
+                  <li>
+                    <a
+                      class:list={[{ 'aw-link-active': childHref === currentPath }]}
+                      href={childHref}
+                    >
+                      {childText}
+                    </a>
+                  </li>
+                );
+              }
+
+              /* Item that itself has children → renders a right-side flyout */
+              return (
+                <li class="sub-dropdown relative">
+                  <a
+                    class:list={[
+                      'flex items-center gap-1',
+                      { 'aw-link-active': childHref === currentPath },
+                    ]}
+                    href={childHref}
+                  >
+                    {childText}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="size-3 shrink-0 opacity-50"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </a>
+
+                  <ul class="sub-dropdown-menu" role="list">
+                    {grandChildLinks!.map(({ text: gcText, href: gcHref }) => (
+                      <li>
+                        <a
+                          class:list={[{ 'aw-link-active': gcHref === currentPath }]}
+                          href={gcHref}
+                        >
+                          {gcText}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              );
+            })}
           </ul>
         </li>
       );

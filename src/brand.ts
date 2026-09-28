@@ -14,74 +14,66 @@
 
 export const brand = {
   fonts: {
+    /** Barlow Condensed — headings, display, ticker. */
     heading: {
-      name: 'Norca',
-      cssVariable: '--font-norca',
-      provider: 'local' as const,
-      fallbacks: ['sans-serif'] as string[],
-      src: ['./src/fonts/norca/Regular/Norca.otf'] as [string, ...string[]],
-    },
-    body: {
-      name: 'Host Grotesk',
-      cssVariable: '--font-host-grotesk',
+      name: 'Barlow Condensed',
+      cssVariable: '--font-barlow-condensed',
       provider: 'google' as const,
-      weights: ['400'] as string[],
+      weights: ['400', '500', '600', '700'] as string[],
       styles: ['normal'] as string[],
       subsets: ['latin'] as string[],
       fallbacks: ['sans-serif'] as string[],
     },
-    /** Eyebrows, ticker, quotes — Figma Wreck Script. */
-    script: {
-      name: 'Wreck Script',
-      cssVariable: '--font-wreck-script',
-      provider: 'local' as const,
-      fallbacks: ['cursive'] as string[],
-      src: ['./src/fonts/wreck/Wreck-Script-Exfont0263.ttf'] as [string, ...string[]],
-    },
-    /** Footer labels — Figma Norca-Rough 18px. */
-    rough: {
-      name: 'Norca Rough',
-      cssVariable: '--font-norca-rough',
-      provider: 'local' as const,
+    /** Work Sans — body copy, labels, buttons. */
+    body: {
+      name: 'Work Sans',
+      cssVariable: '--font-work-sans',
+      provider: 'google' as const,
+      weights: ['400', '500', '600', '700'] as string[],
+      styles: ['normal', 'italic'] as string[],
+      subsets: ['latin'] as string[],
       fallbacks: ['sans-serif'] as string[],
-      src: ['./src/fonts/norca/Rough/Norca-Rough.otf'] as [string, ...string[]],
     },
   },
 
-  /** Style Guide 110:2377 — named fills. Hover tints are derived. */
+  /**
+   * Design system palette.
+   * Primary #964025 · Secondary #605E5A · Tertiary #406146 · Neutral #827470
+   */
   colors: {
-    accent: '#994321', // brand/hibiscus
-    accentHover: '#B55A32',
-    heading: '#3D2819', // text/default
-    muted: '#3C2718', // brand/cacao
-    eyebrow: '#778074', // brand/seaweed-dark
-    page: '#EFE9DE', // brand/shell · text/contrast
-    sectionGrey: '#B5C2B0', // brand/seaweed
-    sectionDark: '#5A6A72', // brand/blueberry darkened to 4.5:1 with cream text
-    card: '#FAF4E8', // background/white
-    cardMist: '#B5C2B0',
-    cardDark: '#8FA1AB', // brand/blueberry-light
-    ctaBg: '#9B9D47', // accent/green-light
-    ctaEnd: '#6A714F', // accent/green
-    ctaTan: '#9B9D47',
-    tanText: '#6A714F',
-    tanBody: '#3C2718',
-    ctaPink: '#EFE9DE',
-    ctaPinkText: '#994321',
-    featureCard: '#FAF4E8',
-    primary: '#994321',
-    secondary: '#778074',
-    navy: '#3C2718',
-    white: '#FAF4E8',
-    cream: '#EFE9DE',
-    nav: '#778074',
-    black: '#3D2819',
-    /** gradient/blue-green — Figma from #8CAC7F to blueberry-light. Used as page-motif band bg. */
-    gradientFrom: '#8CAC7F',
-    gradientTo: '#8FA1AB',
-    /** Page wash — warm cream from top to bottom (sits on top of the green band). */
-    pageWashFrom: '#E6E0D5',
-    pageWashTo: '#FCF6EA',
+    accent: '#964025',       // Primary — terracotta
+    accentHover: '#B04E2C',  // Primary lightened
+    heading: '#1A100C',      // Near-black warm for headings
+    muted: '#605E5A',        // Secondary — warm grey
+    eyebrow: '#827470',      // Neutral — taupe
+    page: '#F2EBE6',         // Warm off-white page bg
+    /** Top utility bar — Figma 4:436 / 4:480. */
+    banner: '#E5E2DC',
+    bannerLine: '#D5D1C9',
+    bannerText: '#382E2B',
+    bannerDot: '#89726C',
+    bannerNote: '#55423D',
+    /** Navbar estimate button — Figma 4:476. */
+    navCta: '#772911',
+    sectionGrey: '#E0D6D0',  // Light warm grey section
+    sectionDark: '#406146',  // Tertiary — forest green
+    card: '#FAF6F3',         // Card bg — near white warm
+    cardMist: '#D6CCC6',     // Muted card border / mist
+    cardDark: '#2D4533',     // Tertiary darkened — deep green
+    ctaBg: '#406146',        // Tertiary — CTA band start
+    ctaEnd: '#2D4533',       // Tertiary darkened — CTA band end
+    ctaTan: '#964025',       // Primary for secondary buttons
+    tanText: '#B04E2C',      // Primary hover for secondary buttons
+    tanBody: '#1A100C',      // Body text on tan
+    featureCard: '#FAF6F3',
+    primary: '#964025',      // Primary
+    secondary: '#605E5A',    // Secondary
+    navy: '#1A100C',         // Dark — near black warm
+    white: '#FAF6F3',        // Lightest surface
+    cream: '#F2EBE6',        // Warm page bg
+    nav: '#827470',          // Neutral — nav tint
+    black: '#1A100C',
+    footerBg: '#21201F',   // Footer background
   },
 
   type: {
@@ -94,7 +86,7 @@ export const brand = {
      */
     h1: { size: '72px', mobile: '40px', lineHeight: '1', tracking: '0' },
     h2: { size: '52px', mobile: '28px', lineHeight: '1', tracking: '0' },
-    h3: { size: '26px', mobile: '22px', lineHeight: '1', tracking: '0' },
+    h3: { size: '32px', mobile: '24px', lineHeight: '1', tracking: '0' },
     /** Extra — not in the Style Guide. */
     h4: { size: '24px', mobile: '18px', lineHeight: '1', tracking: '0' },
     body: { size: '14px', mobile: '14px', lineHeight: '1.3', tracking: '-0.01em' },
@@ -205,8 +197,8 @@ function rootVars(b: Brand): string {
     --aw-font-sans: var(${f.body.cssVariable});
     --aw-font-serif: var(${f.heading.cssVariable});
     --aw-font-heading: var(${f.heading.cssVariable});
-    --aw-font-script: var(${f.script.cssVariable});
-    --aw-font-rough: var(${f.rough.cssVariable});
+    --aw-font-script: var(${f.body.cssVariable});
+    --aw-font-rough: var(${f.heading.cssVariable});
 
     --aw-text-h1: ${t.h1.size};
     --aw-text-h1-mobile: ${t.h1.mobile};
@@ -253,6 +245,12 @@ function rootVars(b: Brand): string {
     --aw-color-text-muted: ${muted};
     --aw-color-text-eyebrow: ${rgb(c.eyebrow)};
     --aw-color-text-page: ${rgb(c.page)};
+    --aw-color-bg-banner: ${rgb(c.banner)};
+    --aw-color-banner-line: ${rgb(c.bannerLine)};
+    --aw-color-banner-text: ${rgb(c.bannerText)};
+    --aw-color-banner-dot: ${rgb(c.bannerDot)};
+    --aw-color-banner-note: ${rgb(c.bannerNote)};
+    --aw-color-nav-cta: ${rgb(c.navCta)};
     --aw-color-bg-page: ${rgb(c.page)};
     --aw-color-bg-page-end: ${rgb(c.white)};
     --aw-color-bg-section-white: ${rgb(c.page)};
@@ -266,15 +264,8 @@ function rootVars(b: Brand): string {
     --aw-color-bg-cta-end: ${rgb(c.ctaEnd)};
     --aw-color-text-tan: ${rgb(c.tanText)};
     --aw-color-text-tan-body: ${rgb(c.tanBody)};
-    --aw-color-bg-cta-pink: ${rgb(c.ctaPink)};
-    --aw-color-text-cta-pink: ${rgb(c.ctaPinkText)};
-    --aw-color-gradient-from: ${rgb(c.gradientFrom)};
-    --aw-color-gradient-to: ${rgb(c.gradientTo)};
-    --aw-color-page-wash-from: ${rgb(c.pageWashFrom)};
-    --aw-color-page-wash-to: ${rgb(c.pageWashTo)};
     --aw-opacity-motif-page: ${m.pageOpacity};
     --aw-shadow-card-mist: 4px 4px 30px rgb(0 0 0 / 5%), 3px 3px 0 ${rgb(c.cardMist)};
-    --aw-shadow-card-pink: 4px 4px 30px rgb(0 0 0 / 5%), 3px 3px 0 ${rgb(c.ctaPink)};
     --aw-color-nav-glass: ${rgb(c.nav, 0.25)};
 
     --aw-color-card-heading-dark: ${rgb(c.white)};
@@ -362,6 +353,7 @@ function rootVars(b: Brand): string {
     --aw-color-projects-desc-dark: ${rgb(c.white, 0.6)};
 
     --aw-color-bg-page-dark: ${rgb(c.navy)};
+    --aw-color-bg-footer: ${rgb(c.footerBg)};
 
     --aw-color-motif-hero: var(--aw-color-accent);
     --aw-color-motif-dark: var(--aw-color-accent);
@@ -395,8 +387,8 @@ function darkVars(b: Brand): string {
     --aw-font-sans: var(${f.body.cssVariable});
     --aw-font-serif: var(${f.heading.cssVariable});
     --aw-font-heading: var(${f.heading.cssVariable});
-    --aw-font-script: var(${f.script.cssVariable});
-    --aw-font-rough: var(${f.rough.cssVariable});
+    --aw-font-script: var(${f.body.cssVariable});
+    --aw-font-rough: var(${f.heading.cssVariable});
 
     --aw-color-primary: ${accent};
     --aw-color-secondary: ${rgb(c.accentHover)};
@@ -468,15 +460,17 @@ export function brandStylesheet(b: Brand = brand): string {
 
 /** Astro Fonts API entries — used by astro.config.ts and Layout.astro. */
 export function brandFontConfig() {
-  const { heading, body, script, rough } = brand.fonts;
+  const { heading, body } = brand.fonts;
   return [
     {
       name: heading.name,
       cssVariable: heading.cssVariable,
       provider: heading.provider,
+      weights: heading.weights,
+      styles: heading.styles,
+      subsets: heading.subsets,
       fallbacks: heading.fallbacks,
-      preload: false,
-      options: { variants: [{ weight: 400, style: 'normal' as const, src: heading.src }] },
+      preload: true,
     },
     {
       name: body.name,
@@ -487,22 +481,6 @@ export function brandFontConfig() {
       subsets: body.subsets,
       fallbacks: body.fallbacks,
       preload: true,
-    },
-    {
-      name: script.name,
-      cssVariable: script.cssVariable,
-      provider: script.provider,
-      fallbacks: script.fallbacks,
-      preload: true,
-      options: { variants: [{ weight: 400, style: 'normal' as const, src: script.src }] },
-    },
-    {
-      name: rough.name,
-      cssVariable: rough.cssVariable,
-      provider: rough.provider,
-      fallbacks: rough.fallbacks,
-      preload: true,
-      options: { variants: [{ weight: 400, style: 'normal' as const, src: rough.src }] },
     },
   ];
 }

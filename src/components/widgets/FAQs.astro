@@ -17,9 +17,6 @@
  *    - Expand/collapse toggle in hibiscus accent.
  */
 
-import Headline from '~/components/ui/Headline.astro';
-import Heading from '~/components/ui/Heading.astro';
-import Text from '~/components/ui/Text.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Faqs as Props } from '~/types';
 
@@ -124,7 +121,25 @@ const toggleActive = 'group-open:border-accent group-open:text-accent';
     containerClass={`max-w-container mx-auto ${classes?.container ?? ''}`}
     bg={bg}
   >
-    <Headline title={title} subtitle={subtitle} tagline={tagline} isDark={false} classes={classes?.headline} />
+    {(title || subtitle || tagline) && (
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6 mb-[30px]">
+        {tagline && (
+          <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+            <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+            <Fragment set:html={tagline} />
+          </p>
+        )}
+        {title && (
+          <h2
+            class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+            set:html={title}
+          />
+        )}
+        {subtitle && (
+          <p class="mt-2 font-body text-[15px] leading-7 text-banner-note" set:html={subtitle} />
+        )}
+      </div>
+    )}
 
     {items.length > 0 && (
       <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">

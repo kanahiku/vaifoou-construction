@@ -1,0 +1,81 @@
+---
+/**
+ * ServiceLinks — "Explore other X services" cross-link grid.
+ *
+ * Renders a labelled grid of arrow-link tiles used on service sub-pages
+ * to point visitors to sibling services in the same category.
+ *
+ * Props:
+ *  categoryLabel  — label appended after "Explore Other" (default "Services")
+ *  items          — full list of links
+ *  maxItems       — how many tiles to show before the "View All" button (default 3)
+ *  viewAllHref    — href for the "View All" button; omit to hide the button
+ *  viewAllLabel   — button label (default "View All {categoryLabel}")
+ */
+
+export interface ServiceLink {
+  title: string;
+  href: string;
+}
+
+export interface Props {
+  categoryLabel?: string;
+  items: ServiceLink[];
+  /** Maximum tiles shown. Remaining items are hidden behind the "View All" button. Default: 3 */
+  maxItems?: number;
+  /** If set, a "View All" button is shown below the grid pointing to this href. */
+  viewAllHref?: string;
+  /** Override the "View All" button label. */
+  viewAllLabel?: string;
+}
+
+const {
+  categoryLabel = 'Services',
+  items,
+  maxItems = 3,
+  viewAllHref,
+  viewAllLabel,
+} = Astro.props;
+
+const visible = items.slice(0, maxItems);
+const hasMore = items.length > maxItems;
+const buttonLabel = viewAllLabel ?? `View All ${categoryLabel}`;
+const buttonHref = viewAllHref ?? (categoryLabel === 'Service Areas' ? '/service-areas/' : '/services/');
+---
+
+<section class="w-full border-b border-banner-line bg-page py-6 md:py-20">
+  <div class="site-frame flex flex-col gap-8">
+    <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+      <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+      Explore Other {categoryLabel}
+    </p>
+
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
+      {visible.map(({ title, href }) => (
+        <a
+          href={href}
+          class="flex items-center justify-between border border-banner-line bg-card px-6 py-5 font-display text-[16px] font-semibold leading-5 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta md:text-[18px]"
+        >
+          {title}
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/>
+          </svg>
+        </a>
+      ))}
+    </div>
+
+    {hasMore && (
+      <div class="flex justify-center">
+        <a
+          href={buttonHref}
+          class="inline-flex items-center gap-2 border border-banner-line bg-card px-8 py-4 font-display text-[14px] font-bold leading-5 tracking-[0.7px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta"
+        >
+          {buttonLabel}
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0">
+            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/>
+          </svg>
+        </a>
+      </div>
+    )}
+  </div>
+</section>

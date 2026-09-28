@@ -9,21 +9,16 @@
  * Per-section `<SectionBg>` still works — leave `sections` off so the motif
  * is not painted twice.
  *
- * To restyle a new website:
- * 1. Drop a new SVG/PNG in `src/assets/images/patterns/` (black shape, transparent ground).
- * 2. Point `pattern` at that file.
- * 3. Toggle page vs section, plus fade / tile size / repeat.
- * 4. Colors and opacity stay in `src/brand.ts`.
+ * To restyle a new website, add a new image pattern and point `pattern` at it,
+ * or leave `pattern` null for CSS-only backgrounds.
  */
-import type { ImageMetadata } from 'astro';
-import leafMotif from '~/assets/images/small-leaf-motif.webp';
 
 export type MotifFade = 'top-to-bottom' | 'bottom-to-top' | 'none';
 export type MotifSection = 'hero' | 'dark' | 'grey' | 'white' | 'cta';
 
 export const MOTIF = {
   /** Black-on-transparent tile used as a CSS mask. Swap this file per client. */
-  pattern: leafMotif as ImageMetadata,
+  pattern: null,
 
   /**
    * Per-section MotifLayer. Leave false — the wallpaper lives on the page
@@ -40,8 +35,7 @@ export const MOTIF = {
   fade: 'none' as MotifFade,
 
   /**
-   * CSS mask-size. Pixel size + `repeat` tiles the produce motif.
-   * Native artboard is 622×1024; 400px wide keeps a dense wallpaper.
+   * CSS mask-size. Applies only when `pattern` is set.
    */
   size: '622px auto',
 

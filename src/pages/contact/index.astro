@@ -1,57 +1,478 @@
 ---
+/**
+ * Contact — /contact/
+ * Request a free estimate for masonry or concrete work on O'ahu.
+ */
 import Layout from '~/layouts/PageLayout.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import Contact from '~/components/widgets/Contact.astro';
+import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import { CONTACT } from '~/config/contact';
-import { contactHelpOptions } from '~/data/pages/contact';
 import { site } from '~/config/site';
-import { CATERING_CTA_HREF } from '~/config/cta';
+import { FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY } from '~/lib/forms';
 
 const metadata = {
-  title: `Contact | ${site.name}`,
-  description: `Get in touch with ${CONTACT.businessName} for project questions and quote requests.`,
+  title: `Contact Vaifoou Construction | O\u02BBahu Masonry & Concrete`,
+  description: `Request a free estimate for structural masonry or concrete flatwork on O\u02BBahu. Contact Vaifoou Construction directly to schedule your site consultation.`,
   ignoreTitleTemplate: true,
 };
+
+/**
+ * Direct contact email shown publicly on this page.
+ * (Separate from the schema.org / legal email in contact.ts)
+ */
+const directEmail = 'vaifoou4@gmail.com';
+
+/**
+ * Address note — uncomment the `showAddress` line below to publish once approved.
+ * [BEGIN ADDRESS - PUBLISH ONLY IF APPROVED FOR PUBLIC LISTING]
+ * Office Yard: 22 Hill Dr. Wahiawa, HI 96786
+ * [END ADDRESS]
+ */
+const showAddress = false; // flip to `true` once approved for public listing
+const officeAddress = '22 Hill Dr. Wahiawa, HI 96786';
+
+/**
+ * 24-hour response promise.
+ * [BEGIN 24-HOUR PROMISE - PUBLISH ONLY IF OPERATIONS CAN HOLD TO THIS GIVEN CLOSED SUNDAYS]
+ * We review all project requests and respond within 24 hours.
+ * [END 24-HOUR PROMISE]
+ */
+const show24HourPromise = false; // flip to `true` when operations can commit
+const promiseText = 'We review all project requests and respond within 24 hours.';
+
+const services = [
+  'Concrete Foundation',
+  'Concrete Driveway & Flatwork',
+  'Rock Wall (Fence or Retaining)',
+  'CMU Block Wall (Fence or Retaining)',
+  'Rock Wall (Planter or Garden)',
+  'Concrete Sidewalk or Walkway',
+  'Concrete Patio or Lanai Extension',
+  'Stamped or Decorative Concrete',
+];
+
+const fieldClass =
+  'block w-full rounded-none border border-heading/15 bg-page px-4 py-3 font-sans text-body text-heading placeholder:text-muted/55 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20';
+const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
 ---
 
 <Layout metadata={metadata}>
-  <Hero2
-    variant="split-dark"
-    overlapHeader={false}
-    hideImage
-    tagline="Contact"
-    title="Get in Touch"
-    content="Questions about a project or the upcoming website build? Send a note and we will follow up soon."
-    actions={[
-      { variant: 'primary', text: 'Email Us', href: `mailto:${CONTACT.email}` },
-      { variant: 'ghost-dark', text: 'Request a Quote', href: CATERING_CTA_HREF },
-    ]}
-  />
+  {/* ── Hero ──────────────────────────────────────────────────── */}
+  <section class="relative w-full bg-heading py-16 md:py-24">
+    <div class="site-frame flex flex-col gap-4">
+      <p class="font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-page/50 uppercase">
+        O&#x02BB;ahu Masonry &amp; Concrete
+      </p>
+      <h1 class="font-display text-[36px] font-bold leading-tight tracking-[-0.5px] text-page uppercase md:text-[52px] md:leading-[58px]">
+        Contact Vaifoou Construction
+      </h1>
+      <p class="max-w-2xl font-body text-[16px] font-normal leading-7 text-page/65">
+        Schedule a site consultation for your masonry or concrete project. We serve residential and commercial properties
+        across O&#x02BB;ahu.
+      </p>
+    </div>
+  </section>
 
-  <Contact
-    title="Send a message"
-    subtitle={`Tell us what you need and the right person from ${CONTACT.businessName} will get back to you.`}
-    button="Send message"
-    inputs={[
-      { type: 'text', name: 'name', label: 'Name', autocomplete: 'name', placeholder: 'Your name', required: true },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-        autocomplete: 'email',
-        placeholder: 'you@email.com',
-        required: true,
-      },
-      { type: 'tel', name: 'phone', label: 'Phone', autocomplete: 'tel', placeholder: CONTACT.phone.display },
-      {
-        type: 'select',
-        name: 'topic',
-        label: 'How can we help?',
-        placeholder: 'Select a topic',
-        required: true,
-        options: contactHelpOptions,
-      },
-    ]}
-    textarea={{ label: 'Message', name: 'message', placeholder: 'How can we help?' }}
-  />
+  {/* ── Main content: Form + Sidebar ─────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page">
+    <div class="site-frame py-12 md:py-20">
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_340px] lg:items-start">
+
+        {/* ── Estimate Form ─────────────────────────────────── */}
+        <div class="flex flex-col gap-8">
+          <div class="flex max-w-2xl flex-col gap-2 border-b border-banner-line pb-6">
+            <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]">
+              Request a Free Estimate
+            </h2>
+            {show24HourPromise && (
+              <p class="font-body text-[15px] leading-7 text-banner-note">{promiseText}</p>
+            )}
+          </div>
+
+          <form
+            id="contact-form"
+            data-endpoint={FORM_ENDPOINT}
+            data-site={SITE_SLUG}
+            data-turnstile-sitekey={TURNSTILE_SITE_KEY}
+            data-phone={CONTACT.phone.display}
+            class="flex flex-col gap-6"
+            enctype="multipart/form-data"
+          >
+            {/* ── Honeypot ── */}
+            <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off" />
+
+            {/* Row 1: Name */}
+            <div>
+              <label for="name" class={labelClass}>Name <span class="text-accent">*</span></label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                autocomplete="name"
+                placeholder="Your full name"
+                class={fieldClass}
+              />
+            </div>
+
+            {/* Row 2: Phone + Email side by side on desktop */}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <div>
+                <label for="phone" class={labelClass}>Phone <span class="text-accent">*</span></label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  required
+                  autocomplete="tel"
+                  placeholder={CONTACT.phone.display}
+                  class={fieldClass}
+                />
+              </div>
+              <div>
+                <label for="email" class={labelClass}>
+                  Email <span class="font-normal text-muted/70">(Optional)</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  class={fieldClass}
+                />
+              </div>
+            </div>
+
+            {/* Row 3: Project Address */}
+            <div>
+              <label for="project-address" class={labelClass}>Project Address <span class="text-accent">*</span></label>
+              <input
+                type="text"
+                id="project-address"
+                name="project_address"
+                required
+                autocomplete="street-address"
+                placeholder="Street address, city"
+                class={fieldClass}
+              />
+            </div>
+
+            {/* Row 4: Property Type — radio */}
+            <fieldset class="flex flex-col gap-3">
+              <legend class={labelClass}>Property Type <span class="text-accent">*</span></legend>
+              <div class="flex flex-wrap gap-6">
+                {['Residential', 'Commercial'].map((type) => (
+                  <label class="flex cursor-pointer items-center gap-2.5 font-sans text-body text-heading">
+                    <input
+                      type="radio"
+                      name="property_type"
+                      value={type}
+                      required
+                      class="size-4 rounded-none border border-heading/25 accent-accent"
+                    />
+                    {type}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            {/* Row 5: Service checkboxes */}
+            <fieldset class="flex flex-col gap-3">
+              <legend class={labelClass}>What do you need? <span class="text-muted/70 font-normal">(Select all that apply)</span></legend>
+              <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {services.map((service) => (
+                  <label class="flex cursor-pointer items-start gap-2.5 font-sans text-body text-heading">
+                    <input
+                      type="checkbox"
+                      name="services"
+                      value={service}
+                      class="mt-0.5 size-4 rounded-none border border-heading/25 accent-accent shrink-0"
+                    />
+                    <span>{service}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+
+            {/* Row 6: Project Description */}
+            <div>
+              <label for="message" class={labelClass}>Project Description</label>
+              <textarea
+                id="message"
+                name="message"
+                rows={5}
+                placeholder="Describe your project — scope, current state, any special requirements."
+                class={fieldClass}
+              />
+            </div>
+
+            {/* Row 7: Preferred Start Date */}
+            <div class="max-w-xs">
+              <label for="start-date" class={labelClass}>
+                Preferred Start Date <span class="font-normal text-muted/70">(Optional)</span>
+              </label>
+              <input
+                type="date"
+                id="start-date"
+                name="start_date"
+                class={fieldClass}
+              />
+            </div>
+
+            {/* Row 8: Site Photos */}
+            <div>
+              <label for="photos" class={labelClass}>
+                Site Photos <span class="font-normal text-muted/70">(Optional)</span>
+              </label>
+              <input
+                type="file"
+                id="photos"
+                name="photos"
+                multiple
+                accept="image/*,.pdf"
+                class="block w-full font-sans text-body text-heading file:mr-4 file:border-0 file:bg-section-grey file:px-4 file:py-2 file:font-sans file:text-[13px] file:font-semibold file:text-heading file:uppercase file:tracking-[0.5px] file:cursor-pointer hover:file:bg-heading/10"
+              />
+              <p class="mt-1.5 font-sans text-[13px] text-muted">
+                JPG, PNG, or PDF. Photos help us prepare a more accurate estimate.
+              </p>
+            </div>
+
+            {/* Turnstile bot check */}
+            <div data-turnstile></div>
+
+            {/* Submit */}
+            <div class="pt-2">
+              <button
+                type="submit"
+                class="inline-flex items-center justify-center bg-nav-cta px-8 py-4 font-display text-[18px] font-bold leading-none tracking-[1px] text-page uppercase transition-colors hover:bg-heading disabled:opacity-60"
+              >
+                Request Free Estimate
+              </button>
+            </div>
+
+            <p id="form-status" class="hidden text-left text-[14px] font-medium text-muted md:text-[15px]" aria-live="polite"></p>
+          </form>
+        </div>
+
+        {/* ── Direct Contact Sidebar ─────────────────────────── */}
+        <aside class="flex flex-col gap-0 bg-heading lg:sticky lg:top-24">
+          <div class="px-6 pb-0 pt-8 md:px-8">
+            <p class="font-body text-[11px] font-bold leading-4 tracking-[1.2px] text-page/45 uppercase">
+              Direct Contact
+            </p>
+          </div>
+
+          <div class="flex flex-col divide-y divide-page/10 px-6 py-6 md:px-8 md:py-8">
+            {/* Phone */}
+            <div class="flex flex-col gap-1.5 py-5 first:pt-0">
+              <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">Phone</p>
+              <a
+                href={CONTACT.phone.href}
+                class="inline-flex items-center gap-2 font-display text-[22px] font-bold leading-none text-page transition-opacity hover:opacity-75"
+              >
+                <PhoneIcon class="size-4 shrink-0 text-accent" />
+                {CONTACT.phone.display}
+              </a>
+            </div>
+
+            {/* Email */}
+            <div class="flex flex-col gap-1.5 py-5">
+              <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">Email</p>
+              <a
+                href={`mailto:${directEmail}`}
+                class="font-body text-[16px] font-medium leading-6 text-page break-all transition-opacity hover:opacity-75"
+              >
+                {directEmail}
+              </a>
+            </div>
+
+            {/* Address — conditional */}
+            {showAddress && (
+              <div class="flex flex-col gap-1.5 py-5">
+                <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">Office Yard</p>
+                <address class="not-italic font-body text-[16px] font-normal leading-6 text-page/80">
+                  {officeAddress}
+                </address>
+              </div>
+            )}
+
+            {/* Hours */}
+            <div class="flex flex-col gap-2.5 py-5">
+              <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">Operating Hours</p>
+              <div class="flex flex-col gap-1">
+                <p class="font-body text-[15px] font-normal leading-6 text-page/80">
+                  Monday – Saturday: 7:00 AM – 6:00 PM
+                </p>
+                <p class="font-body text-[15px] font-normal leading-6 text-page/55 italic">
+                  Sunday: Closed (God First)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Service area note */}
+          <div class="border-t border-page/10 px-6 pb-8 pt-5 md:px-8">
+            <p class="font-body text-[13px] leading-6 text-page/50">
+              We serve residential and commercial properties across O&#x02BB;ahu, Hawai&#x02BB;i.
+              Contractor Licence {CONTACT.license}.
+            </p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script
+  define:vars={{ FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY }}
+>
+  // Re-exported so the inline script can reference them at runtime.
+  // (define:vars serialises the values into the script tag.)
+
+  type TurnstileApi = {
+    render: (el: HTMLElement, opts: Record<string, unknown>) => string;
+    reset: (id: string) => void;
+    getResponse: (id: string) => string;
+  };
+
+  function asText(value) {
+    return typeof value === 'string' ? value.trim() : '';
+  }
+
+  function composeEstimateMessage(form, data) {
+    const lines = [];
+
+    const address = asText(data.get('project_address'));
+    if (address) lines.push(`Project Address: ${address}`);
+
+    const propType = asText(data.get('property_type'));
+    if (propType) lines.push(`Property Type: ${propType}`);
+
+    const services = data.getAll('services');
+    if (services.length) lines.push(`Services Requested:\n${services.map(s => `  • ${s}`).join('\n')}`);
+
+    const startDate = asText(data.get('start_date'));
+    if (startDate) lines.push(`Preferred Start Date: ${startDate}`);
+
+    const message = asText(data.get('message'));
+    if (message) lines.push(`Project Description:\n${message}`);
+
+    return lines.join('\n\n') || 'Estimate request submitted';
+  }
+
+  function loadTurnstile() {
+    const existing = window.turnstile;
+    if (existing) return Promise.resolve(existing);
+
+    return new Promise((resolve, reject) => {
+      const ready = () => {
+        const api = window.turnstile;
+        if (api) resolve(api);
+        else reject(new Error('Turnstile failed to load'));
+      };
+
+      const script = document.querySelector('script[data-turnstile-api]');
+      if (script) {
+        if (window.turnstile) { ready(); return; }
+        script.addEventListener('load', ready, { once: true });
+        script.addEventListener('error', () => reject(new Error('Turnstile failed to load')), { once: true });
+        return;
+      }
+
+      const next = document.createElement('script');
+      next.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      next.async = true;
+      next.dataset.turnstileApi = 'true';
+      next.addEventListener('load', ready, { once: true });
+      next.addEventListener('error', () => reject(new Error('Turnstile failed to load')), { once: true });
+      document.head.appendChild(next);
+    });
+  }
+
+  async function bindEstimateForm() {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+
+    if (!form || !status || form.dataset.bound === 'true') return;
+    form.dataset.bound = 'true';
+
+    const slot = form.querySelector('[data-turnstile]');
+    const sitekey = form.dataset.turnstileSitekey || '';
+    let widgetId = '';
+
+    if (slot && sitekey) {
+      try {
+        const turnstile = await loadTurnstile();
+        widgetId = turnstile.render(slot, { sitekey });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const submitButton = form.querySelector('button[type="submit"]');
+      const data = new FormData(form);
+
+      // Honeypot check
+      if (asText(data.get('website'))) return;
+
+      const endpoint = form.dataset.endpoint;
+      const site = form.dataset.site;
+      const turnstile = window.turnstile;
+      const turnstileToken =
+        widgetId && turnstile
+          ? turnstile.getResponse(widgetId)
+          : asText(data.get('cf-turnstile-response'));
+
+      if (submitButton) submitButton.disabled = true;
+      status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-muted';
+      status.textContent = 'Sending…';
+      status.classList.remove('hidden');
+
+      try {
+        if (!endpoint || !site) throw new Error('Form is not configured');
+        if (!turnstileToken) throw new Error('Spam check is required');
+
+        // Note: file attachments (data.get('photos')) are not included in the
+        // JSON payload — the form worker would need multipart support for that.
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            site,
+            name: asText(data.get('name')),
+            email: asText(data.get('email')),
+            phone: asText(data.get('phone')),
+            message: composeEstimateMessage(form, data),
+            website: asText(data.get('website')),
+            turnstileToken,
+          }),
+        });
+
+        const payload = await res.json().catch(() => null);
+
+        if (res.ok && payload?.ok) {
+          status.textContent = "Thanks! We\u2019ll review your estimate request and be in touch soon.";
+          status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-heading';
+          form.reset();
+          if (widgetId && turnstile) turnstile.reset(widgetId);
+        } else {
+          throw new Error();
+        }
+      } catch {
+        const phone = form.dataset.phone;
+        status.textContent = phone
+          ? `Something went wrong. Please try again or call ${phone}.`
+          : 'Something went wrong. Please try again.';
+        status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-red-700';
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+        status.classList.remove('hidden');
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', bindEstimateForm);
+</script>

@@ -29,6 +29,7 @@ const isrBypassToken = process.env.ISR_BYPASS_TOKEN || 'dev-isr-bypass-token-32-
 
 export default defineConfig({
   output: 'server',
+  trailingSlash: 'always',
   adapter: vercel({
     edgeMiddleware: true,
     isr: {
@@ -51,7 +52,8 @@ export default defineConfig({
     defaultStrategy: 'hover',
   },
 
-  fonts: brandFontConfig().map((font) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  fonts: brandFontConfig().map((font): any =>
     font.provider === 'google'
       ? {
           name: font.name,
@@ -67,7 +69,7 @@ export default defineConfig({
           cssVariable: font.cssVariable,
           provider: fontProviders.local(),
           fallbacks: font.fallbacks,
-          options: font.options,
+          options: (font as unknown as { options: unknown }).options,
         }
   ),
 

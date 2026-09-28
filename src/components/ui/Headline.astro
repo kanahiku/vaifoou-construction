@@ -20,8 +20,9 @@ const {
   subtitle: subtitleClass = '',
 } = classes;
 
-const titleTypography = 'text-h2 font-normal font-rough leading-none';
-const subtitleTypography = 'text-body font-normal';
+// Barlow Condensed for the heading, Work Sans for the subtitle
+const titleTypography = 'text-h2 font-normal font-display leading-none';
+const subtitleTypography = 'text-body font-normal font-body';
 
 // Color classes based on isDark
 const titleColor = isDark ? 'text-headline-dark' : 'text-headline-light';
@@ -32,7 +33,7 @@ const subtitleColor = isDark ? 'text-headline-subtitle-dark' : 'text-headline-su
   (title || subtitle || tagline) && (
     <div class={twMerge('mb-[30px] text-left', containerClass)}>
       {tagline && (
-        <p class="type-eyebrow text-accent font-script mb-3" set:html={tagline} />
+        <p class="type-eyebrow text-accent mb-3" set:html={tagline} />
       )}
       {title && (
         <h2

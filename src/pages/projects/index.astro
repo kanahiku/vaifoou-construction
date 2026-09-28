@@ -1,0 +1,21 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Projects & Gallery | ${site.name}`,
+  description: `Masonry & Concrete Projects — Vaifoou Construction`,
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="site-frame py-24 text-center">
+    <p class="font-display text-[13px] font-bold uppercase tracking-[1px] text-accent mb-4">Coming Soon</p>
+    <h1 class="text-h1 text-heading mb-6">Projects & Gallery</h1>
+    <p class="text-body text-muted max-w-xl mx-auto">
+      This page is under construction. Check back soon or
+      <a href="/contact/" class="text-accent underline underline-offset-2">request a free estimate</a>
+      now.
+    </p>
+  </section>
+</Layout>

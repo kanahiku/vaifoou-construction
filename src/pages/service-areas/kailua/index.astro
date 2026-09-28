@@ -1,0 +1,56 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `Kailua Masonry & Concrete Contractor | ${site.name}`,
+    description: `Vaifoou Construction provides structural masonry and concrete flatwork for Kailua properties. Our crews build custom rock walls and pour new concrete foundations.`,
+  }}
+  hero={{
+    eyebrow: `Windward O\u02BBahu`,
+    title: `Kailua Masonry & Concrete Construction`,
+    body: `Coastal driveway pours, basalt boundary walls, and hillside masonry across Kailua.`,
+    imagePlaceholder: 'Kailua masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'Kailua',
+    heading: `Kailua Masonry & Concrete`,
+    body: `Kailua properties span from sandy coastal lots exposed to constant salt air up to the sloped hillside ridges of Enchanted Lake and Maunawili. Our crews dispatch from Wahiawa to build custom basalt privacy walls, pour replacement concrete driveways, and support Windward commercial developments. Every build carries our 25+ year family legacy.`,
+  }}
+  services={[
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Custom privacy walls, entry columns, and property boundaries crafted with hand-selected volcanic basalt.' },
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'Driveways, coastal walkways, and new foundations poured to last in salt air.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Reinforced hollow tile perimeter fences built to secure coastal and neighborhood residential lots.' },
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: `Heavy-duty rock and block retaining walls built for sloped lots in Kailua's hillside neighborhoods.` },
+  ]}
+  servicesHeading="Kailua Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work in Kailua',
+    description: `Our crew recently poured a replacement concrete driveway and built a hand-selected basalt entry wall for a coastal property near Lanikai, over-excavating the sandy sub-base and adding compacted gravel to prevent future settling in the salt air environment.`,
+    imagePlaceholder: 'Recent Kailua project photo',
+  }}
+  otherAreas={[
+    { title: 'Wahiawa',               href: '/service-areas/wahiawa/' },
+    { title: 'Honolulu',              href: '/service-areas/honolulu/' },
+    { title: 'Mililani',              href: '/service-areas/mililani/' },
+    { title: 'Kaneohe',               href: '/service-areas/kaneohe/' },
+    { title: 'Kapolei',               href: '/service-areas/kapolei/' },
+    { title: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+    { title: 'Aiea & Pearl City',     href: '/service-areas/aiea-pearl-city/' },
+    { title: 'Waipahu',               href: '/service-areas/waipahu/' },
+    { title: 'Ewa Beach',             href: '/service-areas/ewa-beach/' },
+  ]}
+  faqs={{
+    title: 'Kailua Masonry FAQs',
+    items: [
+      { title: 'Do you have a branch office in Kailua?', description: 'No. We dispatch directly from our Wahiawa yard to all Kailua job sites.' },
+      { title: 'How do you prep coastal Kailua lots before pouring a concrete driveway?', description: 'Sandy coastal soils require thorough grading and base compaction before concrete is poured. We demolish the old slab, clear any encroaching roots or vegetation, and compact a solid sub-base so the new driveway resists settling.' },
+      { title: 'Will you build a basalt rock wall for street privacy?', description: 'Yes. Many Kailua homeowners hire us to build front boundary walls and entry pillars using hand-selected volcanic basalt to block beach traffic and secure their yard.' },
+      { title: 'Do you handle foundation leveling for older Kailua homes?', description: 'No. We exclusively pour new concrete foundations for tear-downs, ground-up builds, and additions. We do not perform structural leveling or foundation repair.' },
+      { title: 'Do you handle both residential and commercial concrete work on the Windward side?', description: 'Yes. Alongside custom residential work, we serve as a concrete and masonry subcontractor for commercial properties across Kailua.' },
+    ],
+  }}
+  ctaHeading="Start Your Kailua Masonry Project"
+/>

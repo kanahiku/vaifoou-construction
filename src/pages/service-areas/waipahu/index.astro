@@ -1,0 +1,56 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `Waipahu Masonry & Concrete Contractor | ${site.name}`,
+    description: `Vaifoou Construction provides structural masonry and concrete flatwork for Waipahu properties. We build custom rock walls and pour new foundations.`,
+  }}
+  hero={{
+    eyebrow: `Central O\u02BBahu`,
+    title: `Waipahu Masonry & Concrete Construction`,
+    body: `Multi-car driveway pours, foundation slabs, and CMU boundary walls across Waipahu.`,
+    imagePlaceholder: 'Waipahu masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'Waipahu',
+    heading: `Waipahu Masonry & Concrete`,
+    body: `Waipahu mixes older plantation-era lots and multi-generational homes with newer residential subdivisions in Waikele and Royal Kunia. Property owners here frequently expand parking with wider concrete driveways, pour new foundation slabs for home additions, and enclose busy street lots with solid masonry walls. Dispatched directly down the H-2 from our Wahiawa yard, our family crew brings 25+ years of hands-on experience to every residential and commercial pour.`,
+  }}
+  services={[
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'Multi-car driveway expansions, tear-outs of aging slabs, and new structural foundations poured for home additions.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Reinforced hollow tile perimeter walls built to block street noise and secure residential property lines.' },
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Custom property boundaries and front entry barriers constructed with hand-selected volcanic basalt.' },
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: 'Heavy-duty rock and block walls built to hold back soil on sloped Waikele and upper Waipahu lots.' },
+  ]}
+  servicesHeading="Waipahu Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work in Waipahu',
+    description: `Our crew recently built a 60-foot CMU block boundary wall along a busy street-facing lot near Waipahu District Park, giving the homeowners a solid privacy barrier and a clean property line that cuts road noise significantly.`,
+    imagePlaceholder: 'Recent Waipahu project photo',
+  }}
+  otherAreas={[
+    { title: 'Wahiawa',               href: '/service-areas/wahiawa/' },
+    { title: 'Honolulu',              href: '/service-areas/honolulu/' },
+    { title: 'Mililani',              href: '/service-areas/mililani/' },
+    { title: 'Kaneohe',               href: '/service-areas/kaneohe/' },
+    { title: 'Kailua',                href: '/service-areas/kailua/' },
+    { title: 'Kapolei',               href: '/service-areas/kapolei/' },
+    { title: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+    { title: 'Aiea & Pearl City',     href: '/service-areas/aiea-pearl-city/' },
+    { title: 'Ewa Beach',             href: '/service-areas/ewa-beach/' },
+  ]}
+  faqs={{
+    title: 'Waipahu Masonry FAQs',
+    items: [
+      { title: 'Do you have a branch office in Waipahu?', description: 'No. Our equipment and crews are based at our main yard in Wahiawa and travel directly down the H-2 to service Waipahu job sites.' },
+      { title: 'Can you pour a new concrete foundation for an ADU or home addition?', description: 'Yes. Many multi-generational households in Waipahu expand their living space, and we pour new structural concrete foundations for additions and ground-up builds. We do not perform structural repairs on existing foundations.' },
+      { title: 'Can you widen my existing concrete driveway for extra parking?', description: 'Yes. Instead of patching onto old cracked concrete, we handle complete demolition as needed, grade the expanded parking area, and pour a clean, durable concrete driveway.' },
+      { title: 'Do you build noise-blocking walls along busy Waipahu streets?', description: 'Yes. We construct solid CMU block fences and custom volcanic basalt walls to give homeowners privacy and separation from road traffic.' },
+      { title: 'Do you handle commercial concrete work for Waipahu businesses and warehouses?', description: 'Yes. We work with commercial property owners and general contractors to pour heavy-duty slabs, sidewalks, and curbing across Waipahu.' },
+    ],
+  }}
+  ctaHeading="Start Your Waipahu Masonry Project"
+/>

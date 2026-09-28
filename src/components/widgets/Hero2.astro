@@ -10,13 +10,10 @@
  * Atoms used: Heading, Text, CTAActions.
  */
 import Image from '~/components/common/Image.astro';
-import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
 import CTAActions from '~/components/ui/CTAActions.astro';
 import Text from '~/components/ui/Text.astro';
-import smallLeafMotif from '~/assets/images/small-leaf-motif.webp';
 import Heading from '~/components/ui/Heading.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
-import type { ContentImage } from '~/lib/content/types';
 import { site } from '~/config/site';
 
 import type { Hero as Props } from '~/types';
@@ -28,7 +25,6 @@ const {
   content = await Astro.slots.render('content'),
   actions = await Astro.slots.render('actions'),
   image = await Astro.slots.render('image'),
-  imageMobile,
   variant = 'split',
   words = [],
   isReversed = false,
@@ -51,7 +47,6 @@ const hasStats = variant === 'overlay' && Astro.slots.has('stats');
 const hasNav = Astro.slots.has('nav');
 const hasImage = Boolean(image && (typeof image !== 'string' || image.trim()));
 const isSplitImage = !isOverlay && !isSplitDark && hasImage;
-const keepHomeHeroImage = id === 'home-hero';
 const showSplitDarkImage = isSplitDark && !hideImage;
 
 const wordAlignClass = {
@@ -60,24 +55,6 @@ const wordAlignClass = {
   end: 'self-end md:justify-end',
 } as const;
 
-const asContentImage = (value: unknown): ContentImage | undefined => {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return undefined;
-  const src = 'src' in value && typeof value.src === 'string' ? value.src.trim() : '';
-  if (!src) return undefined;
-  const alt = 'alt' in value && typeof value.alt === 'string' ? value.alt : '';
-  return { src, alt };
-};
-
-const overlayDesktop = isOverlay ? asContentImage(image) : undefined;
-const overlayMobile = isOverlay ? asContentImage(imageMobile) : undefined;
-const hasOverlayPhoto = Boolean(overlayDesktop || overlayMobile);
-const isLocalOverlayImage =
-  isOverlay &&
-  Boolean(image) &&
-  typeof image === 'object' &&
-  !Array.isArray(image) &&
-  'width' in image &&
-  'height' in image;
 ---
 
 {
@@ -101,8 +78,8 @@ const isLocalOverlayImage =
       {/* ── Leaf motif overlay for split-dark variant ── */}
       {isSplitDark && (
         <div
-          class="pointer-events-none absolute inset-0 z-0 opacity-45"
-          style={`background-image: url('${smallLeafMotif.src}'); background-size: 1700px auto; background-position: top left; background-repeat: repeat;`}
+          class="pointer-events-none absolute inset-0 z-0 opacity-20"
+          style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 28px 28px; color: var(--aw-color-bg-page);"
           aria-hidden="true"
         />
       )}
@@ -111,49 +88,18 @@ const isLocalOverlayImage =
         <slot name="bg">
           {bg ? <Fragment set:html={bg} /> : null}
         </slot>
-        {keepHomeHeroImage && isLocalOverlayImage ? (
-          <img
-            src={image.src}
-            alt={'alt' in image && typeof image.alt === 'string' ? image.alt : ''}
-            width={typeof image.width === 'number' ? image.width : 1440}
-            height={typeof image.height === 'number' ? image.height : 800}
-            class:list={[
-              'absolute inset-0 h-full w-full object-cover',
-              isTitle ? 'object-bottom' : 'object-center',
-            ]}
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-          />
-        ) : keepHomeHeroImage && hasOverlayPhoto ? (
-          <ArtDirectedImage
-            desktop={overlayDesktop}
-            mobile={overlayMobile}
-            class="absolute inset-0 h-full w-full object-cover object-center"
-            widths={[768, 1200, 1600, 1920]}
-            mobileWidths={[400, 640, 828, 1080]}
-            sizes="100vw"
-            mobileSizes="100vw"
-            loading="eager"
-            fetchpriority="high"
-            width={1920}
-            layout="cover"
-            format="webp"
-          />
-        ) : (
-          /* TODO: replace with <Image> when asset is ready */
-          <HeroImagePlaceholder
-            fill
-            class="absolute inset-0"
-            style={
-              isTitle
-                ? 'aspect-ratio: 1440 / 450;'
-                : isWords
-                  ? 'aspect-ratio: 1440 / 579;'
-                  : 'aspect-ratio: 1440 / 760;'
-            }
-          />
-        )}
+        {/* TODO: replace with <Image> when asset is ready */}
+        <HeroImagePlaceholder
+          fill
+          class="absolute inset-0"
+          style={
+            isTitle
+              ? 'aspect-ratio: 1440 / 450;'
+              : isWords
+                ? 'aspect-ratio: 1440 / 579;'
+                : 'aspect-ratio: 1440 / 760;'
+          }
+        />
         {isPhotoOverlay ? (
           <>
             <div class="absolute inset-0 z-[1] bg-black/60 md:bg-transparent md:bg-gradient-to-r md:from-black/60 md:to-black/0" />

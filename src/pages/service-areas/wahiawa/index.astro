@@ -1,0 +1,57 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `Wahiawa Masonry & Concrete Contractor | ${site.name}`,
+    description: `Vaifoou Construction is based in Wahiawa. We provide masonry and concrete flatwork for local properties, backed by a 25+ year family legacy.`,
+  }}
+  hero={{
+    eyebrow: `Central O\u02BBahu`,
+    title: `Wahiawa Masonry & Concrete Construction`,
+    body: `Dispatched directly from our Central O\u02BBahu yard for local residential and commercial builds.`,
+    imagePlaceholder: 'Wahiawa masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'Our Home Base',
+    heading: `Our Wahiawa Home Base`,
+    body: `Wahiawa is home for Vaifoou Construction and our main equipment yard. Heavy Central O\u02BBahu rain and shifting red clay often crack older driveways and push unreinforced lava rock walls out of alignment. Our family brings 25+ years of trade experience to rebuilding local stonework and pouring new flatwork.`,
+    imagePlaceholder: 'Wahiawa masonry project photo',
+  }}
+  services={[
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Full tear-out and reconstruction of aging lava rock walls using hand-selected volcanic basalt.' },
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: `Rock and CMU structures built to hold back wet Central O\u02BBahu clay on sloped gulch lots.` },
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'Complete removal and replacement of root-cracked driveways alongside new foundation pours.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Reinforced hollow tile walls built to enclose residential lots and block street noise along busy town roads.' },
+  ]}
+  servicesHeading="Wahiawa Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work in Wahiawa',
+    description: `Our crews recently demolished a failing boundary wall along a gulch-side lot near Whitmore Village and rebuilt it from the footing up using hand-selected basalt, completing stone-setting and backfill in under two weeks.`,
+    imagePlaceholder: 'Recent Wahiawa project photo',
+  }}
+  otherAreas={[
+    { title: 'Honolulu',              href: '/service-areas/honolulu/' },
+    { title: 'Mililani',              href: '/service-areas/mililani/' },
+    { title: 'Kaneohe',               href: '/service-areas/kaneohe/' },
+    { title: 'Kailua',                href: '/service-areas/kailua/' },
+    { title: 'Kapolei',               href: '/service-areas/kapolei/' },
+    { title: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+    { title: 'Aiea & Pearl City',     href: '/service-areas/aiea-pearl-city/' },
+    { title: 'Waipahu',               href: '/service-areas/waipahu/' },
+    { title: 'Ewa Beach',             href: '/service-areas/ewa-beach/' },
+  ]}
+  faqs={{
+    title: 'Wahiawa Masonry FAQs',
+    items: [
+      { title: 'Where are you located in Wahiawa?', description: 'We operate out of our main yard right here in Wahiawa. Because our yard is an active equipment facility rather than a public showroom, our crews dispatch directly from here to your property for on-site estimates and work.' },
+      { title: `How do you keep Wahiawa's heavy rain from pushing over a retaining wall?`, description: 'Water trapped in heavy red dirt builds intense pressure behind masonry. We build our retaining walls with proper drainage paths and gravel backfill so rainwater can escape without shifting the stone.' },
+      { title: 'Can you rebuild an old collapsing lava rock wall on my lot?', description: 'Yes. Many older Wahiawa homes have original rock walls that are failing. Rather than patching unstable stone, we demolish the compromised section and rebuild it from a solid footing.' },
+      { title: 'Tree roots cracked my concrete driveway. Can you replace it?', description: 'Yes. We excavate the damaged concrete, clear out the offending roots or shrubs as part of our site preparation, and pour a brand new driveway.' },
+      { title: 'Do you repair settling foundations on older Wahiawa homes?', description: 'No. We pour new concrete foundations for ground-up builds and additions, but we do not perform structural foundation repair or install micropiles.' },
+    ],
+  }}
+  ctaHeading="Start Your Wahiawa Masonry Project"
+/>

@@ -6,7 +6,7 @@
 
 @custom-variant intersect (&:not([no-intersect]));
 
-/* Disable faux-bold/italic. Headings/buttons are Norca-Rough; body is Host Grotesk; tag/quote/ticker are Wreck Script. */
+/* Disable faux-bold/italic. Headings/buttons/eyebrows = Barlow Condensed; body/labels = Work Sans. */
 @layer base {
   html {
     font-synthesis: none;
@@ -23,16 +23,21 @@
   --color-heading: var(--aw-color-text-heading);
   --color-eyebrow: var(--aw-color-text-eyebrow);
   --color-page: var(--aw-color-bg-page);
+  --color-banner: var(--aw-color-bg-banner);
+  --color-banner-line: var(--aw-color-banner-line);
+  --color-banner-text: var(--aw-color-banner-text);
+  --color-banner-dot: var(--aw-color-banner-dot);
+  --color-banner-note: var(--aw-color-banner-note);
+  --color-nav-cta: var(--aw-color-nav-cta);
   --color-page-end: var(--aw-color-bg-page-end);
   --color-card: var(--aw-color-bg-card);
   --color-section-grey: var(--aw-color-bg-section-grey);
   --color-section-dark: var(--aw-color-bg-section-dark);
+  --color-footer: var(--aw-color-bg-footer);
   --color-cta: var(--aw-color-bg-cta);
   --color-cta-end: var(--aw-color-bg-cta-end);
   --color-tan: var(--aw-color-text-tan);
   --color-tan-body: var(--aw-color-text-tan-body);
-  --color-gradient-from: var(--aw-color-gradient-from);
-  --color-gradient-to: var(--aw-color-gradient-to);
   --max-width-container: 1440px;
 
   --font-sans:
@@ -76,18 +81,50 @@
   max-width: 1440px;
 }
 
+/** Page content frame — 1440px wide, 64px side padding from the md breakpoint. */
+@utility site-frame {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 1440px;
+  padding-inline: 1.25rem;
+  @media (width >= 48rem) {
+    padding-inline: 64px;
+  }
+}
+
+/* ── Font-family utilities ──────────────────────────────────────────────────
+   Semantic names: use font-display for Barlow Condensed, font-body for Work Sans.
+   font-heading / font-rough / font-script are kept as aliases so any existing
+   component usage stays valid — they all resolve via the same CSS variables.
+─────────────────────────────────────────────────────────────────────────── */
+
+/** Barlow Condensed — headings, eyebrows, buttons, display text */
+@utility font-display {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+/** Work Sans — body copy, labels, captions */
+@utility font-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
+
+/* Aliases — map to the two real faces above */
 @utility font-heading {
   font-family: var(--font-heading);
   font-weight: 400;
 }
 
+/** @deprecated: was Wreck Script. Now aliases font-body (Work Sans). */
 @utility font-script {
-  font-family: var(--font-script);
+  font-family: var(--font-sans);
   font-weight: 400;
 }
 
+/** @deprecated: was Norca-Rough. Now aliases font-display (Barlow Condensed). */
 @utility font-rough {
-  font-family: var(--font-rough);
+  font-family: var(--font-heading);
   font-weight: 400;
 }
 
@@ -141,22 +178,25 @@
   }
 }
 
+/** Eyebrow label — Barlow Condensed, uppercase, tracking */
 @utility type-eyebrow {
-  font-family: var(--font-script);
+  font-family: var(--font-heading);
   font-size: var(--aw-text-eyebrow-mobile);
   letter-spacing: var(--aw-tracking-eyebrow);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1;
+  text-transform: uppercase;
   @media (min-width: 768px) {
     font-size: var(--aw-text-eyebrow);
   }
 }
 
+/** Footer / section labels — Barlow Condensed, uppercase */
 @utility type-label {
-  font-family: var(--font-rough);
+  font-family: var(--font-heading);
   font-size: var(--aw-text-label-mobile);
   letter-spacing: var(--aw-tracking-label);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
   @media (min-width: 768px) {
@@ -164,18 +204,20 @@
   }
 }
 
+/** Ticker / marquee text — Barlow Condensed display */
 @utility type-ticker {
-  font-family: var(--font-script);
+  font-family: var(--font-heading);
   font-size: var(--aw-text-ticker-mobile);
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1;
   @media (min-width: 768px) {
     font-size: var(--aw-text-ticker);
   }
 }
 
+/** Pull-quote — Work Sans, slightly larger body */
 @utility type-quote {
-  font-family: var(--font-script);
+  font-family: var(--font-sans);
   font-size: var(--aw-text-quote-mobile);
   font-weight: 400;
   line-height: var(--aw-leading-quote);
@@ -216,27 +258,6 @@
   background-color: var(--aw-color-bg-page);
 }
 
-/* Main page wash — warm cream gradient, top to bottom. */
-@utility bg-page-wash {
-  background-color: var(--aw-color-page-wash-to);
-  background-image: linear-gradient(to bottom, var(--aw-color-page-wash-from) 0%, var(--aw-color-page-wash-to) 100%);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-/* Green-band layer — used by PageBg behind the leaf motif.
-   Solid fallback is the sage start (70% of the gradient), not the blueberry
-   end — otherwise a discarded GPU layer paints a full-viewport blue flash. */
-@utility bg-green-wash {
-  background-color: var(--aw-color-gradient-from);
-  background-image: linear-gradient(
-    to bottom,
-    var(--aw-color-gradient-from) 0%,
-    var(--aw-color-gradient-from) 70%,
-    var(--aw-color-gradient-to) 100%
-  );
-}
-
 @utility bg-dark {
   background-color: var(--aw-color-bg-page-dark);
 }
@@ -273,30 +294,8 @@
   background-color: var(--aw-color-bg-cta);
 }
 
-@utility bg-cta-pink {
-  background-color: var(--aw-color-bg-cta-pink);
-}
-
-@utility text-cta-pink {
-  color: var(--aw-color-text-cta-pink);
-}
-
 @utility shadow-card-mist {
   box-shadow: var(--aw-shadow-card-mist);
-}
-
-@utility shadow-card-pink {
-  box-shadow: var(--aw-shadow-card-pink);
-}
-
-/* Flat offset-only mist shadow — used by schedule cards (Figma: 3px 3px 0 #E4EDF2, no blur) */
-@utility shadow-mist-offset {
-  box-shadow: 3px 3px 0 0 var(--aw-color-bg-card-light);
-}
-
-/* Subtle page-coloured glow behind display text (e.g. bucket numbers, pullquotes) */
-@utility text-shadow-page {
-  text-shadow: 0 0 40px var(--aw-color-bg-page);
 }
 
 @utility text-card-heading-dark {
@@ -576,8 +575,19 @@
 
 /* Site-wide CTA hover — used by Button.astro via btn / btn-* utilities.
    Color tokens per variant; motion (200ms ease + 1px lift) is shared. */
+/** CTA padding sizes. Vertical × horizontal. No fixed height, so a second line can grow the button. */
+@utility cta-lg {
+  padding: 16px 40px;
+}
+@utility cta-md {
+  padding: 8px 24px;
+}
+@utility cta-sm {
+  padding: 8px 16px;
+}
+
 @utility btn {
-  @apply inline-flex items-center justify-center rounded-none border-2 font-rough font-normal text-center leading-none py-6 px-7 cursor-pointer;
+  @apply cta-lg inline-flex items-center justify-center rounded-none border-2 font-display font-normal text-center leading-6 cursor-pointer;
   font-size: var(--aw-text-button);
   transition-property: background-color, color, border-color, box-shadow, transform;
   transition-duration: 200ms;
@@ -647,7 +657,7 @@
 }
 
 @utility btn-link {
-  @apply inline-flex items-center font-rough font-normal text-[14px] cursor-pointer;
+  @apply inline-flex items-center font-body font-normal text-[14px] cursor-pointer;
   color: var(--aw-color-btn-link);
   text-underline-offset: 2px;
   transition-property: color, text-decoration-color;
@@ -664,7 +674,7 @@
 }
 
 @utility tag-pill {
-  @apply inline-flex items-center rounded-full bg-primary/20 border border-primary/30 px-2.5 py-0.5 font-heading font-normal text-[11px] md:text-[12px] leading-[18px] text-primary dark:bg-primary/20 dark:border-white/20 dark:text-white/80;
+  @apply inline-flex items-center rounded-full bg-primary/20 border border-primary/30 px-2.5 py-0.5 font-display font-normal text-[11px] md:text-[12px] leading-[18px] text-primary dark:bg-primary/20 dark:border-white/20 dark:text-white/80;
 }
 
 .dropdown-menu {
@@ -674,17 +684,48 @@
   left: 0;
   z-index: 50;
   min-width: 220px;
-  max-height: min(24rem, 70vh);
-  overflow-y: auto;
-  padding: 8px 0;
+  padding: 0;
+  overflow: visible;
   background: var(--aw-color-bg-card);
   border: 1px solid color-mix(in srgb, var(--aw-color-text-heading) 10%, transparent);
   box-shadow: 0 12px 32px rgb(0 0 0 / 8%);
 }
 
 .dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 16px;
+  font-family: var(--aw-font-sans);
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--aw-color-text-heading);
+  white-space: nowrap;
+}
+
+/* ── Second-level (right-side flyout) ───────────────────────────── */
+
+/* The sub-parent item needs overflow visible so the flyout can escape */
+.dropdown-menu li.sub-dropdown {
+  position: relative;
+}
+
+.sub-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 60;
+  min-width: 220px;
+  padding: 0;
+  background: var(--aw-color-bg-card);
+  border: 1px solid color-mix(in srgb, var(--aw-color-text-heading) 10%, transparent);
+  box-shadow: 8px 12px 32px rgb(0 0 0 / 8%);
+}
+
+.sub-dropdown-menu a {
   display: block;
-  padding: 10px 16px;
+  padding: 7px 16px;
   font-family: var(--aw-font-sans);
   font-size: 14px;
   line-height: 1.3;
@@ -706,6 +747,17 @@
   .dropdown:has(:focus-visible) > .dropdown-menu {
     display: block;
   }
+
+  /* Second-level flyout — show when hovering the sub-dropdown item */
+  .sub-dropdown:hover > .sub-dropdown-menu,
+  .sub-dropdown:has(:focus-visible) > .sub-dropdown-menu {
+    display: block;
+  }
+
+  /* Ensure the primary dropdown stays open while the flyout is being used */
+  .dropdown:has(.sub-dropdown:hover) > .dropdown-menu {
+    display: block;
+  }
 }
 
 /* Active nav link — top-level */
@@ -716,6 +768,7 @@ nav > ul > li > div > a.aw-link-active,
 nav > ul > li > div > a.aw-link-active:hover,
 nav > ul > li > div > button.aw-link-active {
   color: var(--aw-color-accent);
+  font-weight: 700;
 }
 
 [data-nav='embedded'] nav a.aw-link-active,
@@ -749,6 +802,26 @@ nav > ul > li > div > button.aw-link-active {
   color: var(--aw-color-accent);
 }
 
+/* Active / hover states — inside sub-dropdown flyout */
+.sub-dropdown-menu a:hover {
+  background-color: var(--aw-color-bg-section-grey);
+  color: var(--aw-color-text-heading);
+}
+.sub-dropdown-menu a.aw-link-active {
+  color: var(--aw-color-accent);
+  font-weight: 600;
+}
+.sub-dropdown-menu a.aw-link-active:hover {
+  background-color: var(--aw-color-bg-section-grey);
+  color: var(--aw-color-accent);
+}
+
+/* Highlight the sub-parent row when its flyout is open */
+.sub-dropdown:hover > a,
+.sub-dropdown:has(:focus-visible) > a {
+  background-color: var(--aw-color-bg-section-grey);
+}
+
 [astro-icon].icon-light > * {
   stroke-width: 1.2;
 }
@@ -765,10 +838,6 @@ nav > ul > li > div > button.aw-link-active {
 }
 [data-aw-toggle-menu].expanded g > path:last-child {
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
-}
-
-@utility gold-bar {
-  @apply block w-12 h-0.75 bg-accent rounded-full mt-3;
 }
 
 /* Linked-card hover: underline the URL when the card is hovered. No lift or bounce. */

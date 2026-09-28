@@ -1,0 +1,239 @@
+---
+/**
+ * About — /about/
+ * Our Story, 25+ Year Legacy, Values, Team
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+import { CONTACT } from '~/config/contact';
+
+const metadata = {
+  title: `Our Story | ${site.name}`,
+  description: `Learn about Vaifoou Construction LLC, a locally and family-owned O\u02BBahu masonry contractor built on a 25+ year legacy of quality concrete and rock wall construction.`,
+  ignoreTitleTemplate: true,
+};
+
+const values = [
+  {
+    label: 'Faith First',
+    icon: 'M12 2 A10 10 0 1 0 12 22 A10 10 0 1 0 12 2', // circle (placeholder path)
+    body: '"God first" is a foundational company value for our entire team. To honor this commitment, our operations are strictly closed on Sundays — every week, without exception.',
+  },
+  {
+    label: 'Workmanship Guarantee',
+    icon: '',
+    body: 'Every site we manage across O\u02BBahu is backed by a workmanship guarantee. We stand behind the structures we build because we intend them to last.',
+  },
+  {
+    label: 'Family Legacy',
+    icon: '',
+    body: 'The standards and craft passed from our father to his sons guide every project. Our 25+ year trade legacy is not a marketing line — it is the lived history of our crew.',
+  },
+];
+
+const team = [
+  {
+    name: 'Siaosi Vaifoou',
+    role: 'Owner',
+    bio: '[TEXT PLACEHOLDER: Short bio detailing Siaosi leaving his full-time job to obtain his licence and formally take over the family business.]',
+  },
+  {
+    name: '[Brother\'s Name]',
+    role: '[Role]',
+    bio: '[TEXT PLACEHOLDER: Short bio detailing his experience and role on the current team.]',
+  },
+  {
+    name: '[Brother\'s Name]',
+    role: '[Role]',
+    bio: '[TEXT PLACEHOLDER: Short bio detailing his experience and role on the current team.]',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+
+  {/* ── Hero ─────────────────────────────────────────────────── */}
+  <section class="relative w-full bg-heading py-16 md:py-24">
+    <div class="site-frame flex flex-col gap-4 max-w-4xl">
+      <p class="font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-page/50 uppercase">
+        Our Story
+      </p>
+      <h1 class="font-display text-[36px] font-bold leading-tight tracking-[-0.5px] text-page uppercase md:text-[56px] md:leading-[62px]">
+        Vaifoou Construction LLC
+      </h1>
+      <p class="max-w-2xl font-body text-[17px] font-normal leading-7 text-page/65">
+        A locally and family-owned masonry and concrete contractor serving O&#x02BB;ahu, built on a 25+ year legacy in the trade.
+      </p>
+
+      {/* Trust strip */}
+      <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-page/10 pt-5">
+        {[`Licence ${CONTACT.license}`, 'Licensed & Insured', 'Workmanship Guarantee', '25+ Year Family Legacy'].map((item, i) => (
+          <>
+            {i > 0 && <span class="font-display text-[13px] font-bold tracking-[0.65px] text-page/25 uppercase" aria-hidden="true">•</span>}
+            <span class="whitespace-nowrap font-display text-[13px] font-bold tracking-[0.65px] text-page/55 uppercase">{item}</span>
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ── Our Story ────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-12 md:py-24">
+    <div class="site-frame flex flex-col gap-10 md:gap-16">
+
+      {/* Intro */}
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-10">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          About Us
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+          Our Story
+        </h2>
+        <p class="mt-3 max-w-3xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
+          Vaifoou Construction LLC is a locally and family-owned masonry and concrete contractor serving O&#x02BB;ahu. While our company operates under a modern structure today, our foundation is built on a family legacy spanning more than 25 years in the trade.
+        </p>
+      </div>
+
+      {/* 25+ Year Legacy — split layout */}
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_400px] lg:items-start">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-1">
+            <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+              <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+              Legacy
+            </p>
+            <h2 class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]">
+              A 25+ Year Family Legacy
+            </h2>
+          </div>
+          <div class="flex flex-col gap-5 font-body text-[17px] font-normal leading-[1.75] text-banner-note">
+            <p>
+              Our roots in the masonry trade began around 2000 when our father first started running the business. For over two decades, the standards for heavy-duty concrete flatwork and basalt rock wall construction passed down from father to sons.
+            </p>
+            <p>
+              From 2008 until September 2023, a brother carried the business forward on referrals, executing masonry projects around the Waikele Golf Course area. Siaosi Vaifoou later left his full-time career to formally take over the operations.
+            </p>
+            <p>
+              Today, Vaifoou Construction LLC operates as a fully licensed entity ({CONTACT.license}) backed by a dedicated, core crew.
+            </p>
+          </div>
+
+          {/* Timeline accent */}
+          <div class="flex flex-col gap-0 border-l-2 border-nav-cta pl-5">
+            {[
+              { year: '~2000', label: 'Father founds the masonry business' },
+              { year: '2008', label: 'Brother continues operations on referrals near Waikele' },
+              { year: 'Sept 2023', label: 'Siaosi Vaifoou takes formal ownership; LLC established' },
+              { year: 'Today', label: `Fully licensed (${CONTACT.license}), core crew, serving all O\u02BBahu` },
+            ].map(({ year, label }) => (
+              <div class="flex flex-col gap-0.5 py-4 border-b border-banner-line last:border-0">
+                <p class="font-display text-[13px] font-bold tracking-[0.65px] text-nav-cta uppercase">{year}</p>
+                <p class="font-body text-[15px] font-normal leading-6 text-heading">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: placeholder photo area */}
+        <div class="flex flex-col gap-3 lg:sticky lg:top-24">
+          <div
+            class="w-full bg-section-grey"
+            style="aspect-ratio: 4 / 5;"
+            aria-hidden="true"
+          ></div>
+          {/* TODO: replace with <Image> when client provides a team/job-site photo */}
+          <p class="font-body text-[12px] text-muted text-center">Job-site or team photo — provided by client</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  {/* ── Our Values ───────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-card py-12 md:py-20">
+    <div class="site-frame flex flex-col gap-10">
+
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          What Guides Us
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+          Our Values
+        </h2>
+        <p class="mt-3 max-w-2xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
+          Our work is guided by our faith and our family.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-px bg-banner-line sm:grid-cols-3">
+        {values.map(({ label, body }) => (
+          <div class="flex flex-col gap-4 bg-card px-0 py-8 sm:px-8">
+            <div class="flex size-10 items-center justify-center rounded-full bg-nav-cta/10">
+              <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+            </div>
+            <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[20px]">
+              {label}
+            </h3>
+            <p class="font-body text-[15px] font-normal leading-7 text-banner-note">{body}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  {/* ── Meet the Team ────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
+    <div class="site-frame flex flex-col gap-10">
+
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          The People
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+          Meet the Team
+        </h2>
+        <p class="mt-1 font-body text-[13px] italic text-muted">
+          [BEGIN TEAM BIOS — Update with specific names, roles, and real photos when supplied]
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {team.map(({ name, role, bio }) => (
+          <div class="flex flex-col gap-5">
+            {/* Photo placeholder */}
+            <div
+              class="w-full bg-section-grey"
+              style="aspect-ratio: 3 / 4;"
+              aria-hidden="true"
+            ></div>
+            {/* TODO: replace with <Image src={photo} alt={name} class="w-full object-cover" style="aspect-ratio: 3/4;" /> */}
+
+            {/* Name & role */}
+            <div class="flex flex-col gap-1 border-t-2 border-nav-cta pt-4">
+              <h3 class="font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
+                {name}
+              </h3>
+              <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
+            </div>
+
+            {/* Bio */}
+            <p class="font-body text-[15px] font-normal leading-7 text-banner-note italic">{bio}</p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  {/* ── CTA ──────────────────────────────────────────────────── */}
+  <BrickMotifCTA
+    heading="Work With Vaifoou Construction"
+    note="We bring our family&#x2019;s 25+ year trade legacy to every project site. Contact us to schedule an estimate for your masonry or concrete flatwork."
+  />
+
+</Layout>

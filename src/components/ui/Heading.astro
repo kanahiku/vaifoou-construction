@@ -2,29 +2,30 @@
 /**
  * Heading atom — one component for every heading level and the eyebrow label.
  *
+ * Font: Barlow Condensed for all variants (h1–h4 and eyebrow).
+ * Sizes come from brand.ts → type{} → CSS variables → text-h* utilities.
+ *
  * variant  (controls visual scale and default semantic element):
- *   h1      → <h1>   36→72 px / lh 1     hero headlines (Norca-Rough)
- *   h2      → <h2>   32→52 px / lh 1     section headings (Norca-Rough)
- *   h3      → <h3>   20→26 px / lh 1     dish / numbered titles (Norca-Rough)
- *   h4      → <h4>   20→24 px / lh 1     card / subsection titles (Norca)
- *   eyebrow → <p>    16 px script        Figma `tag` — Wreck Script, sentence case
+ *   h1      → <h1>   mobile/desktop from brand.ts   hero / page title
+ *   h2      → <h2>   mobile/desktop from brand.ts   section headings
+ *   h3      → <h3>   mobile/desktop from brand.ts   subsection / card titles
+ *   h4      → <h4>   mobile/desktop from brand.ts   small card / sidebar titles
+ *   eyebrow → <p>    type-eyebrow utility            uppercase label above headings
  *
  * color:
- *   default  → heading color  (h1–h4) / hibiscus accent (eyebrow)
- *   white    → cream on photos (h1–h4 and eyebrow)
- *   muted    → text-muted
- *   inherit  → no color class — use class= to pass a custom token (e.g. class="text-tan")
+ *   default  → near-black heading token (h1–h4) / accent terracotta (eyebrow)
+ *   white    → warm off-white page color — use on dark/photo sections
+ *   muted    → text-muted (warm grey)
+ *   inherit  → no color class — pass a custom token via class=
  *
  * as:  Override the semantic element while keeping the visual scale.
- *      Useful when hierarchy demands h2 but the design uses h3 sizing.
  *
  * Usage:
- *   <Heading variant="h1">Fresh, healthy food that tastes worth coming back for.</Heading>
- *   <Heading variant="h2" html="Two <em>lines</em>" />
+ *   <Heading variant="h1">Built to last.</Heading>
+ *   <Heading variant="h2" html="Projects <em>we're proud of</em>" />
  *   <Heading variant="h3" color="white">On a dark section</Heading>
- *   <Heading variant="eyebrow" color="white">Phase 1</Heading>
- *   <Heading variant="eyebrow" color="white" class="opacity-50">Dimmed label</Heading>
- *   <Heading variant="h2" color="inherit" class="text-tan">Custom colour</Heading>
+ *   <Heading variant="eyebrow">Our Services</Heading>
+ *   <Heading variant="h2" color="inherit" class="text-accent">Custom colour</Heading>
  */
 import { twMerge } from 'tailwind-merge';
 
@@ -51,13 +52,13 @@ const defaultElement: Record<Variant, string> = {
 };
 const Tag = (asOverride ?? defaultElement[variant as Variant]) as any;
 
-// Visual scale per variant
+// Visual scale per variant — all use Barlow Condensed (font-display)
 const scale: Record<string, string> = {
-  h1:      'text-h1 font-rough font-normal leading-none',
-  h2:      'text-h2 font-rough font-normal leading-none',
-  h3:      'text-h3 font-rough font-normal leading-none',
-  h4:      'text-h4 font-heading font-normal leading-none',
-  eyebrow: 'type-eyebrow font-script',
+  h1:      'text-h1 font-display font-normal leading-none',
+  h2:      'text-h2 font-display font-normal leading-none',
+  h3:      'text-h3 font-display font-normal leading-none',
+  h4:      'text-h4 font-display font-normal leading-none',
+  eyebrow: 'type-eyebrow',
 };
 
 const colorClass = (() => {

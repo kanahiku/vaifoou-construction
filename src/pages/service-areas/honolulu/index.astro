@@ -1,0 +1,57 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `Honolulu Masonry & Concrete Contractor | ${site.name}`,
+    description: `Vaifoou Construction provides structural masonry and concrete flatwork for Honolulu properties. We build custom rock walls and pour new concrete foundations.`,
+  }}
+  hero={{
+    eyebrow: `O\u02BBahu`,
+    title: `Honolulu Masonry & Concrete Construction`,
+    body: `Custom rock walls, concrete driveways, and structural masonry across Honolulu and the urban core.`,
+    imagePlaceholder: 'Honolulu masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'Honolulu',
+    heading: `Honolulu Masonry & Concrete`,
+    body: `Honolulu's dense urban lots and older residential neighborhoods create constant demand for driveway replacements, perimeter walls, and foundation pours. Our family crew dispatches from our Wahiawa yard to serve Honolulu properties with 25+ years of trade experience behind every pour and every wall.`,
+    imagePlaceholder: 'Honolulu masonry project photo',
+  }}
+  services={[
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Hand-selected volcanic basalt walls for residential boundaries and property entry features across Honolulu.' },
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'Full demolition and replacement of aging driveways alongside new structural foundation pours.' },
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: 'Heavy-duty masonry built to stabilize sloped lots in Punchbowl, Pauoa, and upper Nuuanu.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Reinforced hollow tile perimeter fences for residential and commercial properties citywide.' },
+  ]}
+  servicesHeading="Honolulu Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work in Honolulu',
+    description: `We recently handled full demolition of a cracked concrete driveway for a residential property in Kaimuki, regraded the base to correct the pitch toward the street, and poured a clean replacement slab in a single day.`,
+    imagePlaceholder: 'Recent Honolulu project photo',
+  }}
+  otherAreas={[
+    { title: 'Wahiawa',               href: '/service-areas/wahiawa/' },
+    { title: 'Mililani',              href: '/service-areas/mililani/' },
+    { title: 'Kaneohe',               href: '/service-areas/kaneohe/' },
+    { title: 'Kailua',                href: '/service-areas/kailua/' },
+    { title: 'Kapolei',               href: '/service-areas/kapolei/' },
+    { title: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+    { title: 'Aiea & Pearl City',     href: '/service-areas/aiea-pearl-city/' },
+    { title: 'Waipahu',               href: '/service-areas/waipahu/' },
+    { title: 'Ewa Beach',             href: '/service-areas/ewa-beach/' },
+  ]}
+  faqs={{
+    title: 'Honolulu Masonry FAQs',
+    items: [
+      { title: 'Do you work on residential lots in dense urban Honolulu neighborhoods?', description: 'Yes. We regularly work on narrow lots in Kaimuki, Palolo, Punchbowl, and similar neighborhoods where access is tight and properties are closely spaced.' },
+      { title: 'Can you replace a cracked concrete driveway in Honolulu?', description: 'Yes. We handle complete demolition of the existing slab, proper sub-base preparation, and a fresh concrete pour sized to your driveway.' },
+      { title: 'Do you build retaining walls for sloped Honolulu lots?', description: 'Yes. We construct heavy basalt and CMU retaining walls for hillside residential properties across upper Nuuanu, Pauoa, and Punchbowl.' },
+      { title: 'Will you build a CMU or rock wall along a busy street in Honolulu?', description: 'Yes. We construct reinforced block walls and hand-selected basalt walls for both privacy and traffic noise separation along urban streets.' },
+      { title: 'Do you pour concrete slabs for commercial properties in Honolulu?', description: 'Yes. We work as a concrete subcontractor for commercial flatwork, curbing, and structural slabs across Honolulu.' },
+    ],
+  }}
+  ctaHeading="Start Your Honolulu Masonry Project"
+/>

@@ -1,0 +1,61 @@
+---
+/**
+ * Concrete Steps & Stairways — /services/concrete/steps/
+ * Content: docs/service/concrete-service/…Concrete Steps & Stairways.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Concrete Steps & Stairways | ${site.name}`,
+  description: `Vaifoou Construction pours durable concrete steps and custom stairways for properties across O\u02BBahu. Contact us to schedule a site estimate.`,
+};
+
+const tableRows = [
+  { feature: 'Application',   val1: 'Simple entryways or porches',           val2: 'Significant property elevation changes' },
+  { feature: 'Design',        val1: 'Basic functional treads',                val2: 'Custom dimensions and landings' },
+  { feature: 'Proof of Work', val1: 'Available upon request',                 val2: 'Viewable in our project gallery' },
+];
+
+const links = [
+  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
+  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
+  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
+  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+];
+
+const faqs = [
+  { title: 'Do you build custom stairways?',                    description: 'Yes. We pour standard steps and construct custom stairways to fit your specific property elevation.' },
+  { title: 'Can I see examples of your previous stairway work?', description: 'Yes. Stairways are a dedicated category in our project gallery where you can review our previous installations.' },
+  { title: 'Are your installations guaranteed?',                 description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Concrete Services"
+    title="Concrete Steps & Stairways"
+    body="We pour concrete steps and construct custom stairways to safely manage elevation changes on your property. We build for both residential and commercial applications across O\u02BBahu. Our family brings a 25+ year trade legacy to every project site, and every installation is backed by our workmanship guarantee."
+    imagePlaceholder="Concrete steps and stairway photo"
+  />
+  <ServiceTable
+    eyebrow="Comparison"
+    heading="Standard Steps vs. Custom Stairways"
+    col1="Standard Concrete Steps"
+    col2="Custom Stairways"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Concrete Services" items={links} />
+  <FAQs title="Concrete Steps & Stairways FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading="Start Your Steps & Stairway Project" />
+</Layout>

@@ -3,33 +3,24 @@
  * Site wallpaper — both layers are position:fixed so they fill the
  * viewport exactly and never move on scroll.
  *
- * Layer order (bottom → top):
- *   1. Fixed green gradient div   #8CAC7F → #8FA1AB            z-index: -10
- *   2. Fixed motif img             leaves-motif.webp             z-index: -9
- *                                  SVG scales proportionally via
- *                                  preserveAspectRatio="xMidYMin slice" so
- *                                  the pattern always fills the viewport width
- *                                  at the same visual density as the 1440 px
- *                                  design, cropping extra height.
- *                                  fill-opacity 0.04 is baked into the SVG.
- *   3. Section fills (bg-page …)  cover both layers                z: auto
+ * Layer order (bottom -> top):
+ *   1. Fixed page color                                        z-index: -10
+ *   2. CSS-only subtle grid/noise layer                         z-index: -9
+ *   3. Section fills cover both layers                          z: auto
  *
  * Transparent sections punch through to show layers 1 + 2.
  */
-import leavesMotif from '~/assets/images/leaves-motif.webp';
-const leavesUrl = leavesMotif.src;
 ---
 
-{/* Layer 1 — green gradient, fixed to viewport */}
+{/* Layer 1 — page color, fixed to viewport */}
 <div
-  class="pointer-events-none fixed inset-0 -z-10 bg-green-wash"
+  class="pointer-events-none fixed inset-0 -z-10 bg-page"
   aria-hidden="true"
 ></div>
 
-{/* Layer 2 — leaves motif, fixed to viewport. Displayed at 5500px so
-     pattern density matches the original 1440-wide SVG design. */}
+{/* Layer 2 — CSS-only texture. No project-specific image asset. */}
 <div
-  class="pointer-events-none fixed inset-0 -z-[9] select-none opacity-[0.04]"
-  style={`background-image: url('${leavesUrl}'); background-size: 5500px auto; background-position: top left; background-repeat: repeat;`}
+  class="pointer-events-none fixed inset-0 -z-[9] select-none opacity-[0.06]"
+  style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 32px 32px; color: var(--aw-color-text-heading);"
   aria-hidden="true"
 />

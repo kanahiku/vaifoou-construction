@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
+import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
 import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import Button from '~/components/ui/Button.astro';
@@ -9,8 +9,8 @@ import NavList from '~/components/widgets/NavList.astro';
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
-import navMotif from '~/assets/images/nav-motif.webp';
 import { site } from '~/config/site';
+import { CONTACT } from '~/config/contact';
 
 interface Link {
   text?: string;
@@ -65,15 +65,22 @@ const phoneAction = phone
   : undefined;
 const phoneLabel = phone ? `Call ${phone.text}` : '';
 const phoneBoxClass =
-  'inline-flex items-center justify-center shrink-0 size-9 rounded-md bg-accent text-black border-2 border-accent hover:bg-accent-hover hover:border-accent-hover transition duration-200';
+  'inline-flex items-center justify-center shrink-0 size-10 bg-accent text-black border-2 border-accent hover:bg-accent-hover hover:border-accent-hover transition duration-200';
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
 const mobileLinkClass =
-  'flex items-center px-3 py-3 font-rough text-[18px] leading-none text-heading transition-colors hover:bg-section-grey/40';
+  'flex items-center px-3 py-3 font-display text-[18px] leading-none text-heading transition-colors hover:bg-section-grey/40';
 const mobilePanelClass =
   'absolute inset-x-0 top-full z-50 max-h-[min(24rem,calc(100dvh-5.5rem))] flex-col overflow-y-auto border-t border-heading/10 bg-card p-3';
-const navBgStyle = `background-image: url('${navMotif.src}'); background-size: cover; background-position: center; background-repeat: no-repeat;`;
+const navBgStyle = '';
+
+/** Top utility bar — Figma 4:436 (desktop) / 4:480 (mobile). */
+const topBarItems = [
+  CONTACT.license ? `Licence ${CONTACT.license}` : '',
+  'Licensed & Insured',
+  'BBB Accredited',
+].filter(Boolean);
 ---
 
 <aw-header transition:persist={embedded ? 'hero-nav' : 'header'}>
@@ -124,53 +131,95 @@ const navBgStyle = `background-image: url('${navMotif.src}'); background-size: c
   <header
     class:list={[
       { sticky: isSticky, relative: !isSticky },
-      'top-0 z-40 flex-none mx-auto w-full bg-card',
+      'top-0 z-40 flex-none mx-auto w-full',
     ]}
-    style={navBgStyle}
     {...isSticky ? { 'data-aw-sticky-header': true } : {}}
     {...id ? { id } : {}}
   >
-    <div
-      class:list={[
-        'relative mx-auto flex w-full items-center justify-between px-5 py-4 md:justify-center md:gap-12 md:px-16',
-        { 'max-w-container': !isFullWidth },
-      ]}
-    >
-      <a class="flex shrink-0 items-center md:hidden" href={getHomePermalink()} aria-label={`${site.name} home`}>
-        <Logo />
-      </a>
-      <div class="flex items-center gap-2 md:hidden">
-        {
-          phone && (
-            <a href={phone.href} class={phoneBoxClass} aria-label={phoneLabel}>
-              <Icon name="tabler:phone" class="size-4" aria-hidden="true" />
-            </a>
-          )
-        }
-        <ToggleMenu class="flex size-12 flex-col items-center justify-center bg-heading/5 text-heading cursor-pointer group" />
+    {/* ── Top utility bar — Figma 4:436 / 4:480 ───────────────── */}
+    <div class="w-full border-b border-banner-line bg-banner">
+      <div class="site-frame flex flex-col items-center gap-1 pb-[9px] pt-2 md:flex-row md:justify-between md:gap-4 md:py-1">
+        <p class="flex flex-wrap items-center justify-center gap-1.5 md:gap-4">
+          {topBarItems.map((item) => (
+            <Fragment>
+              <span class="font-display text-[10px] font-semibold! leading-6 tracking-[0.5px] text-banner-text uppercase md:text-[13px] md:font-bold! md:leading-4 md:tracking-[0.65px]">
+                {item}
+              </span>
+              <span class="font-display text-[10px] font-semibold! leading-6 tracking-[0.5px] text-banner-dot md:text-[13px] md:font-bold! md:leading-4 md:tracking-[0.65px]" aria-hidden="true">
+                •
+              </span>
+            </Fragment>
+          ))}
+          <span class="font-display text-[10px] font-semibold! leading-6 tracking-[0.5px] text-banner-text uppercase md:hidden">
+            25+ Year Legacy
+          </span>
+          <span class="hidden font-display text-[13px] font-bold! leading-4 tracking-[0.65px] text-banner-text uppercase md:inline">
+            25+ Year Family Legacy
+          </span>
+        </p>
+        <p class="flex items-center gap-1 md:gap-2">
+          <svg class="h-[21px] w-5 shrink-0 text-section-dark" viewBox="0 0 20 21" fill="currentColor" aria-hidden="true">
+            <path d="M0 21V13L4 11.225V8L9 5.5V4H7V2H9V0H11V2H13V4H11V5.5L16 8V11.225L20 13V21H11V17C11 16.7167 10.9042 16.4792 10.7125 16.2875C10.5208 16.0958 10.2833 16 10 16C9.71667 16 9.47917 16.0958 9.2875 16.2875C9.09583 16.4792 9 16.7167 9 17V21H0ZM2 19H7V16.95C7 16.1 7.29167 15.3792 7.875 14.7875C8.45833 14.1958 9.16667 13.9 10 13.9C10.8333 13.9 11.5417 14.1958 12.125 14.7875C12.7083 15.3792 13 16.1 13 16.95V19H18V14.2L14 12.4V9.05L10 7L6 9.05V12.4L2 14.2V19ZM10 12.5C10.4167 12.5 10.7708 12.3542 11.0625 12.0625C11.3542 11.7708 11.5 11.4167 11.5 11C11.5 10.5833 11.3542 10.2292 11.0625 9.9375C10.7708 9.64583 10.4167 9.5 10 9.5C9.58333 9.5 9.22917 9.64583 8.9375 9.9375C8.64583 10.2292 8.5 10.5833 8.5 11C8.5 11.4167 8.64583 11.7708 8.9375 12.0625C9.22917 12.3542 9.58333 12.5 10 12.5Z" />
+          </svg>
+          <span class="font-body text-[10px] font-normal! leading-6 tracking-[0.25px] text-muted md:text-xs md:font-medium! md:leading-4 md:tracking-[0.3px] md:text-banner-note">
+            Closed Sundays to honor God
+          </span>
+        </p>
       </div>
+    </div>
 
-      <nav class="hidden md:block" data-desktop-nav aria-label="Main navigation">
-        <NavList links={leftLinks} class="flex items-center gap-8" />
-      </nav>
-
-      <a class="hidden shrink-0 items-center md:flex" href={getHomePermalink()} aria-label={`${site.name} home`}>
-        <Logo />
-      </a>
-
-      <div class="hidden items-center gap-8 md:flex">
-        <NavList links={rightLinks} class="flex items-center gap-8" />
-        {showToggleTheme && <ToggleTheme iconClass="w-5 h-5" />}
-        {
-          showRssFeed && (
-            <a class="text-secondary" aria-label="RSS Feed" href={getAsset('/rss.xml')}>
-              <Icon name="tabler:rss" class="w-5 h-5" />
+    {/* ── Main nav bar ────────────────────────────────────────── */}
+    <div class="w-full bg-card border-b border-heading/10">
+      <div
+        class:list={[
+          'site-frame relative flex items-center justify-between py-4 md:justify-between',
+        ]}
+      >
+        {/* Mobile: logo + menu toggle */}
+        <a class="flex shrink-0 items-center md:hidden" href={getHomePermalink()} aria-label={`${site.name} home`}>
+          <Logo />
+        </a>
+        <div class="flex items-center gap-2 md:hidden">
+          {phone && (
+            <a href={phone.href} class={phoneBoxClass} aria-label={phoneLabel}>
+              <PhoneIcon class="size-4" />
             </a>
-          )
-        }
-        {extraActions.map((btnProps) => (
-          <Button {...btnProps} hideNote class="whitespace-nowrap" />
-        ))}
+          )}
+          <ToggleMenu class="flex size-10 flex-col items-center justify-center bg-heading/5 text-heading cursor-pointer group" />
+        </div>
+
+        {/* Desktop: logo */}
+        <a class="hidden h-10 shrink-0 items-center md:flex" href={getHomePermalink()} aria-label={`${site.name} home`}>
+          <Logo class="whitespace-nowrap text-[15px] leading-none" />
+        </a>
+
+        {/* Desktop: nav links */}
+        <nav class="hidden md:block" data-desktop-nav aria-label="Main navigation">
+          <NavList links={links} class="flex items-center gap-6" />
+        </nav>
+
+        {/* Desktop: phone + estimate — Figma 4:470 */}
+        <div class="hidden items-center gap-4 md:flex">
+          {phone && (
+            <a
+              href={phone.href}
+              class="cta-sm inline-flex shrink-0 items-center justify-center gap-1 border border-muted/30 bg-banner-text text-center font-display text-[20px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading"
+              aria-label={phoneLabel}
+            >
+              <PhoneIcon />
+              {phone.text}
+            </a>
+          )}
+          {showToggleTheme && <ToggleTheme iconClass="w-5 h-5" />}
+          {extraActions.map((action) => (
+            <a
+              href={action.href}
+              class="cta-sm inline-flex shrink-0 items-center justify-center bg-nav-cta text-center font-display text-[20px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading"
+            >
+              {action.text}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
 
@@ -188,14 +237,20 @@ const navBgStyle = `background-image: url('${navMotif.src}'); background-size: c
                   {isDropdown ? (
                     <details>
                       <summary class="flex cursor-pointer list-none items-center">
-                        {/* Tappable parent link — occupies most of the row */}
-                        <a
-                          class:list={[mobileLinkClass, 'flex-1']}
-                          href={href}
-                          data-mobile-parent-link
-                        >
-                          {text}
-                        </a>
+                        {/* Tappable parent link — occupies most of the row; if no href, render a non-nav span */}
+                        {href ? (
+                          <a
+                            class:list={[mobileLinkClass, 'flex-1']}
+                            href={href}
+                            data-mobile-parent-link
+                          >
+                            {text}
+                          </a>
+                        ) : (
+                          <span class:list={[mobileLinkClass, 'flex-1 cursor-default select-none']}>
+                            {text}
+                          </span>
+                        )}
                         {/* Chevron-only toggle zone — tapping this toggles the accordion */}
                         <span class="mobile-chevron-toggle flex size-10 shrink-0 items-center justify-center text-heading/50" aria-hidden="true">
                           <svg xmlns="http://www.w3.org/2000/svg" class="size-3.5 transition-transform duration-200 [[open]_&]:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -204,16 +259,54 @@ const navBgStyle = `background-image: url('${navMotif.src}'); background-size: c
                         </span>
                       </summary>
                       <ul class="mb-1 ml-2 flex flex-col border-l border-heading/10 pl-2">
-                        {nested.map(({ text: nestedText, href: nestedHref }) => (
-                          <li>
-                            <a
-                              class:list={[mobileLinkClass, 'py-2.5 text-[15px]', { 'aw-link-active': nestedHref === currentPath }]}
-                              href={nestedHref}
-                            >
-                              {nestedText}
-                            </a>
-                          </li>
-                        ))}
+                        {nested.map(({ text: nestedText, href: nestedHref, links: grandChildLinks }) => {
+                          const hasGrandChildren = Boolean((grandChildLinks as Array<unknown> | undefined)?.length);
+                          if (!hasGrandChildren) {
+                            return (
+                              <li>
+                                <a
+                                  class:list={[mobileLinkClass, 'py-2.5 text-[15px]', { 'aw-link-active': nestedHref === currentPath }]}
+                                  href={nestedHref}
+                                >
+                                  {nestedText}
+                                </a>
+                              </li>
+                            );
+                          }
+                          /* Second-level accordion for items with grandchildren */
+                          return (
+                            <li>
+                              <details>
+                                <summary class="flex cursor-pointer list-none items-center">
+                                  <a
+                                    class:list={[mobileLinkClass, 'flex-1 py-2.5 text-[15px]', { 'aw-link-active': nestedHref === currentPath }]}
+                                    href={nestedHref}
+                                    data-mobile-parent-link
+                                  >
+                                    {nestedText}
+                                  </a>
+                                  <span class="mobile-chevron-toggle flex size-9 shrink-0 items-center justify-center text-heading/40" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="size-3 transition-transform duration-200 [[open]_&]:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M6 9l6 6 6-6"/>
+                                    </svg>
+                                  </span>
+                                </summary>
+                                <ul class="mb-1 ml-2 flex flex-col border-l border-heading/10 pl-2">
+                                  {(grandChildLinks as Array<{ text: string; href: string }>).map(({ text: gcText, href: gcHref }) => (
+                                    <li>
+                                      <a
+                                        class:list={[mobileLinkClass, 'py-2 text-[14px]', { 'aw-link-active': gcHref === currentPath }]}
+                                        href={gcHref}
+                                      >
+                                        {gcText}
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </details>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </details>
                   ) : (
@@ -229,9 +322,9 @@ const navBgStyle = `background-image: url('${navMotif.src}'); background-size: c
       </nav>
       {(phoneAction || extraActions.length > 0) && (
         <div class="mt-2 flex flex-col gap-2 border-t border-heading/10 pt-3">
-          {phoneAction && <Button {...phoneAction} hideNote class="w-full justify-center" />}
+          {phoneAction && <Button {...phoneAction} hideNote size="sm" class="w-full justify-center" />}
           {extraActions.map((btnProps) => (
-            <Button {...btnProps} hideNote class="w-full justify-center" />
+            <Button {...btnProps} hideNote size="sm" class="w-full justify-center" />
           ))}
         </div>
       )}
@@ -461,6 +554,28 @@ const navBgStyle = `background-image: url('${navMotif.src}'); background-size: c
         const triggerHref = trigger instanceof HTMLAnchorElement ? trigger.href : null;
         const triggerActive = Boolean(triggerHref && isActive(triggerHref));
         if (trigger) trigger.classList.toggle('aw-link-active', anyChildActive || triggerActive);
+      });
+
+      // Desktop: mark sub-dropdown parent links active when any grandchild is active
+      // e.g. "Rock Walls" link becomes active when on /services/rock-walls/veneer/
+      this.querySelectorAll<HTMLElement>('li.sub-dropdown').forEach((li) => {
+        const childLinks = li.querySelectorAll<HTMLAnchorElement>('.sub-dropdown-menu a[href]');
+        const anyChildActive = Array.from(childLinks).some((a) => isActive(a.href));
+        const trigger = li.querySelector<HTMLElement>(':scope > a');
+        const triggerHref = trigger instanceof HTMLAnchorElement ? trigger.href : null;
+        const triggerActive = Boolean(triggerHref && isActive(triggerHref));
+        if (trigger) trigger.classList.toggle('aw-link-active', anyChildActive || triggerActive);
+      });
+
+      // Mobile: mark parent summary links active when any descendant leaf is active
+      this.querySelectorAll<HTMLElement>('[data-mobile-panel] details').forEach((details) => {
+        const summary = details.querySelector(':scope > summary');
+        const parentLink = summary?.querySelector<HTMLAnchorElement>('a[href]');
+        if (!parentLink) return;
+        const nestedLinks = details.querySelectorAll<HTMLAnchorElement>('ul a[href]');
+        const anyChildActive = Array.from(nestedLinks).some((a) => isActive(a.href));
+        const parentActive = isActive(parentLink.href);
+        parentLink.classList.toggle('aw-link-active', anyChildActive || parentActive);
       });
     }
   }

@@ -1,0 +1,56 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `Kaneohe Masonry & Concrete Contractor | ${site.name}`,
+    description: `Vaifoou Construction provides structural masonry and concrete flatwork for Kaneohe properties. Our crews build custom rock walls and pour new concrete foundations.`,
+  }}
+  hero={{
+    eyebrow: `Windward O\u02BBahu`,
+    title: `Kaneohe Masonry & Concrete Construction`,
+    body: `Hillside retaining walls, basalt rockwork, and concrete flatwork built for Windward properties.`,
+    imagePlaceholder: 'Kaneohe masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'Kaneohe',
+    heading: `Kaneohe Masonry & Concrete`,
+    body: `Kaneohe properties sit against the steep Ko\u02BBolaU range, where frequent Windward rain saturates sloped lots and tests older masonry. Our crews travel across the H-3 from our Wahiawa yard to build heavy-duty retaining walls and pour durable concrete driveways for local homeowners and commercial builders. Every build is backed by our 25+ year family trade legacy.`,
+  }}
+  services={[
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: 'Structural masonry built with proper drainage to hold back rain-heavy Windward soil on sloped lots.' },
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Custom property lines and terraced hillside barriers constructed with hand-selected volcanic basalt.' },
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'Full replacement of weather-worn driveways alongside new structural foundations for residential and commercial builds.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Reinforced hollow tile walls and perimeter fences built for privacy and long-term structural stability.' },
+  ]}
+  servicesHeading="Kaneohe Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work in Kaneohe',
+    description: `We recently built a heavy-duty basalt retaining wall to secure a sloped residential lot above Kaneohe Bay, cutting drainage channels into the hillside and packing gravel backfill so the wall can manage Windward rainfall without building pressure.`,
+    imagePlaceholder: 'Recent Kaneohe project photo',
+  }}
+  otherAreas={[
+    { title: 'Wahiawa',               href: '/service-areas/wahiawa/' },
+    { title: 'Honolulu',              href: '/service-areas/honolulu/' },
+    { title: 'Mililani',              href: '/service-areas/mililani/' },
+    { title: 'Kailua',                href: '/service-areas/kailua/' },
+    { title: 'Kapolei',               href: '/service-areas/kapolei/' },
+    { title: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+    { title: 'Aiea & Pearl City',     href: '/service-areas/aiea-pearl-city/' },
+    { title: 'Waipahu',               href: '/service-areas/waipahu/' },
+    { title: 'Ewa Beach',             href: '/service-areas/ewa-beach/' },
+  ]}
+  faqs={{
+    title: 'Kaneohe Masonry FAQs',
+    items: [
+      { title: 'Are your masonry crews based in Kaneohe?', description: 'No. Our teams travel from our Wahiawa home base across the H-3 to service all Windward Coast job sites.' },
+      { title: `How do your retaining walls handle Kaneohe's heavy rainfall?`, description: 'Wet Windward soil puts heavy pressure on hillside walls. We build structural basalt and CMU retaining walls with proper drainage paths so water relieves safely instead of pushing the wall forward.' },
+      { title: 'Will you fix a collapsing rock wall on a sloped lot?', description: 'We do not patch failing walls. When a hillside wall begins to bulge or collapse, we completely demolish the unstable structure and build a secure replacement from the footing up.' },
+      { title: 'Do you offer tieback installations for steep Kaneohe lots?', description: 'No. We do not install micropiles or tiebacks. Our focus remains strictly on traditional structural masonry and concrete flatwork.' },
+      { title: 'Do you pour new concrete driveways and slabs in Kaneohe?', description: 'Yes. We handle full site preparation, old slab demolition, and concrete pouring for new residential driveways and commercial slabs.' },
+    ],
+  }}
+  ctaHeading="Start Your Kaneohe Masonry Project"
+/>

@@ -1,6 +1,6 @@
 ---
 import CardWrapper from './CardWrapper.astro';
-import Image from '~/components/common/Image.astro';
+import HeroImagePlaceholder from './HeroImagePlaceholder.astro';
 import { getFormattedDate } from '~/utils/utils';
 import { getBlogPermalink } from '~/lib/content';
 import type { BlogPost } from '~/lib/content/types';
@@ -16,41 +16,16 @@ const headingClass = variant === 'dark' ? 'text-card-heading-dark' : 'text-card-
 const bodyClass = variant === 'dark' ? 'text-card-body-dark' : 'text-card-body-light';
 const linkClass = variant === 'dark' ? 'text-card-link-dark hover:text-white' : 'btn-link';
 const dateClass = variant === 'dark' ? 'text-white/50' : 'text-muted';
-const placeholderClass = variant === 'dark' ? 'bg-[#111] text-white/25' : 'bg-gray-100 text-gray-300';
 const publishDate = new Date(post.publishDate);
-const thumbnail = post.image?.src ? post.image : undefined;
 ---
 
 <CardWrapper variant={variant} href={href}>
-  {
-    thumbnail ? (
-      <Image
-        src={thumbnail.src}
-        alt={thumbnail.alt || post.title}
-        class="w-full h-36 md:h-44 object-cover rounded mb-3 shrink-0"
-        width={640}
-        height={360}
-        layout="none"
-        widths={[320, 480, 640, 800]}
-        sizes="(max-width: 768px) 100vw, 33vw"
-      />
-    ) : (
-      <div
-        class:list={['w-full h-36 md:h-44 rounded mb-3 shrink-0 flex items-center justify-center', placeholderClass]}
-        role="img"
-        aria-label={`${post.title} photo placeholder`}
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-          />
-        </svg>
-      </div>
-    )
-  }
+  <!-- TODO: replace with <Image> when asset is ready -->
+  <HeroImagePlaceholder
+    fill
+    label={`${post.title} photo placeholder`}
+    class="mb-3 h-36 w-full shrink-0 rounded md:h-44"
+  />
   <time
     datetime={post.publishDate}
     class:list={['block text-[12px] font-medium uppercase tracking-wider mb-2', dateClass]}

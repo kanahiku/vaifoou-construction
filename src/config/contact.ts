@@ -9,25 +9,25 @@ export const CONTACT = {
   businessName: site.name,
 
   /** Contractor license shown in footer or legal copy (set null if none). */
-  license: null as string | null,
+  license: 'CT-39534',
 
   phone: {
     /** Human-readable label — used in nav, footer, CTABanner, CTA buttons. */
-    display: '(555) 000-0000',
+    display: '808-778-6954',
     /** HTML tel: href — used in all anchor href attributes. */
-    href: 'tel:+15550000000',
+    href: 'tel:+18087786954',
     /** E.164 format — used in schema.org telephone field. */
-    schema: '+1-555-000-0000',
+    schema: '+1-808-778-6954',
   },
 
   /** Primary contact email shown in legal pages and schema.org. */
-  email: 'hello@example.com',
+  email: 'info@vaifoouconstruction.com',
 
   address: {
     street: '',
-    city: '',
-    state: '',
-    zip: '',
+    city: 'Wahiawa',
+    state: 'HI',
+    zip: '96786',
     country: 'US',
     /** "City, ST ZIP" — used in footer and CTABanner one-liner. */
     get cityLine() {
@@ -51,11 +51,11 @@ export const CONTACT = {
   hours: [
     {
       '@type': 'OpeningHoursSpecification' as const,
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      opens: '10:00',
-      closes: '20:00',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '07:00',
+      closes: '18:00',
     },
   ],
 
-  areaServed: 'Service Area',
+  areaServed: "O'ahu, Hawaii",
 } as const;

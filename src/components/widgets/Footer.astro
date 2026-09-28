@@ -1,13 +1,21 @@
 ---
 /**
- * Site footer — Homepage 59:577 (stamp + columns) and 66:833 (wordmark).
- * Same widget on every page. Do NOT fork a HomeFooter.
- *
+ * Site footer — Figma node 4:316 (dark 4-column layout).
+ * 4 cols · bottom legal bar. Same widget on every page.
  */
-import { Icon } from 'astro-icon/components';
-import Logo from '~/components/Logo.astro';
+import { Image } from 'astro:assets';
 import { getHomePermalink } from '~/utils/permalinks';
 import { site } from '~/config/site';
+import { CONTACT } from '~/config/contact';
+import { PRIMARY_CTA_HREF } from '~/config/cta';
+import logoDark from '~/assets/icons/logo-dark.svg';
+import iconLicence from '~/assets/icons/green-star-tick.svg';
+import iconBadge from '~/assets/icons/green-badge.svg';
+import iconChurch from '~/assets/icons/green-church.svg';
+import iconPhone from '~/assets/icons/red-phone.svg';
+import iconClock from '~/assets/icons/red-clock.svg';
+import iconPin from '~/assets/icons/red-location-pin.svg';
+import iconShield from '~/assets/icons/sheild.svg';
 
 interface Link {
   text?: string;
@@ -22,74 +30,77 @@ interface Links {
 }
 
 export interface Props {
-  links: Array<Links>;
+  links?: Array<Links>;
   secondaryLinks?: Array<Link>;
   socialLinks?: Array<Link>;
   footNote?: string;
-  theme?: string;
-  tagline?: string;
 }
 
 const {
   links = [],
   secondaryLinks = [],
-  socialLinks = [],
   footNote = '',
 } = Astro.props;
+
+const servicesCol   = links.find((c) => c.title === 'SERVICES');
+const areasCol      = links.find((c) => c.title === 'SERVICE AREAS');
+const workWithCol   = links.find((c) => c.title === 'WHO WE WORK WITH');
+const vaifoouCol    = links.find((c) => c.title === 'VAIFOOU CONSTRUCTION');
 ---
 
-<footer class="relative not-prose w-full bg-card">
-  <div
-    class="mx-auto flex w-full max-w-container flex-col px-5 pt-16 sm:px-8 md:px-16"
-  >
-    <div class="flex w-full flex-col items-start justify-between gap-12 md:flex-row md:items-center">
-      <a href={getHomePermalink()} class="shrink-0" aria-label={site.name}>
-        <Logo class="max-w-[260px] text-[28px]" />
-      </a>
+<footer class="not-prose w-full bg-footer text-page">
 
-      <nav class="grid w-full grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-16 md:w-auto md:grid-cols-4" aria-label="Footer">
-        {
-          links.map(({ title, links: items }) => (
-            <div class="flex min-w-0 flex-col items-start gap-4">
-              {title && <p class="type-label text-accent">{title}</p>}
-              {items && items.length > 0 && (
-                <ul class="flex flex-col items-start gap-2">
-                  {items.map(({ text, href, ariaLabel }) => (
-                    <li>
-                      <a
-                        class="text-small text-heading hover:text-accent"
-                        href={href}
-                        aria-label={ariaLabel}
-                      >
-                        <Fragment set:html={text} />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          ))
-        }
-      </nav>
-    </div>
-  </div>
+  {/* pt 96 · pb 64 · 64 between the columns and the legal bar */}
+  <div class="site-frame flex flex-col gap-16 pb-16 pt-24">
 
-  {(socialLinks.length > 0 || secondaryLinks.length > 0 || footNote) && (
-    <div class="mx-auto grid w-full max-w-container grid-cols-1 items-center gap-4 px-5 py-10 sm:px-8 md:grid-cols-[1fr_auto_1fr] md:px-16">
-      {/* Left — social icons, glyphs flush with the content edge */}
-      <div class="flex items-center">
-        {socialLinks.length > 0 && (
-          <ul class="-ml-2.5 flex items-center gap-1">
-            {socialLinks.map(({ href, ariaLabel, icon }) => (
+    {/* 4 columns · 40px apart · 64px under the content, above the rule */}
+    <div class="grid grid-cols-1 items-start gap-10 border-b border-[rgba(96,94,90,0.2)] pb-16 md:grid-cols-2 lg:grid-cols-4">
+
+      {/* ── Col 1: Brand & Company Links ─────────────────────── */}
+      <div class="flex flex-col gap-[15px]">
+
+        <a href={getHomePermalink()} class="inline-flex h-10 w-[149px] shrink-0" aria-label={site.name}>
+          <Image src={logoDark} alt="" width={149} height={40} class="h-10 w-[149px]" />
+        </a>
+
+        <p class="font-body text-[14px] font-normal leading-[22.75px] text-page/80">
+          {site.footerTagline}
+        </p>
+
+        <ul class="flex flex-col gap-1 pt-[5px]">
+          <li class="flex items-center gap-1 font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
+            <Image src={iconLicence} alt="" width={22} height={21} class="h-[21px] w-[22px] shrink-0" aria-hidden="true" />
+            <span>Licence {CONTACT.license} • Fully Licensed &amp; Insured</span>
+          </li>
+          <li class="flex items-center gap-1 font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
+            <Image src={iconBadge} alt="" width={16} height={21} class="h-[21px] w-4 shrink-0" aria-hidden="true" />
+            <span>BBB Accredited • 25+ Year Legacy</span>
+          </li>
+          <li class="flex items-center gap-1 font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
+            <Image src={iconChurch} alt="" width={20} height={21} class="h-[21px] w-5 shrink-0" aria-hidden="true" />
+            <span>Closed Sundays to honor God</span>
+          </li>
+        </ul>
+
+        <a
+          href={PRIMARY_CTA_HREF}
+          class="cta-sm mt-[5px] inline-flex w-fit items-center gap-1 bg-nav-cta text-center font-display text-[20px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:opacity-90"
+        >
+          Request Free Estimate
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor" />
+          </svg>
+        </a>
+
+        {vaifoouCol && (
+          <ul class="flex flex-col gap-[7px] border-t border-[rgba(96,94,90,0.2)] pt-3">
+            {vaifoouCol.links.map(({ text, href }) => (
               <li>
                 <a
                   href={href}
-                  aria-label={ariaLabel}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex size-10 items-center justify-center text-heading hover:text-accent"
+                  class="font-body text-[13px] leading-[20px] text-page/70 transition-colors hover:text-page-end"
                 >
-                  {icon ? <Icon name={icon} class="size-5" /> : ariaLabel}
+                  {text}
                 </a>
               </li>
             ))}
@@ -97,28 +108,136 @@ const {
         )}
       </div>
 
-      {/* Centre — copyright sits in an auto column so it is the true midpoint */}
-      {footNote && (
-        <p class="text-small leading-none text-muted md:whitespace-nowrap" set:html={footNote} />
-      )}
-
-      {/* Right — legal links, text flush with the content edge */}
-      {secondaryLinks.length > 0 && (
-        <nav aria-label="Legal" class="md:justify-self-end">
-          <ul class="flex flex-wrap items-center gap-x-4">
-            {secondaryLinks.map(({ text, href }) => (
+      {/* ── Col 2: Services ──────────────────────────────────── */}
+      {servicesCol && (
+        <div class="flex flex-col gap-4">
+          <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+            {servicesCol.title}
+          </p>
+          <ul class="flex flex-col gap-2">
+            {servicesCol.links.map(({ text, href }) => (
               <li>
                 <a
-                  class="inline-flex h-10 items-center text-small leading-none text-heading hover:text-accent"
                   href={href}
+                  class="flex items-center justify-between gap-3 font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
                 >
-                  {text}
+                  <span>{text}</span>
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" class="shrink-0">
+                    <path d="M4 4H11V11H9.5V6.56L5.03 11.03L3.97 9.97L8.44 5.5H4V4Z" fill="currentColor" />
+                  </svg>
                 </a>
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
       )}
+
+      {/* ── Col 3: Service Areas ─────────────────────────────── */}
+      {areasCol && (
+        <div class="flex flex-col gap-[15px]">
+          <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+            {areasCol.title}
+          </p>
+          <ul class="flex flex-col gap-[7px]">
+            {areasCol.links.map(({ text, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class="flex items-center justify-between gap-3 font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
+                >
+                  <span>{text}</span>
+                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" class="shrink-0">
+                    <path d="M4 4H11V11H9.5V6.56L5.03 11.03L3.97 9.97L8.44 5.5H4V4Z" fill="currentColor" />
+                  </svg>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* ── Col 4: Who We Work With + Direct Inquiries ───────── */}
+      <div class="flex flex-col gap-4">
+
+        {workWithCol && (
+          <>
+            <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+              {workWithCol.title}
+            </p>
+            <ul class="flex flex-col gap-[7px]">
+              {workWithCol.links.map(({ text, href }) => (
+                <li>
+                  <a
+                    href={href}
+                    class="font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
+                  >
+                    {text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div class="border-t border-[rgba(96,94,90,0.2)] pt-4" />
+          </>
+        )}
+
+        <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+          Direct Inquiries
+        </p>
+
+        <ul class="flex flex-col gap-2">
+          <li>
+            <a
+              href={CONTACT.phone.href}
+              class="flex items-center gap-1 font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
+            >
+              <Image src={iconPhone} alt="" width={18} height={18} class="size-[18px] shrink-0" aria-hidden="true" />
+              Direct: {CONTACT.phone.display}
+            </a>
+          </li>
+          <li class="flex items-center gap-1 font-body text-[14px] leading-[21.6px] text-page/80">
+            <Image src={iconClock} alt="" width={20} height={20} class="size-5 shrink-0" aria-hidden="true" />
+            Mon &ndash; Sat: 7:00 AM &ndash; 5:30 PM
+          </li>
+          <li class="flex items-center gap-1 font-body text-[14px] leading-[21.6px] text-page/80">
+            <Image src={iconPin} alt="" width={16} height={20} class="h-5 w-4 shrink-0" aria-hidden="true" />
+            <a href="/service-areas/" class="transition-colors hover:text-page-end">
+              Serving all of O&#x2019;ahu
+            </a>
+          </li>
+        </ul>
+
+        <div class="flex flex-col gap-1 border border-[rgba(96,94,90,0.2)] bg-[rgba(230,226,222,0.1)] p-[9px]">
+          <p class="flex items-center gap-1 font-display text-[13px] font-bold leading-4 tracking-[0.65px] uppercase" style="color: #c7ecc9;">
+            <Image src={iconShield} alt="" width={16} height={20} class="h-5 w-4 shrink-0" aria-hidden="true" />
+            Workmanship Guarantee
+          </p>
+          <p class="font-body text-[12px] font-medium leading-[16.5px] tracking-[0.6px] text-page/80">
+            Every wall and pour is backed by our full trade warranty &amp; 25+ year family legacy.
+          </p>
+        </div>
+      </div>
     </div>
-  )}
+
+    {/* ── Bottom bar: copyright + nav ──────────────────────────────── */}
+    <div class="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+      {footNote && (
+        <p set:html={footNote} class="font-body text-[14px] leading-[21.6px] text-page/80" />
+      )}
+      <nav aria-label="Footer utility">
+        <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
+          {secondaryLinks.map(({ text, href }) => (
+            <li>
+              <a
+                href={href}
+                class="font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80 uppercase transition-colors hover:text-page-end"
+              >
+                {text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+  </div>
 </footer>

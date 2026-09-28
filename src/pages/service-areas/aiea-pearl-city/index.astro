@@ -1,0 +1,56 @@
+---
+import AreaPageView from '~/components/templates/AreaPageView.astro';
+import { site } from '~/config/site';
+---
+
+<AreaPageView
+  metadata={{
+    title: `Aiea & Pearl City Masonry & Concrete | ${site.name}`,
+    description: `Vaifoou Construction provides structural masonry and concrete flatwork for Aiea and Pearl City properties. We build custom rock walls and pour new foundations.`,
+  }}
+  hero={{
+    eyebrow: `Central O\u02BBahu`,
+    title: `Aiea & Pearl City Masonry & Concrete Construction`,
+    body: `Hillside retaining walls, residential driveway replacements, and commercial slabs overlooking Pearl Harbor.`,
+    imagePlaceholder: 'Aiea and Pearl City masonry project photo',
+  }}
+  intro={{
+    eyebrow: 'Aiea & Pearl City',
+    heading: `Aiea & Pearl City Masonry & Concrete`,
+    body: `Neighborhoods in Aiea and Pearl City climb steeply from the commercial corridor along Kamehameha Highway up into the residential ridges of Aiea Heights and Pacific Palisades. Older hillside lots here frequently deal with cracked multi-car driveways and aging masonry retaining walls that need full replacement. Dispatched from our central Wahiawa yard, our family crew brings 25+ years of trade experience to residential slope retention and commercial concrete pours.`,
+  }}
+  services={[
+    { name: 'Retaining Walls',   href: '/services/retaining-walls/', description: 'Heavy-duty structural masonry built to hold back hillside soil across sloped Aiea Heights and Pearl City ridge lots.' },
+    { name: 'Concrete Services', href: '/services/concrete/',        description: 'Full tear-out and replacement of steep residential driveways alongside commercial slabs near the harbor corridor.' },
+    { name: 'Rock Walls',        href: '/services/rock-walls/',      description: 'Custom terraced stonework and property boundaries crafted with hand-selected volcanic basalt.' },
+    { name: 'CMU & Block Walls', href: '/services/cmu-block-walls/', description: 'Reinforced hollow tile perimeter walls built to separate narrow residential lots and commercial properties.' },
+  ]}
+  servicesHeading="Aiea & Pearl City Masonry & Concrete Services"
+  recentWork={{
+    heading: 'Recent Work in Aiea & Pearl City',
+    description: `We recently demolished a settling driveway on a steep hillside lot in Aiea Heights, regraded the slope to correct drainage away from the foundation, and poured a new reinforced concrete driveway built to handle the grade long-term.`,
+    imagePlaceholder: 'Recent Aiea & Pearl City project photo',
+  }}
+  otherAreas={[
+    { title: 'Wahiawa',               href: '/service-areas/wahiawa/' },
+    { title: 'Honolulu',              href: '/service-areas/honolulu/' },
+    { title: 'Mililani',              href: '/service-areas/mililani/' },
+    { title: 'Kaneohe',               href: '/service-areas/kaneohe/' },
+    { title: 'Kailua',                href: '/service-areas/kailua/' },
+    { title: 'Kapolei',               href: '/service-areas/kapolei/' },
+    { title: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+    { title: 'Waipahu',               href: '/service-areas/waipahu/' },
+    { title: 'Ewa Beach',             href: '/service-areas/ewa-beach/' },
+  ]}
+  faqs={{
+    title: 'Aiea & Pearl City Masonry FAQs',
+    items: [
+      { title: 'Do you operate a branch office in Pearl City?', description: 'No. Our equipment and crews are based at our Wahiawa yard and dispatch directly down the H-2 to your job site.' },
+      { title: 'Can you build a retaining wall for a sloped ridge lot in Aiea Heights or Pacific Palisades?', description: 'Yes. We construct heavy-duty basalt and CMU retaining walls designed specifically to hold back soil on steep residential properties.' },
+      { title: 'Will your team install tiebacks or micropiles for a failing slope?', description: 'No. We do not install micropiles or tiebacks. We exclusively build traditional structural masonry walls from a solid concrete footing.' },
+      { title: 'Do you replace older cracked concrete driveways in Pearl City?', description: 'Yes. Many older homes in the area have steep or settling driveways. We handle the complete demolition of the existing slab and pour a durable new concrete driveway.' },
+      { title: 'Do you pour concrete for commercial businesses along Kamehameha Highway?', description: 'Yes. We act as a concrete subcontractor for commercial flatwork, curbing, and structural slab pouring across Aiea and Pearl City.' },
+    ],
+  }}
+  ctaHeading="Start Your Aiea & Pearl City Masonry Project"
+/>

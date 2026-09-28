@@ -6,7 +6,6 @@
 import Button from '~/components/ui/Button.astro';
 import Heading from '~/components/ui/Heading.astro';
 import Text from '~/components/ui/Text.astro';
-import smallLeafMotif from '~/assets/images/small-leaf-motif.webp';
 
 export interface Props {
   eyebrow?: string;
@@ -45,8 +44,8 @@ const {
 >
   {/* ── Decorative motif overlay ── */}
   <div
-    class="pointer-events-none absolute inset-0 opacity-45"
-    style={`background-image: url('${smallLeafMotif.src}'); background-size: 1700px auto; background-position: top left; background-repeat: repeat;`}
+    class="pointer-events-none absolute inset-0 opacity-20"
+    style="background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 28px 28px; color: var(--aw-color-bg-page);"
     aria-hidden="true"
   ></div>
 

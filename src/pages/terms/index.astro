@@ -2,178 +2,71 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { CONTACT } from '~/config/contact';
-import { PRIMARY_CTA_LABEL } from '~/config/cta';
-import { siteHost } from '~/config/site';
-
-const host = siteHost();
 
 const metadata = {
-  title: `Terms | ${CONTACT.businessName}`,
-  description: `Terms of Service for ${host}, operated by ${CONTACT.businessName}.`,
+  title: `Terms of Use | ${CONTACT.businessName}`,
+  description: `Read the website terms of use for ${CONTACT.businessName}.`,
   ignoreTitleTemplate: true,
 };
 
-const headingClass =
-  'text-[22px] md:text-[26px] font-normal leading-[130%] tracking-tight font-heading text-heading mb-4';
-const bodyClass = 'text-[16px] md:text-[17px] font-normal leading-[160%] text-muted';
-const listClass = `${bodyClass} mt-4 space-y-1 list-disc pl-5`;
-const linkClass = 'btn-link';
+const h2 = 'font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[24px]';
+const body = 'mt-2 font-body text-[15px] leading-7 text-banner-note md:text-[16px]';
 ---
 
 <Layout metadata={metadata}>
-  <Hero2>
-    <Fragment slot="title">Terms</Fragment>
-    <Fragment slot="subtitle">
-      Last updated: September 8, 2026
-    </Fragment>
-    <Fragment slot="bg">
-      <SectionBg variant="hero" />
-    </Fragment>
-  </Hero2>
 
+  {/* ── Page hero ─────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-heading py-14 md:py-20">
+    <div class="site-frame flex flex-col gap-1">
+      <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-page/50 uppercase">
+        <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+        Legal
+      </p>
+      <h1 class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[56px]">
+        Terms of Use
+      </h1>
+    </div>
+  </section>
+
+  {/* ── Body ───────────────────────────────────────────────────── */}
   <WidgetWrapper containerClass="max-w-container mx-auto">
     <div class="max-w-3xl space-y-10 md:space-y-14">
+
       <section>
-        <h2 class={headingClass}>1. Acceptance of these terms</h2>
-        <p class={bodyClass}>
-          These Terms of Service govern your use of {host}, operated by {CONTACT.businessName}, referred to here as
-          "we," "us," or "our." By accessing or using this website, you agree to these terms. If you do not agree,
-          please do not use the site.
+        <p class={body}>
+          These terms govern your access to vaifoouconstruction.com. By browsing this website, you agree to these operational conditions.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>2. About this website</h2>
-        <p class={bodyClass}>
-          This website provides general information about our services and allows visitors to contact us. Using this
-          website, submitting a form, or communicating with us through the site does not by itself create a service
-          agreement. A relationship begins only when we and you sign a written agreement.
+        <h2 class={h2}>Website Content</h2>
+        <p class={body}>
+          All text, photography and branding on this site belong to {CONTACT.businessName}. Unauthorized reproduction is strictly prohibited.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>3. Use of this website</h2>
-        <p class={bodyClass}>You may use this website for lawful purposes. You agree not to:</p>
-        <ul class={listClass}>
-          <li>Use the site in a way that violates any applicable law or regulation</li>
-          <li>Attempt to gain unauthorized access to the site, its servers, or any connected systems</li>
-          <li>Introduce malware, or interfere with the normal operation or security of the site</li>
-          <li>Copy, scrape, or republish site content for commercial purposes without our written permission</li>
-          <li>Submit false, misleading, or fraudulent information through any form on the site</li>
-        </ul>
-        <p class={`${bodyClass} mt-4`}>
-          We may restrict or suspend access to the site at any time if we reasonably believe use of the site breaches
-          these terms.
+        <h2 class={h2}>Service Estimates and Agreements</h2>
+        <p class={body}>
+          Online estimate requests do not constitute binding legal contracts. All project scopes, timeline estimates, pricing parameters, and workmanship guarantees are formalized in writing following a direct on-site consultation.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>4. Service information, pricing, and estimates</h2>
-        <p class={bodyClass}>
-          We try to keep the information on this website accurate, but content may become out of date and may contain
-          errors. Descriptions of services, availability, timelines, and any pricing shown on this site are for general
-          information only and are not binding offers. Any estimate or quote becomes binding only when provided in
-          writing and signed by both parties.
+        <h2 class={h2}>Liability</h2>
+        <p class={body}>
+          {CONTACT.businessName} provides website information for general reference. We are not liable for decisions made based solely on web content prior to an on-site consultation.
         </p>
       </section>
 
-      <section>
-        <h2 class={headingClass}>5. Contact forms and submissions</h2>
-        <p class={bodyClass}>
-          When you submit a form on this website, you are asking us to contact you about our services, and you agree
-          that we may respond by email, phone, or text using the details you provide. Please do not submit sensitive
-          personal information, payment details, or confidential documents through the site. Information you send us is
-          handled as described in our
-          <a class={linkClass} href="/privacy-policy">Privacy Policy</a>.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>6. Text messages</h2>
-        <p class={bodyClass}>
-          If you provide a mobile number and opt in, we may send text messages about your inquiry, appointment, or
-          project. Message and data rates may apply, and message frequency varies. Reply STOP to any message to opt out,
-          or HELP for assistance. Consent to receive text messages is not a condition of purchasing any service.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>7. Third-party links and embedded content</h2>
-        <p class={bodyClass}>
-          This website may link to, or embed content from, third-party services such as maps, analytics, and review
-          platforms. We do not control those services and are not responsible for their content, availability, or
-          privacy practices. Your use of a third-party service is governed by that provider's own terms.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>8. Cookies</h2>
-        <p class={bodyClass}>
-          This website may use cookies and similar technologies to operate the site, remember your preferences, and
-          understand how the site is used. You can control cookies through your browser settings. See our
-          <a class={linkClass} href="/privacy-policy">Privacy Policy</a> for more detail.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>9. Intellectual property</h2>
-        <p class={bodyClass}>
-          Unless stated otherwise, the content on this website is owned by {CONTACT.businessName} or used with
-          permission. You may view and print pages for your own personal or internal business use. You may not
-          reproduce, distribute, or create derivative works from site content without our written permission.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>10. Disclaimer of warranties</h2>
-        <p class={bodyClass}>
-          To the maximum extent permitted by applicable law, this website and its content are provided on an "as is" and
-          "as available" basis, without warranties of any kind. Nothing in this section limits any warranty given in a
-          signed agreement for services we perform for you.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>11. Limitation of liability</h2>
-        <p class={bodyClass}>
-          To the maximum extent permitted by applicable law, {CONTACT.businessName} and its owners, employees, and
-          contractors will not be liable for any indirect, incidental, special, consequential, or punitive damages
-          arising out of your use of this website. Where liability cannot be excluded, our total liability relating to
-          this website is limited to one hundred United States dollars (USD 100).
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>12. Changes to these terms</h2>
-        <p class={bodyClass}>
-          We may update these terms from time to time. The current version is always posted on this page. Continued use
-          of the site after an update means you accept the revised terms.
-        </p>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>13. Contact</h2>
-        <p class={bodyClass}>
-          Questions about these terms can be sent to:<br /><br />
-          {CONTACT.businessName}<br />
-          {CONTACT.address.street}<br />
-          {CONTACT.address.cityLine}<br />
-          Email: <a class={linkClass} href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><br />
-          Phone: <a class={linkClass} href={CONTACT.phone.href}>{CONTACT.phone.display}</a>
-        </p>
-      </section>
     </div>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <CTABanner
-    title="Questions?"
-    subtitle={`If you have questions about these terms or about working with ${CONTACT.businessName}, contact us.`}
-    ctaText={PRIMARY_CTA_LABEL}
-  />
+  <BrickMotifCTA heading="Ready to Start Your Project?" />
+
 </Layout>

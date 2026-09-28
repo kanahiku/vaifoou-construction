@@ -1,0 +1,94 @@
+---
+description: Eyebrow → Heading spacing is always 4px (gap-1). Body text below a heading gets mt-3/mt-4.
+alwaysApply: true
+---
+
+# Eyebrow → Heading spacing rule
+
+The gap between an eyebrow label and the heading directly below it is **always 4px (`gap-1`)**.
+This is a global, non-negotiable design token — do not override it per section.
+
+---
+
+## The one correct pattern
+
+```astro
+{/* ✅ Eyebrow + heading only */}
+<div class="flex flex-col gap-1">
+  <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+    <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+    Eyebrow label
+  </p>
+  <h2 class="font-display … text-heading uppercase">Section heading</h2>
+</div>
+
+{/* ✅ Eyebrow + heading + body paragraph */}
+<div class="flex flex-col gap-1">
+  <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+    <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+    Eyebrow label
+  </p>
+  <h2 class="font-display … text-heading uppercase">Section heading</h2>
+  {/* Body text needs its own top margin — do NOT increase the container gap */}
+  <p class="mt-3 font-body … text-banner-note md:mt-4">Body paragraph…</p>
+</div>
+```
+
+---
+
+## What NOT to do
+
+```astro
+{/* ❌ gap-4 makes eyebrow → heading 16px, not 4px */}
+<div class="flex flex-col gap-4">
+  <p class="eyebrow">…</p>
+  <h2>…</h2>
+</div>
+
+{/* ❌ gap-2 is still too much (8px) */}
+<div class="flex flex-col gap-2">
+  <p class="eyebrow">…</p>
+  <h2>…</h2>
+</div>
+
+{/* ❌ mb-1 on the eyebrow itself — use gap-1 on the container instead */}
+<p class="mb-1 eyebrow">…</p>
+<h2>…</h2>
+
+{/* ❌ pt-1 on the heading — use gap-1 on the container */}
+<p class="eyebrow">…</p>
+<h2 class="pt-1">…</h2>
+```
+
+---
+
+## Spacing after the heading
+
+| Sibling after heading | Class to use |
+|---|---|
+| Body / lead paragraph | `mt-3` (mobile) + `md:mt-4` |
+| Subtitle / supporting text | `mt-2` |
+| CTA button / link | `mt-4` or `mt-6` |
+| Bordered divider only (no body) | use `border-b` + `pb-6` on the container — no extra `mt` needed |
+
+---
+
+## Where this rule already applies
+
+| File | Section |
+|---|---|
+| `AreaPageView.astro` | Intro split, services header, recent-work split |
+| `FAQs.astro` | Light-mode heading block |
+| `ServiceTable.astro` | Table header |
+| `BrickMotifCTA.astro` | Eyebrow + H2 + note |
+| `service-areas/index.astro` | Island-wide intro |
+| `services/rock-walls/index.astro` | Intro split |
+| `services/concrete/index.astro` | Intro split |
+| `about/index.astro` | Our Story, Legacy heading |
+| All `src/pages/` using inline eyebrow patterns | same rule |
+
+## TL;DR
+
+- Container holding eyebrow + heading: **`gap-1`** — always.
+- Body text that follows: **`mt-3`** (mobile), **`md:mt-4`** (desktop).
+- Never raise `gap-*` on the container to make room for body text.

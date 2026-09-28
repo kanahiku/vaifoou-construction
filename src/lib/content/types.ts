@@ -10,6 +10,8 @@ export interface ContentImage {
 export interface NavSubLink {
   text: string;
   href: string;
+  /** Optional grandchildren — renders a right-side flyout on desktop, nested accordion on mobile. */
+  links?: Array<{ text: string; href: string }>;
 }
 
 export interface NavColumn {

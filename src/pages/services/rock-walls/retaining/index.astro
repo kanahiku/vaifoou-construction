@@ -1,0 +1,58 @@
+---
+/**
+ * Rock Retaining Walls — /services/rock-walls/retaining/
+ * Content: docs/service/roxk-wall/…Rock Retaining Walls.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Rock Retaining Walls | ${site.name}`,
+  description: `Secure your hillside with a heavy-duty rock retaining wall. Vaifoou Construction builds structural basalt retaining walls across O\u02BBahu.`,
+};
+
+const tableRows = [
+  { feature: 'Aesthetic',      val1: 'Natural volcanic basalt',   val2: 'Clean and uniform block' },
+  { feature: 'Surface Finish', val1: 'Exposed natural rock face', val2: 'Can be plastered or painted' },
+  { feature: 'Material',       val1: 'Hand-selected local stone', val2: 'Concrete masonry units' },
+];
+
+const links = [
+  { title: 'Veneer Rock Walls',           href: '/services/rock-walls/veneer/' },
+  { title: 'Rock Wall Repair',            href: '/services/rock-walls/repair/' },
+  { title: 'Planter & Garden Rock Walls', href: '/services/rock-walls/planter-garden/' },
+];
+
+const faqs = [
+  { title: 'What materials do you use for rock retaining walls?', description: 'We build heavy-duty barriers using hand-selected volcanic basalt to secure your property elevation.' },
+  { title: 'Do you offer other retaining wall options?',          description: 'Yes. We also construct CMU block retaining walls. You can choose the material that best fits your site requirements.' },
+  { title: 'Are your installations guaranteed?',                  description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Rock Wall Construction"
+    title="Rock Retaining Walls"
+    body="We construct rock retaining walls for residential and commercial properties across O\u02BBahu. Our crews build these heavy-duty barriers to secure hillsides and manage property elevation differences. We build every structure using hand-selected volcanic basalt, and every installation is backed by our workmanship guarantee."
+    imagePlaceholder="Rock retaining wall construction photo"
+  />
+  <ServiceTable
+    eyebrow="Comparison"
+    heading="Rock vs. CMU Block Retaining Walls"
+    note="We maintain a dedicated page for CMU block retaining walls so you can easily compare materials with one click. Here is how the two options differ:"
+    col1="Rock Retaining Wall"
+    col2="CMU Block Retaining Wall"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Rock Wall Services" items={links} />
+  <FAQs title="Rock Retaining Wall FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading={`Secure Your O\u02BBahu Hillside Today`} />
+</Layout>

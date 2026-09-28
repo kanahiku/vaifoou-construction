@@ -2,26 +2,29 @@
 /**
  * Button atom — single component for all CTA variants.
  *
- * Hover animation lives on the `.btn` / `.btn-*` utilities in tailwind.css
- * (200ms ease, fill/color swap, 1px lift). Do not add per-page hover classes.
+ * Font: Barlow Condensed 14px (font-display). Square corners (border-radius: 0).
+ * Hover: 200ms ease, fill/color swap, 1px lift — defined in tailwind.css btn utilities.
+ * Do not add per-page hover classes.
  *
  * Variants:
- *   primary → square hibiscus fill, cream Norca-Rough 14px, px-7 py-6
- *   ghost tone=dark  → 2px cream outline on photos
- *   ghost tone=light → 2px cacao outline on cream
- *   link → inline hibiscus text link
+ *   primary            → filled accent (terracotta #964025), warm off-white text
+ *   secondary          → filled secondary accent (hover = darker)
+ *   ghost tone=dark    → 2px warm off-white outline — use on dark/photo sections
+ *   ghost tone=light   → 2px near-black outline — use on light/cream sections
+ *   link               → inline accent text link (Work Sans, 14px)
  *
  * Backward-compat aliases: 'ghost-dark' and 'ghost-light' still resolve correctly
  * so existing data objects (actions arrays, CMS entries) don't need updating.
  *
  * Usage:
- *   <Button variant="primary" text="order online" href="#" />
- *   <Button variant="ghost" text="view locations" href="/locations" />
+ *   <Button variant="primary" text="Get a free quote" href="/contact" />
+ *   <Button variant="ghost" text="View our work" href="/projects" />
  *   <Button variant="ghost" tone="light" text="Learn more" href="/about" />
  *   <Button variant="link" text="Read more" href="/blog" />
  */
 import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
+import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import type { CallToAction } from '~/types';
 import CTANote from '~/components/ui/CTANote.astro';
 import { PRIMARY_CTA_NOTE } from '~/config/cta';
@@ -34,11 +37,14 @@ export interface Props extends CallToAction {
    * Only used when variant="ghost".
    */
   tone?: 'dark' | 'light';
+  /** lg 16×40 · md 8×24 · sm 8×16. Ignored when variant="link". */
+  size?: 'lg' | 'md' | 'sm';
 }
 
 const {
   variant = 'primary',
   tone = 'dark',
+  size = 'lg',
   target,
   text = Astro.slots.render('default'),
   icon = '',
@@ -60,9 +66,16 @@ const variantClass: Record<string, string> = {
   link:         'btn-link',
 };
 
+const sizeClass = { lg: 'cta-lg', md: 'cta-md', sm: 'cta-sm' }[size];
+const isPhoneIcon = icon === 'tabler:phone' || icon === 'phone';
 const showNote = variant === 'primary' && !hideNote && Boolean(PRIMARY_CTA_NOTE);
 const isNativeButton = type === 'button' || type === 'submit' || type === 'reset';
-const buttonClass = twMerge(variantClass[variant] ?? '', className, showNote && 'w-auto self-start');
+const buttonClass = twMerge(
+  variantClass[variant] ?? '',
+  variant === 'link' ? '' : sizeClass,
+  className,
+  showNote && 'w-auto self-start',
+);
 ---
 
 {
@@ -71,12 +84,20 @@ const buttonClass = twMerge(variantClass[variant] ?? '', className, showNote && 
       {isNativeButton ? (
         <button type={type} class={buttonClass} {...rest}>
           <Fragment set:html={text} />
-          {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
+          {isPhoneIcon ? (
+            <PhoneIcon class="ml-1 -mr-1.5 inline-block rtl:mr-1 rtl:-ml-1.5" />
+          ) : (
+            icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />
+          )}
         </button>
       ) : (
         <a class={buttonClass} {...(target ? { target, rel: 'noopener noreferrer' } : {})} {...rest}>
           <Fragment set:html={text} />
-          {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
+          {isPhoneIcon ? (
+            <PhoneIcon class="ml-1 -mr-1.5 inline-block rtl:mr-1 rtl:-ml-1.5" />
+          ) : (
+            icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />
+          )}
         </a>
       )}
       <CTANote tone={noteTone} />
@@ -84,12 +105,20 @@ const buttonClass = twMerge(variantClass[variant] ?? '', className, showNote && 
   ) : isNativeButton ? (
     <button type={type} class={buttonClass} {...rest}>
       <Fragment set:html={text} />
-      {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
+      {isPhoneIcon ? (
+            <PhoneIcon class="ml-1 -mr-1.5 inline-block rtl:mr-1 rtl:-ml-1.5" />
+          ) : (
+            icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />
+          )}
     </button>
   ) : (
     <a class={buttonClass} {...(target ? { target, rel: 'noopener noreferrer' } : {})} {...rest}>
       <Fragment set:html={text} />
-      {icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />}
+      {isPhoneIcon ? (
+            <PhoneIcon class="ml-1 -mr-1.5 inline-block rtl:mr-1 rtl:-ml-1.5" />
+          ) : (
+            icon && <Icon name={icon} class="w-5 h-5 ml-1 -mr-1.5 rtl:mr-1 rtl:-ml-1.5 inline-block" />
+          )}
     </a>
   )
 }

@@ -1,6 +1,5 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "trailingSlash": true,
   "crons": [
     {
       "path": "/api/reviews",

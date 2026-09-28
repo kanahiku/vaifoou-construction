@@ -1,0 +1,61 @@
+---
+/**
+ * Sidewalks & Walkways — /services/concrete/sidewalks/
+ * Content: docs/service/concrete-service/…Sidewalks & Walkways.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Sidewalks & Walkways | ${site.name}`,
+  description: `We pour residential walkways and commercial sidewalks across O\u02BBahu. Contact Vaifoou Construction to schedule a concrete site estimate.`,
+};
+
+const tableRows = [
+  { feature: 'Project Scope',     val1: 'Pathways and home entries',                        val2: 'High-traffic public paths' },
+  { feature: 'Site Requirements', val1: 'Property line navigation',                          val2: 'Public access layouts and structural curbs' },
+  { feature: 'Example Work',      val1: 'Backyard access',                                   val2: 'Commercial curb and swale projects' },
+];
+
+const links = [
+  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
+  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
+  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+];
+
+const faqs = [
+  { title: 'Do you handle both residential and commercial projects?', description: 'Yes. We pour residential walkways and execute commercial sidewalk work across the island.' },
+  { title: 'What materials do you use?',                             description: 'We use high-quality concrete mixtures designed for structural longevity.' },
+  { title: 'Are your installations guaranteed?',                     description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Concrete Services"
+    title="Sidewalks & Walkways"
+    body="We pour residential walkways and manage commercial sidewalk work across O\u02BBahu. Our family brings a 25+ year trade legacy to every project. Every installation is backed by our workmanship guarantee."
+    imagePlaceholder="Concrete sidewalk and walkway photo"
+  />
+  <ServiceTable
+    eyebrow="Comparison"
+    heading="Residential vs. Commercial Applications"
+    col1="Residential Walkways"
+    col2="Commercial Sidewalks"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Concrete Services" items={links} />
+  <FAQs title="Sidewalks & Walkways FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading={`Get Your O\u02BBahu Walkway Estimate`} />
+</Layout>

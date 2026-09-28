@@ -1,0 +1,148 @@
+---
+/**
+ * Service Areas hub — /service-areas/
+ * Content: docs/areas/_service-areas_.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `O\u02BBahu Masonry & Concrete Service Areas | ${site.name}`,
+  description: `Vaifoou Construction provides structural masonry, custom rock walls, and concrete flatwork across O\u02BBahu. We serve homeowners, property managers, and contractors.`,
+};
+
+const areas = [
+  { name: 'Wahiawa',               href: '/service-areas/wahiawa/' },
+  { name: 'Honolulu',              href: '/service-areas/honolulu/' },
+  { name: 'Mililani',              href: '/service-areas/mililani/' },
+  { name: 'Kaneohe',               href: '/service-areas/kaneohe/' },
+  { name: 'Kailua',                href: '/service-areas/kailua/' },
+  { name: 'Kapolei',               href: '/service-areas/kapolei/' },
+  { name: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
+  { name: 'Aiea & Pearl City',     href: '/service-areas/aiea-pearl-city/' },
+  { name: 'Waipahu',               href: '/service-areas/waipahu/' },
+  { name: 'Ewa Beach',             href: '/service-areas/ewa-beach/' },
+];
+
+const faqs = [
+  {
+    title: 'Where is your primary service yard located?',
+    description: 'Our equipment and crews are based in Wahiawa.',
+  },
+  {
+    title: 'Are there additional Vaifoou Construction branches on O\u02BBahu?',
+    description: 'No. All crews dispatch directly from our Wahiawa headquarters to project sites island-wide.',
+  },
+  {
+    title: 'Is Vaifoou Construction fully licensed?',
+    description: 'Yes. We are a fully licensed and insured masonry and concrete contractor (CT-39534).',
+  },
+  {
+    title: 'Will your team handle foundation repairs?',
+    description: 'We specialize in pouring new concrete foundations. We do not perform structural repairs or micropile installations.',
+  },
+  {
+    title: 'Do you offer landscaping services?',
+    description: 'No. We do not provide general landscaping. We remove trees and shrubs strictly as site preparation for concrete pours.',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+
+  {/* ── Hero ─────────────────────────────────────────────────── */}
+  <SubServiceHero
+    eyebrow={`O\u02BBahu, Hawai\u02BBi`}
+    title={`O\u02BBahu Masonry & Concrete Service Areas`}
+    body={`Serving residential and commercial properties across the island of O\u02BBahu.`}
+    imagePlaceholder="O'ahu masonry service area photo"
+  />
+
+  {/* ── Island-Wide Description ───────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-10 md:flex-row md:items-center md:gap-16">
+      {/* Left — text */}
+      <div class="flex flex-1 flex-col gap-1">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          Island Coverage
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+          Island-Wide Masonry &amp; Concrete
+        </h2>
+        <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:mt-4 md:text-[18px] md:leading-[29.25px]">
+          Operating from our main yard in Wahiawa, our crews build custom rock walls and concrete flatwork across O&#x02BB;ahu. We work with local property owners and serve as a concrete subcontractor to general contractors. Every project is backed by our 25+ year family legacy.
+        </p>
+      </div>
+      {/* Right — image placeholder */}
+      <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
+        <!-- TODO: replace with <Image> when client provides a site or crew photo -->
+        <HeroImagePlaceholder fill class="absolute inset-0" label="O'ahu masonry crew or project photo" />
+      </div>
+    </div>
+  </section>
+
+  {/* ── Communities Grid ─────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-12 md:gap-16">
+
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          Where We Work
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+          Communities We Serve
+        </h2>
+        <p class="mt-1 max-w-2xl font-body text-[16px] font-normal leading-7 text-banner-note">
+          We deploy our crews from our home base in Wahiawa to job sites across the island.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+        {areas.map(({ name, href, note }) => (
+          <a
+            href={href}
+            class="group flex flex-col gap-2 border border-banner-line bg-white p-6 transition-colors hover:border-accent/30 hover:bg-section-grey"
+          >
+            <span class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-accent md:text-[20px]">
+              {name}
+            </span>
+            {note && (
+              <span class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">
+                {note}
+              </span>
+            )}
+            <span class="flex items-center gap-1.5 font-body text-[13px] font-medium leading-4 text-muted transition-colors group-hover:text-accent">
+              View service area
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-3 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  {/* ── FAQs ─────────────────────────────────────────────────── */}
+  <FAQs
+    title="O&#x02BB;ahu Service Area FAQs"
+    tagline="Common Questions"
+    items={faqs}
+  >
+    <div slot="bg" class="absolute inset-0 bg-page"></div>
+  </FAQs>
+
+  {/* ── CTA ──────────────────────────────────────────────────── */}
+  <BrickMotifCTA
+    heading={`Start Your O\u02BBahu Masonry Project`}
+    note="Contact us to discuss your masonry or concrete project. Every job is backed by our workmanship guarantee. Please note we are closed on Sundays to put God first."
+  />
+
+</Layout>

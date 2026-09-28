@@ -12,10 +12,10 @@
  */
 export const site = {
   name: 'Vaifoou Construction',
-  url: 'https://example.com',
-  description: 'Vaifoou Construction is a construction company website starter ready for the new design system.',
-  footerTagline: 'Construction services built around clear communication, careful planning, and quality work.',
-  trailingSlash: false,
+  url: 'https://vaifoouconstruction.com',
+  description: "O'ahu's trusted family-owned masonry and concrete contractor since 2000. We build rock walls, CMU block walls, and concrete for O'ahu homeowners, HOAs, and contractors.",
+  footerTagline: "O'ahu's trusted family-owned masonry and concrete contractor since 2000. Built to last, built right.",
+  trailingSlash: true,
 
   /** Cloudflare Worker `sites.slug`. `PUBLIC_SITE_SLUG` in env overrides this. */
   formSlug: 'vaifoou-construction',

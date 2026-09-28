@@ -1,0 +1,61 @@
+---
+/**
+ * Stem Walls — /services/concrete/stem-walls/
+ * Content: docs/service/concrete-service/…Stem Walls.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Stem Walls | ${site.name}`,
+  description: `Vaifoou Construction builds concrete stem walls for residential and commercial structures across O\u02BBahu. Contact us for a site estimate.`,
+};
+
+// 2-col explainer table (no col2)
+const tableRows = [
+  { feature: 'Function',      val1: 'Connects the foundation slab to the vertical framing above.' },
+  { feature: 'Moisture',      val1: 'Elevates the structure above the ground to resist moisture and pests.' },
+  { feature: 'Load Transfer', val1: 'Distributes the weight of the superstructure down to the footing.' },
+];
+
+const links = [
+  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
+  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
+  { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
+  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+];
+
+const faqs = [
+  { title: 'What is the purpose of a stem wall?',           description: 'A stem wall connects the foundation footing to the vertical structure above, lifts the building above grade to resist moisture and pests, and transfers the load of the structure down to the footing.' },
+  { title: 'Do you pour both the footing and stem wall?',   description: 'Yes. Our crews handle the complete stem wall system including the concrete footing and stem wall pour.' },
+  { title: 'Are your installations guaranteed?',             description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Concrete Services"
+    title="Stem Walls"
+    body="We construct concrete stem walls for residential and commercial buildings across O\u02BBahu. A stem wall is the short concrete wall that runs between your foundation footing and the frame of the structure above. Our family brings a 25+ year trade legacy to every project site. Every installation is backed by our workmanship guarantee."
+    imagePlaceholder="Concrete stem wall construction photo"
+  />
+  <ServiceTable
+    eyebrow="Explainer"
+    heading="Role of a Stem Wall"
+    col1="Description"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Concrete Services" items={links} />
+  <FAQs title="Stem Wall FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading="Start Your Stem Wall Project" />
+</Layout>

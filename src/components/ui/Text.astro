@@ -2,20 +2,22 @@
 /**
  * Text atom — one component for all body and UI text.
  *
+ * Font: Work Sans for all body variants. Barlow Condensed for "button" variant.
+ * Sizes come from brand.ts → type{} → CSS variables → text-body / text-body-lg etc.
+ *
  * variant  (controls visual scale and default semantic element):
- *   body-lg → <p>      16 px / lh 1.3   lede paragraphs, hero subtitles
- *   body    → <p>      14 px / lh 1.3   standard paragraph copy  ← default
- *   small   → <p>      12 px / lh 1.3   footnotes, footer taglines
- *   caption → <p>      11 px / lh 1.3   timestamps, metadata
- *   button  → <span>   14 px Norca-Rough CTA label without button chrome
- *                                        (use when you need the exact button font
- *                                         inside a custom control or rich text)
+ *   body-lg → <p>      mobile/desktop from brand.ts   lede paragraphs, hero subtitles
+ *   body    → <p>      mobile/desktop from brand.ts   standard paragraph copy ← default
+ *   small   → <p>      fixed small size               footnotes, footer taglines
+ *   caption → <p>      fixed caption size             timestamps, metadata
+ *   button  → <span>   Barlow Condensed 14px          CTA label inside a custom control
+ *                                                      (without button chrome)
  *
  * color:
- *   muted   → text-muted    ← default for body variants
- *   default → text-default
- *   white   → text-page (Figma text/contrast)
- *   inherit → no color class — use class= for a custom token
+ *   muted   → text-muted (warm grey)   ← default
+ *   default → text-default (near-black)
+ *   white   → text-page (warm off-white) — use on dark sections
+ *   inherit → no color class — pass custom token via class=
  *
  * as:  Override the semantic element (e.g. as="span" for inline text).
  *
@@ -61,7 +63,8 @@ const scale: Record<string, string> = {
   body:      'text-body font-normal',
   small:     'text-small font-normal',
   caption:   'text-[11px] leading-[1.3] font-normal',
-  button:    'font-rough [font-size:var(--aw-text-button)] leading-none font-normal',
+  // button variant = Barlow Condensed (display font) at button size
+  button:    'font-display [font-size:var(--aw-text-button)] leading-none font-normal',
 };
 
 const colors: Record<string, string> = {
@@ -74,7 +77,8 @@ const colors: Record<string, string> = {
 // twMerge only handles the color + className layer so `text-body-lg` (font-size utility)
 // is never stripped by twMerge's text-* conflict resolution.
 const overrideCls = twMerge(colors[color as string] ?? '', className);
-const face = variant === 'button' ? 'font-rough' : 'font-sans';
+// button → Barlow Condensed (font-display); all body variants → Work Sans (font-body)
+const face = variant === 'button' ? 'font-display' : 'font-body';
 const cls = [face, scale[variant as string] ?? '', overrideCls].filter(Boolean).join(' ');
 ---
 

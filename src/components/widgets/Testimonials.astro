@@ -19,8 +19,6 @@
  */
 
 import Heading from '~/components/ui/Heading.astro';
-import googleIcon from '~/assets/images/google-icon.png';
-import yelpIcon from '~/assets/images/yelp-icon.png';
 import { sanityClient } from '~/lib/sanity/client';
 
 export type ReviewPlatform = 'google' | 'yelp';
@@ -83,27 +81,9 @@ const doubled = [...testimonials, ...testimonials];
 
           {/* Platform logo + stars */}
           <div class="flex items-start gap-1.5">
-            {item.platform === 'yelp' ? (
-              <img
-                src={yelpIcon.src}
-                alt="Yelp"
-                width={yelpIcon.width}
-                height={yelpIcon.height}
-                class="h-6 w-auto object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-            ) : (
-              <img
-                src={googleIcon.src}
-                alt="Google"
-                width={googleIcon.width}
-                height={googleIcon.height}
-                class="h-6 w-auto object-contain"
-                loading="lazy"
-                decoding="async"
-              />
-            )}
+            <span class="inline-flex h-6 items-center rounded-sm border border-heading/15 px-2 text-[11px] font-medium uppercase tracking-wide text-heading/70">
+              {item.platform === 'yelp' ? 'Yelp' : 'Google'}
+            </span>
 
             {/* 5-star row — rotate −1.82° matching Figma */}
             <div class="-rotate-[1.82deg]" role="img" aria-label="5 out of 5 stars">

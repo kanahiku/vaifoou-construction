@@ -2,90 +2,68 @@
 import Layout from '~/layouts/PageLayout.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import SectionBg from '~/components/ui/SectionBg.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { CONTACT } from '~/config/contact';
-import { PRIMARY_CTA_LABEL } from '~/config/cta';
-import { siteHost } from '~/config/site';
-
-const host = siteHost();
 
 const metadata = {
   title: `Accessibility Statement | ${CONTACT.businessName}`,
-  description: `Accessibility statement for ${host}, including our WCAG 2.1 AA approach and how to request help accessing the site.`,
+  description: `${CONTACT.businessName} is committed to ensuring digital accessibility for all website visitors.`,
   ignoreTitleTemplate: true,
 };
 
-const headingClass =
-  'text-[22px] md:text-[26px] font-normal leading-[130%] tracking-tight font-heading text-heading mb-4';
-const bodyClass = 'text-[16px] md:text-[17px] font-normal leading-[160%] text-muted';
-const listClass = `${bodyClass} mt-4 space-y-1 list-disc pl-5`;
-const linkClass = 'btn-link';
+const h2 = 'font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[24px]';
+const body = 'mt-2 font-body text-[15px] leading-7 text-banner-note md:text-[16px]';
+const linkClass = 'text-nav-cta underline underline-offset-2 hover:text-accent';
 ---
 
 <Layout metadata={metadata}>
-  <Hero2>
-    <Fragment slot="title">Accessibility Statement</Fragment>
-    <Fragment slot="subtitle">Last reviewed: September 8, 2026</Fragment>
-    <Fragment slot="bg">
-      <SectionBg variant="hero" />
-    </Fragment>
-  </Hero2>
 
+  {/* ── Page hero ─────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-heading py-14 md:py-20">
+    <div class="site-frame flex flex-col gap-1">
+      <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-page/50 uppercase">
+        <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+        Legal
+      </p>
+      <h1 class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[56px]">
+        Accessibility Statement
+      </h1>
+    </div>
+  </section>
+
+  {/* ── Body ───────────────────────────────────────────────────── */}
   <WidgetWrapper containerClass="max-w-container mx-auto">
     <div class="max-w-3xl space-y-10 md:space-y-14">
+
       <section>
-        <h2 class={headingClass}>Our commitment</h2>
-        <p class={bodyClass}>
-          {CONTACT.businessName} is committed to improving the accessibility and usability of {host} for all
-          visitors, including people who use assistive technology. Accessibility is an ongoing effort, and we continue
-          to make improvements to the site over time.
+        <p class={body}>
+          {CONTACT.businessName} is committed to digital accessibility. We are working toward conformance with the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA on vaifoouconstruction.com.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>Our approach</h2>
-        <p class={bodyClass}>
-          As we build and maintain this website, our team works toward the Web Content Accessibility Guidelines (WCAG)
-          2.1 Level AA as a reference standard. We do not claim full conformance. Steps we take include:
-        </p>
-        <ul class={listClass}>
-          <li>Writing descriptive text for images that carry meaning</li>
-          <li>Using clear headings and page structure so content is easier to navigate</li>
-          <li>Aiming for readable text sizes and sufficient contrast</li>
-          <li>Supporting keyboard navigation where possible</li>
-          <li>Labeling form fields so they are easier to complete</li>
-          <li>Respecting reduced motion settings in your browser or operating system</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 class={headingClass}>If you need help</h2>
-        <p class={bodyClass}>
-          If you have difficulty accessing any part of this website, or if you would like information in a different
-          format, please contact us at
-          <a class={linkClass} href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> or
-          <a class={linkClass} href={CONTACT.phone.href}>{CONTACT.phone.display}</a>. Please tell us the page you were
-          on and what you were trying to do.
+        <h2 class={h2}>Ongoing Improvements</h2>
+        <p class={body}>
+          The site is built with semantic headings, keyboard navigation, alt text on images and color contrast in mind. We review pages as they are added, and we fix issues as they are reported to us.
         </p>
       </section>
 
       <section>
-        <h2 class={headingClass}>Feedback</h2>
-        <p class={bodyClass}>
-          We welcome feedback on the accessibility of this website. Please send suggestions to
-          <a class={linkClass} href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>.
+        <h2 class={h2}>Feedback and Assistance</h2>
+        <p class={body}>
+          If you encounter any barriers while using our website or require assistance reading our service information, contact us directly. Call{' '}
+          <a href={CONTACT.phone.href} class={linkClass}>{CONTACT.phone.display}</a>{' '}
+          or email{' '}
+          <a href="mailto:vaifoou4@gmail.com" class={linkClass}>vaifoou4@gmail.com</a>.
         </p>
       </section>
+
     </div>
     <Fragment slot="bg">
       <SectionBg variant="grey" />
     </Fragment>
   </WidgetWrapper>
 
-  <CTABanner
-    title="Questions?"
-    subtitle={`If you have questions about this site or about working with ${CONTACT.businessName}, contact us.`}
-    ctaText={PRIMARY_CTA_LABEL}
-  />
+  <BrickMotifCTA heading="Need Help Accessing Our Site?" />
+
 </Layout>

@@ -1,0 +1,57 @@
+---
+/**
+ * Planter & Garden Rock Walls — /services/rock-walls/planter-garden/
+ * Content: docs/service/roxk-wall/…Planter & Garden Rock Walls.docx
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { site } from '~/config/site';
+
+const metadata = {
+  title: `Planter & Garden Rock Walls | ${site.name}`,
+  description: `Structure your property with dedicated planter and garden rock walls built by Vaifoou Construction LLC on O\u02BBahu.`,
+};
+
+const tableRows = [
+  { feature: 'Focus',        val1: 'Structural rock boundaries',  val2: 'Soil preparation and planting' },
+  { feature: 'Materials',    val1: 'Volcanic basalt',              val2: 'Vegetation and mulch' },
+  { feature: 'Installation', val1: 'Masonry construction',         val2: 'Gardening and horticulture' },
+];
+
+const links = [
+  { title: 'Veneer Rock Walls',    href: '/services/rock-walls/veneer/' },
+  { title: 'Rock Wall Repair',     href: '/services/rock-walls/repair/' },
+  { title: 'Rock Retaining Walls', href: '/services/rock-walls/retaining/' },
+];
+
+const faqs = [
+  { title: 'Do you provide the soil and plants for the garden wall?', description: 'No. We focus strictly on the structural masonry to build your planter walls. We do not provide landscaping services or plant installation.' },
+  { title: 'What materials do you use?',                              description: 'We build your garden borders using hand-selected volcanic basalt.' },
+  { title: 'Are your installations guaranteed?',                      description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+];
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    eyebrow="Rock Wall Construction"
+    title="Planter & Garden Rock Walls"
+    body="We build dedicated planter and garden rock walls to structure exterior spaces for residential and commercial properties across O\u02BBahu. We strictly handle the hardscape masonry to prepare your site boundary. We do not provide landscaping services, soil grading, or plant installation."
+    imagePlaceholder="Planter and garden rock wall photo"
+  />
+  <ServiceTable
+    eyebrow="Scope of Work"
+    heading="Hardscaping vs. Landscaping"
+    col1="Hardscaping (Our Service)"
+    col2="Landscaping (Not Provided)"
+    rows={tableRows}
+  />
+  <ServiceLinks categoryLabel="Rock Wall Services" items={links} />
+  <FAQs title="Planter Rock Wall FAQs" tagline="Common Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading="Start Your Planter Wall Project" />
+</Layout>

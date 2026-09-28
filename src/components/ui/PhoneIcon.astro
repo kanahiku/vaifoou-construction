@@ -1,0 +1,23 @@
+---
+/**
+ * Phone mark used on call-to-action buttons.
+ */
+import { Image } from 'astro:assets';
+import { twMerge } from 'tailwind-merge';
+import icon from '~/assets/icons/red-phone.svg';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<Image
+  src={icon}
+  alt=""
+  width={18}
+  height={18}
+  class={twMerge('size-[18px] shrink-0', className)}
+  aria-hidden="true"
+/>

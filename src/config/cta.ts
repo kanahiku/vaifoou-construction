@@ -2,19 +2,19 @@
 export const PRIMARY_CTA_NOTE = '';
 
 /** Primary conversion button label + destination sitewide. */
-export const PRIMARY_CTA_LABEL = 'request a quote';
-export const PRIMARY_CTA_HREF = '/contact';
+export const PRIMARY_CTA_LABEL = 'REQUEST A FREE ESTIMATE';
+export const PRIMARY_CTA_HREF = '/contact/';
 
-export const LOCATION_CTA_LABEL = 'contact us';
-export const LOCATION_CTA_HREF = '/contact';
+export const LOCATION_CTA_LABEL = 'VIEW ALL SERVICE AREAS';
+export const LOCATION_CTA_HREF = '/service-areas/';
 
-export const CATERING_CTA_LABEL = 'request a quote';
-export const CATERING_CTA_HREF = '/contact';
+export const CATERING_CTA_LABEL = 'REQUEST A FREE ESTIMATE';
+export const CATERING_CTA_HREF = '/contact/';
 
-/** Footer conversion card. */
-export const FOOTER_CTA_EYEBROW = 'Start a project';
-export const FOOTER_CTA_TITLE = 'Ready to build?';
+/** Footer / CTA Banner conversion section. */
+export const FOOTER_CTA_EYEBROW = 'Get Started';
+export const FOOTER_CTA_TITLE = "START YOUR O'AHU MASONRY PROJECT";
 export const FOOTER_CTA_BODY =
-  'Share a few details and the team will follow up with the next steps.';
-export const FOOTER_CTA_LABEL = 'request a quote';
-export const FOOTER_CTA_HREF = '/contact';
+  'Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays to put God first.';
+export const FOOTER_CTA_LABEL = 'REQUEST A FREE ESTIMATE';
+export const FOOTER_CTA_HREF = '/contact/';
