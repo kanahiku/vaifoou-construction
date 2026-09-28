@@ -12,9 +12,13 @@ import brickMotif from '~/assets/brick-motif-wide-light.svg';
 import iconRockWall from '~/assets/icons/rock-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
 import iconHammer from '~/assets/icons/hammer.svg';
+import TestimonialCard from '~/components/ui/TestimonialCard.astro';
+import { getTestimonials } from '~/lib/content';
 import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
+
+export const prerender = false;
 
 const meta = {
   title: "Vaifoou Construction | O\u2019ahu Masonry & Concrete Contractor",
@@ -66,24 +70,9 @@ const serviceAreas = [
   'North Shore & Haleiwa',
 ];
 
-/* 3 placeholder reviews — replace with real copy when available */
-const reviews = [
-  {
-    quote: 'REVIEW PLACEHOLDER — Replace with a real 5-star customer review referencing rock walls, concrete work, or demolition.',
-    name: 'Customer Name',
-    location: 'Kailua, O\u02BBahu',
-  },
-  {
-    quote: 'REVIEW PLACEHOLDER — Replace with a real 5-star customer review referencing rock walls, concrete work, or demolition.',
-    name: 'Customer Name',
-    location: 'Mililani, O\u02BBahu',
-  },
-  {
-    quote: 'REVIEW PLACEHOLDER — Replace with a real 5-star customer review referencing rock walls, concrete work, or demolition.',
-    name: 'Customer Name',
-    location: 'Ewa Beach, O\u02BBahu',
-  },
-];
+/* Fetch up to 3 testimonials from Sanity for the homepage preview */
+const allTestimonials = await getTestimonials();
+const reviews = allTestimonials.slice(0, 3);
 ---
 
 <Layout metadata={meta}>
@@ -388,25 +377,14 @@ const reviews = [
         </h2>
       </div>
 
-      {/* 3-column review grid */}
-      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8">
-        {reviews.map(({ quote, name, location }) => (
-          <article class="flex h-full flex-col justify-between border border-banner-line bg-white p-4 md:p-8">
-            <div class="flex flex-col gap-4 pb-8">
-              <div class="flex items-center gap-0.5 text-nav-cta" aria-label="5 stars">
-                {Array.from({ length: 5 }).map(() => (
-                  <Icon name="tabler:star-filled" class="size-4" aria-hidden="true" />
-                ))}
-              </div>
-              <p class="font-body text-[15px] font-normal italic leading-[26px] text-heading">&ldquo;{quote}&rdquo;</p>
-            </div>
-            <div class="border-t border-banner-line pt-4">
-              <p class="font-display text-[18px] font-bold leading-5 tracking-[0.5px] text-heading uppercase">{name}</p>
-              <p class="mt-1 font-body text-[13px] font-normal leading-4 text-muted">{location}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+      {/* 3-column review grid — from Sanity; shows nothing if no testimonials published yet */}
+      {reviews.length > 0 && (
+        <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8">
+          {reviews.map((t) => (
+            <TestimonialCard quote={t.quote} name={t.name} location={t.location} tenure={t.tenure} />
+          ))}
+        </div>
+      )}
 
       <div class="flex justify-center">
         <a

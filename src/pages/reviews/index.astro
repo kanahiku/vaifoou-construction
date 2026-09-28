@@ -1,56 +1,76 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
-import ReviewsGrid from '~/components/widgets/ReviewsGrid.astro';
-import { getReviewsPage } from '~/lib/content';
-import { CONTACT } from '~/config/contact';
-import { PRIMARY_CTA_LABEL } from '~/config/cta';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import TestimonialCard from '~/components/ui/TestimonialCard.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { getTestimonials } from '~/lib/content';
+import { site } from '~/config/site';
 
 export const prerender = false;
 
-const page = await getReviewsPage();
+const testimonials = await getTestimonials();
 
 const metadata = {
-  title: page?.meta.title || `Reviews | ${CONTACT.businessName}`,
-  description: page?.meta.description || `Read recent Google and Yelp reviews for ${CONTACT.businessName}.`,
+  title: `Reviews & Testimonials | ${site.name}`,
+  description: `Read what O\u02BBahu property owners and homeowners say about Vaifoou Construction\u2019s masonry and concrete work.`,
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <Hero2>
-    <Fragment slot="title">{page?.hero.title || 'Reviews'}</Fragment>
-    <Fragment slot="subtitle">
-      {page?.hero.subtitle || `What people are saying about ${CONTACT.businessName}.`}
-    </Fragment>
-    <Fragment slot="bg">
-      <SectionBg variant="hero" />
-    </Fragment>
-  </Hero2>
 
-  <WidgetWrapper containerClass="max-w-container mx-auto">
-    <Headline title={page?.liveReviews.heading || 'Recent reviews'} classes={{ container: 'mb-[9px]' }} />
-    {
-      page?.liveReviews.intro ? (
-        <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted text-left max-w-3xl mb-[30px]">
-          {page.liveReviews.intro}
-        </p>
-      ) : null
-    }
-    <ReviewsGrid showHeader={false} sources={['google', 'yelp']} variant="dark" showCta={false} />
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
-
-  <CTABanner
-    title={page?.ctaBanner.title || 'Have a project in mind?'}
-    subtitle={page?.ctaBanner.subtitle || `Contact ${CONTACT.businessName} and we will follow up.`}
-    ctaText={page?.ctaBanner.ctaText || PRIMARY_CTA_LABEL}
-    ctaHref={page?.ctaBanner.ctaHref}
+  {/* ── Hero ──────────────────────────────────────────────────────── */}
+  <SubServiceHero
+    eyebrow="Client Testimonials"
+    title="Trusted by O\u02BBahu Property Owners"
+    body="Real feedback from homeowners, property managers and contractors across the island."
+    imagePlaceholder="Vaifoou Construction completed project photo"
   />
+
+  {/* ── Testimonials grid ─────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-12 md:gap-16">
+
+      {/* Section header */}
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          {testimonials.length
+            ? `${testimonials.length} Review${testimonials.length === 1 ? '' : 's'}`
+            : 'Reviews'}
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+          What Our Clients Say
+        </h2>
+      </div>
+
+      {/* Grid or empty state */}
+      {testimonials.length ? (
+        <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3 md:gap-8">
+          {testimonials.map((t) => (
+            <TestimonialCard
+              quote={t.quote}
+              name={t.name}
+              location={t.location}
+              tenure={t.tenure}
+            />
+          ))}
+        </div>
+      ) : (
+        <div class="flex flex-col gap-4 border border-banner-line bg-white p-8 md:p-12">
+          <p class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[22px]">
+            Coming Soon
+          </p>
+          <p class="font-body text-[16px] font-normal leading-7 text-banner-note">
+            Client reviews and testimonials will appear here as they are published.
+          </p>
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  {/* ── CTA closer ────────────────────────────────────────────────── */}
+  <BrickMotifCTA heading="Start Your O\u02BBahu Masonry Project" />
+
 </Layout>

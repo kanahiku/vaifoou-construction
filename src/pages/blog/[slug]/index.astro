@@ -1,16 +1,15 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
-import RelatedBlogs from '~/components/widgets/RelatedBlogs.astro';
-import BlogArticleImage from '~/components/blog/BlogArticleImage.astro';
+import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import { Image } from 'astro:assets';
 import BlogArticleBody from '~/components/blog/BlogArticleBody.astro';
 import BlogSidebar from '~/components/blog/BlogSidebar.astro';
-import { Icon } from 'astro-icon/components';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { getFormattedDate } from '~/utils/utils';
 import { getBlogPost } from '~/lib/content';
 import { getArticleToc, getLeadInlineImages, shouldUsePortableBody } from '~/lib/content/blogArticle';
-import { PRIMARY_CTA_LABEL } from '~/config/cta';
+import { CONTACT } from '~/config/contact';
+import { site } from '~/config/site';
 
 export const prerender = false;
 
@@ -28,6 +27,16 @@ const leadParagraphs = usePortableBody ? [] : post.heroParagraphs.length ? post.
 const leadImages = getLeadInlineImages(post);
 const toc = getArticleToc(post);
 
+// ── Reading time (≈ 200 wpm) ────────────────────────────────────────────────
+const wordCount = (post.contentBlocks ?? [])
+  .filter((b) => b._type === 'paragraph' || b._type === 'heading')
+  .reduce((n, b) => n + ('text' in b ? (b.text ?? '').split(/\s+/).length : 0), 0);
+const readingMinutes = Math.max(1, Math.round(wordCount / 200));
+
+// ── Canonical URL for share buttons ─────────────────────────────────────────
+const siteUrl = (site.url ?? '').replace(/\/$/, '');
+const canonicalUrl = `${siteUrl}/blog/${post.slug}/`;
+
 const metadata = {
   title: post.meta.title,
   description: post.meta.description,
@@ -36,73 +45,142 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <section class="relative">
-    <div class="absolute inset-0 overflow-hidden pointer-events-none -z-[1]" aria-hidden="true">
-      <SectionBg variant="white" />
+
+  {/* ── Article hero — dark overlay ───────────────────────────────── */}
+  <section class="relative w-full overflow-hidden border-b border-banner-line">
+    {/* Background image */}
+    {post.image?.src ? (
+      <Image
+        src={post.image.src}
+        alt={post.image.alt || post.title}
+        width={1440}
+        height={600}
+        class="absolute inset-0 h-full w-full object-cover"
+        loading="eager"
+      />
+    ) : (
+      <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label={`${post.title} photo placeholder`} />
+    )}
+
+    {/* Gradient overlay */}
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(90deg, rgb(28 27 26 / 92%) 0%, rgb(28 27 26 / 75%) 55%, rgb(28 27 26 / 35%) 100%);"
+      aria-hidden="true"
+    ></div>
+
+    <div class="site-frame relative z-10 flex flex-col gap-4 pb-14 pt-14 md:pb-20 md:pt-20">
+      {/* Back link */}
+      <a
+        href="/blog/"
+        class="inline-flex items-center gap-2 font-body text-[13px] font-semibold leading-4 tracking-[0.5px] text-page/70 uppercase transition-colors hover:text-page-end"
+      >
+        <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" style="transform: rotate(180deg)">
+          <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/>
+        </svg>
+        All Articles
+      </a>
+
+      {/* Category chip */}
+      <p class="bg-section-dark px-2 py-1 w-fit font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page-end uppercase">
+        {post.category ?? 'Insights'}
+      </p>
+
+      {/* Title */}
+      <h1 class="max-w-[768px] font-display text-[32px] font-bold leading-tight tracking-[-0.3px] text-page-end uppercase md:text-[56px] md:leading-[64px] md:tracking-[-0.6px]">
+        {post.title}
+      </h1>
+
+      {/* Meta */}
+      <p class="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[13px] font-medium text-page/70">
+        <time datetime={post.publishDate}>{getFormattedDate(publishDate)}</time>
+        {post.author && (
+          <>
+            <span aria-hidden="true">·</span>
+            <span>{post.author}</span>
+          </>
+        )}
+        <span aria-hidden="true">·</span>
+        <span>{readingMinutes} min read</span>
+      </p>
     </div>
-    <div class="relative max-w-container mx-auto px-4 md:px-6 py-8 md:py-16 lg:py-20">
-      <div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:gap-12 xl:gap-16 lg:items-start">
+  </section>
+
+  {/* ── Article body + sidebar ────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-8 md:py-16 lg:py-20">
+    <div class="site-frame">
+      <div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start lg:gap-12 xl:gap-16">
+
+        {/* Sidebar (TOC + author + tags + share + CTA) */}
         <BlogSidebar
           toc={toc}
-          ctaTitle={post.ctaBanner.title}
-          ctaHref={post.ctaBanner.ctaHref}
+          author={post.author}
+          tags={post.tags}
+          postTitle={post.title}
+          postUrl={canonicalUrl}
+          ctaTitle={`Start Your ${CONTACT.businessName} Project`}
+          ctaHref="/contact/"
         />
 
+        {/* Article */}
         <article class="min-w-0">
-          <a
-            href="/blog/"
-            class="btn-link gap-1 mb-6"
-          >
-            <Icon name="tabler:chevron-left" class="w-4 h-4" aria-hidden="true" />
-            All articles
-          </a>
 
-          <h1 class="text-[42px] md:text-[56px] font-normal leading-[105%] tracking-tighter font-heading text-heading mb-4">
-            {post.title}
-          </h1>
-          <p class="text-[14px] md:text-[15px] font-medium text-muted mb-8">
-            <time datetime={post.publishDate}>{getFormattedDate(publishDate)}</time>
-            {post.author ? ` · ${post.author}` : ''}
-          </p>
+          {/* Lead paragraphs */}
+          {leadParagraphs.length > 0 && (
+            <div class="mb-8 space-y-5">
+              {leadParagraphs.map((paragraph) => (
+                <p class="font-body text-[16px] font-normal leading-[1.8] text-banner-note md:text-[17px]">{paragraph}</p>
+              ))}
+            </div>
+          )}
 
-          {post.image?.src && <BlogArticleImage image={post.image} eager class="mb-8 mt-0" />}
+          {/* Lead inline images */}
+          {leadImages.map((imageBlock) => (
+            <figure class="mb-8">
+              <Image
+                src={imageBlock.image.src}
+                alt={imageBlock.image.alt || ''}
+                width={800}
+                height={450}
+                class="w-full object-cover"
+                loading="lazy"
+              />
+              {imageBlock.caption && (
+                <figcaption class="mt-2 font-body text-[13px] text-muted/70 text-center">{imageBlock.caption}</figcaption>
+              )}
+            </figure>
+          ))}
 
-          {
-            leadParagraphs.length > 0 && (
-              <div class="space-y-5">
-                {leadParagraphs.map((paragraph) => (
-                  <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted">{paragraph}</p>
-                ))}
-              </div>
-            )
-          }
+          {/* Inline TOC on mobile */}
+          {toc.length > 0 && (
+            <div class="mb-10 mt-0">
+              <BlogSidebar variant="inline" toc={toc} ctaTitle="" />
+            </div>
+          )}
 
-          {
-            leadImages.map((imageBlock) => (
-              <BlogArticleImage image={imageBlock.image} caption={imageBlock.caption} />
-            ))
-          }
-
-          {
-            toc.length > 0 && (
-              <div class="mt-10">
-                <BlogSidebar variant="inline" toc={toc} />
-              </div>
-            )
-          }
-
+          {/* Main body */}
           <BlogArticleBody post={post} />
+
         </article>
       </div>
     </div>
   </section>
 
-  <RelatedBlogs post={post} surface="grey" />
+  {/* ── CTA closer ────────────────────────────────────────────────── */}
+  <BrickMotifCTA heading={`Ready to Start Your Project?`} />
 
-  <CTABanner
-    title={post.ctaBanner.title}
-    subtitle={post.ctaBanner.subtitle}
-    ctaText={PRIMARY_CTA_LABEL}
-    ctaHref={post.ctaBanner.ctaHref}
-  />
 </Layout>
+
+<style>
+  /* Sidebar CTA card — override the default bg-card-light to match site palette */
+  :global(blog-toc-nav .rounded-lg) {
+    background-color: var(--aw-color-bg-card, #f5f4f2);
+    border: 1px solid var(--aw-color-banner-line, #e0ddd8);
+    border-radius: 0;
+  }
+  /* TOC active link highlight */
+  :global(blog-toc-nav a[data-toc-link][aria-current='location']) {
+    color: var(--aw-color-nav-cta);
+    font-weight: 600;
+  }
+</style>

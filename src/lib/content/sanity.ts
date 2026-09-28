@@ -428,9 +428,10 @@ type SanityPortableBlock = {
   text?: string;
 } & SanityImageFields;
 
-type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body' | 'contentBlocks'> & {
+type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body' | 'contentBlocks' | 'tags'> & {
   image?: ContentImage;
   relatedPages?: string[] | null;
+  tags?: string[] | null;
   body?: SanityPortableBlock[] | null;
 };
 
@@ -609,6 +610,8 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
     excerpt,
     publishDate: post.publishDate,
     author: post.author,
+    category: post.category,
+    tags: (post.tags ?? []).filter((t): t is string => Boolean(t?.trim())),
     image: resolveContentImage(post.image as FetchedImage | undefined),
     relatedPages: (post.relatedPages ?? []).map((key) => key.replace(/^\/+/, '')).filter(Boolean),
     meta: {
@@ -643,6 +646,8 @@ const BLOG_POST_CARD_PROJECTION = /* groq */ `
   excerpt,
   publishDate,
   author,
+  category,
+  tags,
   "image": {
     "src": coalesce(image.asset->url, imageUrl, ""),
     "alt": coalesce(image.alt, imageAlt, title),

@@ -1,14 +1,7 @@
 // Singletons
 import { siteNavigation } from './singletons/navigation';
 import { siteFooter } from './singletons/footer';
-import { homePage } from './singletons/homePage';
-import { contactPage } from './singletons/contactPage';
-import { reviewsPage } from './singletons/reviewsPage';
-import { lead } from './documents/lead';
-import { servicePage } from './documents/servicePage';
 import { blogPost } from './documents/blogPost';
-import { book } from './documents/book';
-import { podcastEpisode } from './documents/podcastEpisode';
 import { testimonial } from './documents/testimonial';
 
 // Navigation objects
@@ -57,15 +50,8 @@ export const schemaTypes = [
   // Documents
   siteNavigation,
   siteFooter,
-  homePage,
-  contactPage,
-  reviewsPage,
-  servicePage,
   blogPost,
-  book,
-  podcastEpisode,
   testimonial,
-  lead,
 
   // Objects — nav
   navLink,

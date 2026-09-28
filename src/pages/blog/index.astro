@@ -1,52 +1,69 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import SectionBg from '~/components/ui/SectionBg.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
 import BlogCard from '~/components/ui/BlogCard.astro';
-import CTABanner from '~/components/widgets/CTABanner.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { getBlogPosts } from '~/lib/content';
-import { CONTACT } from '~/config/contact';
-import { PRIMARY_CTA_LABEL } from '~/config/cta';
+import { site } from '~/config/site';
 
 export const prerender = false;
 
 const posts = await getBlogPosts();
 
 const metadata = {
-  title: `Blog | ${CONTACT.businessName}`,
-  description: `Articles and updates from ${CONTACT.businessName}.`,
+  title: `Blog | ${site.name}`,
+  description: `Masonry tips, project spotlights and trade insights from the Vaifoou Construction team on O\u02BBahu.`,
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-  <WidgetWrapper containerClass="max-w-container mx-auto">
-    <h1
-      class="text-[42px] md:text-[56px] font-normal leading-[105%] tracking-tighter font-heading text-heading mb-[30px]"
-    >
-      Blogs
-    </h1>
-    {
-      posts.length ? (
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+
+  {/* ── Hero ──────────────────────────────────────────────────────── */}
+  <SubServiceHero
+    eyebrow="Insights"
+    title="Masonry & Concrete Blog"
+    body="Tips, project spotlights and trade insights from our O\u02BBahu masonry team."
+    imagePlaceholder="Vaifoou Construction blog photo"
+  />
+
+  {/* ── Posts grid ────────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-12 md:gap-16">
+
+      {/* Section header */}
+      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
+          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
+          {posts.length ? `${posts.length} Article${posts.length === 1 ? '' : 's'}` : 'Articles'}
+        </p>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+          Latest Articles
+        </h2>
+      </div>
+
+      {/* Grid or empty state */}
+      {posts.length ? (
+        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <BlogCard post={post} variant="dark" />
+            <BlogCard post={post} variant="light" />
           ))}
         </div>
       ) : (
-        <p class="text-[16px] md:text-[17px] font-normal leading-[160%] text-muted">
-          New articles will appear here as they are published.
-        </p>
-      )
-    }
-    <Fragment slot="bg">
-      <SectionBg variant="grey" />
-    </Fragment>
-  </WidgetWrapper>
+        <div class="flex flex-col gap-4 border border-banner-line bg-white p-8 md:p-12">
+          <p class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[22px]">
+            Coming Soon
+          </p>
+          <p class="font-body text-[16px] font-normal leading-7 text-banner-note">
+            New articles from our masonry team will appear here as they are published.
+          </p>
+        </div>
+      )}
 
-  <CTABanner
-    title="Have a question?"
-    subtitle={`Contact ${CONTACT.businessName} and we will follow up.`}
-    ctaText={PRIMARY_CTA_LABEL}
-  />
+    </div>
+  </section>
+
+  {/* ── CTA closer ────────────────────────────────────────────────── */}
+  <BrickMotifCTA heading="Start Your O\u02BBahu Masonry Project" />
+
 </Layout>

@@ -14,6 +14,8 @@ database_id = "376bc987-bf24-4f8c-88e0-64ce2daacf61"
 # Safe to commit. Secrets (RESEND_API_KEY, TURNSTILE_SECRET, NOTIFY_EMAIL) go in
 # .dev.vars locally and `wrangler secret put` in production.
 [vars]
-RESEND_FROM = "Vaifoou Construction <onboarding@resend.dev>"
+# RESEND_FROM is intentionally NOT set here.
+# Each site has its own from_email in the D1 `sites` table.
+# Setting this globally would override ALL sites with a single sender name (wrong).
 # Notify emails per site per UTC day. Extra leads still save; visitor still sees success.
-RESEND_DAILY_LIMIT = "20"
+RESEND_DAILY_LIMIT = "1000"

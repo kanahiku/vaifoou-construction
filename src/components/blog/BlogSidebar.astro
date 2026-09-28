@@ -1,11 +1,17 @@
 ---
 import type { TocItem } from '~/lib/content/blogArticle';
-import Button from '~/components/ui/Button.astro';
-import CTANote from '~/components/ui/CTANote.astro';
-import { PRIMARY_CTA_LABEL } from '~/config/cta';
+import { Icon } from 'astro-icon/components';
 
 export interface Props {
   toc: TocItem[];
+  /** Author name shown in the author card. */
+  author?: string;
+  /** Keyword tags displayed as chips. */
+  tags?: string[];
+  /** Article title — used to pre-fill share text. */
+  postTitle?: string;
+  /** Canonical article URL — used to build share links. */
+  postUrl?: string;
   ctaTitle?: string;
   ctaHref?: string;
   variant?: 'sticky' | 'inline';
@@ -13,12 +19,17 @@ export interface Props {
 
 const {
   toc,
+  author,
+  tags,
+  postTitle = '',
+  postUrl = '',
   ctaTitle = 'Have a question?',
-  ctaHref = '/form',
+  ctaHref = '/contact/',
   variant = 'sticky',
 } = Astro.props;
 
 const isSticky = variant === 'sticky';
+
 ---
 
 <blog-toc-nav
@@ -29,24 +40,31 @@ const isSticky = variant === 'sticky';
       : 'lg:hidden mb-10',
   ]}
 >
+
+
+  {/* ── Table of contents ─────────────────────────────────────── */}
   {
     toc.length > 0 && (
       <nav aria-label="On this page">
         {isSticky ? (
-          <p class="text-[12px] font-medium uppercase tracking-wider text-muted mb-3">On this page</p>
+          <p class="mb-3 font-body text-[12px] font-medium uppercase tracking-wider text-muted">
+            On this page
+          </p>
         ) : (
           <details class="group">
-            <summary class="text-[12px] font-medium uppercase tracking-wider text-muted cursor-pointer list-none flex items-center justify-between gap-3 [&::-webkit-details-marker]:hidden">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-3 font-body text-[12px] font-medium uppercase tracking-wider text-muted [&::-webkit-details-marker]:hidden">
               On this page
-              <span class="text-heading text-[16px] leading-none group-open:rotate-45 transition-transform">+</span>
+              <span class="text-[16px] leading-none text-heading transition-transform group-open:rotate-45">
+                +
+              </span>
             </summary>
-            <ol class="space-y-2.5 mt-3">
+            <ol class="mt-3 space-y-2.5">
               {toc.map((item) => (
                 <li>
                   <a
                     href={`#${item.id}`}
                     data-toc-link
-                    class="block text-[14px] md:text-[15px] font-normal leading-[150%] text-muted hover:text-heading"
+                    class="block font-body text-[14px] font-normal leading-[150%] text-muted hover:text-heading md:text-[15px]"
                   >
                     {item.title}
                   </a>
@@ -55,6 +73,7 @@ const isSticky = variant === 'sticky';
             </ol>
           </details>
         )}
+
         {isSticky && (
           <ol class="space-y-2.5">
             {toc.map((item) => (
@@ -62,7 +81,7 @@ const isSticky = variant === 'sticky';
                 <a
                   href={`#${item.id}`}
                   data-toc-link
-                  class="block text-[14px] md:text-[15px] font-normal leading-[150%] text-muted hover:text-heading"
+                  class="block font-body text-[14px] font-normal leading-[150%] text-muted hover:text-heading md:text-[15px]"
                 >
                   {item.title}
                 </a>
@@ -74,23 +93,23 @@ const isSticky = variant === 'sticky';
     )
   }
 
+  {/* ── Tags (sticky only) ────────────────────────────────────── */}
   {
-    isSticky && (
-      <div class:list={['rounded-lg bg-card-light p-5', toc.length > 0 && 'mt-8']}>
-        <p class="text-[18px] md:text-[20px] font-sans font-medium leading-[130%] text-heading mb-4">{ctaTitle}</p>
-        <div class="flex flex-col gap-1.5">
-          <Button
-            variant="primary"
-            text={PRIMARY_CTA_LABEL}
-            href={ctaHref}
-            hideNote={true}
-            class="w-auto self-start"
-          />
-          <CTANote />
+    isSticky && tags && tags.length > 0 && (
+      <div class:list={['mt-6', toc.length > 0 && 'border-t border-banner-line pt-6']}>
+        <p class="mb-2.5 font-body text-[11px] font-bold uppercase tracking-wider text-muted">Tags</p>
+        <div class="flex flex-wrap gap-1.5">
+          {tags.map((tag) => (
+            <span class="border border-banner-line bg-page px-2.5 py-1 font-body text-[12px] font-medium text-muted">
+              {tag}
+            </span>
+          ))}
         </div>
       </div>
     )
   }
+
+
 </blog-toc-nav>
 
 <style>
@@ -108,12 +127,13 @@ const isSticky = variant === 'sticky';
 {
   isSticky && (
     <script>
+      // ── TOC scroll-spy ──────────────────────────────────────────────────────
       class BlogTocNav extends HTMLElement {
-        abort;
+        abort?: () => void;
 
         connectedCallback() {
           const links = Array.from(this.querySelectorAll('a[data-toc-link]'));
-          const items = [];
+          const items: { link: Element; target: HTMLElement }[] = [];
 
           for (const link of links) {
             const id = decodeURIComponent(link.getAttribute('href') || '').replace('#', '');
@@ -121,36 +141,37 @@ const isSticky = variant === 'sticky';
             if (target) items.push({ link, target });
           }
 
-          if (!items.length) return;
+          if (items.length) {
+            const marker = () => {
+              const header = document.getElementById('header');
+              const headerH = header?.getBoundingClientRect().height ?? 72;
+              return Math.max(headerH + 56, 168);
+            };
 
-          const marker = () => {
-            const header = document.getElementById('header');
-            const headerH = header?.getBoundingClientRect().height ?? 72;
-            return Math.max(headerH + 56, 168);
-          };
+            const sync = () => {
+              const line = marker();
+              let active = items[0];
+              for (const item of items) {
+                if (item.target.getBoundingClientRect().top <= line) active = item;
+              }
+              for (const item of items) {
+                if (item === active) item.link.setAttribute('aria-current', 'location');
+                else item.link.removeAttribute('aria-current');
+              }
+            };
 
-          const sync = () => {
-            const line = marker();
-            let active = items[0];
-            for (const item of items) {
-              if (item.target.getBoundingClientRect().top <= line) active = item;
-            }
+            sync();
+            window.addEventListener('scroll', sync, { passive: true });
+            window.addEventListener('resize', sync);
+            window.addEventListener('hashchange', sync);
+            this.abort = () => {
+              window.removeEventListener('scroll', sync);
+              window.removeEventListener('resize', sync);
+              window.removeEventListener('hashchange', sync);
+            };
+          }
 
-            for (const item of items) {
-              if (item === active) item.link.setAttribute('aria-current', 'location');
-              else item.link.removeAttribute('aria-current');
-            }
-          };
 
-          sync();
-          window.addEventListener('scroll', sync, { passive: true });
-          window.addEventListener('resize', sync);
-          window.addEventListener('hashchange', sync);
-          this.abort = () => {
-            window.removeEventListener('scroll', sync);
-            window.removeEventListener('resize', sync);
-            window.removeEventListener('hashchange', sync);
-          };
         }
 
         disconnectedCallback() {

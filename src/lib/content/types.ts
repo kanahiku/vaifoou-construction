@@ -403,6 +403,8 @@ export interface BlogPost {
   excerpt: string;
   publishDate: string;
   author?: string;
+  category?: string;
+  tags?: string[];
   image?: ContentImage;
   imagePlaceholder?: string;
   meta: {

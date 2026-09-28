@@ -1,0 +1,50 @@
+---
+/**
+ * TestimonialCard — a single curated testimonial card.
+ *
+ * Matches the home-page reviews grid card pattern.
+ * Data comes from Sanity `testimonial` documents via getTestimonials().
+ *
+ * Props match the Testimonial type from ~/lib/content/types.
+ */
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  quote: string;
+  name: string;
+  location?: string;
+  /** Attribution subtitle — job title, tenure, or context (e.g. "Homeowner, Kailua") */
+  tenure?: string;
+  /** Number of stars to show. Default: 5 */
+  stars?: number;
+}
+
+const { quote, name, location, tenure, stars = 5 } = Astro.props;
+const attribution = tenure || location || '';
+---
+
+<article class="flex h-full flex-col justify-between border border-banner-line bg-white p-4 md:p-8">
+  <div class="flex flex-col gap-4 pb-8">
+    {/* Stars */}
+    <div class="flex items-center gap-0.5 text-nav-cta" aria-label={`${stars} out of 5 stars`}>
+      {Array.from({ length: stars }).map(() => (
+        <Icon name="tabler:star-filled" class="size-4" aria-hidden="true" />
+      ))}
+    </div>
+
+    {/* Quote */}
+    <p class="font-body text-[15px] font-normal italic leading-[26px] text-heading">
+      &ldquo;{quote}&rdquo;
+    </p>
+  </div>
+
+  {/* Attribution */}
+  <div class="border-t border-banner-line pt-4">
+    <p class="font-display text-[18px] font-bold leading-5 tracking-[0.5px] text-heading uppercase">
+      {name}
+    </p>
+    {attribution && (
+      <p class="mt-1 font-body text-[13px] font-normal leading-4 text-muted">{attribution}</p>
+    )}
+  </div>
+</article>

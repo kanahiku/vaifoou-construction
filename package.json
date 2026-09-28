@@ -23,6 +23,7 @@
     "migrate:to-sanity": "tsx --env-file=.env scripts/migrate-to-sanity.ts",
     "migrate:services": "tsx --env-file=.env scripts/migrate-services-to-sanity.ts",
     "migrate:contact-reviews": "tsx --env-file=.env scripts/migrate-contact-reviews-to-sanity.ts",
+    "seed:blog": "tsx --env-file=.env scripts/seed-blog.ts",
     "studio": "cd studio && npm run dev"
   },
   "dependencies": {
