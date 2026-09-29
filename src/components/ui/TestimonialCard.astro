@@ -36,8 +36,21 @@ const {
 } = Astro.props;
 
 const attribution = tenure || location || '';
-const platformLabel = platform === 'yelp' ? 'Yelp' : platform === 'google' ? 'Google' : '';
-const platformIcon = platform === 'yelp' ? 'tabler:brand-yelp' : 'tabler:brand-google';
+const displayedPlatform = tone === 'featured' ? (platform ?? 'google') : platform;
+const platformLabel =
+  displayedPlatform === 'yelp'
+    ? 'Yelp'
+    : displayedPlatform === 'google'
+      ? 'Google'
+      : displayedPlatform === 'thumbtack'
+        ? 'Thumbtack'
+        : '';
+const platformIcon =
+  displayedPlatform === 'google'
+    ? 'tabler:brand-google'
+    : displayedPlatform === 'thumbtack'
+      ? 'tabler:pin-filled'
+      : null;
 const formattedDate = reviewedAt
   ? new Date(`${reviewedAt}T00:00:00`).toLocaleDateString('en-US', {
       month: 'short',
@@ -58,7 +71,10 @@ const formattedDate = reviewedAt
         </div>
         {platformLabel && (
           <span class="inline-flex items-center gap-1.5 text-page/80" title={`Reviewed on ${platformLabel}`}>
-            <Icon name={platformIcon} class="size-5" aria-hidden="true" />
+            {platformIcon
+              ? <Icon name={platformIcon} class="size-5" aria-hidden="true" />
+              : <span class="font-display text-[13px] font-bold leading-none tracking-[0.5px] uppercase">{platformLabel}</span>
+            }
             <span class="sr-only">{platformLabel}</span>
           </span>
         )}

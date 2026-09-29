@@ -10,6 +10,7 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
+import { photos } from '~/data/photos';
 
 const metadata = {
   title: `Veneer Rock Walls | ${site.name}`,
@@ -39,7 +40,8 @@ const faqs = [
   <SubServiceHero
     title="Veneer Rock Walls"
     body="We build veneer rock walls for residential and commercial properties across O'ahu. This application offers a distinct space-saving advantage for tight property lines. The material arrives palletized for highly efficient site handling and is lighter to carry. We utilize available flat corners to deliver a seamless finish. Every installation is backed by our workmanship guarantee."
-    imagePlaceholder="Veneer rock wall installation photo"
+    image={photos.veneer.src}
+    imageAlt={photos.veneer.alt}
   />
   <ServiceTable
     eyebrow="Comparison"

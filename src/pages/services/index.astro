@@ -7,7 +7,9 @@
 import Layout from '~/layouts/PageLayout.astro';
 import { Image } from 'astro:assets';
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FillImage from '~/components/ui/FillImage.astro';
+import ComparisonTable from '~/components/ui/ComparisonTable.astro';
+import { photos } from '~/data/photos';
 import brickMotif from '~/assets/brick-motif-wide-light.svg';
 import iconRockWall from '~/assets/icons/rock-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
@@ -27,48 +29,36 @@ const capabilities = [
     iconW: 22,
     iconH: 12,
     title: 'Rock Walls',
+    href: '/services/rock-walls/',
     description:
       'Custom property boundaries and retaining structures built with hand-selected volcanic basalt.',
-    subLinks: [
-      { text: 'Veneer Rock Walls',   href: '/services/rock-walls/veneer/'   },
-      { text: 'Rock Wall Repair',    href: '/services/rock-walls/repair/'   },
-      { text: 'Rock Retaining Walls',href: '/services/rock-walls/retaining/'},
-    ],
   },
   {
     icon: iconWalls,
     iconW: 18,
     iconH: 14,
     title: 'Retaining Walls',
+    href: '/services/retaining-walls/',
     description:
       'Rock and CMU options compared for hillside retention.',
-    subLinks: [],
   },
   {
     icon: iconWalls,
     iconW: 18,
     iconH: 14,
     title: 'CMU & Block Walls',
+    href: '/services/cmu-block-walls/',
     description:
       'Retaining walls and block fences built for long-term stability.',
-    subLinks: [],
   },
   {
     icon: iconHammer,
     iconW: 16,
     iconH: 18,
     title: 'Concrete Services',
+    href: '/services/concrete/',
     description:
       'Custom driveways, new foundations, and decorative surfaces poured for durability.',
-    subLinks: [
-      { text: 'Driveways',               href: '/services/concrete/driveways/'          },
-      { text: 'Sidewalks & Walkways',    href: '/services/concrete/sidewalks/'          },
-      { text: 'Patios',                  href: '/services/concrete/patios/'             },
-      { text: 'Steps & Stairways',       href: '/services/concrete/steps/'              },
-      { text: 'Foundations',             href: '/services/concrete/foundations/'        },
-      { text: 'Stamped & Decorative',    href: '/services/concrete/stamped-decorative/' },
-      { text: 'Sealing',                 href: '/services/concrete/sealing/'            },
-    ],
   },
 ];
 
@@ -88,8 +78,7 @@ const scopeRows = [
   ════════════════════════════════════════════════════════════ */}
   <section class="relative w-full overflow-hidden border-b border-banner-line min-h-[400px] md:min-h-[500px]">
 
-    {/* Background photo placeholder */}
-    <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label="Services hero image placeholder" />
+    <FillImage src={photos.hero.src} alt={photos.hero.alt} eager />
 
     {/* Gradient overlay */}
     <div
@@ -142,22 +131,21 @@ const scopeRows = [
       <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10">
         {[
           {
-            label: 'Residential',
             title: 'Working on your home?',
             cta: 'View Residential Masonry & Concrete',
             href: '/who-we-work-with/residential/',
+            photo: photos.residential,
           },
           {
-            label: 'Commercial & Civil',
             title: 'Managing a commercial property, an HOA or a job site?',
             cta: 'View Commercial Masonry & Concrete',
             href: '/who-we-work-with/commercial/',
+            photo: photos.commercial,
           },
-        ].map(({ label, title, cta, href }) => (
+        ].map(({ title, cta, href, photo }) => (
           <article class="flex h-full flex-col overflow-hidden border border-banner-line bg-card">
             <div class="relative h-48 w-full shrink-0 md:h-[240px]">
-              <!-- TODO: replace with <Image> when asset is ready -->
-              <HeroImagePlaceholder fill class="absolute inset-0" label={`${label} image placeholder`} />
+              <FillImage src={photo.src} alt={photo.alt} />
             </div>
             <div class="flex flex-1 flex-col p-6 md:p-10">
               <h3 class="font-display text-[22px] font-semibold leading-7 tracking-[0.22px] text-heading uppercase md:text-[26px] md:leading-8">
@@ -166,12 +154,9 @@ const scopeRows = [
               <div class="mt-auto pt-8">
                 <a
                   href={href}
-                  class="cta-md inline-flex w-fit items-center justify-center gap-2 bg-nav-cta text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[18px]"
+                  class="cta-md inline-flex w-fit items-center justify-center bg-nav-cta text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[18px]"
                 >
                   {cta}
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
-                    <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
-                  </svg>
                 </a>
               </div>
             </div>
@@ -184,21 +169,24 @@ const scopeRows = [
 
   {/* ═══════════════════════════════════════════════════════════
       SECTION 3 — CORE CAPABILITIES
-      bg-card · 2×2 service card grid · sub-service links
+      bg-card · 2×2 clickable service card grid
   ════════════════════════════════════════════════════════════ */}
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
 
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Core Masonry &amp; Concrete Capabilities</h2>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8">
-        {capabilities.map(({ icon, iconW, iconH, title, description, subLinks }) => (
-          <article class="flex h-full flex-col border border-banner-line bg-white p-6 md:p-10">
+        {capabilities.map(({ icon, iconW, iconH, title, href, description }) => (
+          <a
+            href={href}
+            class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-10"
+          >
             <div class="flex flex-col gap-3 flex-1">
               {/* Icon inline with title */}
-              <h3 class="flex items-center gap-2.5 font-display text-[22px] font-semibold leading-none tracking-[0.22px] text-heading uppercase md:text-[26px]">
+              <h3 class="flex items-center gap-2.5 font-display text-[22px] font-semibold leading-none tracking-[0.22px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
                 <Image
                   src={icon}
                   alt=""
@@ -210,22 +198,8 @@ const scopeRows = [
                 {title}
               </h3>
               <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>
-
-              {subLinks.length > 0 && (
-                <p class="flex flex-wrap items-center gap-x-2 gap-y-1 pt-1 font-body text-[13px] font-semibold leading-5 tracking-[0.3px] text-nav-cta uppercase">
-                  {subLinks.map(({ text, href: subHref }, index) => (
-                    <>
-                      {index > 0 && <span class="text-muted" aria-hidden="true">·</span>}
-                      <a href={subHref} class="transition-colors hover:text-heading">
-                        {text}
-                      </a>
-                    </>
-                  ))}
-                </p>
-              )}
             </div>
-
-          </article>
+          </a>
         ))}
       </div>
     </div>
@@ -243,30 +217,11 @@ const scopeRows = [
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[40px] md:leading-[48px] md:tracking-[-0.2px]">Service Scope</h2>
       </div>
 
-      <div class="overflow-hidden border border-banner-line">
-        {/* Table header */}
-        <div class="grid grid-cols-2 border-b border-white/10 bg-footer">
-          <div class="px-6 py-4 font-display text-[13px] font-bold leading-4 tracking-[1.3px] text-page-end uppercase">
-            What We Build
-          </div>
-          <div class="border-l border-white/10 px-6 py-4 font-display text-[13px] font-bold leading-4 tracking-[1.3px] text-page-end uppercase">
-            What We Do Not Cover
-          </div>
-        </div>
-        {/* Table rows — very subtle alternation */}
-        {scopeRows.map(({ build, notCover }, i) => (
-          <div class:list={['grid grid-cols-2 border-b border-banner-line last:border-b-0', i % 2 === 0 ? 'bg-white' : 'bg-page']}>
-            <div class="flex items-center gap-2 px-6 py-4 font-body text-[15px] font-normal leading-6 text-heading">
-              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-nav-cta" aria-hidden="true"></span>
-              {build}
-            </div>
-            <div class="flex items-center gap-2 border-l border-banner-line px-6 py-4 font-body text-[15px] font-normal leading-6 text-muted">
-              <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-muted/40" aria-hidden="true"></span>
-              {notCover}
-            </div>
-          </div>
-        ))}
-      </div>
+      <ComparisonTable
+        featureLabel="What We Build"
+        columns={["What We Do Not Cover"]}
+        rows={scopeRows.map(({ build, notCover }) => ({ feature: build, values: [notCover] }))}
+      />
     </div>
   </section>
 

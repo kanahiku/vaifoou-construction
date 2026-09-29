@@ -3,6 +3,7 @@ import type { StructureBuilder } from 'sanity/structure';
 const SINGLETONS: Record<string, string> = {
   siteNavigation: 'singleton-navigation',
   siteFooter: 'singleton-footer',
+  homePage: 'singleton-home',
 };
 
 export const structure = (S: StructureBuilder) =>
@@ -20,20 +21,30 @@ export const structure = (S: StructureBuilder) =>
       S.divider(),
 
       S.listItem()
+        .title('Homepage')
+        .child(S.document().schemaType('homePage').documentId('singleton-home').title('Homepage')),
+
+      S.divider(),
+
+      S.listItem()
         .title('Blog')
         .schemaType('blogPost')
         .child(
-          S.documentTypeList('blogPost').title('Blog posts').defaultOrdering([{ field: 'publishDate', direction: 'desc' }])
+          S.documentTypeList('blogPost')
+            .title('Blog posts')
+            .defaultOrdering([{ field: 'publishDate', direction: 'desc' }])
         ),
 
       S.listItem()
         .title('Testimonials')
         .schemaType('testimonial')
         .child(
-          S.documentTypeList('testimonial').title('Testimonials').defaultOrdering([
-            { field: 'order', direction: 'asc' },
-            { field: 'name', direction: 'asc' },
-          ])
+          S.documentTypeList('testimonial')
+            .title('Testimonials')
+            .defaultOrdering([
+              { field: 'order', direction: 'asc' },
+              { field: 'name', direction: 'asc' },
+            ])
         ),
     ]);
 

@@ -10,6 +10,7 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
+import { photos } from '~/data/photos';
 
 const metadata = {
   title: `Stem Walls | ${site.name}`,
@@ -43,14 +44,15 @@ const faqs = [
   <SubServiceHero
     title="Stem Walls"
     body="We construct concrete stem walls for residential and commercial buildings across O'ahu. A stem wall is the short concrete wall that runs between your foundation footing and the frame of the structure above. Our family brings a 25+ year trade legacy to every project site. Every installation is backed by our workmanship guarantee."
-    imagePlaceholder="Concrete stem wall construction photo"
+    image={photos.commercial.src}
+    imageAlt={photos.commercial.alt}
   />
   <ServiceTable
     heading="Stem Wall Support Structure"
     col1="Role of a Stem Wall"
     rows={tableRows}
   />
-  <ServiceLinks categoryLabel="Concrete Services" items={links} />
+  <ServiceLinks categoryLabel="Concrete Services" items={links} maxItems={links.length} />
   <FAQs title="Frequently Asked Questions" items={faqs}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>

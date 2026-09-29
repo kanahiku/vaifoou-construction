@@ -85,57 +85,15 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-medium leading-[130%]
         }
 
         if (block._type === 'table') {
-          const colCount = block.headerRow.length;
           return (
-            <figure class="mt-8 overflow-x-auto">
-              <table class="w-full border-separate border-spacing-0 text-left font-sans text-[14px] md:text-[15px]" style={`min-width: ${colCount * 160}px`}>
-                <thead>
-                  <tr>
-                    {block.headerRow.map((header, hi) => (
-                      <th
-                        class:list={[
-                          'bg-card-dark text-white font-medium leading-[160%] px-4 py-3 border-r border-accent last:border-r-0',
-                          hi === 0 && 'rounded-tl-lg',
-                          hi === block.headerRow.length - 1 && 'rounded-tr-lg text-white border-r-0',
-                        ]}
-                      >
-                        {header}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {block.rows.map((row, ri) => {
-                    const isLast = ri === block.rows.length - 1;
-                    return (
-                      <tr>
-                        {row.cells.map((cell, ci) => {
-                          const isFirstCol = ci === 0;
-                          const isLastCol = ci === row.cells.length - 1;
-                          const CellTag = isFirstCol ? 'th' : 'td';
-                          return (
-                            <CellTag
-                              class:list={[
-                                'align-top bg-card-light leading-[160%] px-4 py-4 border-r border-accent last:border-r-0',
-                                isFirstCol
-                                  ? 'font-medium text-heading'
-                                  : 'font-normal text-muted',
-                                isLast && isFirstCol && 'rounded-bl-lg',
-                                isLast && isLastCol && 'rounded-br-lg',
-                              ]}
-                            >
-                              {cell}
-                            </CellTag>
-                          );
-                        })}
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              {block.caption && (
-                <figcaption class="mt-2 text-[13px] text-muted/70 text-center">{block.caption}</figcaption>
-              )}
+            <figure class="mt-8">
+              <ComparisonTable
+                featureLabel={block.headerRow[0]}
+                columns={block.headerRow.slice(1)}
+                rows={block.rows.map((r) => ({ feature: r.cells[0], values: r.cells.slice(1) }))}
+                caption={block.caption}
+                minWidth={`${block.headerRow.length * 180}px`}
+              />
             </figure>
           );
         }
@@ -211,69 +169,18 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-medium leading-[130%]
         {section._type === 'comparisonTableSection' && (
           <>
             {section.intro && <p class={`${paragraphClass} mb-6`}>{section.intro}</p>}
-            {section.column3 ? (
-              <div class="overflow-x-auto">
-                <table class="w-full min-w-[720px] border-separate border-spacing-0 text-left font-sans">
-                  <thead>
-                    <tr>
-                      <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tl-lg border-r border-accent">
-                        {section.featureLabel}
-                      </th>
-                      <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
-                        {section.column1}
-                      </th>
-                      <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
-                        {section.column2}
-                      </th>
-                      <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tr-lg">
-                        {section.column3}
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {section.rows.map((row, rowIndex) => {
-                      const isLast = rowIndex === section.rows.length - 1;
-                      return (
-                        <tr>
-                          <th
-                            class:list={[
-                              'align-top bg-card-light text-heading font-sans font-medium text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent',
-                              isLast && 'rounded-bl-lg',
-                            ]}
-                          >
-                            {row.feature}
-                          </th>
-                          <td class="align-top bg-card-light text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
-                            {row.cell1}
-                          </td>
-                          <td class="align-top bg-card-light text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent">
-                            {row.cell2}
-                          </td>
-                          <td
-                            class:list={[
-                              'align-top bg-card-light text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5',
-                              isLast && 'rounded-br-lg',
-                            ]}
-                          >
-                            {row.cell3}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <ComparisonTable
-                featureLabel={section.featureLabel}
-                columns={[section.column1, section.column2]}
-                rows={section.rows.map((row) => ({
-                  feature: row.feature,
-                  left: row.cell1,
-                  right: row.cell2,
-                }))}
-              />
-            )}
+            <ComparisonTable
+              featureLabel={section.featureLabel}
+              columns={section.column3
+                ? [section.column1, section.column2, section.column3]
+                : [section.column1, section.column2]}
+              rows={section.rows.map((row) => ({
+                feature: row.feature,
+                values: section.column3
+                  ? [row.cell1, row.cell2, row.cell3 ?? '']
+                  : [row.cell1, row.cell2],
+              }))}
+            />
           </>
         )}
 
@@ -424,12 +331,11 @@ const h3Class = 'text-[16px] md:text-[18px] font-sans font-medium leading-[130%]
     color: var(--aw-color-btn-link);
     font-weight: 600;
     text-decoration: none;
-    text-underline-offset: 2px;
     transition: color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
   div :global(a:hover) {
     color: var(--aw-color-btn-link-hover);
-    text-decoration: underline;
+    text-decoration: none;
   }
   div :global(strong) {
     font-weight: 600;

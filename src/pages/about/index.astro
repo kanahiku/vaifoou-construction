@@ -5,6 +5,9 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import FillImage from '~/components/ui/FillImage.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import { photos } from '~/data/photos';
 import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
 
@@ -53,34 +56,20 @@ const team = [
 
 <Layout metadata={metadata}>
 
-  {/* ── Hero ─────────────────────────────────────────────────── */}
-  <section class="relative w-full bg-heading py-16 md:py-24">
-    <div class="site-frame flex flex-col gap-4 max-w-4xl">
-      <h1 class="font-display text-[36px] font-bold leading-tight tracking-[-0.5px] text-page uppercase md:text-[56px] md:leading-[62px]">
-        Vaifoou Construction LLC
-      </h1>
-      <p class="max-w-2xl font-body text-[17px] font-normal leading-7 text-page/65">
-        A locally and family-owned masonry and concrete contractor serving O'ahu, built on a 25+ year legacy in the trade.
-      </p>
-
-      {/* Trust strip */}
-      <div class="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-page/10 pt-5">
-        {[CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"].map((item, i) => (
-          <>
-            {i > 0 && <span class="font-display text-[13px] font-bold tracking-[0.65px] text-page/25 uppercase" aria-hidden="true">•</span>}
-            <span class="whitespace-nowrap font-display text-[13px] font-bold tracking-[0.65px] text-page/55 uppercase">{item}</span>
-          </>
-        ))}
-      </div>
-    </div>
-  </section>
+  <SubServiceHero
+    title="Vaifoou Construction LLC"
+    body="A locally and family-owned masonry and concrete contractor serving O'ahu, built on a 25+ year legacy in the trade."
+    image={photos.commercial.src}
+    imageAlt={photos.commercial.alt}
+    showCtas={false}
+  />
 
   {/* ── Our Story ────────────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-page py-12 md:py-24">
     <div class="site-frame flex flex-col gap-10 md:gap-16">
 
       {/* Intro */}
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-10">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Our Story</h2>
         <p class="mt-3 max-w-3xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
           Vaifoou Construction LLC is a locally and family-owned masonry and concrete contractor serving O'ahu. While our company operates under a modern structure today, our foundation is built on a family legacy spanning more than 25 years in the trade.
@@ -121,15 +110,10 @@ const team = [
           </div>
         </div>
 
-        {/* Right: placeholder photo area */}
         <div class="flex flex-col gap-3 lg:sticky lg:top-24">
-          <div
-            class="w-full bg-section-grey"
-            style="aspect-ratio: 4 / 5;"
-            aria-hidden="true"
-          ></div>
-          {/* TODO: replace with <Image> when client provides a team/job-site photo */}
-          <p class="font-body text-[12px] text-muted text-center">Job-site or team photo — provided by client</p>
+          <div class="relative w-full overflow-hidden" style="aspect-ratio: 4 / 5;">
+            <FillImage src={photos.commercial.src} alt={photos.commercial.alt} />
+          </div>
         </div>
       </div>
 
@@ -140,20 +124,17 @@ const team = [
   <section class="w-full border-b border-banner-line bg-card py-12 md:py-20">
     <div class="site-frame flex flex-col gap-10">
 
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Our Values</h2>
         <p class="mt-3 max-w-2xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
           Our work is guided by our faith and our family.
         </p>
       </div>
 
-      <div class="grid grid-cols-1 gap-px bg-banner-line sm:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 md:gap-8">
         {values.map(({ label, body }) => (
-          <div class="flex flex-col gap-4 bg-card px-0 py-8 sm:px-8">
-            <div class="flex size-10 items-center justify-center rounded-full bg-nav-cta/10">
-              <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
-            </div>
-            <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[20px]">
+          <div class="group flex flex-col gap-4 border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 sm:p-8">
+            <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[20px]">
               {label}
             </h3>
             <p class="font-body text-[15px] font-normal leading-7 text-banner-note">{body}</p>
@@ -168,11 +149,8 @@ const team = [
   <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
     <div class="site-frame flex flex-col gap-10">
 
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Meet the Team</h2>
-        <p class="mt-1 font-body text-[13px] italic text-muted">
-          [BEGIN TEAM BIOS — Update with specific names, roles, and real photos when supplied]
-        </p>
       </div>
 
       <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">

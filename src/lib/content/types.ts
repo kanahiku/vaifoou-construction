@@ -143,6 +143,19 @@ export interface HomePageContent {
   };
 }
 
+export interface HomeMediaCard {
+  title?: string;
+  href?: string;
+  image?: ContentImage;
+}
+
+export interface HomeMediaContent {
+  heroImage?: ContentImage;
+  heroImageMobile?: ContentImage;
+  audienceCards: HomeMediaCard[];
+  bannerImage?: ContentImage;
+}
+
 // ─── Shared CMS sections (service pages and later templates) ───────────────────
 
 export interface LinkedCardItem {
@@ -539,7 +552,7 @@ export type PodcastPartGroup = {
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 
-export type ReviewPlatform = 'google' | 'yelp';
+export type ReviewPlatform = 'google' | 'yelp' | 'thumbtack';
 
 export interface Testimonial {
   _id: string;

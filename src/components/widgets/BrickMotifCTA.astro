@@ -3,7 +3,7 @@
  * BrickMotifCTA — light-background CTA closing section with brick-motif texture.
  *
  * Used as the last section on all service sub-pages.
- * Phone, licence and trust-bar items are wired automatically from config.
+ * Phone CTA is wired automatically from config.
  * Only pass `heading` (required) and optionally `eyebrow` / `note`.
  * Explicit eyebrow text is folded into the heading instead of rendered separately.
  */
@@ -32,12 +32,6 @@ const {
   note = "We bring our family\u2019s 25+ year trade legacy to every project site. Contact us to schedule an estimate. Please note we are closed on Sundays.",
 } = Astro.props;
 const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
-
-const trustItems = [
-  CONTACT.license,
-  'Licensed & Insured',
-  "Serving All of O'ahu",
-];
 ---
 
 <section class="w-full bg-card py-6 md:py-24">
@@ -77,18 +71,6 @@ const trustItems = [
           <PhoneIcon />{CONTACT.phone.display}
         </a>
       </div>
-
-      {/* Trust strip */}
-      <p class="relative z-10 flex w-full flex-wrap items-center gap-x-5 gap-y-2">
-        {trustItems.map((item, i) => (
-          <>
-            {i > 0 && (
-              <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
-            )}
-            <span class="whitespace-nowrap font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-note uppercase">{item}</span>
-          </>
-        ))}
-      </p>
 
     </div>
   </div>

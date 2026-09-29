@@ -1,9 +1,5 @@
 import { sanityClient } from '../sanity/client';
-import {
-  resolveContentImage,
-  resolveContentImageOrEmpty,
-  type SanityImageFields,
-} from '../sanity/image';
+import { resolveContentImage, resolveContentImageOrEmpty, type SanityImageFields } from '../sanity/image';
 import type {
   BlogContentBlock,
   BlogPost,
@@ -18,6 +14,7 @@ import type {
   ContentImage,
   FormHelpOption,
   HomePageContent,
+  HomeMediaContent,
   NavigationContent,
   ReviewsPageContent,
   ServicePageContent,
@@ -117,6 +114,60 @@ export async function getSanityHomeContent(): Promise<HomePageContent> {
       ...page.whyInspect,
       image: resolveContentImageOrEmpty(page.whyInspect?.image),
     },
+  };
+}
+
+const HOME_MEDIA_QUERY = /* groq */ `
+  *[_type == "homePage" && _id == "singleton-home"][0] {
+    hero {
+      "heroImage": {
+        "src": coalesce(heroImage.asset->url, ""),
+        "alt": coalesce(heroImage.alt, ""),
+        "crop": heroImage.crop,
+        "hotspot": heroImage.hotspot,
+        "asset": heroImage.asset
+      },
+      "heroImageMobile": {
+        "src": coalesce(heroImageMobile.asset->url, ""),
+        "alt": coalesce(heroImageMobile.alt, heroImage.alt, ""),
+        "crop": heroImageMobile.crop,
+        "hotspot": heroImageMobile.hotspot,
+        "asset": heroImageMobile.asset
+      }
+    },
+    "audienceCards": audienceCards[] {
+      title,
+      href,
+      "image": {
+        ${IMAGE_PROJECTION}
+      }
+    },
+    highlightBanner {
+      "image": {
+        ${IMAGE_PROJECTION}
+      }
+    }
+  }
+`;
+
+export async function getSanityHomeMediaContent(): Promise<HomeMediaContent | null> {
+  const page = await sanityClient.fetch<{
+    hero?: { heroImage?: FetchedImage; heroImageMobile?: FetchedImage };
+    audienceCards?: Array<{ title?: string; href?: string; image?: FetchedImage }>;
+    highlightBanner?: { image?: FetchedImage };
+  } | null>(HOME_MEDIA_QUERY);
+
+  if (!page) return null;
+
+  return {
+    heroImage: resolveContentImage(page.hero?.heroImage),
+    heroImageMobile: resolveContentImage(page.hero?.heroImageMobile),
+    audienceCards: (page.audienceCards ?? []).map((card) => ({
+      title: card.title,
+      href: card.href,
+      image: resolveContentImage(card.image),
+    })),
+    bannerImage: resolveContentImage(page.highlightBanner?.image),
   };
 }
 
@@ -222,9 +273,9 @@ const SERVICE_PAGE_QUERY = /* groq */ `
   }
 `;
 
-function normalizeHeroImage<T extends { image?: FetchedImage | ContentImage; imageMobile?: FetchedImage | ContentImage }>(
-  hero: T
-): T {
+function normalizeHeroImage<
+  T extends { image?: FetchedImage | ContentImage; imageMobile?: FetchedImage | ContentImage },
+>(hero: T): T {
   return {
     ...hero,
     image: resolveContentImage(hero.image as FetchedImage | undefined),
@@ -440,17 +491,10 @@ function portableBlockText(block: SanityPortableBlock): string {
 }
 
 function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function spansToHtml(
-  children: SanitySpan[] | undefined,
-  markDefs: SanityMarkDef[] | undefined
-): string {
+function spansToHtml(children: SanitySpan[] | undefined, markDefs: SanityMarkDef[] | undefined): string {
   if (!Array.isArray(children)) return '';
   const defsMap = new Map((markDefs ?? []).map((d) => [d._key, d]));
 
@@ -871,9 +915,7 @@ function normalizePodcastEpisode(doc: SanityPodcastEpisode): PodcastEpisode | nu
 
 export async function getSanityPodcastEpisodes(): Promise<PodcastEpisode[]> {
   const docs = await sanityClient.fetch<SanityPodcastEpisode[]>(PODCAST_EPISODES_QUERY);
-  return (docs ?? [])
-    .map(normalizePodcastEpisode)
-    .filter((ep): ep is PodcastEpisode => Boolean(ep));
+  return (docs ?? []).map(normalizePodcastEpisode).filter((ep): ep is PodcastEpisode => Boolean(ep));
 }
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
@@ -906,7 +948,7 @@ type SanityTestimonial = {
 
 function normalizeTestimonial(doc: SanityTestimonial): Testimonial | null {
   if (!doc?._id || !doc.quote?.trim() || !doc.name?.trim()) return null;
-  const platform = doc.platform === 'google' || doc.platform === 'yelp' ? doc.platform : undefined;
+  const platform = doc.platform === 'google' || doc.platform === 'yelp' || doc.platform === 'thumbtack' ? doc.platform : undefined;
   return {
     _id: doc._id,
     quote: doc.quote.trim(),

@@ -44,7 +44,21 @@ interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'width' | 'height'> 
   layout?: Layout;
 }
 
-const { src, alt, width, height, widths, format, layout = 'constrained', class: className, style } = Astro.props;
+const {
+  src,
+  alt,
+  width,
+  height,
+  widths,
+  format,
+  layout = 'constrained',
+  class: className,
+  style,
+  ...rest
+} = Astro.props;
+
+rest.loading ??= 'lazy';
+rest.decoding ??= 'async';
 
 // --- Accessibility ---------------------------------------------------------
 if (alt === undefined || alt === null) {
@@ -62,8 +76,7 @@ let h = toNumber(height);
 // --- Resolve src (handles `~/assets/...` paths) ----------------------------
 const resolved = await findImage(src);
 
-const isSanityUrl =
-  typeof resolved === 'string' && /^https?:\/\/cdn\.sanity\.io\//.test(resolved);
+const isSanityUrl = typeof resolved === 'string' && /^https?:\/\/cdn\.sanity\.io\//.test(resolved);
 
 // Unpic mis-detects cdn.sanity.io as Imgix. Sanity also 403s CORS requests
 // (`crossorigin="anonymous"`), so those assets are rendered as a plain <img>.
@@ -225,12 +238,39 @@ const placeholderStyle =
     .filter(Boolean)
     .join(';') || undefined;
 
-// Keep the original image resolution path intact for dimensions, but render the branded placeholder.
-const _resolvedImageState = { AstroImage, resolved, cdnSrc, cdnSrcSet, nativeLayout, localStyle, cdnStyle, format };
+const canRenderRemote = Boolean(isRemoteImg && cdnSrc);
+const canRenderLocal = Boolean(resolved && typeof resolved === 'object' && w && h);
 ---
 
 {
-  _resolvedImageState && (
+  canRenderRemote ? (
+    <img
+      src={cdnSrc}
+      srcset={cdnSrcSet}
+      width={w}
+      height={h}
+      alt={alt}
+      class={className}
+      {...(isCdnUrl ? { crossorigin: 'anonymous', referrerpolicy: 'no-referrer' } : {})}
+      {...rest}
+      style={cdnStyle}
+    />
+  ) : canRenderLocal ? (
+    <AstroImage
+      {...({
+        ...rest,
+        src: resolved,
+        width: w,
+        height: h,
+        alt,
+        widths,
+        format,
+        layout: nativeLayout,
+        class: className,
+        style: localStyle,
+      } as unknown as Parameters<typeof AstroImage>[0])}
+    />
+  ) : (
     <HeroImagePlaceholder
       label={alt ? `${alt} placeholder` : `${site.name} photo placeholder`}
       fill={layout === 'cover' || layout === 'full-width' || layout === 'none'}

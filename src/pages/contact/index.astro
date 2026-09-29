@@ -5,9 +5,11 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
 import { CONTACT } from '~/config/contact';
 import { site } from '~/config/site';
 import { FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY } from '~/lib/forms';
+import { photos } from '~/data/photos';
 
 const metadata = {
   title: `Contact Vaifoou Construction | O'ahu Masonry & Concrete`,
@@ -56,18 +58,13 @@ const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
 ---
 
 <Layout metadata={metadata}>
-  {/* ── Hero ──────────────────────────────────────────────────── */}
-  <section class="relative w-full bg-heading py-16 md:py-24">
-    <div class="site-frame flex flex-col gap-4">
-      <h1 class="font-display text-[36px] font-bold leading-tight tracking-[-0.5px] text-page uppercase md:text-[52px] md:leading-[58px]">
-        Contact Vaifoou Construction
-      </h1>
-      <p class="max-w-2xl font-body text-[16px] font-normal leading-7 text-page/65">
-        Schedule a site consultation for your masonry or concrete project. We serve residential and commercial properties
-        across O'ahu.
-      </p>
-    </div>
-  </section>
+  <SubServiceHero
+    title="Contact Vaifoou Construction"
+    body="Schedule a site consultation for your masonry or concrete project. We serve residential and commercial properties across O'ahu."
+    image={photos.hero.src}
+    imageAlt={photos.hero.alt}
+    showCtas={false}
+  />
 
   {/* ── Main content: Form + Sidebar ─────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-page">
@@ -76,7 +73,7 @@ const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
 
         {/* ── Estimate Form ─────────────────────────────────── */}
         <div class="flex flex-col gap-8">
-          <div class="flex max-w-2xl flex-col gap-2 border-b border-banner-line pb-6">
+          <div class="flex max-w-2xl flex-col gap-2">
             <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]">
               Request a Free Estimate
             </h2>

@@ -1,71 +1,100 @@
 ---
-export interface Props {
-  featureLabel?: string;
-  columns: [string, string];
-  rows: Array<{ feature: string; left: string; right: string }>;
-  isDark?: boolean;
+/**
+ * ComparisonTable — the single shared table component for the entire site.
+ *
+ * Visual design matches the "Service Scope" table on /services/:
+ *  • Bordered container with overflow clip
+ *  • Dark full-width header bar (bg-footer)
+ *  • Alternating row backgrounds (bg-white / bg-section-grey)
+ *  • Vertical column dividers
+ *
+ * Used directly by BlogArticleBody, CmsSections, and internally by ServiceTable.
+ */
+
+export interface TableRow {
+  /** Text shown in the first (feature/label) column. */
+  feature: string;
+  /** One value per data column; length must match `columns`. */
+  values: string[];
 }
 
-const { featureLabel = 'Feature', columns, rows, isDark = false } = Astro.props;
+export interface Props {
+  /** Header for the row-label column. Defaults to "Feature". */
+  featureLabel?: string;
+  /** Headers for the data columns (1–4 supported). */
+  columns: string[];
+  /** Table rows. */
+  rows: TableRow[];
+  /** Optional caption rendered below the table. */
+  caption?: string;
+  /**
+   * Minimum width of the scrollable table (CSS value).
+   * Auto-calculated from column count when omitted.
+   */
+  minWidth?: string;
+}
 
-const cellBg = isDark ? 'bg-white' : 'bg-card-light';
-const headerCell = 'font-sans font-medium text-[16px] leading-[160%]';
-const rowLabel = 'font-sans font-medium text-[15px] leading-[160%]';
-const rowCell = 'font-sans font-normal text-[15px] leading-[160%]';
+const { featureLabel = 'Feature', columns, rows, caption, minWidth } = Astro.props;
+
+const autoMinWidth =
+  columns.length <= 1 ? '380px' : columns.length === 2 ? '560px' : '680px';
+const tableMinWidth = minWidth ?? autoMinWidth;
+
+/** Strip bullet characters and collapse line-breaks so cell text is always inline. */
+const cleanCell = (value?: string) =>
+  String(value ?? '')
+    .replace(/\s*[•·]\s*/g, ', ')
+    .replace(/\s*[\r\n]+\s*(?:[-*]\s*)?/g, '; ')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/,\s*;/g, ';')
+    .trim();
 ---
 
 <div class="overflow-x-auto">
-  <table class="w-full min-w-[640px] border-separate border-spacing-0 text-left font-sans">
-    <thead>
-      <tr>
-        <th
-          class={`bg-card-dark text-white ${headerCell} px-4 md:px-5 py-3 md:py-4 rounded-tl-lg w-[22%] border-r border-accent`}
-        >
-          {featureLabel}
-        </th>
-        <th class={`bg-card-dark text-white ${headerCell} px-4 md:px-5 py-3 md:py-4 w-[39%] border-r border-accent`}>
-          {columns[0]}
-        </th>
-        <th
-          class={`bg-card-dark text-white ${headerCell} px-4 md:px-5 py-3 md:py-4 rounded-tr-lg w-[39%]`}
-        >
-          {columns[1]}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        rows.map(({ feature, left, right }, index) => {
-          const isLast = index === rows.length - 1;
-          return (
-            <tr>
-              <th
-                class:list={[
-                  `align-top ${cellBg} text-heading ${rowLabel} px-4 md:px-5 py-4 md:py-5 border-r border-accent`,
-                  isLast && 'rounded-bl-lg',
-                ]}
-              >
-                {feature}
-              </th>
-              <td
-                class:list={[
-                  `align-top ${cellBg} text-muted ${rowCell} px-4 md:px-5 py-4 md:py-5 border-r border-accent`,
-                ]}
-              >
-                {left}
+  <div class="overflow-hidden border border-banner-line" style={`min-width: ${tableMinWidth}`}>
+    <table class="w-full border-collapse text-left">
+
+      {/* ── Header ── */}
+      <thead>
+        <tr class="border-b border-white/10 bg-footer">
+          <th class="px-6 py-4 font-display text-[13px] font-bold leading-4 tracking-[1.3px] text-page-end uppercase">
+            {featureLabel}
+          </th>
+          {columns.map((col) => (
+            <th class="border-l border-white/10 px-6 py-4 font-display text-[13px] font-bold leading-4 tracking-[1.3px] text-page-end uppercase">
+              {col}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      {/* ── Body ── */}
+      <tbody>
+        {rows.map(({ feature, values }, ri) => (
+          <tr class:list={['border-b border-banner-line last:border-b-0', ri % 2 === 0 ? 'bg-white' : 'bg-card']}>
+
+            {/* Feature / label column */}
+            <td class="px-6 py-4 font-display text-[15px] font-semibold leading-6 tracking-[0.2px] text-heading uppercase">
+              {cleanCell(feature)}
+            </td>
+
+            {/* Data columns */}
+            {values.map((val) => (
+              <td class="border-l border-banner-line px-6 py-4 font-body text-[15px] font-normal leading-6 text-banner-note">
+                {cleanCell(val)}
               </td>
-              <td
-                class:list={[
-                  `align-top ${cellBg} text-muted ${rowCell} px-4 md:px-5 py-4 md:py-5`,
-                  isLast && 'rounded-br-lg',
-                ]}
-              >
-                {right}
-              </td>
-            </tr>
-          );
-        })
-      }
-    </tbody>
-  </table>
+            ))}
+
+          </tr>
+        ))}
+      </tbody>
+
+    </table>
+
+    {caption && (
+      <p class="border-t border-banner-line px-6 py-3 font-body text-[13px] text-muted/70">
+        {caption}
+      </p>
+    )}
+  </div>
 </div>

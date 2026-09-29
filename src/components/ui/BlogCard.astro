@@ -14,10 +14,10 @@ const { post, variant = 'light' } = Astro.props;
 const href = getBlogPermalink(post.slug);
 const publishDate = new Date(post.publishDate);
 
-const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
+const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
 
 const isDark = variant === 'dark';
-const cardBg   = isDark ? 'bg-section-dark border-white/10 hover:border-nav-cta' : 'bg-white border-banner-line hover:border-nav-cta';
+const cardBg   = isDark ? 'bg-section-dark border-white/10 hover:border-nav-cta' : 'bg-white border-banner-line hover:border-nav-cta hover:bg-section-grey/40';
 const dateCl   = isDark ? 'text-page/50' : 'text-muted';
 const titleCl  = isDark ? 'text-page-end group-hover:text-nav-cta' : 'text-heading group-hover:text-nav-cta';
 const bodyCl   = isDark ? 'text-page/70' : 'text-banner-note';
@@ -28,6 +28,7 @@ const linkCl   = isDark ? 'text-nav-cta' : 'text-nav-cta';
   href={href}
   class:list={[
     'group flex flex-col gap-0 border transition-colors',
+    !isDark && 'focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta',
     cardBg,
   ]}
 >

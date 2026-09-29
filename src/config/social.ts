@@ -11,10 +11,24 @@ export const SOCIAL = {
 /** Public review profiles. Omit a platform until a real listing URL exists. */
 export const REVIEW_PROFILES = [
   {
-    title: 'BBB',
-    note: 'Current BBB profile and rating information are shown on the live listing.',
-    href: 'https://www.bbb.org/us/hi/wahiawa/profile/construction/vaifoou-construction-llc-1296-1000160782',
-    linkText: 'View Vaifoou on BBB',
-    icon: 'tabler:shield-check',
+    title: 'Google',
+    note: 'Read customer ratings and reviews for Vaifoou Construction on Google.',
+    href: '#',
+    linkText: 'View Vaifoou on Google',
+    icon: 'tabler:brand-google',
+  },
+  {
+    title: 'Yelp',
+    note: 'Browse customer feedback and star ratings for Vaifoou Construction on Yelp.',
+    href: '#',
+    linkText: 'View Vaifoou on Yelp',
+    icon: 'tabler:star-filled',
+  },
+  {
+    title: 'Thumbtack',
+    note: 'See Vaifoou Construction reviews and project history on Thumbtack.',
+    href: '#',
+    linkText: 'View Vaifoou on Thumbtack',
+    icon: 'tabler:pin',
   },
 ] as const;

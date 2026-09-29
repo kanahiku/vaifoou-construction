@@ -1,16 +1,16 @@
 ---
 /**
- * ServiceTable — feature / comparison table for service sub-pages.
+ * ServiceTable — section wrapper for the shared ComparisonTable.
  *
- * Supports both 2-column (feature + single value) and 3-column
- * (feature + col A vs col B) layouts.
+ * Used on every service sub-page. Provides the section chrome (bg, padding,
+ * heading, optional note) and delegates all table rendering to ComparisonTable.
  *
- * The first data column is highlighted in nav-cta; the optional second
- * data column is rendered in the muted colour.
+ * Supports 2-column (feature + one value) and 3-column (feature + A vs B) layouts.
  */
+import ComparisonTable from '~/components/ui/ComparisonTable.astro';
 
 export interface TableRow {
-  /** Row label — left "Feature" column. */
+  /** Row label shown in the Feature column. */
   feature: string;
   /** First data column value. */
   val1: string;
@@ -25,7 +25,7 @@ export interface Props {
   heading: string;
   /** Optional introductory paragraph below the heading (supports HTML via set:html). */
   note?: string;
-  /** Header for the first data column — rendered in nav-cta colour. */
+  /** Header for the first data column. */
   col1: string;
   /** Header for the second data column — omit for a 2-col table. */
   col2?: string;
@@ -34,7 +34,6 @@ export interface Props {
 }
 
 const { eyebrow, heading, note, col1, col2, rows } = Astro.props;
-const isTwoCol = !col2;
 const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
 ---
 
@@ -42,7 +41,7 @@ const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
   <div class="site-frame flex flex-col gap-12">
 
     {/* Section header */}
-    <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+    <div class="flex max-w-[896px] flex-col gap-1">
       <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
         {displayHeading}
       </h2>
@@ -51,43 +50,15 @@ const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
       )}
     </div>
 
-    {/* Table */}
-    <div class="overflow-x-auto">
-      <table class:list={['w-full border-collapse', isTwoCol ? 'min-w-[400px]' : 'min-w-[540px]']}>
-        <thead>
-          <tr class="border-b-2 border-nav-cta">
-            <th class="py-3 pl-6 pr-6 text-left font-display text-[13px] font-bold leading-4 tracking-[0.8px] text-muted uppercase">
-              Feature
-            </th>
-            <th class="px-6 py-3 text-left font-display text-[13px] font-bold leading-4 tracking-[0.8px] text-nav-cta uppercase">
-              {col1}
-            </th>
-            {col2 && (
-              <th class="px-6 py-3 text-left font-display text-[13px] font-bold leading-4 tracking-[0.8px] text-muted uppercase">
-                {col2}
-              </th>
-            )}
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-banner-line">
-          {rows.map(({ feature, val1, val2 }) => (
-            <tr class="bg-white even:bg-card">
-              <td class="py-4 pl-6 pr-6 font-display text-[15px] font-semibold leading-6 tracking-[0.2px] text-heading uppercase">
-                {feature}
-              </td>
-              <td class="px-6 py-4 font-body text-[15px] font-normal leading-6 text-banner-note">
-                {val1}
-              </td>
-              {col2 && (
-                <td class="px-6 py-4 font-body text-[15px] font-normal leading-6 text-muted">
-                  {val2}
-                </td>
-              )}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    {/* Table — delegated to ComparisonTable */}
+    <ComparisonTable
+      featureLabel="Feature"
+      columns={col2 ? [col1, col2] : [col1]}
+      rows={rows.map(({ feature, val1, val2 }) => ({
+        feature,
+        values: col2 ? [val1, val2 ?? ''] : [val1],
+      }))}
+    />
 
   </div>
 </section>

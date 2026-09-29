@@ -1,6 +1,5 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
 import BlogCard from '~/components/ui/BlogCard.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { getBlogPosts } from '~/lib/content';
@@ -19,20 +18,13 @@ const metadata = {
 
 <Layout metadata={metadata}>
 
-  {/* ── Hero ──────────────────────────────────────────────────────── */}
-  <SubServiceHero
-    title="Masonry & Concrete Blog"
-    body="Tips, project spotlights and trade insights from our O'ahu masonry team."
-    imagePlaceholder="Vaifoou Construction blog photo"
-  />
-
-  {/* ── Posts grid ────────────────────────────────────────────────── */}
+  {/* ── Posts list ────────────────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
 
       {/* Section header */}
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Latest Articles</h2>
+      <div class="flex max-w-[896px] flex-col gap-1">
+        <h1 class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-heading uppercase md:text-[72px] md:tracking-[-0.8px]">Blogs</h1>
       </div>
 
       {/* Grid or empty state */}

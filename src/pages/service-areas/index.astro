@@ -5,7 +5,8 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FillImage from '~/components/ui/FillImage.astro';
+import { photos } from '~/data/photos';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
@@ -71,10 +72,8 @@ const faqs = [
           Operating from our main yard in Wahiawa, our crews build custom rock walls and concrete flatwork across O'ahu. We work with local property owners and serve as a concrete subcontractor to general contractors. Every project is backed by our 25+ year family legacy.
         </p>
       </div>
-      {/* Right — image placeholder */}
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <!-- TODO: replace with <Image> when client provides a site or crew photo -->
-        <HeroImagePlaceholder fill class="absolute inset-0" label="O'ahu masonry crew or project photo" />
+        <FillImage src={photos.commercial.src} alt={photos.commercial.alt} />
       </div>
     </div>
   </section>
@@ -83,7 +82,7 @@ const faqs = [
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
 
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Communities We Serve</h2>
         <p class="mt-1 max-w-2xl font-body text-[16px] font-normal leading-7 text-banner-note">
           We deploy our crews from our home base in Wahiawa to job sites across the island.
@@ -94,9 +93,9 @@ const faqs = [
         {areas.map(({ name, href, note }) => (
           <a
             href={href}
-            class="group flex flex-col gap-2 border border-banner-line bg-white p-6 transition-colors hover:border-accent/30 hover:bg-section-grey"
+            class="group flex flex-col gap-2 border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta"
           >
-            <span class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-accent md:text-[20px]">
+            <span class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[20px]">
               {name}
             </span>
             {note && (
@@ -104,7 +103,7 @@ const faqs = [
                 {note}
               </span>
             )}
-            <span class="flex items-center gap-1.5 font-body text-[13px] font-medium leading-4 text-muted transition-colors group-hover:text-accent">
+            <span class="flex items-center gap-1.5 font-body text-[13px] font-medium leading-4 text-muted transition-colors group-hover:text-nav-cta">
               View service area
               <svg xmlns="http://www.w3.org/2000/svg" class="size-3 transition-transform group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M5 12h14M12 5l7 7-7 7"/>

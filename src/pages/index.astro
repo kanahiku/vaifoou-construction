@@ -7,12 +7,14 @@ import Layout from '~/layouts/PageLayout.astro';
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import { Image } from 'astro:assets';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import SanityImage from '~/components/common/Image.astro';
+import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
 import brickMotif from '~/assets/brick-motif-wide-light.svg';
 import iconRockWall from '~/assets/icons/rock-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
 import iconHammer from '~/assets/icons/hammer.svg';
 import TestimonialCard from '~/components/ui/TestimonialCard.astro';
-import { getTestimonials } from '~/lib/content';
+import { getHomeMediaContent, getTestimonials } from '~/lib/content';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
 
@@ -77,6 +79,20 @@ const serviceAreas = [
   { label: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
 ];
 
+const homeMedia = await getHomeMediaContent();
+const heroImage = homeMedia?.heroImage;
+const heroImageMobile = homeMedia?.heroImageMobile;
+const bannerImage = homeMedia?.bannerImage;
+
+const findAudienceCardImage = (title: string, href: string, index: number) => {
+  const cards = homeMedia?.audienceCards ?? [];
+  return (
+    cards.find((card) => card.href === href)?.image ??
+    cards.find((card) => card.title === title)?.image ??
+    cards[index]?.image
+  );
+};
+
 /* Fetch up to 3 testimonials from Sanity for the homepage preview */
 const allTestimonials = await getTestimonials();
 const reviews = allTestimonials.slice(0, 3);
@@ -94,37 +110,59 @@ const reviewItems =
 ---
 
 <Layout metadata={meta}>
-  {/* ═══════════════════════════════════════════════════════════
+  {
+    /* ═══════════════════════════════════════════════════════════
       SECTION 1 — HERO
       Figma node 4:5 · h=571 · full-bleed image + gradient overlay
-  ════════════════════════════════════════════════════════════ */}
+  ════════════════════════════════════════════════════════════ */
+  }
   <section class="relative w-full overflow-hidden border-b border-banner-line min-h-[480px] md:min-h-[571px]">
-
-    {/* Hero photo — placeholder until the asset pass */}
-    <HeroImagePlaceholder
-      fill
-      hideLabel
-      class="absolute inset-0"
-      label="Hero image placeholder"
-    />
-    <span
-      class="pointer-events-none absolute right-6 top-6 z-[5] font-display text-[13px] font-semibold uppercase leading-none tracking-[0.14em] text-page-end/70 md:right-16 md:top-1/2 md:-translate-y-1/2 md:text-[18px]"
-    >
-      Placeholder
-    </span>
+    {
+      heroImage?.src || heroImageMobile?.src ? (
+        <ArtDirectedImage
+          desktop={heroImage}
+          mobile={heroImageMobile}
+          class="absolute inset-0 h-full w-full max-w-none object-cover"
+          widths={[768, 1200, 1600, 1920]}
+          mobileWidths={[400, 640, 828]}
+          sizes="100vw"
+          mobileSizes="100vw"
+          loading="eager"
+          fetchpriority="high"
+          width={1600}
+          height={900}
+          layout="cover"
+          format="webp"
+        />
+      ) : (
+        <>
+          <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label="Hero image placeholder" />
+          <span class="pointer-events-none absolute right-6 top-6 z-[5] font-display text-[13px] font-semibold uppercase leading-none tracking-[0.14em] text-page-end/70 md:right-16 md:top-1/2 md:-translate-y-1/2 md:text-[18px]">
+            Placeholder
+          </span>
+        </>
+      )
+    }
 
     {/* Gradient overlay: dark on left, fades right */}
     <div
       class="absolute inset-0"
       style="background: linear-gradient(90deg, rgb(28 27 26 / 88%) 0%, rgb(28 27 26 / 68%) 55%, rgb(28 27 26 / 25%) 100%);"
       aria-hidden="true"
-    ></div>
+    >
+    </div>
 
     {/* Content */}
     <div class="site-frame relative z-10 flex flex-col items-start gap-4 pb-16 pt-16 md:pb-24 md:pt-24">
-      <h1 class="max-w-[896px] font-display text-[40px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[80px] md:tracking-[-0.8px]">O'ahu Masonry &amp; Concrete Specialists</h1>
+      <h1
+        class="max-w-[896px] font-display text-[40px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[80px] md:tracking-[-0.8px]"
+      >
+        O'ahu Masonry &amp; Concrete Specialists
+      </h1>
 
-      <p class="max-w-[672px] font-display text-[18px] font-semibold leading-snug tracking-[0.22px] text-page/80 md:text-[28px] md:leading-[38.5px] md:tracking-[0.28px]">
+      <p
+        class="max-w-[672px] font-display text-[18px] font-semibold leading-snug tracking-[0.22px] text-page/80 md:text-[28px] md:leading-[38.5px] md:tracking-[0.28px]"
+      >
         Concrete &ndash; Rockwall &ndash; CMU. Backed by a 25+ year family legacy in the masonry trade.
       </p>
 
@@ -149,155 +187,215 @@ const reviewItems =
         <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">
           {CONTACT.license}
         </span>
-        <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
+        <span
+          class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase"
+          aria-hidden="true">•</span
+        >
         <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">
           Licensed &amp; Insured
         </span>
-        <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
+        <span
+          class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase"
+          aria-hidden="true">•</span
+        >
         <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">
           Serving All of O'ahu
         </span>
       </p>
+
     </div>
   </section>
 
-
-  {/* ═══════════════════════════════════════════════════════════
+  {
+    /* ═══════════════════════════════════════════════════════════
       SECTION 2 — INTRO / PATHWAYS
       Figma node 4:39 · h=992
       H2 + body + 2 audience pathway cards
-  ════════════════════════════════════════════════════════════ */}
+  ════════════════════════════════════════════════════════════ */
+  }
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Built to last. Built right.</h2>
-        <p class="max-w-[896px] pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
-          We are a locally owned family business specializing in concrete and masonry. Our work rests on a 25+ year family legacy in the masonry trade that goes back to around 2000. We build rock walls, CMU and block walls, and concrete for O'ahu homeowners, property owners and contractors. Every project comes with our workmanship guarantee.
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
+        >
+          Built to last. Built right.
+        </h2>
+        <p
+          class="max-w-[896px] pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]"
+        >
+          We are a locally owned family business specializing in concrete and masonry. Our work rests on a 25+ year
+          family legacy in the masonry trade that goes back to around 2000. We build rock walls, CMU and block walls,
+          and concrete for O'ahu homeowners, property owners and contractors. Every project comes with our workmanship
+          guarantee.
         </p>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10">
-        {[
-          {
-            label: 'Residential',
-            title: 'Working on your home?',
-            cta: 'View Residential Masonry & Concrete',
-            href: '/who-we-work-with/residential/',
-          },
-          {
-            label: 'Commercial & civil',
-            title: 'Managing a commercial property, an HOA or a job site?',
-            cta: 'View Commercial Masonry & Concrete',
-            href: '/who-we-work-with/commercial/',
-          },
-        ].map(({ label, title, cta, href }) => (
-          <article class="flex h-full flex-col overflow-hidden border border-banner-line bg-card">
-            <div class="relative h-56 w-full shrink-0 md:h-[288px]">
-              <!-- TODO: replace with <Image> when asset is ready -->
-              <HeroImagePlaceholder fill class="absolute inset-0" label={`${label} image placeholder`} />
-            </div>
-            <div class="flex flex-1 flex-col p-6 md:p-10">
-              <h3 class="font-display text-[24px] font-semibold leading-8 tracking-[0.24px] text-heading uppercase md:text-[28px] md:leading-8 md:tracking-[0.28px]">
-                {title}
-              </h3>
-              <div class="mt-auto pt-8 md:pt-10">
-                <a
-                  href={href}
-                  class="cta-md inline-flex w-fit items-center justify-center gap-2 bg-nav-cta text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[20px]"
-                >
-                  {cta}
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
-                    <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
-                  </svg>
-                </a>
+        {
+          [
+            {
+              title: 'Working on your home?',
+              cta: 'View Residential Masonry & Concrete',
+              href: '/who-we-work-with/residential/',
+              label: 'Residential',
+              image: findAudienceCardImage('Working on your home?', '/who-we-work-with/residential/', 0),
+            },
+            {
+              title: 'Managing a commercial property, an HOA or a job site?',
+              cta: 'View Commercial Masonry & Concrete',
+              href: '/who-we-work-with/commercial/',
+              label: 'Commercial & civil',
+              image: findAudienceCardImage(
+                'Managing a commercial property, an HOA or a job site?',
+                '/who-we-work-with/commercial/',
+                1
+              ),
+            },
+          ].map(({ label, title, cta, href, image }) => (
+            <article class="flex h-full flex-col overflow-hidden border border-banner-line bg-card">
+              <div class="relative h-56 w-full shrink-0 md:h-[288px]">
+                {image?.src ? (
+                  <SanityImage
+                    src={image.src}
+                    alt={image.alt}
+                    class="absolute inset-0 h-full w-full max-w-none object-cover"
+                    widths={[400, 640, 768]}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    width={700}
+                    height={288}
+                    layout="cover"
+                    format="webp"
+                  />
+                ) : (
+                  <HeroImagePlaceholder fill class="absolute inset-0" label={`${label} image placeholder`} />
+                )}
               </div>
-            </div>
-          </article>
-        ))}
+              <div class="flex flex-1 flex-col p-6 md:p-10">
+                <h3 class="font-display text-[24px] font-semibold leading-8 tracking-[0.24px] text-heading uppercase md:text-[28px] md:leading-8 md:tracking-[0.28px]">
+                  {title}
+                </h3>
+                <div class="mt-auto pt-8 md:pt-10">
+                  <a
+                    href={href}
+                  class="cta-md inline-flex w-fit items-center justify-center bg-nav-cta text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[20px]"
+                  >
+                    {cta}
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 
-
-  {/* ═══════════════════════════════════════════════════════════
+  {
+    /* ═══════════════════════════════════════════════════════════
       SECTION 3 — CORE SERVICES
       Figma node 4:84 · h=1106
       H2 + 4 service cards
-  ════════════════════════════════════════════════════════════ */}
+  ════════════════════════════════════════════════════════════ */
+  }
   <section id="services" class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
-
       {/* Section header */}
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Core Masonry Services</h2>
+      <div class="flex max-w-[896px] flex-col gap-1">
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
+        >
+          Core Masonry Services
+        </h2>
       </div>
 
       {/* 4 service cards — 2x2 on tablet, single row on wide screens */}
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
-        {services.map(({ icon, iconW, iconH, title, description, cta, href }) => (
-          <article class="flex h-full flex-col border border-banner-line bg-white p-6">
-            <div class="flex flex-col gap-3 flex-1">
-              {/* Icon inline left of title */}
-              <h3 class="flex items-center gap-2.5 font-display text-[24px] font-semibold leading-none tracking-[0.24px] text-heading uppercase md:text-[26px]">
-                <Image
-                  src={icon}
-                  alt=""
-                  width={iconW}
-                  height={iconH}
-                  class="h-[18px] w-auto shrink-0"
-                  aria-hidden="true"
-                />
-                {title}
-              </h3>
-              <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>
-            </div>
-            {/* Text link at bottom */}
-            <a
-              href={href}
-              class="mt-8 inline-flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-heading"
-            >
-              {cta}
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
-                <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/>
-              </svg>
-            </a>
-          </article>
-        ))}
+        {
+          services.map(({ icon, iconW, iconH, title, description, cta, href }) => (
+            <article class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 cursor-pointer">
+              <div class="flex flex-col gap-3 flex-1">
+                {/* Icon inline left of title */}
+                <h3 class="flex items-center gap-2.5 font-display text-[24px] font-semibold leading-none tracking-[0.24px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
+                  <Image
+                    src={icon}
+                    alt=""
+                    width={iconW}
+                    height={iconH}
+                    class="h-[18px] w-auto shrink-0"
+                    aria-hidden="true"
+                  />
+                  {title}
+                </h3>
+                <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>
+              </div>
+              {/* Text link at bottom */}
+              <a
+                href={href}
+                class="mt-8 inline-flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-accent"
+              >
+                {cta}
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5">
+                  <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor" />
+                </svg>
+              </a>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  {/* ═══════════════════════════════════════════════════════════
+  {
+    /* ═══════════════════════════════════════════════════════════
       SECTION 4 — VENEER HIGHLIGHT
-  ════════════════════════════════════════════════════════════ */}
+  ════════════════════════════════════════════════════════════ */
+  }
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
       <div class="border border-banner-line bg-section-grey p-2">
         <div class="relative flex min-h-[360px] flex-col justify-end overflow-hidden p-6 md:h-[420px]">
-          <!-- TODO: replace with <Image> when asset is ready — real photo of a completed veneer rock wall project on O'ahu, labeled by location -->
-          <HeroImagePlaceholder
-            fill
-            align="start"
-            class="absolute inset-0"
-            label="Completed veneer rock wall project on O'ahu photo placeholder"
-          />
-          <div class="relative z-10 flex w-full max-w-[896px] flex-col items-start justify-between gap-6 bg-heading/90 p-6 md:flex-row md:items-end">
+          {
+            bannerImage?.src ? (
+              <SanityImage
+                src={bannerImage.src}
+                alt={bannerImage.alt}
+                class="absolute inset-0 h-full w-full max-w-none object-cover"
+                widths={[768, 1200, 1600]}
+                sizes="(max-width: 768px) 100vw, 1200px"
+                width={1200}
+                height={420}
+                layout="cover"
+                format="webp"
+              />
+            ) : (
+              <HeroImagePlaceholder
+                fill
+                align="start"
+                class="absolute inset-0"
+                label="Completed veneer rock wall project on O'ahu photo placeholder"
+              />
+            )
+          }
+          <div
+            class="relative z-10 flex w-full max-w-[896px] flex-col items-start justify-between gap-6 bg-heading/80 p-6 md:flex-row md:items-end"
+          >
             <div class="max-w-[672px]">
-              <h3 class="font-display text-[24px] font-semibold leading-8 tracking-[0.24px] text-page-end uppercase md:text-[28px] md:tracking-[0.28px]">
+              <h3
+                class="font-display text-[24px] font-semibold leading-8 tracking-[0.24px] text-page-end uppercase md:text-[28px] md:tracking-[0.28px]"
+              >
                 Custom Veneer Rock Walls
               </h3>
               <p class="mt-1 font-body text-[16px] font-normal leading-[26px] text-page/80">
-                Veneer rock walls arrive on pallets and feature flat corners for a clean finish. The material is lighter to carry, and compared with standard block, it can save roughly two feet of property space.
+                Veneer rock walls arrive on pallets and feature flat corners for a clean finish. The material is lighter
+                to carry, and compared with standard block, it can save roughly two feet of property space.
               </p>
             </div>
             <a
               href="/services/rock-walls/veneer/"
-              class="inline-flex shrink-0 items-center justify-center gap-2 bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
+              class="inline-flex shrink-0 items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
             >
               View Veneer Rock Walls
-              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
-                <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
-              </svg>
             </a>
           </div>
         </div>
@@ -305,17 +403,26 @@ const reviewItems =
     </div>
   </section>
 
-
-  {/* ═══════════════════════════════════════════════════════════
+  {
+    /* ═══════════════════════════════════════════════════════════
       SECTION 5 — SERVICE AREAS
       Figma node 4:149 · h=806
-  ════════════════════════════════════════════════════════════ */}
+  ════════════════════════════════════════════════════════════ */
+  }
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
     <div class="site-frame flex flex-col">
       <div class="mb-12 flex max-w-[896px] flex-col gap-1 md:mb-16">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Serving All of O'ahu</h2>
-        <p class="max-w-[896px] pb-1 pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
-          Our crews manage residential and commercial masonry projects across the entire island. We work in Wahiawa, Mililani, Honolulu, Aiea and Pearl City, Waipahu, Ewa Beach, Kapolei, Kailua, Kaneohe, and the North Shore and Haleiwa.
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
+        >
+          Serving All of O'ahu
+        </h2>
+        <p
+          class="max-w-[896px] pb-1 pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]"
+        >
+          Our crews manage residential and commercial masonry projects across the entire island. We work in Wahiawa,
+          Mililani, Honolulu, Aiea and Pearl City, Waipahu, Ewa Beach, Kapolei, Kailua, Kaneohe, and the North Shore and
+          Haleiwa.
         </p>
         <a
           href="/service-areas/"
@@ -327,60 +434,77 @@ const reviewItems =
 
       <div class="flex flex-col gap-6 border border-banner-line bg-card p-6 md:p-10">
         <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-          {serviceAreas.map(({ label, href }) => (
-            <li>
-              <a
-                href={href}
-                class="flex h-16 items-center justify-center border border-banner-line bg-section-grey px-2 text-center font-display text-[16px] font-semibold leading-6 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta md:text-[20px] md:leading-[25px]"
-              >
-                {label}
-              </a>
-            </li>
-          ))}
+          {
+            serviceAreas.map(({ label, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class="flex h-16 items-center justify-center border border-banner-line bg-section-grey px-2 text-center font-display text-[16px] font-semibold leading-6 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta md:text-[20px] md:leading-[25px]"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </div>
   </section>
 
-
-  {/* ═══════════════════════════════════════════════════════════
+  {
+    /* ═══════════════════════════════════════════════════════════
       SECTION 6 — REVIEWS / TESTIMONIALS
       3 cards in a grid
-  ════════════════════════════════════════════════════════════ */}
+  ════════════════════════════════════════════════════════════ */
+  }
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
-      <div class="flex flex-col gap-1 border-b border-banner-line pb-4">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Trusted by O'ahu Property Owners</h2>
+      <div class="flex flex-col gap-1">
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
+        >
+          Trusted by O'ahu Property Owners
+        </h2>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8">
-        {reviewItems.map((t) => (
-          <TestimonialCard quote={t.quote} name={t.name} location={t.location} tenure={t.tenure} />
-        ))}
+        {
+          reviewItems.map((t) => (
+            <TestimonialCard
+              tone="featured"
+              quote={t.quote}
+              name={t.name}
+              location={t.location}
+              tenure={t.tenure}
+              platform={t.platform}
+              reviewedAt={t.reviewedAt}
+            />
+          ))
+        }
       </div>
 
       <div class="flex justify-center">
         <a
           href="/reviews/"
-          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
+          class="inline-flex items-center justify-center border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)] transition-colors hover:bg-heading md:text-[20px]"
         >
           Read Reviews
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
-            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="white"/>
-          </svg>
         </a>
       </div>
     </div>
   </section>
 
-
-  {/* ═══════════════════════════════════════════════════════════
+  {
+    /* ═══════════════════════════════════════════════════════════
       SECTION 7 — CTA BANNER
       Figma node 4:272 · h=765
-  ════════════════════════════════════════════════════════════ */}
+  ════════════════════════════════════════════════════════════ */
+  }
   <section class="w-full bg-card py-6 md:py-24">
     <div class="site-frame">
-      <div class="@container relative w-full overflow-hidden border border-banner-line bg-section-grey p-4 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.1),0_8px_10px_-6px_rgb(0_0_0/0.1)] md:p-24">
+      <div
+        class="@container relative w-full overflow-hidden border border-banner-line bg-section-grey p-4 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.1),0_8px_10px_-6px_rgb(0_0_0/0.1)] md:p-24"
+      >
         {/* Brick motif background */}
         <Image
           src={brickMotif}
@@ -392,9 +516,14 @@ const reviewItems =
         />
 
         <div class="relative z-10 flex max-w-[768px] flex-col items-start">
-          <h2 class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Start Your O'ahu Masonry Project</h2>
+          <h2
+            class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
+          >
+            Start Your O'ahu Masonry Project
+          </h2>
           <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
-            Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays.
+            Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on
+            Sundays.
           </p>
         </div>
 
@@ -414,20 +543,6 @@ const reviewItems =
           </a>
         </div>
 
-        <p class="relative z-10 flex w-full flex-wrap items-center gap-x-5 gap-y-2 pt-6">
-          {[
-            CONTACT.license,
-            'Licensed & Insured',
-            "Serving All of O'ahu",
-          ].map((item, index) => (
-            <>
-              {index > 0 && (
-                <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
-              )}
-              <span class="whitespace-nowrap font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-note uppercase">{item}</span>
-            </>
-          ))}
-        </p>
       </div>
     </div>
   </section>

@@ -10,6 +10,7 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
+import { photos } from '~/data/photos';
 
 const metadata = {
   title: `Rock Wall Repair & Rebuilds | ${site.name}`,
@@ -39,7 +40,8 @@ const faqs = [
   <SubServiceHero
     title="Rock Wall Repair"
     body="We manage rock wall repair and structural rebuilds for residential and commercial properties across O'ahu. When a barrier fails, our crews handle the complete demolition of the compromised masonry. We then execute a ground-up reconstruction to replace bulging or collapsed structures using hand-selected volcanic basalt."
-    imagePlaceholder="Rock wall repair and rebuild photo"
+    image={photos.residential.src}
+    imageAlt={photos.residential.alt}
   />
   <ServiceTable
     eyebrow="Comparison"

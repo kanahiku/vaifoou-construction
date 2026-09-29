@@ -10,8 +10,9 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FillImage from '~/components/ui/FillImage.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import { photos } from '~/data/photos';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 
@@ -85,7 +86,7 @@ export interface Props {
 
 const { metadata, hero, intro, services, servicesHeading, recentWork, otherAreas, faqs, ctaHeading } = Astro.props;
 
-const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
+const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
 const introHeading = intro.heading;
 const servicesSectionHeading = servicesHeading;
 const recentWorkHeading = recentWork.heading;
@@ -110,7 +111,7 @@ const recentWorkHeading = recentWork.heading;
         <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:mt-4 md:text-[18px] md:leading-[29.25px]" set:html={intro.body} />
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <HeroImagePlaceholder fill class="absolute inset-0" label={intro.imagePlaceholder ?? hero.imagePlaceholder ?? 'Area photo placeholder'} />
+        <FillImage src={photos.residential.src} alt={photos.residential.alt} />
       </div>
     </div>
   </section>
@@ -118,14 +119,14 @@ const recentWorkHeading = recentWork.heading;
   {/* ── Services grid — 2-col linked cards ─────────────────── */}
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
           {servicesSectionHeading}
         </h2>
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
         {services.map(({ name, href, description }) => (
-          <a href={href} class="group flex flex-col gap-3 border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta md:p-8">
+          <a href={href} class="group flex flex-col gap-3 border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-8">
             <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[22px]">
               {name}
             </h3>
@@ -143,7 +144,7 @@ const recentWorkHeading = recentWork.heading;
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-20">
     <div class="site-frame flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
       <div class="relative w-full shrink-0 overflow-hidden md:w-[480px]" style="aspect-ratio: 4/3;">
-        <HeroImagePlaceholder fill class="absolute inset-0" label={recentWork.imagePlaceholder ?? 'Recent project photo'} />
+        <FillImage src={photos.veneer.src} alt={photos.veneer.alt} />
       </div>
       <div class="flex flex-col gap-1">
         <h2 class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[36px]">
@@ -158,7 +159,7 @@ const recentWorkHeading = recentWork.heading;
   </section>
 
   {/* ── Other area cross-links ───────────────────────────────── */}
-  <ServiceLinks categoryLabel="Service Areas" items={otherAreas} />
+  <ServiceLinks categoryLabel="Service Areas" items={otherAreas} maxItems={otherAreas.length} />
 
   {/* ── FAQ accordion ───────────────────────────────────────── */}
   <FAQs title={faqs.title} items={faqs.items}>

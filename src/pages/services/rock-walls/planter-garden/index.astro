@@ -10,6 +10,7 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
+import { photos } from '~/data/photos';
 
 const metadata = {
   title: `Planter & Garden Rock Walls | ${site.name}`,
@@ -39,7 +40,8 @@ const faqs = [
   <SubServiceHero
     title="Planter & Garden Rock Walls"
     body="We build dedicated planter and garden rock walls to structure exterior spaces for residential and commercial properties across O'ahu. We strictly handle the hardscape masonry to prepare your site boundary. We do not provide landscaping services, soil grading, or plant installation."
-    imagePlaceholder="Planter and garden rock wall photo"
+    image={photos.residential.src}
+    imageAlt={photos.residential.alt}
   />
   <ServiceTable
     eyebrow="Scope of Work"

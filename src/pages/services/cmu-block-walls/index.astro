@@ -6,7 +6,8 @@
 import Layout from '~/layouts/PageLayout.astro';
 import { Image } from 'astro:assets';
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FillImage from '~/components/ui/FillImage.astro';
+import { photos } from '~/data/photos';
 import brickMotif from '~/assets/brick-motif-wide-light.svg';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
@@ -79,7 +80,7 @@ const related = [
 
   {/* ── HERO ─────────────────────────────────────────────────── */}
   <section class="relative w-full overflow-hidden border-b border-banner-line min-h-[400px] md:min-h-[500px]">
-    <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label="CMU block wall project image placeholder" />
+    <FillImage src={photos.commercial.src} alt={photos.commercial.alt} eager />
     <div class="absolute inset-0" style="background: linear-gradient(90deg, rgb(28 27 26 / 90%) 0%, rgb(28 27 26 / 72%) 55%, rgb(28 27 26 / 30%) 100%);" aria-hidden="true"></div>
     <div class="site-frame relative z-10 flex flex-col items-start gap-4 pb-16 pt-16 md:pb-24 md:pt-24">
       <h1 class="max-w-[896px] font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[72px] md:tracking-[-0.8px]">O'ahu CMU &amp; Block Wall Construction</h1>
@@ -104,8 +105,7 @@ const related = [
       </div>
       {/* Right — image */}
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <!-- TODO: replace with <Image> when asset is ready — CMU block wall construction photo -->
-        <HeroImagePlaceholder fill class="absolute inset-0" label="CMU block wall construction photo" />
+        <FillImage src={photos.commercial.src} alt={photos.commercial.alt} />
       </div>
     </div>
   </section>
@@ -113,36 +113,32 @@ const related = [
   {/* ── CMU SERVICES ─────────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">CMU Construction Services</h2>
       </div>
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-3 md:gap-8">
         {subServices.map(({ title, href, description, cta }) => (
-          <article class="flex h-full flex-col border border-banner-line bg-white p-6 md:p-8">
-            <h3 class="font-display text-[20px] font-semibold leading-6 tracking-[0.2px] text-heading uppercase md:text-[22px]">{title}</h3>
+          <a href={href ?? PRIMARY_CTA_HREF} class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-8">
+            <h3 class="font-display text-[20px] font-semibold leading-6 tracking-[0.2px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[22px]">{title}</h3>
             <p class="mt-3 flex-1 font-body text-[15px] font-normal leading-6 text-banner-note">{description}</p>
-            {href && cta && (
-              <a href={href} class="mt-6 inline-flex items-center gap-1.5 font-display text-[13px] font-bold leading-4 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-heading">
-                {cta}
-                <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/></svg>
-              </a>
-            )}
-          </article>
+            <span class="mt-6 inline-flex items-center gap-1.5 font-display text-[13px] font-bold leading-4 tracking-[0.5px] text-nav-cta uppercase">
+              {cta ?? PRIMARY_CTA_LABEL}
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/></svg>
+            </span>
+          </a>
         ))}
       </div>
       {/* Project photo + View Our Work */}
       <div class="flex flex-col gap-0 border border-banner-line bg-page overflow-hidden md:flex-row md:items-stretch min-h-[320px] md:min-h-[400px]">
         {/* Left — image (50%) */}
         <div class="relative w-full md:w-1/2" style="aspect-ratio: 4/3;">
-          <!-- TODO: replace with <Image> when asset is ready — completed CMU block wall project photo -->
-          <HeroImagePlaceholder fill class="absolute inset-0" label="CMU block wall project image placeholder" />
+          <FillImage src={photos.commercial.src} alt={photos.commercial.alt} />
         </div>
         {/* Right — text + CTA (50%) */}
         <div class="flex w-full flex-col justify-center gap-5 p-8 md:w-1/2 md:p-12">
           <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[17px]">Real photo of a completed CMU block wall project on O'ahu, labeled by location.</p>
-          <a href="/projects/" class="self-start inline-flex items-center gap-2 bg-nav-cta px-6 py-3 font-display text-[13px] font-bold leading-4 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading">
+          <a href="/projects/" class="self-start inline-flex items-center bg-nav-cta px-6 py-3 font-display text-[13px] font-bold leading-4 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading">
             View Our Work
-            <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/></svg>
           </a>
         </div>
       </div>
@@ -170,7 +166,7 @@ const related = [
   {/* ── FAQs ─────────────────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-10 md:gap-14">
-      <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
+      <div class="flex max-w-[896px] flex-col gap-1">
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">CMU &amp; Block Wall FAQs</h2>
       </div>
       <div class="flex flex-col divide-y divide-banner-line">
@@ -197,9 +193,9 @@ const related = [
       </h2>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
         {related.map(({ title, href }) => (
-          <a href={href} class="flex items-center justify-between border border-banner-line bg-card px-6 py-5 font-display text-[16px] font-semibold leading-5 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta md:text-[18px]">
+          <a href={href} class="group flex items-center justify-between border border-banner-line bg-card px-6 py-5 font-display text-[16px] font-semibold leading-5 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:bg-section-grey/40 hover:text-nav-cta focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:text-[18px]">
             {title}
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/></svg>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/></svg>
           </a>
         ))}
       </div>
@@ -219,9 +215,6 @@ const related = [
           <a href={PRIMARY_CTA_HREF} class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]">{PRIMARY_CTA_LABEL}</a>
           <a href={CONTACT.phone.href} class="inline-flex items-center justify-center gap-2 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"><PhoneIcon />Call {CONTACT.phone.display}</a>
         </div>
-        <p class="relative z-10 flex w-full flex-wrap items-center gap-x-5 gap-y-2">
-          {[CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"].map((item, i) => (<>{i > 0 && <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>}<span class="whitespace-nowrap font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-note uppercase">{item}</span></>))}
-        </p>
       </div>
     </div>
   </section>

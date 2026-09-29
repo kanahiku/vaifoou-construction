@@ -10,6 +10,7 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
+import { photos } from '~/data/photos';
 
 const metadata = {
   title: `Rock Retaining Walls | ${site.name}`,
@@ -39,7 +40,8 @@ const faqs = [
   <SubServiceHero
     title="Rock Retaining Walls"
     body="We construct rock retaining walls for residential and commercial properties across O'ahu. Our crews build these heavy-duty barriers to secure hillsides and manage property elevation differences. We build every structure using hand-selected volcanic basalt, and every installation is backed by our workmanship guarantee."
-    imagePlaceholder="Rock retaining wall construction photo"
+    image={photos.veneer.src}
+    imageAlt={photos.veneer.alt}
   />
   <ServiceTable
     eyebrow="Comparison"

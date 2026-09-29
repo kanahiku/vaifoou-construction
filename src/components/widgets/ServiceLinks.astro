@@ -54,10 +54,10 @@ const heading = `Explore Other ${categoryLabel}`;
       {visible.map(({ title, href }) => (
         <a
           href={href}
-          class="flex items-center justify-between border border-banner-line bg-card px-6 py-5 font-display text-[16px] font-semibold leading-5 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta md:text-[18px]"
+          class="group flex items-center justify-between border border-banner-line bg-card px-6 py-5 font-display text-[16px] font-semibold leading-5 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:bg-section-grey/40 hover:text-nav-cta focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:text-[18px]"
         >
           {title}
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5">
             <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/>
           </svg>
         </a>
@@ -68,10 +68,10 @@ const heading = `Explore Other ${categoryLabel}`;
       <div class="flex justify-center">
         <a
           href={buttonHref}
-          class="inline-flex items-center gap-2 border border-banner-line bg-card px-8 py-4 font-display text-[14px] font-bold leading-5 tracking-[0.7px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta"
+          class="group inline-flex items-center gap-2 border border-banner-line bg-card px-8 py-4 font-display text-[14px] font-bold leading-5 tracking-[0.7px] text-heading uppercase transition-colors hover:border-nav-cta hover:bg-section-grey/40 hover:text-nav-cta focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta"
         >
           {buttonLabel}
-          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0">
+          <svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5">
             <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/>
           </svg>
         </a>

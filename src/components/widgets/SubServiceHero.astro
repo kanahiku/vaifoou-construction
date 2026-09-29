@@ -8,7 +8,9 @@
  * CTAs and trust bar are wired automatically from config.
  */
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FillImage from '~/components/ui/FillImage.astro';
+import type { ImageMetadata } from 'astro';
+import { photos } from '~/data/photos';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
 
@@ -19,11 +21,24 @@ export interface Props {
   title: string;
   /** Lead paragraph shown below the H1 inside the hero. */
   body: string;
-  /** aria-label forwarded to the grey image placeholder. */
+  /** Background photo. Defaults to the island rock-wall hero. */
+  image?: ImageMetadata;
+  /** Alt text for `image`. */
+  imageAlt?: string;
+  /** Kept for existing page calls. Ignored once a photo is set. */
   imagePlaceholder?: string;
+  /** Hide estimate/phone buttons when the page only needs the shared hero shell. */
+  showCtas?: boolean;
 }
 
-const { eyebrow, title, body, imagePlaceholder = 'Service photo placeholder' } = Astro.props;
+const {
+  eyebrow,
+  title,
+  body,
+  image = photos.hero.src,
+  imageAlt = photos.hero.alt,
+  showCtas = true,
+} = Astro.props;
 const heroTitle = eyebrow ? `${eyebrow}: ${title}` : title;
 
 const trustItems = [
@@ -34,8 +49,7 @@ const trustItems = [
 ---
 
 <section class="relative w-full overflow-hidden border-b border-banner-line min-h-[400px] md:min-h-[500px]">
-  {/* Background photo placeholder */}
-  <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label={imagePlaceholder} />
+  <FillImage src={image} alt={imageAlt} eager class="absolute inset-0" />
   {/* Dark gradient overlay */}
   <div
     class="absolute inset-0"
@@ -55,20 +69,22 @@ const trustItems = [
     </p>
 
     {/* CTAs */}
-    <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
-      <a
-        href={PRIMARY_CTA_HREF}
-        class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
-      >
-        {PRIMARY_CTA_LABEL}
-      </a>
-      <a
-        href={CONTACT.phone.href}
-        class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
-      >
-        <PhoneIcon />{CONTACT.phone.display}
-      </a>
-    </div>
+    {showCtas && (
+      <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
+        <a
+          href={PRIMARY_CTA_HREF}
+          class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+        >
+          {PRIMARY_CTA_LABEL}
+        </a>
+        <a
+          href={CONTACT.phone.href}
+          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+        >
+          <PhoneIcon />{CONTACT.phone.display}
+        </a>
+      </div>
+    )}
 
     {/* Trust bar */}
     <p class="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-muted/30 pt-6">
@@ -81,5 +97,6 @@ const trustItems = [
         </>
       ))}
     </p>
+
   </div>
 </section>

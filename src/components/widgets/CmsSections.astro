@@ -51,6 +51,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
   }
   return ['google', 'yelp'];
 }
+
 ---
 
 {
@@ -86,7 +87,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
                 <a
                   href={section.linkHref}
                   class:list={[
-                    isDark ? 'font-semibold text-page hover:text-white hover:underline' : 'btn-link',
+                    isDark ? 'font-semibold text-page transition-colors hover:text-white' : 'btn-link',
                   ]}
                 >
                   {section.linkText}
@@ -207,76 +208,20 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
             </div>
           ))}
 
-        {section._type === 'comparisonTableSection' &&
-          (section.column3 ? (
-            <div class="overflow-x-auto">
-              <table class="w-full min-w-[720px] border-separate border-spacing-0 text-left font-sans">
-                <thead>
-                  <tr>
-                    <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tl-lg border-r border-accent">
-                      {section.featureLabel}
-                    </th>
-                    <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
-                      {section.column1}
-                    </th>
-                    <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 border-r border-accent">
-                      {section.column2}
-                    </th>
-                    <th class="bg-card-dark text-white font-sans font-medium text-[16px] leading-[160%] px-4 md:px-5 py-3 md:py-4 rounded-tr-lg">
-                      {section.column3}
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {section.rows.map((row, rowIndex) => {
-                    const isLast = rowIndex === section.rows.length - 1;
-                    const cellBg = isDark ? 'bg-white' : 'bg-card-light';
-                    return (
-                      <tr>
-                        <th
-                          class:list={[
-                            `align-top ${cellBg} text-heading font-sans font-medium text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent`,
-                            isLast && 'rounded-bl-lg',
-                          ]}
-                        >
-                          {row.feature}
-                        </th>
-                        <td
-                          class={`align-top ${cellBg} text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent`}
-                        >
-                          {row.cell1}
-                        </td>
-                        <td
-                          class={`align-top ${cellBg} text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5 border-r border-accent`}
-                        >
-                          {row.cell2}
-                        </td>
-                        <td
-                          class:list={[
-                            `align-top ${cellBg} text-muted font-sans font-normal text-[15px] leading-[160%] px-4 md:px-5 py-4 md:py-5`,
-                            isLast && 'rounded-br-lg',
-                          ]}
-                        >
-                          {row.cell3}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <ComparisonTable
-              isDark={isDark}
-              featureLabel={section.featureLabel}
-              columns={[section.column1, section.column2]}
-              rows={section.rows.map((row) => ({
-                feature: row.feature,
-                left: row.cell1,
-                right: row.cell2,
-              }))}
-            />
-          ))}
+        {section._type === 'comparisonTableSection' && (
+          <ComparisonTable
+            featureLabel={section.featureLabel}
+            columns={section.column3
+              ? [section.column1, section.column2, section.column3]
+              : [section.column1, section.column2]}
+            rows={section.rows.map((row) => ({
+              feature: row.feature,
+              values: section.column3
+                ? [row.cell1, row.cell2, row.cell3 ?? '']
+                : [row.cell1, row.cell2],
+            }))}
+          />
+        )}
 
         {section._type === 'bulletCardsSection' && (
           <div class={section.items.length === 2 ? 'grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6' : cardGridClass(section.items.length)}>

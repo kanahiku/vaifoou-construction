@@ -3,6 +3,7 @@ import type {
   Book,
   BookSeries,
   ContactPageContent,
+  HomeMediaContent,
   HomePageContent,
   NavigationContent,
   PodcastEpisode,
@@ -22,6 +23,7 @@ import {
   getSanityContactHelpOptions,
   getSanityContactPage,
   getSanityHomeContent,
+  getSanityHomeMediaContent,
   getSanityNavigationContent,
   getSanityReviewsPage,
   getSanityServicePage,
@@ -37,6 +39,15 @@ export async function getHomeContent(): Promise<HomePageContent> {
     throw new Error('Sanity homePage document is missing (singleton-home).');
   }
   return page;
+}
+
+export async function getHomeMediaContent(): Promise<HomeMediaContent | null> {
+  try {
+    return await getSanityHomeMediaContent();
+  } catch (error) {
+    console.warn('Sanity homepage media unavailable; using local photo fallback.', error);
+    return null;
+  }
 }
 
 export async function getContactPage(): Promise<ContactPageContent | null> {
@@ -69,10 +80,7 @@ const HIDDEN_NAV_HREFS = new Set(['/chapters', '/guidebooks']);
 const HIDDEN_NAV_LABELS = new Set(['chapters', 'guidebooks', 'guidebook series']);
 
 function isHiddenNavLink(link: { text: string; href?: string }): boolean {
-  return (
-    (link.href != null && HIDDEN_NAV_HREFS.has(link.href)) ||
-    HIDDEN_NAV_LABELS.has(link.text.toLowerCase())
-  );
+  return (link.href != null && HIDDEN_NAV_HREFS.has(link.href)) || HIDDEN_NAV_LABELS.has(link.text.toLowerCase());
 }
 
 function hidePagesFromUi(nav: NavigationContent): NavigationContent {
@@ -150,15 +158,7 @@ export async function getBlogPostSlugs(): Promise<string[]> {
   return [...new Set([...localSlugs, ...sanitySlugs])];
 }
 
-const STATIC_PATHS = [
-  '/',
-  '/blog',
-  '/reviews',
-  '/privacy-policy',
-  '/terms',
-  '/accessibility',
-  '/contact',
-];
+const STATIC_PATHS = ['/', '/blog', '/reviews', '/privacy-policy', '/terms', '/accessibility', '/contact'];
 
 export async function getPublicContentPaths(): Promise<string[]> {
   const [pageSlugs, postSlugs] = await Promise.all([getServicePageSlugs(), getBlogPostSlugs()]);
@@ -261,6 +261,7 @@ export type {
   Book,
   BookSeries,
   ContactPageContent,
+  HomeMediaContent,
   HomePageContent,
   NavigationContent,
   PodcastEpisode,

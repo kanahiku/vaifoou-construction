@@ -1,6 +1,7 @@
 // Singletons
 import { siteNavigation } from './singletons/navigation';
 import { siteFooter } from './singletons/footer';
+import { homePage, homeAudienceCard } from './documents/homePage';
 import { blogPost } from './documents/blogPost';
 import { testimonial } from './documents/testimonial';
 
@@ -9,13 +10,7 @@ import { navLink, navSubLink } from './objects/navLink';
 import { footerColumn, footerLink, socialLink } from './objects/footerColumn';
 
 // Shared item objects
-import {
-  statItem,
-  infoCardItem,
-  serviceItem,
-  timelineStep,
-  faqItem,
-} from './objects/homeObjects';
+import { statItem, infoCardItem, serviceItem, timelineStep, faqItem } from './objects/homeObjects';
 
 // Shared section objects (reused across page templates)
 import {
@@ -50,6 +45,7 @@ export const schemaTypes = [
   // Documents
   siteNavigation,
   siteFooter,
+  homePage,
   blogPost,
   testimonial,
 
@@ -68,6 +64,7 @@ export const schemaTypes = [
   serviceItem,
   timelineStep,
   faqItem,
+  homeAudienceCard,
   linkedCard,
   quoteCardItem,
 

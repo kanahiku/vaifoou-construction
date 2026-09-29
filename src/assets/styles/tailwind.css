@@ -659,13 +659,13 @@
 @utility btn-link {
   @apply inline-flex items-center font-body font-normal text-[14px] cursor-pointer;
   color: var(--aw-color-btn-link);
-  text-underline-offset: 2px;
-  transition-property: color, text-decoration-color;
+  text-decoration: none;
+  transition-property: color;
   transition-duration: 200ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   &:hover {
     color: var(--aw-color-btn-link-hover);
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
@@ -841,9 +841,9 @@ nav > ul > li > div > button.aw-link-active {
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
 }
 
-/* Linked-card hover: underline the URL when the card is hovered. No lift or bounce. */
+/* Linked-card hover: color-only, matching site hyperlink behavior. */
 @utility card-link {
-  @apply underline underline-offset-[3px] decoration-2 decoration-transparent transition-[color,text-decoration-color] duration-200 group-hover:decoration-current;
+  @apply no-underline transition-colors duration-200;
 }
 
 .dd *:first-child {

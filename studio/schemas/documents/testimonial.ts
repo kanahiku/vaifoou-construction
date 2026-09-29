@@ -35,6 +35,7 @@ export const testimonial = defineType({
         list: [
           { title: 'Google', value: 'google' },
           { title: 'Yelp', value: 'yelp' },
+          { title: 'Thumbtack', value: 'thumbtack' },
         ],
         layout: 'radio',
       },

@@ -1,18 +1,14 @@
 ---
 /**
- * Site footer — Figma node 4:316 (dark 4-column layout).
- * 4 cols · bottom legal bar. Same widget on every page.
+ * Site footer — Figma node 112:316.
+ * 5-col dark layout · rock-texture overlay · social icons in bottom bar.
  */
 import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
 import { getHomePermalink } from '~/utils/permalinks';
 import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
-import { PRIMARY_CTA_HREF } from '~/config/cta';
 import logoDark from '~/assets/icons/logo-dark.svg';
-import iconPhone from '~/assets/icons/red-phone.svg';
-import iconClock from '~/assets/icons/red-clock.svg';
-import iconPin from '~/assets/icons/red-location-pin.svg';
-import iconShield from '~/assets/icons/sheild.svg';
 
 interface Link {
   text?: string;
@@ -39,70 +35,75 @@ const {
   footNote = '',
 } = Astro.props;
 
-const servicesCol   = links.find((c) => c.title === 'SERVICES');
-const areasCol      = links.find((c) => c.title === 'SERVICE AREAS');
-const workWithCol   = links.find((c) => c.title === 'WHO WE WORK WITH');
-const vaifoouCol    = links.find((c) => c.title === 'VAIFOOU CONSTRUCTION');
+const servicesCol    = links.find((c) => c.title === 'SERVICES');
+const areasCol       = links.find((c) => c.title === 'SERVICE AREAS');
+const whoWeServeCol  = links.find((c) => c.title === 'WHO WE SERVE');
+const companyCol     = links.find((c) => c.title === 'COMPANY');
 ---
 
-<footer class="not-prose w-full bg-footer text-page">
+<footer class="not-prose relative w-full overflow-hidden text-page" style="background-color: #0e0d0c;">
 
-  {/* pt 96 · pb 64 · 64 between the columns and the legal bar */}
-  <div class="site-frame flex flex-col gap-16 pb-16 pt-24">
+  {/* Dark overlay — sits above the texture (added via CMS/bg image in future) */}
+  <div class="absolute inset-0 bg-[rgba(14,13,12,0.92)]" aria-hidden="true"></div>
+  {/* TODO: add rock texture background image behind overlay when asset is ready */}
 
-    {/* 4 columns · 40px apart · 64px under the content, above the rule */}
-    <div class="grid grid-cols-1 items-start gap-10 border-b border-[rgba(96,94,90,0.2)] pb-16 md:grid-cols-2 lg:grid-cols-4">
+  <div class="site-frame relative z-10 flex flex-col gap-16 pb-10 pt-24">
 
-      {/* ── Col 1: Brand & Company Links ─────────────────────── */}
-      <div class="flex flex-col gap-[15px]">
+    {/* ── 5-column grid ─────────────────────────────────────────── */}
+    <div class="grid grid-cols-1 gap-10 border-b border-[rgba(96,94,90,0.2)] pb-16 sm:grid-cols-2 lg:grid-cols-5">
 
-        <a href={getHomePermalink()} class="inline-flex h-10 w-[149px] shrink-0" aria-label={site.name}>
-          <Image src={logoDark} alt="" width={149} height={40} class="h-10 w-[149px]" />
-        </a>
+      {/* ── Col 1: Brand ──────────────────────────────────────── */}
+      <div class="flex flex-col justify-between gap-8">
+        <div class="flex flex-col gap-[7px]">
+          {/* Logo */}
+          <a href={getHomePermalink()} class="inline-flex h-10 shrink-0" aria-label={site.name}>
+            <Image src={logoDark} alt="" width={149} height={40} class="h-10 w-auto" />
+          </a>
 
-        <p class="font-body text-[14px] font-normal leading-[22.75px] text-page/80">
-          {site.footerTagline}
-        </p>
+          {/* Company name */}
+          <p class="font-display text-[20px] font-bold leading-6 tracking-[0.5px] text-page-end uppercase">
+            {site.name}
+          </p>
 
-        <p class="flex flex-wrap items-center gap-1 pt-[5px] font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
-          {[CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"].map((item, i) => (
-            <>
-              {i > 0 && <span aria-hidden="true">•</span>}
-              <span>{item}</span>
-            </>
-          ))}
-        </p>
+          {/* Contact info — plain text, no icons */}
+          <div class="mt-1 flex flex-col gap-[2px]">
+            <p class="font-body text-[14px] font-normal leading-[22.75px] text-page/80">
+              {CONTACT.license} &bull; Licensed &amp; Insured
+            </p>
+            <p class="font-body text-[14px] font-normal leading-[22.75px] text-page/80">
+              O&#x02BB;ahu, Hawai&#x02BB;i
+            </p>
+            <a
+              href={CONTACT.phone.href}
+              class="font-body text-[14px] font-normal leading-[22.75px] text-page-end transition-colors hover:text-nav-cta"
+            >
+              {CONTACT.phone.display}
+            </a>
+          </div>
+        </div>
 
-        <a
-          href={PRIMARY_CTA_HREF}
-          class="cta-sm mt-[5px] inline-flex w-fit items-center gap-1 bg-nav-cta text-center font-display text-[20px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:opacity-90"
-        >
-          Request Free Estimate
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
-            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor" />
-          </svg>
-        </a>
-
-        {vaifoouCol && (
-          <ul class="flex flex-col gap-[7px] border-t border-[rgba(96,94,90,0.2)] pt-3">
-            {vaifoouCol.links.map(({ text, href }) => (
-              <li>
+        {/* Legal links — Privacy Policy • Terms • Accessibility */}
+        {secondaryLinks.length > 0 && (
+          <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+            {secondaryLinks.map(({ text, href }, i) => (
+              <>
+                {i > 0 && <span class="font-body text-[12px] font-medium leading-4 text-page/40" aria-hidden="true">&bull;</span>}
                 <a
                   href={href}
-                  class="font-body text-[13px] leading-[20px] text-page/70 transition-colors hover:text-page-end"
+                  class="font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/60 uppercase transition-colors hover:text-page-end"
                 >
                   {text}
                 </a>
-              </li>
+              </>
             ))}
-          </ul>
+          </div>
         )}
       </div>
 
-      {/* ── Col 2: Services ──────────────────────────────────── */}
+      {/* ── Col 2: Services ───────────────────────────────────── */}
       {servicesCol && (
         <div class="flex flex-col gap-4">
-          <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+          <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
             {servicesCol.title}
           </p>
           <ul class="flex flex-col gap-2">
@@ -110,12 +111,9 @@ const vaifoouCol    = links.find((c) => c.title === 'VAIFOOU CONSTRUCTION');
               <li>
                 <a
                   href={href}
-                  class="flex items-center justify-between gap-3 font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
+                  class="font-body text-[16px] font-normal leading-6 text-page/80 transition-colors hover:text-page-end"
                 >
-                  <span>{text}</span>
-                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" class="shrink-0">
-                    <path d="M4 4H11V11H9.5V6.56L5.03 11.03L3.97 9.97L8.44 5.5H4V4Z" fill="currentColor" />
-                  </svg>
+                  {text}
                 </a>
               </li>
             ))}
@@ -123,23 +121,20 @@ const vaifoouCol    = links.find((c) => c.title === 'VAIFOOU CONSTRUCTION');
         </div>
       )}
 
-      {/* ── Col 3: Service Areas ─────────────────────────────── */}
+      {/* ── Col 3: Service Areas ──────────────────────────────── */}
       {areasCol && (
-        <div class="flex flex-col gap-[15px]">
-          <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+        <div class="flex flex-col gap-4">
+          <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
             {areasCol.title}
           </p>
-          <ul class="flex flex-col gap-[7px]">
+          <ul class="flex flex-col gap-2">
             {areasCol.links.map(({ text, href }) => (
               <li>
                 <a
                   href={href}
-                  class="flex items-center justify-between gap-3 font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
+                  class="font-body text-[16px] font-normal leading-6 text-page/80 transition-colors hover:text-page-end"
                 >
-                  <span>{text}</span>
-                  <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" class="shrink-0">
-                    <path d="M4 4H11V11H9.5V6.56L5.03 11.03L3.97 9.97L8.44 5.5H4V4Z" fill="currentColor" />
-                  </svg>
+                  {text}
                 </a>
               </li>
             ))}
@@ -147,87 +142,70 @@ const vaifoouCol    = links.find((c) => c.title === 'VAIFOOU CONSTRUCTION');
         </div>
       )}
 
-      {/* ── Col 4: Who We Work With + Direct Inquiries ───────── */}
-      <div class="flex flex-col gap-4">
+      {/* ── Col 4: Who We Serve ───────────────────────────────── */}
+      {whoWeServeCol && (
+        <div class="flex flex-col gap-4">
+          <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+            {whoWeServeCol.title}
+          </p>
+          <ul class="flex flex-col gap-2">
+            {whoWeServeCol.links.map(({ text, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class="font-body text-[16px] font-normal leading-6 text-page/80 transition-colors hover:text-page-end"
+                >
+                  {text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-        {workWithCol && (
-          <>
-            <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
-              {workWithCol.title}
-            </p>
-            <ul class="flex flex-col gap-[7px]">
-              {workWithCol.links.map(({ text, href }) => (
-                <li>
+      {/* ── Col 5: Company ────────────────────────────────────── */}
+      {companyCol && (
+        <div class="flex flex-col gap-4">
+          <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
+            {companyCol.title}
+          </p>
+          <ul class="flex flex-col gap-2">
+            {companyCol.links.map(({ text, href }) => (
+              <li>
+                {href ? (
                   <a
                     href={href}
-                    class="font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
+                    class="font-body text-[16px] font-normal leading-6 text-page/80 transition-colors hover:text-page-end"
                   >
                     {text}
                   </a>
-                </li>
-              ))}
-            </ul>
-            <div class="border-t border-[rgba(96,94,90,0.2)] pt-4" />
-          </>
-        )}
-
-        <p class="border-b border-[rgba(96,94,90,0.2)] pb-[5px] font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
-          Direct Inquiries
-        </p>
-
-        <ul class="flex flex-col gap-2">
-          <li>
-            <a
-              href={CONTACT.phone.href}
-              class="flex items-center gap-1 font-body text-[14px] leading-[21.6px] text-page/80 transition-colors hover:text-page-end"
-            >
-              <Image src={iconPhone} alt="" width={18} height={18} class="size-[18px] shrink-0" aria-hidden="true" />
-              Direct: {CONTACT.phone.display}
-            </a>
-          </li>
-          <li class="flex items-center gap-1 font-body text-[14px] leading-[21.6px] text-page/80">
-            <Image src={iconClock} alt="" width={20} height={20} class="size-5 shrink-0" aria-hidden="true" />
-            Mon &ndash; Sat: 7:00 AM &ndash; 5:30 PM
-          </li>
-          <li class="flex items-center gap-1 font-body text-[14px] leading-[21.6px] text-page/80">
-            <Image src={iconPin} alt="" width={16} height={20} class="h-5 w-4 shrink-0" aria-hidden="true" />
-            <a href="/service-areas/" class="transition-colors hover:text-page-end">
-              Serving all of O'ahu
-            </a>
-          </li>
-        </ul>
-
-        <div class="flex flex-col gap-1 border border-[rgba(96,94,90,0.2)] bg-[rgba(230,226,222,0.1)] p-[9px]">
-          <p class="flex items-center gap-1 font-display text-[13px] font-bold leading-4 tracking-[0.65px] uppercase" style="color: #c7ecc9;">
-            <Image src={iconShield} alt="" width={16} height={20} class="h-5 w-4 shrink-0" aria-hidden="true" />
-            Workmanship Guarantee
-          </p>
-          <p class="font-body text-[12px] font-medium leading-[16.5px] tracking-[0.6px] text-page/80">
-            Every wall and pour is backed by our full trade warranty &amp; 25+ year family legacy.
-          </p>
+                ) : (
+                  <span class="font-body text-[16px] font-normal italic leading-6 text-page/60">
+                    {text}
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+      )}
     </div>
 
-    {/* ── Bottom bar: copyright + nav ──────────────────────────────── */}
+    {/* ── Bottom bar: copyright left · social icons right ───────── */}
     <div class="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
       {footNote && (
-        <p set:html={footNote} class="font-body text-[14px] leading-[21.6px] text-page/80" />
+        <p set:html={footNote} class="font-body text-[16px] font-normal leading-6 text-page/60" />
       )}
-      <nav aria-label="Footer utility">
-        <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
-          {secondaryLinks.map(({ text, href }) => (
-            <li>
-              <a
-                href={href}
-                class="font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80 uppercase transition-colors hover:text-page-end"
-              >
-                {text}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
+
+      {/* Social icons */}
+      <div class="flex items-center gap-4">
+        <a href="https://www.instagram.com/vaifoou_construction_llc/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-page/60 transition-colors hover:text-page-end">
+          <Icon name="tabler:brand-instagram" class="size-5" aria-hidden="true" />
+        </a>
+        <a href="https://www.facebook.com/p/Vaifoou-Construction-61552740776227/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-page/60 transition-colors hover:text-page-end">
+          <Icon name="tabler:brand-facebook" class="size-5" aria-hidden="true" />
+        </a>
+      </div>
     </div>
 
   </div>

@@ -87,6 +87,7 @@ const topBarItems = [
   'Licensed & Insured',
   "Serving All of O'ahu",
 ].filter(Boolean);
+
 ---
 
 <aw-header transition:persist={embedded ? 'hero-nav' : 'header'}>
@@ -134,14 +135,7 @@ const topBarItems = [
         </div>
       </header>
     ) : (
-  <header
-    class:list={[
-      { sticky: isSticky, relative: !isSticky },
-      'top-0 z-40 flex-none mx-auto w-full',
-    ]}
-    {...isSticky ? { 'data-aw-sticky-header': true } : {}}
-    {...id ? { id } : {}}
-  >
+  <Fragment>
     {/* ── Top utility bar — Figma 4:436 / 4:480 ───────────────── */}
     <div class="w-full border-b border-banner-line bg-banner">
       <div class="site-frame flex flex-col items-center gap-1 pb-[9px] pt-2 md:flex-row md:justify-between md:gap-4 md:py-1">
@@ -159,9 +153,20 @@ const topBarItems = [
             </Fragment>
           ))}
         </p>
+        <p class="font-display text-[10px] font-semibold! leading-6 tracking-[0.5px] text-banner-text uppercase md:text-[13px] md:font-bold! md:leading-4 md:tracking-[0.65px]">
+          Closed on Sunday
+        </p>
       </div>
     </div>
 
+  <header
+    class:list={[
+      { sticky: isSticky, relative: !isSticky },
+      'top-0 z-40 flex-none mx-auto w-full',
+    ]}
+    {...isSticky ? { 'data-aw-sticky-header': true } : {}}
+    {...id ? { id } : {}}
+  >
     {/* ── Main nav bar ────────────────────────────────────────── */}
     <div class="w-full bg-card border-b border-heading/10">
       <div
@@ -215,9 +220,8 @@ const topBarItems = [
           ))}
         </div>
       </div>
-    </div>
 
-    <div class={mobilePanelClass} data-mobile-panel style={navBgStyle}>
+      <div class={mobilePanelClass} data-mobile-panel style={navBgStyle}>
       <nav aria-label="Mobile navigation">
         <ul class="flex flex-col">
           {
@@ -322,8 +326,10 @@ const topBarItems = [
           ))}
         </div>
       )}
+      </div>
     </div>
   </header>
+  </Fragment>
     )
   }
 </aw-header>
