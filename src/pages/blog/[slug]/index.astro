@@ -81,14 +81,9 @@ const metadata = {
         All Articles
       </a>
 
-      {/* Category chip */}
-      <p class="bg-section-dark px-2 py-1 w-fit font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page-end uppercase">
-        {post.category ?? 'Insights'}
-      </p>
-
       {/* Title */}
       <h1 class="max-w-[768px] font-display text-[32px] font-bold leading-tight tracking-[-0.3px] text-page-end uppercase md:text-[56px] md:leading-[64px] md:tracking-[-0.6px]">
-        {post.title}
+        {post.category ?? 'Insights'}: {post.title}
       </h1>
 
       {/* Meta */}

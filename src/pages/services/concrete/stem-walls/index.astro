@@ -13,14 +13,13 @@ import { site } from '~/config/site';
 
 const metadata = {
   title: `Stem Walls | ${site.name}`,
-  description: `Vaifoou Construction builds concrete stem walls for residential and commercial structures across O\u02BBahu. Contact us for a site estimate.`,
+  description: `Vaifoou Construction builds concrete stem walls for residential and commercial structures across O'ahu. Contact us for a site estimate.`,
 };
 
-// 2-col explainer table (no col2)
 const tableRows = [
-  { feature: 'Function',      val1: 'Connects the foundation slab to the vertical framing above.' },
-  { feature: 'Moisture',      val1: 'Elevates the structure above the ground to resist moisture and pests.' },
-  { feature: 'Load Transfer', val1: 'Distributes the weight of the superstructure down to the footing.' },
+  { feature: 'Primary Function', val1: 'Transfers the load of the house to the foundation' },
+  { feature: 'Site Application', val1: 'Ideal for lots with slopes or uneven elevation' },
+  { feature: 'Moisture Control', val1: 'Elevates the base structure above ground level' },
 ];
 
 const links = [
@@ -34,28 +33,26 @@ const links = [
 ];
 
 const faqs = [
-  { title: 'What is the purpose of a stem wall?',           description: 'A stem wall connects the foundation footing to the vertical structure above, lifts the building above grade to resist moisture and pests, and transfers the load of the structure down to the footing.' },
-  { title: 'Do you pour both the footing and stem wall?',   description: 'Yes. Our crews handle the complete stem wall system including the concrete footing and stem wall pour.' },
-  { title: 'Are your installations guaranteed?',             description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+  { title: 'What is the purpose of a stem wall?',           description: 'It is the structural base that connects your foundation pad to the vertical walls of the building, often used to manage uneven lot elevations.' },
+  { title: 'Do you offer this as a standalone service?',    description: 'Yes. We maintain stem walls as a dedicated service separate from standard slab foundations to meet specific structural requirements.' },
+  { title: 'Are your installations guaranteed?',             description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
-    eyebrow="Concrete Services"
     title="Stem Walls"
-    body="We construct concrete stem walls for residential and commercial buildings across O\u02BBahu. A stem wall is the short concrete wall that runs between your foundation footing and the frame of the structure above. Our family brings a 25+ year trade legacy to every project site. Every installation is backed by our workmanship guarantee."
+    body="We construct concrete stem walls for residential and commercial buildings across O'ahu. A stem wall is the short concrete wall that runs between your foundation footing and the frame of the structure above. Our family brings a 25+ year trade legacy to every project site. Every installation is backed by our workmanship guarantee."
     imagePlaceholder="Concrete stem wall construction photo"
   />
   <ServiceTable
-    eyebrow="Explainer"
-    heading="Role of a Stem Wall"
-    col1="Description"
+    heading="Stem Wall Support Structure"
+    col1="Role of a Stem Wall"
     rows={tableRows}
   />
   <ServiceLinks categoryLabel="Concrete Services" items={links} />
-  <FAQs title="Stem Wall FAQs" tagline="Common Questions" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Start Your Stem Wall Project" />
+  <BrickMotifCTA heading="Request a Site Consultation" />
 </Layout>

@@ -41,14 +41,14 @@ const visible = items.slice(0, maxItems);
 const hasMore = items.length > maxItems;
 const buttonLabel = viewAllLabel ?? `View All ${categoryLabel}`;
 const buttonHref = viewAllHref ?? (categoryLabel === 'Service Areas' ? '/service-areas/' : '/services/');
+const heading = `Explore Other ${categoryLabel}`;
 ---
 
 <section class="w-full border-b border-banner-line bg-page py-6 md:py-20">
   <div class="site-frame flex flex-col gap-8">
-    <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-      <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
-      Explore Other {categoryLabel}
-    </p>
+    <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+      {heading}
+    </h2>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
       {visible.map(({ title, href }) => (

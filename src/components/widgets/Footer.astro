@@ -9,9 +9,6 @@ import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF } from '~/config/cta';
 import logoDark from '~/assets/icons/logo-dark.svg';
-import iconLicence from '~/assets/icons/green-star-tick.svg';
-import iconBadge from '~/assets/icons/green-badge.svg';
-import iconChurch from '~/assets/icons/green-church.svg';
 import iconPhone from '~/assets/icons/red-phone.svg';
 import iconClock from '~/assets/icons/red-clock.svg';
 import iconPin from '~/assets/icons/red-location-pin.svg';
@@ -67,20 +64,14 @@ const vaifoouCol    = links.find((c) => c.title === 'VAIFOOU CONSTRUCTION');
           {site.footerTagline}
         </p>
 
-        <ul class="flex flex-col gap-1 pt-[5px]">
-          <li class="flex items-center gap-1 font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
-            <Image src={iconLicence} alt="" width={22} height={21} class="h-[21px] w-[22px] shrink-0" aria-hidden="true" />
-            <span>Licence {CONTACT.license} • Fully Licensed &amp; Insured</span>
-          </li>
-          <li class="flex items-center gap-1 font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
-            <Image src={iconBadge} alt="" width={16} height={21} class="h-[21px] w-4 shrink-0" aria-hidden="true" />
-            <span>BBB Accredited • 25+ Year Legacy</span>
-          </li>
-          <li class="flex items-center gap-1 font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
-            <Image src={iconChurch} alt="" width={20} height={21} class="h-[21px] w-5 shrink-0" aria-hidden="true" />
-            <span>Closed Sundays to honor God</span>
-          </li>
-        </ul>
+        <p class="flex flex-wrap items-center gap-1 pt-[5px] font-body text-[12px] font-medium leading-4 tracking-[0.6px] text-page/80">
+          {[CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"].map((item, i) => (
+            <>
+              {i > 0 && <span aria-hidden="true">•</span>}
+              <span>{item}</span>
+            </>
+          ))}
+        </p>
 
         <a
           href={PRIMARY_CTA_HREF}
@@ -201,7 +192,7 @@ const vaifoouCol    = links.find((c) => c.title === 'VAIFOOU CONSTRUCTION');
           <li class="flex items-center gap-1 font-body text-[14px] leading-[21.6px] text-page/80">
             <Image src={iconPin} alt="" width={16} height={20} class="h-5 w-4 shrink-0" aria-hidden="true" />
             <a href="/service-areas/" class="transition-colors hover:text-page-end">
-              Serving all of O&#x2019;ahu
+              Serving all of O'ahu
             </a>
           </li>
         </ul>

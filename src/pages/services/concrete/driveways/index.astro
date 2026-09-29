@@ -13,7 +13,7 @@ import { site } from '~/config/site';
 
 const metadata = {
   title: `Concrete Driveways | ${site.name}`,
-  description: `Vaifoou Construction pours durable concrete driveways for properties on O\u02BBahu. Contact us to schedule a site estimate.`,
+  description: `Vaifoou Construction pours durable concrete driveways for properties on O'ahu. Contact us to schedule a site estimate.`,
 };
 
 // 2-col cost factors table (no col2)
@@ -36,27 +36,25 @@ const links = [
 const faqs = [
   { title: 'What factors affect the cost of a new driveway?', description: 'Costs are determined by total square footage and required site preparation. Your chosen concrete finish also impacts the final estimate.' },
   { title: 'What materials do you use?',                      description: 'We use high-quality concrete mixtures designed for structural longevity.' },
-  { title: 'Are your installations guaranteed?',              description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+  { title: 'Are your installations guaranteed?',              description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
-    eyebrow="Concrete Services"
     title="Concrete Driveways"
-    body="We pour concrete driveways for residential and commercial properties across O\u02BBahu. Our family brings a 25+ year trade legacy to every project. Your new driveway is built to handle heavy vehicle traffic. Every installation is backed by our workmanship guarantee."
+    body="We pour concrete driveways for residential and commercial properties across O'ahu. Our family brings a 25+ year trade legacy to every project. Your new driveway is built to handle heavy vehicle traffic. Every installation is backed by our workmanship guarantee."
     imagePlaceholder="Concrete driveway pour photo"
   />
   <ServiceTable
-    eyebrow="Estimating"
     heading="Driveway Cost Factors"
     note="Estimating the cost of a new concrete driveway requires an on-site consultation. We evaluate specific variables to determine the final project scope."
     col1="Description"
     rows={tableRows}
   />
   <ServiceLinks categoryLabel="Concrete Services" items={links} />
-  <FAQs title="Concrete Driveway FAQs" tagline="Common Questions" items={faqs}>
+  <FAQs title="Concrete Driveway FAQs" items={faqs}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Start Your Concrete Driveway Project" />
+  <BrickMotifCTA heading="Request a Site Consultation" />
 </Layout>

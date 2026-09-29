@@ -18,7 +18,7 @@ export const GET = async () => {
   const origin = siteOrigin();
 
   const rss = await getRssString({
-    title: `${site.name}’s Blog`,
+    title: `${site.name}'s Blog`,
     description: site.description,
     site: origin,
 

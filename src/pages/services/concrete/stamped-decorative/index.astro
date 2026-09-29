@@ -12,14 +12,14 @@ import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
 
 const metadata = {
-  title: `Stamped & Decorative Concrete | ${site.name}`,
-  description: `Elevate your property with decorative concrete finishes. Vaifoou Construction handles stamped and custom concrete across O\u02BBahu.`,
+  title: `Stamped & Decorative Concrete | Vaifoou Construction LLC`,
+  description: `Vaifoou Construction pours stamped and decorative concrete with various pattern and finish options across O'ahu. Contact us for an estimate.`,
 };
 
 const tableRows = [
-  { feature: 'Aesthetic',   val1: 'Patterns and custom textures',        val2: 'Plain broom surface' },
-  { feature: 'Cost',        val1: 'Higher — custom finish work',          val2: 'Lower — standard finish' },
-  { feature: 'Best For',    val1: 'High-visibility driveways and patios', val2: 'Sidewalks and functional utility areas' },
+  { feature: 'Aesthetic', val1: 'Custom patterns and textures', val2: 'Traditional textured surface' },
+  { feature: 'Maintenance', val1: 'Requires regular sealing', val2: 'Minimal maintenance required' },
+  { feature: 'Application', val1: 'Patios, driveways, and entries', val2: 'High-traffic utility pathways' },
 ];
 
 const links = [
@@ -33,29 +33,31 @@ const links = [
 ];
 
 const faqs = [
-  { title: 'What surfaces can you apply decorative concrete finishes to?', description: 'We apply decorative and stamped finishes to driveways, patios, walkways, and steps.' },
-  { title: 'Is stamped concrete more expensive than standard broom finish?', description: 'Yes. Decorative finishes require additional labour and materials, so the cost is higher than a standard broom finish.' },
-  { title: 'Are your installations guaranteed?',                            description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+  { title: 'What pattern and finish options do you offer?', description: 'We provide a variety of decorative patterns and custom finish options designed to complement your property style.' },
+  { title: 'Does decorative concrete require special maintenance?', description: 'Yes. Stamped surfaces require routine maintenance to maintain their color and texture. We handle this directly through our Concrete Sealing service.' },
+  { title: 'Are your installations guaranteed?',                            description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
-    eyebrow="Concrete Services"
     title="Stamped & Decorative Concrete"
-    body="We install custom stamped and decorative concrete finishes to elevate the aesthetic of your driveways, patios, and walkways across O\u02BBahu. Our family brings a 25+ year trade legacy to every project site. Every installation is backed by our workmanship guarantee."
+    body="We pour stamped and decorative concrete for residential and commercial properties across O'ahu. Our crews provide multiple pattern and finish options to match your exact design requirements. Every installation is backed by our family's 25+ year trade legacy and workmanship guarantee."
     imagePlaceholder="Stamped and decorative concrete photo"
   />
   <ServiceTable
-    eyebrow="Comparison"
-    heading="Decorative vs. Standard Broom Finish"
+    heading="Finish Options"
+    note="Choosing a decorative finish allows you to elevate the look of standard flatwork. To protect these specialized finishes over time, we strongly recommend establishing a regular maintenance schedule through our dedicated Concrete Sealing service."
     col1="Stamped & Decorative Finish"
     col2="Standard Broom Finish"
     rows={tableRows}
   />
-  <ServiceLinks categoryLabel="Concrete Services" items={links} />
-  <FAQs title="Stamped & Decorative Concrete FAQs" tagline="Common Questions" items={faqs}>
+  <ServiceLinks categoryLabel="Explore Other Concrete Services" items={links} />
+  <FAQs title="Frequently Asked Questions" items={faqs}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Start Your Decorative Concrete Project" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family's 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

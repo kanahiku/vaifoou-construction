@@ -2,7 +2,7 @@
 /**
  * Services hub page — /services/
  * Content: docs/service/Vaifoou Construction Service Pages - Main.docx
- * Design: matches homepage section patterns (eyebrow · H2 · body · cards · CTA banner)
+ * Design: matches homepage section patterns (H2 · body · cards · CTA banner)
  */
 import Layout from '~/layouts/PageLayout.astro';
 import { Image } from 'astro:assets';
@@ -12,13 +12,13 @@ import brickMotif from '~/assets/brick-motif-wide-light.svg';
 import iconRockWall from '~/assets/icons/rock-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
 import iconHammer from '~/assets/icons/hammer.svg';
-import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
 
 const metadata = {
-  title: `O\u02BBahu Masonry & Concrete Services | ${site.name}`,
-  description: `Masonry and concrete services for O\u02BBahu properties. Specializing in rock walls, CMU block, and concrete flatwork. Request an estimate.`,
+  title: "O'ahu Masonry & Concrete Services | Vaifoou Construction",
+  description: "Masonry and concrete services for O'ahu properties. Specializing in rock walls, CMU block, and concrete flatwork. Request an estimate.",
+  ignoreTitleTemplate: true,
 };
 
 const capabilities = [
@@ -27,7 +27,6 @@ const capabilities = [
     iconW: 22,
     iconH: 12,
     title: 'Rock Walls',
-    href: '/services/rock-walls/',
     description:
       'Custom property boundaries and retaining structures built with hand-selected volcanic basalt.',
     subLinks: [
@@ -41,9 +40,8 @@ const capabilities = [
     iconW: 18,
     iconH: 14,
     title: 'Retaining Walls',
-    href: '/services/retaining-walls/',
     description:
-      'Rock and CMU options compared for hillside retention — one decision page so you can choose the right material for your site.',
+      'Rock and CMU options compared for hillside retention.',
     subLinks: [],
   },
   {
@@ -51,9 +49,8 @@ const capabilities = [
     iconW: 18,
     iconH: 14,
     title: 'CMU & Block Walls',
-    href: '/services/cmu-block-walls/',
     description:
-      'Retaining walls and block fences built for long-term stability. CMU retaining and CMU fence covered in a single service.',
+      'Retaining walls and block fences built for long-term stability.',
     subLinks: [],
   },
   {
@@ -61,7 +58,6 @@ const capabilities = [
     iconW: 16,
     iconH: 18,
     title: 'Concrete Services',
-    href: '/services/concrete/',
     description:
       'Custom driveways, new foundations, and decorative surfaces poured for durability.',
     subLinks: [
@@ -71,7 +67,7 @@ const capabilities = [
       { text: 'Steps & Stairways',       href: '/services/concrete/steps/'              },
       { text: 'Foundations',             href: '/services/concrete/foundations/'        },
       { text: 'Stamped & Decorative',    href: '/services/concrete/stamped-decorative/' },
-      { text: 'Concrete Sealing',        href: '/services/concrete/sealing/'            },
+      { text: 'Sealing',                 href: '/services/concrete/sealing/'            },
     ],
   },
 ];
@@ -88,7 +84,7 @@ const scopeRows = [
 
   {/* ═══════════════════════════════════════════════════════════
       SECTION 1 — PAGE HERO
-      Dark bg · eyebrow tag · H1 · subtitle · 2 CTAs · trust bar
+      Dark bg · H1 · subtitle · 2 CTAs
   ════════════════════════════════════════════════════════════ */}
   <section class="relative w-full overflow-hidden border-b border-banner-line min-h-[400px] md:min-h-[500px]">
 
@@ -104,16 +100,10 @@ const scopeRows = [
 
     {/* Content */}
     <div class="site-frame relative z-10 flex flex-col items-start gap-4 pb-16 pt-16 md:pb-24 md:pt-24">
-      <p class="bg-section-dark px-2 py-1 font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)]">
-        Masonry &amp; Concrete
-      </p>
-
-      <h1 class="max-w-[896px] font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[72px] md:tracking-[-0.8px]">
-        O&#x02BB;ahu Masonry &amp; Concrete Services
-      </h1>
+      <h1 class="max-w-[896px] font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[72px] md:tracking-[-0.8px]">O'ahu Masonry &amp; Concrete Services</h1>
 
       <p class="max-w-[640px] font-display text-[16px] font-semibold leading-snug tracking-[0.2px] text-page/80 md:text-[24px] md:leading-[34px] md:tracking-[0.24px]">
-        We build custom rock walls, CMU and block walls, and concrete for residential and commercial properties across O&#x02BB;ahu.
+        We build custom rock walls, CMU and block walls, and concrete for residential and commercial properties across O'ahu.
       </p>
 
       <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
@@ -128,42 +118,22 @@ const scopeRows = [
           class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
         >
           <PhoneIcon />
-          {CONTACT.phone.display}
+          Call {CONTACT.phone.display}
         </a>
       </div>
-
-      <p class="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-muted/30 pt-6">
-        {[
-          `Licence ${CONTACT.license}`,
-          'Licensed & Insured',
-          'Serving all of O\u02BBahu',
-          'Closed Sundays',
-        ].map((item, i) => (
-          <>
-            {i > 0 && <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>}
-            <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">{item}</span>
-          </>
-        ))}
-      </p>
     </div>
   </section>
 
 
   {/* ═══════════════════════════════════════════════════════════
       SECTION 2 — AUDIENCE PATHWAYS
-      bg-page · eyebrow · H2 · body · 2 audience cards
+      bg-page · H2 · body · 2 audience cards
   ════════════════════════════════════════════════════════════ */}
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
 
       <div class="flex max-w-[896px] flex-col gap-1">
-        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
-          Who We Work With
-        </p>
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
-          Dedicated to Homeowners, Property Managers and Contractors
-        </h2>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Dedicated to Homeowners, Property Managers and Contractors</h2>
         <p class="max-w-[896px] pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
           Our crews handle new construction, and demolition and rebuilds of failing walls, across the island. We work directly with homeowners, commercial property owners, property managers and HOAs, and as a masonry and concrete subcontractor to general contractors.
         </p>
@@ -175,22 +145,19 @@ const scopeRows = [
             label: 'Residential',
             title: 'Working on your home?',
             cta: 'View Residential Masonry & Concrete',
-            href: '/residential/',
+            href: '/who-we-work-with/residential/',
           },
           {
             label: 'Commercial & Civil',
             title: 'Managing a commercial property, an HOA or a job site?',
             cta: 'View Commercial Masonry & Concrete',
-            href: '/commercial/',
+            href: '/who-we-work-with/commercial/',
           },
         ].map(({ label, title, cta, href }) => (
           <article class="flex h-full flex-col overflow-hidden border border-banner-line bg-card">
             <div class="relative h-48 w-full shrink-0 md:h-[240px]">
               <!-- TODO: replace with <Image> when asset is ready -->
               <HeroImagePlaceholder fill class="absolute inset-0" label={`${label} image placeholder`} />
-              <span class="absolute left-2 top-2 z-10 bg-section-dark px-2 py-1 font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page-end uppercase shadow-[0_1px_1px_rgb(0_0_0/0.05)]">
-                {label}
-              </span>
             </div>
             <div class="flex flex-1 flex-col p-6 md:p-10">
               <h3 class="font-display text-[22px] font-semibold leading-7 tracking-[0.22px] text-heading uppercase md:text-[26px] md:leading-8">
@@ -217,23 +184,17 @@ const scopeRows = [
 
   {/* ═══════════════════════════════════════════════════════════
       SECTION 3 — CORE CAPABILITIES
-      bg-card · 2×2 service card grid · sub-service tag pills
+      bg-card · 2×2 service card grid · sub-service links
   ════════════════════════════════════════════════════════════ */}
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
 
       <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
-        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
-          Trade Capabilities
-        </p>
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
-          Core Masonry &amp; Concrete Capabilities
-        </h2>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Core Masonry &amp; Concrete Capabilities</h2>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8">
-        {capabilities.map(({ icon, iconW, iconH, title, href, description, subLinks }) => (
+        {capabilities.map(({ icon, iconW, iconH, title, description, subLinks }) => (
           <article class="flex h-full flex-col border border-banner-line bg-white p-6 md:p-10">
             <div class="flex flex-col gap-3 flex-1">
               {/* Icon inline with title */}
@@ -250,31 +211,20 @@ const scopeRows = [
               </h3>
               <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>
 
-              {/* Sub-service tag pills */}
               {subLinks.length > 0 && (
-                <div class="flex flex-wrap gap-2 pt-1">
-                  {subLinks.map(({ text, href: subHref }) => (
-                    <a
-                      href={subHref}
-                      class="inline-flex items-center border border-banner-line bg-section-grey px-3 py-1 font-body text-[12px] font-semibold leading-4 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta"
-                    >
-                      {text}
-                    </a>
+                <p class="flex flex-wrap items-center gap-x-2 gap-y-1 pt-1 font-body text-[13px] font-semibold leading-5 tracking-[0.3px] text-nav-cta uppercase">
+                  {subLinks.map(({ text, href: subHref }, index) => (
+                    <>
+                      {index > 0 && <span class="text-muted" aria-hidden="true">·</span>}
+                      <a href={subHref} class="transition-colors hover:text-heading">
+                        {text}
+                      </a>
+                    </>
                   ))}
-                </div>
+                </p>
               )}
             </div>
 
-            {/* Card CTA link */}
-            <a
-              href={href}
-              class="mt-8 inline-flex items-center gap-1.5 font-display text-[14px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-heading"
-            >
-              View {title}
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0">
-                <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/>
-              </svg>
-            </a>
           </article>
         ))}
       </div>
@@ -290,13 +240,7 @@ const scopeRows = [
     <div class="site-frame flex flex-col gap-8 md:gap-12">
 
       <div class="flex max-w-[896px] flex-col gap-1">
-        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
-          Scope of Work
-        </p>
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[40px] md:leading-[48px] md:tracking-[-0.2px]">
-          Service Scope
-        </h2>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[40px] md:leading-[48px] md:tracking-[-0.2px]">Service Scope</h2>
       </div>
 
       <div class="overflow-hidden border border-banner-line">
@@ -345,15 +289,9 @@ const scopeRows = [
         />
 
         <div class="relative z-10 flex max-w-[768px] flex-col items-start">
-          <p class="mb-1 flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-            <span class="h-3 w-1.5 shrink-0 rounded-full bg-nav-cta" aria-hidden="true"></span>
-            Start your project
-          </p>
-          <h2 class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
-            Start Your O&#x02BB;ahu Masonry Project
-          </h2>
+          <h2 class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Start Your O'ahu Masonry Project</h2>
           <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
-            Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays to put God first.
+            Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays.
           </p>
         </div>
 
@@ -369,26 +307,9 @@ const scopeRows = [
             class="inline-flex items-center justify-center gap-2 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
           >
             <PhoneIcon />
-            {CONTACT.phone.display}
+            Call {CONTACT.phone.display}
           </a>
         </div>
-
-        <p class="relative z-10 flex w-full flex-wrap items-center gap-x-5 gap-y-2 pt-6">
-          {[
-            `Licence ${CONTACT.license}`,
-            'Licensed & Insured',
-            'Workmanship Guarantee',
-            'BBB Accredited',
-            '25+ Year Family Legacy',
-          ].map((item, index) => (
-            <>
-              {index > 0 && (
-                <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>
-              )}
-              <span class="whitespace-nowrap font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-note uppercase">{item}</span>
-            </>
-          ))}
-        </p>
       </div>
     </div>
   </section>

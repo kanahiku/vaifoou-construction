@@ -19,7 +19,7 @@ export function getFallbackReviews(): Review[] {
     {
       id: 'fallback-2',
       authorName: 'Jordan P.',
-      text: 'Placeholder review. Swap these quotes when the client’s review APIs are connected.',
+      text: "Placeholder review. Swap these quotes when the client's review APIs are connected.",
       rating: 5,
       date: '',
       source: 'yelp',

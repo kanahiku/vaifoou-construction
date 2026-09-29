@@ -19,7 +19,7 @@ export interface TableRow {
 }
 
 export interface Props {
-  /** Small eyebrow label above the heading. */
+  /** Small category label folded into the heading. */
   eyebrow?: string;
   /** Section H2. */
   heading: string;
@@ -33,8 +33,9 @@ export interface Props {
   rows: TableRow[];
 }
 
-const { eyebrow = 'Comparison', heading, note, col1, col2, rows } = Astro.props;
+const { eyebrow, heading, note, col1, col2, rows } = Astro.props;
 const isTwoCol = !col2;
+const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
 ---
 
 <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
@@ -42,12 +43,8 @@ const isTwoCol = !col2;
 
     {/* Section header */}
     <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
-      <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-        <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
-        {eyebrow}
-      </p>
       <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
-        {heading}
+        {displayHeading}
       </h2>
       {note && (
         <p class="pt-2 font-body text-[16px] font-normal leading-7 text-banner-note" set:html={note} />

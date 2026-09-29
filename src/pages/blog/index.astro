@@ -12,7 +12,7 @@ const posts = await getBlogPosts();
 
 const metadata = {
   title: `Blog | ${site.name}`,
-  description: `Masonry tips, project spotlights and trade insights from the Vaifoou Construction team on O\u02BBahu.`,
+  description: `Masonry tips, project spotlights and trade insights from the Vaifoou Construction team on O'ahu.`,
   ignoreTitleTemplate: true,
 };
 ---
@@ -21,9 +21,8 @@ const metadata = {
 
   {/* ── Hero ──────────────────────────────────────────────────────── */}
   <SubServiceHero
-    eyebrow="Insights"
     title="Masonry & Concrete Blog"
-    body="Tips, project spotlights and trade insights from our O\u02BBahu masonry team."
+    body="Tips, project spotlights and trade insights from our O'ahu masonry team."
     imagePlaceholder="Vaifoou Construction blog photo"
   />
 
@@ -33,13 +32,7 @@ const metadata = {
 
       {/* Section header */}
       <div class="flex max-w-[896px] flex-col gap-1 border-b border-banner-line pb-6">
-        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-          <span class="h-3 w-1.5 rounded-full bg-nav-cta" aria-hidden="true"></span>
-          {posts.length ? `${posts.length} Article${posts.length === 1 ? '' : 's'}` : 'Articles'}
-        </p>
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
-          Latest Articles
-        </h2>
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Latest Articles</h2>
       </div>
 
       {/* Grid or empty state */}
@@ -64,6 +57,6 @@ const metadata = {
   </section>
 
   {/* ── CTA closer ────────────────────────────────────────────────── */}
-  <BrickMotifCTA heading="Start Your O\u02BBahu Masonry Project" />
+  <BrickMotifCTA heading="Start Your O'ahu Masonry Project" />
 
 </Layout>

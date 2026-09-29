@@ -38,7 +38,8 @@ export interface Props {
   id?: string;
 }
 
-const { eyebrow = 'Reviews', heading = 'Loved across the island.', testimonials: propTestimonials, id } = Astro.props;
+const { eyebrow, heading = 'Loved across the island.', testimonials: propTestimonials, id } = Astro.props;
+const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
 
 // Fetch from Sanity; fall back to prop overrides if provided.
 let testimonials: TestimonialItem[] = propTestimonials ?? [];
@@ -68,8 +69,7 @@ const doubled = [...testimonials, ...testimonials];
   {/* ── Centered header ── */}
   <div class="mx-auto w-full max-w-container px-5 sm:px-8 md:px-16">
     <div class="flex flex-col items-center gap-6 text-center">
-      {eyebrow && <Heading variant="eyebrow">{eyebrow}</Heading>}
-      {heading && <Heading variant="h2">{heading}</Heading>}
+      {displayHeading && <Heading variant="h2">{displayHeading}</Heading>}
     </div>
   </div>
 

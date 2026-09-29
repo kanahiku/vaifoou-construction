@@ -886,6 +886,8 @@ const TESTIMONIALS_QUERY = /* groq */ `
     age,
     location,
     tenure,
+    platform,
+    reviewedAt,
     order
   }
 `;
@@ -897,18 +899,23 @@ type SanityTestimonial = {
   age?: number;
   location?: string;
   tenure?: string;
+  platform?: string;
+  reviewedAt?: string;
   order?: number;
 };
 
 function normalizeTestimonial(doc: SanityTestimonial): Testimonial | null {
-  if (!doc?._id || !doc.quote?.trim() || !doc.name?.trim() || !doc.tenure?.trim()) return null;
+  if (!doc?._id || !doc.quote?.trim() || !doc.name?.trim()) return null;
+  const platform = doc.platform === 'google' || doc.platform === 'yelp' ? doc.platform : undefined;
   return {
     _id: doc._id,
     quote: doc.quote.trim(),
     name: doc.name.trim(),
     age: typeof doc.age === 'number' ? doc.age : undefined,
     location: doc.location?.trim() || undefined,
-    tenure: doc.tenure.trim(),
+    tenure: doc.tenure?.trim() || undefined,
+    platform,
+    reviewedAt: doc.reviewedAt || undefined,
     order: typeof doc.order === 'number' ? doc.order : 0,
   };
 }

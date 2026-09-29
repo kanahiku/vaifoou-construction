@@ -40,14 +40,14 @@ export const navigationData: NavigationContent = {
         text: 'Who We Work With',
         // No href — dropdown label only, not a navigation link
         links: [
-          { text: 'Residential Masonry & Concrete', href: '/residential/' },
+          { text: 'Residential Masonry & Concrete', href: '/who-we-work-with/residential/' },
           {
             text: 'Commercial Masonry & Concrete',
-            href: '/commercial/',
+            href: '/who-we-work-with/commercial/',
             links: [
-              { text: 'Property Managers & Landlords',     href: '/commercial/property-managers-landlords/' },
-              { text: 'HOA Masonry & Concrete',            href: '/commercial/hoa/' },
-              { text: 'Masonry & Concrete Subcontracting', href: '/commercial/contractors/' },
+              { text: 'Property Managers & Landlords',     href: '/who-we-work-with/commercial/property-managers-landlords/' },
+              { text: 'HOA Masonry & Concrete',            href: '/who-we-work-with/commercial/hoa/' },
+              { text: 'Masonry & Concrete Subcontracting', href: '/who-we-work-with/commercial/contractors/' },
             ],
           },
         ],
@@ -68,7 +68,6 @@ export const navigationData: NavigationContent = {
           { text: 'North Shore & Haleiwa', href: '/service-areas/north-shore/' },
         ],
       },
-      { text: 'Gallery', href: '/projects/' },
       { text: 'Reviews', href: '/reviews/' },
       { text: 'Blog', href: '/blog/' },
       { text: 'About', href: '/about/' },
@@ -120,15 +119,14 @@ export const navigationData: NavigationContent = {
       {
         title: 'WHO WE WORK WITH',
         links: [
-          { text: 'Residential Masonry & Concrete', href: '/residential/' },
-          { text: 'Commercial Masonry & Concrete',  href: '/commercial/' },
+          { text: 'Residential Masonry & Concrete', href: '/who-we-work-with/residential/' },
+          { text: 'Commercial Masonry & Concrete',  href: '/who-we-work-with/commercial/' },
         ],
       },
       {
         title: 'VAIFOOU CONSTRUCTION',
         links: [
           { text: 'About', href: '/about/' },
-          { text: 'Projects & Gallery', href: '/projects/' },
           { text: 'Reviews & Testimonials', href: '/reviews/' },
           { text: 'Blog', href: '/blog/' },
           { text: 'Contact / Request an Estimate', href: '/contact/' },
@@ -141,6 +139,6 @@ export const navigationData: NavigationContent = {
       { text: 'Accessibility', href: '/accessibility/' },
     ],
     socialLinks: SOCIAL.nav as unknown as NavigationContent['footer']['socialLinks'],
-    footNote: `&copy; ${new Date().getFullYear()} ${CONTACT.businessName} LLC. All rights reserved. O&#x2019;ahu, Hawai&#x02BB;i.`,
+    footNote: `&copy; ${new Date().getFullYear()} ${CONTACT.businessName} LLC. All rights reserved. O'ahu, Hawai'i.`,
   },
 };

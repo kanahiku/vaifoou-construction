@@ -5,6 +5,7 @@
  * Used as the last section on all service sub-pages.
  * Phone, licence and trust-bar items are wired automatically from config.
  * Only pass `heading` (required) and optionally `eyebrow` / `note`.
+ * Explicit eyebrow text is folded into the heading instead of rendered separately.
  */
 import { Image } from 'astro:assets';
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
@@ -13,7 +14,7 @@ import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
 
 export interface Props {
-  /** Small eyebrow label. Defaults to "Request a Site Consultation". */
+  /** Optional label folded into the heading. */
   eyebrow?: string;
   /** Section H2 — the page-specific CTA headline. */
   heading: string;
@@ -26,16 +27,16 @@ export interface Props {
 }
 
 const {
-  eyebrow = 'Request a Site Consultation',
+  eyebrow,
   heading,
-  note = "We bring our family\u2019s 25+ year trade legacy to every project site. Contact us to schedule an estimate. Please note we are closed on Sundays to put God first.",
+  note = "We bring our family\u2019s 25+ year trade legacy to every project site. Contact us to schedule an estimate. Please note we are closed on Sundays.",
 } = Astro.props;
+const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
 
 const trustItems = [
-  `Licence ${CONTACT.license}`,
+  CONTACT.license,
   'Licensed & Insured',
-  'Workmanship Guarantee',
-  '25+ Year Family Legacy',
+  "Serving All of O'ahu",
 ];
 ---
 
@@ -53,14 +54,10 @@ const trustItems = [
         aria-hidden="true"
       />
 
-      {/* Eyebrow + heading + note */}
+      {/* Heading + note */}
       <div class="relative z-10 flex max-w-[768px] flex-col items-start gap-1">
-        <p class="flex items-center gap-2 font-body text-[12px] font-bold leading-4 tracking-[1.2px] text-muted uppercase">
-          <span class="h-3 w-1.5 shrink-0 rounded-full bg-nav-cta" aria-hidden="true"></span>
-          {eyebrow}
-        </p>
         <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">
-          {heading}
+          {displayHeading}
         </h2>
         <p class="mt-4 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]" set:html={note} />
       </div>

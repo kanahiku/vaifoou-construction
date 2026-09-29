@@ -539,12 +539,16 @@ export type PodcastPartGroup = {
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 
+export type ReviewPlatform = 'google' | 'yelp';
+
 export interface Testimonial {
   _id: string;
   quote: string;
   name: string;
   age?: number;
   location?: string;
-  tenure: string;
+  tenure?: string;
+  platform?: ReviewPlatform;
+  reviewedAt?: string;
   order: number;
 }

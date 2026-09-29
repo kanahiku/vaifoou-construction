@@ -11,6 +11,16 @@ export interface Props {
 const { links = [], class: className = '' } = Astro.props;
 
 const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const isPathActive = (href?: string) => {
+  if (!href) return false;
+  const hrefPath = `/${trimSlash(new URL(href, Astro.url).pathname)}`;
+  if (hrefPath === '/') return currentPath === '/';
+  return currentPath === hrefPath || currentPath.startsWith(`${hrefPath}/`);
+};
+const hasActiveDescendant = (items?: NavLink[]): boolean => {
+  if (!items?.length) return false;
+  return items.some((item) => isPathActive(item.href) || hasActiveDescendant(item.links));
+};
 const navLinkClass =
   'inline-flex items-center font-body text-[14px] font-semibold leading-[18px] tracking-[0.7px] text-banner-note uppercase whitespace-nowrap hover:text-accent';
 ---
@@ -19,10 +29,11 @@ const navLinkClass =
   {
     links.map(({ text, href, links: childLinks }) => {
       const isDropdown = Boolean(childLinks?.length);
+      const isDropdownActive = isPathActive(href) || hasActiveDescendant(childLinks);
       if (!isDropdown) {
         return (
           <li>
-            <a class:list={[navLinkClass, { 'aw-link-active': href === currentPath }]} href={href}>
+            <a class:list={[navLinkClass, { 'aw-link-active': isPathActive(href) }]} href={href}>
               {text}
             </a>
           </li>
@@ -33,12 +44,12 @@ const navLinkClass =
         <li class="dropdown relative">
           <div>
             {href ? (
-              <a class:list={[navLinkClass, 'inline-flex items-center gap-1']} href={href}>
+              <a class:list={[navLinkClass, 'inline-flex items-center gap-1', { 'aw-link-active': isDropdownActive }]} href={href}>
                 {text}
                 <Icon name="tabler:chevron-down" class="size-3.5" aria-hidden="true" />
               </a>
             ) : (
-              <span class:list={[navLinkClass, 'inline-flex cursor-default items-center gap-1 select-none']}>
+              <span class:list={[navLinkClass, 'inline-flex cursor-default items-center gap-1 select-none', { 'aw-link-active': isDropdownActive }]}>
                 {text}
                 <Icon name="tabler:chevron-down" class="size-3.5" aria-hidden="true" />
               </span>
@@ -53,7 +64,7 @@ const navLinkClass =
                 return (
                   <li>
                     <a
-                      class:list={[{ 'aw-link-active': childHref === currentPath }]}
+                      class:list={[{ 'aw-link-active': isPathActive(childHref) }]}
                       href={childHref}
                     >
                       {childText}
@@ -68,7 +79,7 @@ const navLinkClass =
                   <a
                     class:list={[
                       'flex items-center gap-1',
-                      { 'aw-link-active': childHref === currentPath },
+                      { 'aw-link-active': isPathActive(childHref) },
                     ]}
                     href={childHref}
                   >
@@ -92,7 +103,7 @@ const navLinkClass =
                     {grandChildLinks!.map(({ text: gcText, href: gcHref }) => (
                       <li>
                         <a
-                          class:list={[{ 'aw-link-active': gcHref === currentPath }]}
+                          class:list={[{ 'aw-link-active': isPathActive(gcHref) }]}
                           href={gcHref}
                         >
                           {gcText}

@@ -13,7 +13,7 @@ import { site } from '~/config/site';
 
 const metadata = {
   title: `Rock Retaining Walls | ${site.name}`,
-  description: `Secure your hillside with a heavy-duty rock retaining wall. Vaifoou Construction builds structural basalt retaining walls across O\u02BBahu.`,
+  description: `Secure your hillside with a heavy-duty rock retaining wall. Vaifoou Construction builds structural basalt retaining walls across O'ahu.`,
 };
 
 const tableRows = [
@@ -31,15 +31,14 @@ const links = [
 const faqs = [
   { title: 'What materials do you use for rock retaining walls?', description: 'We build heavy-duty barriers using hand-selected volcanic basalt to secure your property elevation.' },
   { title: 'Do you offer other retaining wall options?',          description: 'Yes. We also construct CMU block retaining walls. You can choose the material that best fits your site requirements.' },
-  { title: 'Are your installations guaranteed?',                  description: 'Yes. Every site we manage across O\u02BBahu is backed by a workmanship guarantee.' },
+  { title: 'Are your installations guaranteed?',                  description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
-    eyebrow="Rock Wall Construction"
     title="Rock Retaining Walls"
-    body="We construct rock retaining walls for residential and commercial properties across O\u02BBahu. Our crews build these heavy-duty barriers to secure hillsides and manage property elevation differences. We build every structure using hand-selected volcanic basalt, and every installation is backed by our workmanship guarantee."
+    body="We construct rock retaining walls for residential and commercial properties across O'ahu. Our crews build these heavy-duty barriers to secure hillsides and manage property elevation differences. We build every structure using hand-selected volcanic basalt, and every installation is backed by our workmanship guarantee."
     imagePlaceholder="Rock retaining wall construction photo"
   />
   <ServiceTable
@@ -54,5 +53,5 @@ const faqs = [
   <FAQs title="Rock Retaining Wall FAQs" tagline="Common Questions" items={faqs}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading={`Secure Your O\u02BBahu Hillside Today`} />
+  <BrickMotifCTA heading="Request a Site Consultation" />
 </Layout>

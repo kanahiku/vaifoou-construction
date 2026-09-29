@@ -15,6 +15,6 @@ export const CATERING_CTA_HREF = '/contact/';
 export const FOOTER_CTA_EYEBROW = 'Get Started';
 export const FOOTER_CTA_TITLE = "START YOUR O'AHU MASONRY PROJECT";
 export const FOOTER_CTA_BODY =
-  'Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays to put God first.';
+  'Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays.';
 export const FOOTER_CTA_LABEL = 'REQUEST A FREE ESTIMATE';
 export const FOOTER_CTA_HREF = '/contact/';

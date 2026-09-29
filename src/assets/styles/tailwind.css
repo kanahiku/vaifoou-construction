@@ -766,6 +766,7 @@ nav > ul > li > a.aw-link-active:hover,
 nav > ul > li > span.aw-link-active,
 nav > ul > li > div > a.aw-link-active,
 nav > ul > li > div > a.aw-link-active:hover,
+nav > ul > li > div > span.aw-link-active,
 nav > ul > li > div > button.aw-link-active {
   color: var(--aw-color-accent);
   font-weight: 700;

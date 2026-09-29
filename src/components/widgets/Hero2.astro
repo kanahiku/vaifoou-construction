@@ -48,6 +48,7 @@ const hasNav = Astro.slots.has('nav');
 const hasImage = Boolean(image && (typeof image !== 'string' || image.trim()));
 const isSplitImage = !isOverlay && !isSplitDark && hasImage;
 const showSplitDarkImage = isSplitDark && !hideImage;
+const displayTitle = tagline ? `${tagline}: ${title}` : title;
 
 const wordAlignClass = {
   start: 'self-start md:justify-start',
@@ -149,12 +150,12 @@ const wordAlignClass = {
             ))}
           </Heading>
         ) : isTitle ? (
-          title && (
+          displayTitle && (
             <Heading
               variant="h1"
               color="white"
               class="flex w-full flex-1 items-center justify-center text-center"
-              html={title}
+              html={displayTitle}
             />
           )
         ) : isPage ? (
@@ -164,9 +165,6 @@ const wordAlignClass = {
               withImage ? 'items-stretch gap-6 md:gap-[72px]' : 'items-start gap-6',
             ]}
           >
-            {tagline && (
-              <p class="mb-2 font-script text-ticker text-heading/60 md:mb-4">{tagline}</p>
-            )}
             <div
               class:list={[
                 'flex w-full flex-col items-start',
@@ -174,17 +172,17 @@ const wordAlignClass = {
                 !withImage && 'flex-1',
               ]}
             >
-              {title && (
+              {displayTitle && (
                 <h1
                   class:list={[
                     'font-rough text-h1 shrink-0 overflow-visible bg-[linear-gradient(var(--aw-color-bg-section-dark)_5%,var(--aw-color-primary)_97%)] bg-clip-text font-normal leading-[1.25] text-transparent [text-box-edge:cap_text] [text-box-trim:trim-start]',
                     stacked
                       ? 'w-full'
-                      : typeof title === 'string' && /<br\s*\/?>/i.test(title)
+                    : typeof displayTitle === 'string' && /<br\s*\/?>/i.test(displayTitle)
                         ? 'w-full md:w-auto md:whitespace-nowrap'
                         : 'md:whitespace-nowrap',
                   ]}
-                  set:html={title}
+                  set:html={displayTitle}
                 />
               )}
               {subtitle && (
@@ -223,8 +221,7 @@ const wordAlignClass = {
                 showSplitDarkImage ? 'lg:w-[55%]' : 'lg:w-full lg:max-w-[760px]',
               ]}
             >
-              {tagline && <p class="font-script text-[var(--aw-text-eyebrow)] leading-none text-page/55">{tagline}</p>}
-              {title && <h1 class="font-rough text-h1 font-normal leading-[1.05] text-page" set:html={title} />}
+              {displayTitle && <h1 class="font-rough text-h1 font-normal leading-[1.05] text-page" set:html={displayTitle} />}
               {content && (
                 <div class="font-sans text-[16px] leading-[1.55] text-page/60 max-w-[480px]" set:html={content} />
               )}
@@ -255,11 +252,8 @@ const wordAlignClass = {
         ) : (
         <div class="flex flex-1 flex-col items-start justify-center min-h-0">
           <div class="flex w-full max-w-[604px] flex-col items-start gap-6">
-            {tagline && (
-              <Heading variant="eyebrow" color="white" html={tagline} />
-            )}
-            {title && (
-              <Heading variant="h1" color="white" html={title} />
+            {displayTitle && (
+              <Heading variant="h1" color="white" html={displayTitle} />
             )}
             {subtitle && (
               <Text variant="body-lg" color="inherit" class="text-page" html={subtitle} />
@@ -315,16 +309,10 @@ const wordAlignClass = {
               ],
             ]}
           >
-            {tagline && (
-              <p
-                class="type-eyebrow text-eyebrow font-sans intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
-                set:html={tagline}
-              />
-            )}
-            {title && (
+            {displayTitle && (
               <h1
                 class="text-h2 font-normal leading-[105%] font-heading text-heading dark:text-gray-200 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
-                set:html={title}
+                set:html={displayTitle}
               />
             )}
             <div class="max-w-3xl lg:max-w-none flex flex-col items-start gap-6">

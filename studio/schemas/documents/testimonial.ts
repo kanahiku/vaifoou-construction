@@ -24,12 +24,13 @@ export const testimonial = defineType({
       name: 'location',
       title: 'Attribution / Location',
       type: 'string',
-      description: 'Shown under the name, e.g. "Google Review" or "Kailua".',
+      description: 'Shown under the name, e.g. "Kailua" or "Homeowner".',
     }),
     defineField({
       name: 'platform',
       title: 'Review Platform',
       type: 'string',
+      description: 'Leave empty when the quote is a direct customer testimonial.',
       options: {
         list: [
           { title: 'Google', value: 'google' },
@@ -37,14 +38,18 @@ export const testimonial = defineType({
         ],
         layout: 'radio',
       },
-      initialValue: 'google',
-      validation: (r) => r.required(),
+    }),
+    defineField({
+      name: 'reviewedAt',
+      title: 'Review Date',
+      type: 'date',
+      description: 'Shown on the card when the original review has a date.',
     }),
     defineField({
       name: 'order',
       title: 'Display Order',
       type: 'number',
-      description: 'Lower numbers appear first in the carousel.',
+      description: 'Lower numbers appear first on the reviews page and homepage.',
       initialValue: 0,
       validation: (r) => r.required().integer(),
     }),
@@ -68,7 +73,7 @@ export const testimonial = defineType({
     prepare({ title, platform, quote }) {
       return {
         title: title || 'Untitled',
-        subtitle: `${platform ?? 'google'} · ${quote?.slice(0, 60)}…`,
+        subtitle: [platform, quote?.slice(0, 60)].filter(Boolean).join(' · '),
       };
     },
   },

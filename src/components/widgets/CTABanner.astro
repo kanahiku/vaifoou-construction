@@ -36,6 +36,7 @@ const {
   secondaryCtaHref,
   id,
 } = Astro.props;
+const displayTitle = eyebrow ? `${eyebrow}: ${title}` : title;
 ---
 
 <section
@@ -59,18 +60,13 @@ const {
     </div>
 
     <div class="flex w-full flex-col items-center gap-6">
-      {/* ── Eyebrow ─────────────────────────────────────────── */}
-      {eyebrow && (
-        <p class="font-script text-[var(--aw-text-eyebrow)] leading-none text-page/50">{eyebrow}</p>
-      )}
-
       {/* ── Display headline — h1 scale, full visual weight ─── */}
       <Heading
         variant="h1"
         color="inherit"
         class="max-w-3xl text-balance text-page"
       >
-        {title}
+        {displayTitle}
       </Heading>
 
       {/* ── Subtitle ─────────────────────────────────────────── */}

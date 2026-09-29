@@ -27,18 +27,16 @@ const subtitleTypography = 'text-body font-normal font-body';
 // Color classes based on isDark
 const titleColor = isDark ? 'text-headline-dark' : 'text-headline-light';
 const subtitleColor = isDark ? 'text-headline-subtitle-dark' : 'text-headline-subtitle-light';
+const displayTitle = tagline ? `${tagline}: ${title}` : title;
 ---
 
 {
-  (title || subtitle || tagline) && (
+  (displayTitle || subtitle) && (
     <div class={twMerge('mb-[30px] text-left', containerClass)}>
-      {tagline && (
-        <p class="type-eyebrow text-accent mb-3" set:html={tagline} />
-      )}
-      {title && (
+      {displayTitle && (
         <h2
           class={twMerge(titleTypography, titleColor, titleClass)}
-          set:html={title}
+          set:html={displayTitle}
         />
       )}
 
