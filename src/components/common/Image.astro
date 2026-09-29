@@ -41,6 +41,7 @@ interface Props extends Omit<HTMLAttributes<'img'>, 'src' | 'width' | 'height'> 
   height?: number | string;
   widths?: number[];
   format?: Format;
+  quality?: number | string;
   layout?: Layout;
 }
 
@@ -51,6 +52,7 @@ const {
   height,
   widths,
   format,
+  quality = 72,
   layout = 'constrained',
   class: className,
   style,
@@ -130,6 +132,7 @@ const sanityCoverObjectPosition = (): string | undefined => {
 const sanityImageUrl = (variantWidth?: number, variantHeight?: number): string => {
   const url = new URL(resolved as string);
   const hasEditorCrop = url.searchParams.has('rect');
+  const q = toNumber(quality);
 
   if (variantWidth) url.searchParams.set('w', String(variantWidth));
 
@@ -146,6 +149,7 @@ const sanityImageUrl = (variantWidth?: number, variantHeight?: number): string =
     url.searchParams.set('fit', 'max');
   }
   url.searchParams.set('auto', 'format');
+  if (q) url.searchParams.set('q', String(q));
   return url.toString();
 };
 

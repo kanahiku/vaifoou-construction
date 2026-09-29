@@ -1,7 +1,10 @@
 import type {
+  AboutPageMediaContent,
+  AudiencePageMediaContent,
   BlogPost,
   Book,
   BookSeries,
+  CommercialAudienceSubPageMediaContent,
   ContactPageContent,
   HomeMediaContent,
   HomePageContent,
@@ -9,14 +12,22 @@ import type {
   PodcastEpisode,
   PodcastPartGroup,
   ReviewsPageContent,
+  ServiceAreaHubMediaContent,
+  ServiceAreaLocationMediaContent,
+  ServiceCategoryPageMediaContent,
+  ServicesHubMediaContent,
   ServicePageContent,
+  ServiceSubPageMediaContent,
   Testimonial,
 } from './types';
 import {
+  getSanityAboutPageMediaContent,
+  getSanityAudiencePageMedia,
   getSanityBlogPost,
   getSanityBlogPosts,
   getSanityBlogPostSlugs,
   getSanityBooks,
+  getSanityCommercialAudienceSubPageMedia,
   getSanityPodcastEpisodes,
   getSanityTestimonials,
   groupEpisodesByPart,
@@ -26,8 +37,13 @@ import {
   getSanityHomeMediaContent,
   getSanityNavigationContent,
   getSanityReviewsPage,
+  getSanityServiceAreaHubMediaContent,
+  getSanityServiceAreaLocationMedia,
+  getSanityServiceCategoryPageMedia,
   getSanityServicePage,
   getSanityServicePageSlugs,
+  getSanityServicesHubMediaContent,
+  getSanityServiceSubPageMedia,
 } from './sanity';
 import { blogPosts as localBlogPosts } from '../../data/pages/blogPosts';
 /* contact page removed */
@@ -46,6 +62,80 @@ export async function getHomeMediaContent(): Promise<HomeMediaContent | null> {
     return await getSanityHomeMediaContent();
   } catch (error) {
     console.warn('Sanity homepage media unavailable; using local photo fallback.', error);
+    return null;
+  }
+}
+
+export async function getServicesHubMediaContent(): Promise<ServicesHubMediaContent | null> {
+  try {
+    return await getSanityServicesHubMediaContent();
+  } catch (error) {
+    console.warn('Sanity services hub media unavailable; using placeholder fallback.', error);
+    return null;
+  }
+}
+
+export async function getAboutPageMediaContent(): Promise<AboutPageMediaContent | null> {
+  try {
+    return await getSanityAboutPageMediaContent();
+  } catch (error) {
+    console.warn('Sanity about page media unavailable; using fallback images.', error);
+    return null;
+  }
+}
+
+export async function getAudiencePageMedia(path: string): Promise<AudiencePageMediaContent | null> {
+  try {
+    return await getSanityAudiencePageMedia(path);
+  } catch (error) {
+    console.warn(`Sanity audience page media unavailable for "${path}"; using fallback images.`, error);
+    return null;
+  }
+}
+
+export async function getCommercialAudienceSubPageMedia(
+  path: string
+): Promise<CommercialAudienceSubPageMediaContent | null> {
+  try {
+    return await getSanityCommercialAudienceSubPageMedia(path);
+  } catch (error) {
+    console.warn(`Sanity commercial audience sub-page media unavailable for "${path}"; using fallback images.`, error);
+    return null;
+  }
+}
+
+export async function getServiceAreaHubMediaContent(): Promise<ServiceAreaHubMediaContent | null> {
+  try {
+    return await getSanityServiceAreaHubMediaContent();
+  } catch (error) {
+    console.warn('Sanity service area hub media unavailable; using fallback images.', error);
+    return null;
+  }
+}
+
+export async function getServiceAreaLocationMedia(path: string): Promise<ServiceAreaLocationMediaContent | null> {
+  try {
+    return await getSanityServiceAreaLocationMedia(path);
+  } catch (error) {
+    console.warn(`Sanity service area location media unavailable for "${path}"; using fallback images.`, error);
+    return null;
+  }
+}
+
+export async function getServiceCategoryPageMedia(path: string): Promise<ServiceCategoryPageMediaContent | null> {
+  try {
+    return await getSanityServiceCategoryPageMedia(path);
+  } catch (error) {
+    console.warn(`Sanity service category media unavailable for "${path}"; using fallback images.`, error);
+    return null;
+  }
+}
+
+export async function getServiceSubPageMedia(path: string): Promise<ServiceSubPageMediaContent | null> {
+  try {
+    return await getSanityServiceSubPageMedia(path);
+  } catch (error) {
+    console.warn(`Sanity service sub-page media unavailable for "${path}"; using fallback image.`, error);
     return null;
   }
 }
@@ -257,9 +347,12 @@ export async function getRelatedBlogPosts(post: BlogPost, max = 3): Promise<Blog
 }
 
 export type {
+  AboutPageMediaContent,
+  AudiencePageMediaContent,
   BlogPost,
   Book,
   BookSeries,
+  CommercialAudienceSubPageMediaContent,
   ContactPageContent,
   HomeMediaContent,
   HomePageContent,
@@ -267,7 +360,12 @@ export type {
   PodcastEpisode,
   PodcastPartGroup,
   ReviewsPageContent,
+  ServiceAreaHubMediaContent,
+  ServiceAreaLocationMediaContent,
+  ServiceCategoryPageMediaContent,
+  ServicesHubMediaContent,
   ServicePageContent,
+  ServiceSubPageMediaContent,
   Testimonial,
 };
 

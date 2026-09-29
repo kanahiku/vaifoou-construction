@@ -5,14 +5,19 @@ import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FillImage from '~/components/ui/FillImage.astro';
 import { site } from '~/config/site';
 import { photos } from '~/data/photos';
+import { getCommercialAudienceSubPageMedia } from '~/lib/content';
 
 const metadata = {
   title: `Property Managers & Landlords | ${site.name}`,
   description: `Vaifoou Construction provides reliable masonry and concrete services for property managers and landlords across O'ahu.`,
 };
+
+const media = await getCommercialAudienceSubPageMedia(Astro.url.pathname);
+const heroImage = media?.heroImage ?? photos.commercial;
+const introImage = media?.introImage ?? photos.commercial;
 
 const siblingsLinks = [
   { title: 'HOA Masonry & Concrete',        href: '/who-we-work-with/commercial/hoa/' },
@@ -41,8 +46,8 @@ const faqs = [
   <SubServiceHero
     title="Property Managers & Landlords"
     body="We execute masonry and concrete projects for O'ahu property managers and landlords. Our crews handle multi-unit repairs and repeat maintenance contracts."
-    image={photos.commercial.src}
-    imageAlt={photos.commercial.alt}
+    image={heroImage.src}
+    imageAlt={heroImage.alt}
   />
 
   {/* ── Intro section ─────────────────────────────────────────────── */}
@@ -55,8 +60,7 @@ const faqs = [
         </p>
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        {/* TODO: replace with <Image> when asset is ready */}
-        <HeroImagePlaceholder fill label="Property management project photo placeholder" />
+        <FillImage src={introImage.src} alt={introImage.alt} width={700} height={525} quality={68} />
       </div>
     </div>
   </section>

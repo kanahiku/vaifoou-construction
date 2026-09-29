@@ -156,6 +156,59 @@ export interface HomeMediaContent {
   bannerImage?: ContentImage;
 }
 
+export interface ServicesHubMediaContent {
+  heroImage?: ContentImage;
+  audienceCards: HomeMediaCard[];
+}
+
+export interface AudiencePageMediaContent {
+  title?: string;
+  path: string;
+  heroImage?: ContentImage;
+  introImage?: ContentImage;
+  projectImage?: ContentImage;
+}
+
+export interface CommercialAudienceSubPageMediaContent {
+  title?: string;
+  path: string;
+  heroImage?: ContentImage;
+  introImage?: ContentImage;
+}
+
+export interface AboutPageMediaContent {
+  heroImage?: ContentImage;
+  legacyImage?: ContentImage;
+  siaosiImage?: ContentImage;
+}
+
+export interface ServiceAreaHubMediaContent {
+  heroImage?: ContentImage;
+  introImage?: ContentImage;
+}
+
+export interface ServiceAreaLocationMediaContent {
+  title?: string;
+  path: string;
+  heroImage?: ContentImage;
+  introImage?: ContentImage;
+  recentWorkImage?: ContentImage;
+}
+
+export interface ServiceCategoryPageMediaContent {
+  title?: string;
+  path: string;
+  heroImage?: ContentImage;
+  introImage?: ContentImage;
+  projectImage?: ContentImage;
+}
+
+export interface ServiceSubPageMediaContent {
+  title?: string;
+  path: string;
+  heroImage?: ContentImage;
+}
+
 // ─── Shared CMS sections (service pages and later templates) ───────────────────
 
 export interface LinkedCardItem {

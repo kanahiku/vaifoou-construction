@@ -20,6 +20,7 @@ interface Props {
   height?: number;
   layout?: 'constrained' | 'full-width' | 'fixed' | 'cover' | 'none';
   format?: 'avif' | 'jpeg' | 'jpg' | 'png' | 'webp';
+  quality?: number | string;
 }
 
 const {
@@ -36,6 +37,7 @@ const {
   height,
   layout = 'cover',
   format = 'webp',
+  quality = 72,
 } = Astro.props;
 
 const desktopSrc = desktop?.src?.trim();
@@ -60,6 +62,7 @@ const single = desktopSrc ? desktop : mobileSrc ? mobile : undefined;
         height={height}
         layout={layout}
         format={format}
+        quality={quality}
       />
       <Image
         src={desktop.src}
@@ -73,6 +76,7 @@ const single = desktopSrc ? desktop : mobileSrc ? mobile : undefined;
         height={height}
         layout={layout}
         format={format}
+        quality={quality}
       />
     </>
   ) : (
@@ -89,6 +93,7 @@ const single = desktopSrc ? desktop : mobileSrc ? mobile : undefined;
         height={height}
         layout={layout}
         format={format}
+        quality={quality}
       />
     )
   )

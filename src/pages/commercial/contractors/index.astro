@@ -5,14 +5,19 @@ import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
-import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
+import FillImage from '~/components/ui/FillImage.astro';
 import { site } from '~/config/site';
 import { photos } from '~/data/photos';
+import { getCommercialAudienceSubPageMedia } from '~/lib/content';
 
 const metadata = {
   title: `Masonry & Concrete Subcontracting | ${site.name}`,
   description: `Vaifoou Construction partners with GCs and builders as a reliable masonry and concrete subcontractor across O'ahu.`,
 };
+
+const media = await getCommercialAudienceSubPageMedia(Astro.url.pathname);
+const heroImage = media?.heroImage ?? photos.commercial;
+const introImage = media?.introImage ?? photos.commercial;
 
 const siblingsLinks = [
   { title: 'Property Managers & Landlords', href: '/who-we-work-with/commercial/property-managers-landlords/' },
@@ -41,8 +46,8 @@ const faqs = [
   <SubServiceHero
     title="Masonry & Concrete Subcontracting"
     body="We partner with general contractors and builders across O'ahu. When you hire us as your subcontractor, we manage the specialized masonry and concrete requirements for your build."
-    image={photos.commercial.src}
-    imageAlt={photos.commercial.alt}
+    image={heroImage.src}
+    imageAlt={heroImage.alt}
   />
 
   {/* ── Intro section ─────────────────────────────────────────────── */}
@@ -55,8 +60,7 @@ const faqs = [
         </p>
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        {/* TODO: replace with <Image> when asset is ready */}
-        <HeroImagePlaceholder fill label="Masonry subcontracting project photo placeholder" />
+        <FillImage src={introImage.src} alt={introImage.alt} width={700} height={525} quality={68} />
       </div>
     </div>
   </section>

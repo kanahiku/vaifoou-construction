@@ -2,6 +2,14 @@
 import { siteNavigation } from './singletons/navigation';
 import { siteFooter } from './singletons/footer';
 import { homePage, homeAudienceCard } from './documents/homePage';
+import { aboutPageMedia } from './documents/aboutPageMedia';
+import { servicesHubPage, servicesHubAudienceCard } from './documents/servicesHubPage';
+import { audiencePageMedia } from './documents/audiencePageMedia';
+import { commercialAudienceSubPageMedia } from './documents/commercialAudienceSubPageMedia';
+import { serviceCategoryPageMedia } from './documents/serviceCategoryPageMedia';
+import { concreteServiceSubPageMedia, rockWallSubPageMedia } from './documents/serviceSubPageMedia';
+import { serviceAreaHubPageMedia } from './documents/serviceAreaHubPageMedia';
+import { serviceAreaLocationPageMedia } from './documents/serviceAreaLocationPageMedia';
 import { blogPost } from './documents/blogPost';
 import { testimonial } from './documents/testimonial';
 
@@ -46,6 +54,15 @@ export const schemaTypes = [
   siteNavigation,
   siteFooter,
   homePage,
+  aboutPageMedia,
+  servicesHubPage,
+  audiencePageMedia,
+  commercialAudienceSubPageMedia,
+  serviceCategoryPageMedia,
+  rockWallSubPageMedia,
+  concreteServiceSubPageMedia,
+  serviceAreaHubPageMedia,
+  serviceAreaLocationPageMedia,
   blogPost,
   testimonial,
 
@@ -65,6 +82,7 @@ export const schemaTypes = [
   timelineStep,
   faqItem,
   homeAudienceCard,
+  servicesHubAudienceCard,
   linkedCard,
   quoteCardItem,
 

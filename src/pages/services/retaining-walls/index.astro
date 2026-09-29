@@ -11,10 +11,12 @@ import { photos } from '~/data/photos';
 import brickMotif from '~/assets/brick-motif-wide-light.svg';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
+import { getServiceCategoryPageMedia } from '~/lib/content';
 
 const metadata = {
   title: "O'ahu Retaining Wall Construction | Vaifoou Construction",
-  description: "Structural retaining walls built for O'ahu's hillside terrain. We build durable retaining walls in CMU block and volcanic basalt. Request an estimate.",
+  description:
+    "Structural retaining walls built for O'ahu's hillside terrain. We build durable retaining walls in CMU block and volcanic basalt. Request an estimate.",
   ignoreTitleTemplate: true,
 };
 
@@ -32,10 +34,10 @@ const subServices = [
 ];
 
 const steps = [
-  { n: '01', title: 'Consultation',  body: 'We review your property and define the exact structural requirements.' },
-  { n: '02', title: 'Excavation',    body: 'Our team prepares the site and hillside foundation for maximum stability.' },
-  { n: '03', title: 'Construction',  body: 'We build the wall in hand-selected volcanic basalt or CMU block.' },
-  { n: '04', title: 'Finishing',     body: 'The team details the final build for a clean presentation.' },
+  { n: '01', title: 'Consultation', body: 'We review your property and define the exact structural requirements.' },
+  { n: '02', title: 'Excavation', body: 'Our team prepares the site and hillside foundation for maximum stability.' },
+  { n: '03', title: 'Construction', body: 'We build the wall in hand-selected volcanic basalt or CMU block.' },
+  { n: '04', title: 'Finishing', body: 'The team details the final build for a clean presentation.' },
 ];
 
 const faqs = [
@@ -62,27 +64,68 @@ const faqs = [
 ];
 
 const related = [
-  { title: 'Rock Walls',        href: '/services/rock-walls/' },
+  { title: 'Rock Walls', href: '/services/rock-walls/' },
   { title: 'CMU & Block Walls', href: '/services/cmu-block-walls/' },
   { title: 'Concrete Services', href: '/services/concrete/' },
 ];
+
+const serviceMedia = await getServiceCategoryPageMedia('/services/retaining-walls/');
+const heroPhoto = serviceMedia?.heroImage ?? photos.commercial;
+const introPhoto = serviceMedia?.introImage ?? photos.commercial;
+const projectPhoto = serviceMedia?.projectImage ?? photos.veneer;
 ---
 
 <Layout metadata={metadata}>
-
   {/* ── HERO ─────────────────────────────────────────────────── */}
   <section class="relative w-full overflow-hidden border-b border-banner-line min-h-[400px] md:min-h-[500px]">
-    <FillImage src={photos.commercial.src} alt={photos.commercial.alt} eager />
-    <div class="absolute inset-0" style="background: linear-gradient(90deg, rgb(28 27 26 / 90%) 0%, rgb(28 27 26 / 72%) 55%, rgb(28 27 26 / 30%) 100%);" aria-hidden="true"></div>
+    <FillImage src={heroPhoto.src} alt={heroPhoto.alt} eager width={1600} height={640} quality={72} />
+    <div
+      class="absolute inset-0"
+      style="background: linear-gradient(90deg, rgb(28 27 26 / 90%) 0%, rgb(28 27 26 / 72%) 55%, rgb(28 27 26 / 30%) 100%);"
+      aria-hidden="true"
+    >
+    </div>
     <div class="site-frame relative z-10 flex flex-col items-start gap-4 pb-16 pt-16 md:pb-24 md:pt-24">
-      <h1 class="max-w-[896px] font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[72px] md:tracking-[-0.8px]">O'ahu Retaining Wall Construction</h1>
-      <p class="max-w-[640px] font-display text-[16px] font-semibold leading-snug tracking-[0.2px] text-page/80 md:text-[22px] md:leading-[32px]">Rock and CMU retaining walls built for O'ahu's hillsides.</p>
+      <h1
+        class="max-w-[896px] font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[72px] md:tracking-[-0.8px]"
+      >
+        O'ahu Retaining Wall Construction
+      </h1>
+      <p
+        class="max-w-[640px] font-display text-[16px] font-semibold leading-snug tracking-[0.2px] text-page/80 md:text-[22px] md:leading-[32px]"
+      >
+        Rock and CMU retaining walls built for O'ahu's hillsides.
+      </p>
       <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
-        <a href={PRIMARY_CTA_HREF} class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]">{PRIMARY_CTA_LABEL}</a>
-        <a href={CONTACT.phone.href} class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"><PhoneIcon />Call {CONTACT.phone.display}</a>
+        <a
+          href={PRIMARY_CTA_HREF}
+          class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          >{PRIMARY_CTA_LABEL}</a
+        >
+        <a
+          href={CONTACT.phone.href}
+          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          ><PhoneIcon />Call {CONTACT.phone.display}</a
+        >
       </div>
       <p class="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-muted/30 pt-6">
-        {[CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"].map((item, i) => (<>{i > 0 && <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase" aria-hidden="true">•</span>}<span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">{item}</span></>))}
+        {
+          [CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"].map((item, i) => (
+            <>
+              {i > 0 && (
+                <span
+                  class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-banner-dot uppercase"
+                  aria-hidden="true"
+                >
+                  •
+                </span>
+              )}
+              <span class="font-display text-[13px] font-bold leading-4 tracking-[0.65px] text-page/80 uppercase">
+                {item}
+              </span>
+            </>
+          ))
+        }
       </p>
     </div>
   </section>
@@ -92,12 +135,30 @@ const related = [
     <div class="site-frame flex flex-col gap-10 md:flex-row md:items-center md:gap-16">
       {/* Left — text */}
       <div class="flex flex-1 flex-col gap-4">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Built For O'ahu's Hillsides</h2>
-        <p class="pt-1 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">We build heavy-duty retaining walls for residential and commercial properties. Our crews build them in CMU block and natural volcanic basalt. Every build is backed by a 25+ year family legacy in the masonry trade and comes with our workmanship guarantee.</p>
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          Built For O'ahu's Hillsides
+        </h2>
+        <p
+          class="pt-1 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]"
+        >
+          We build heavy-duty retaining walls for residential and commercial properties. Our crews build them in CMU
+          block and natural volcanic basalt. Every build is backed by a 25+ year family legacy in the masonry trade and
+          comes with our workmanship guarantee.
+        </p>
       </div>
       {/* Right — image */}
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <FillImage src={photos.commercial.src} alt={photos.commercial.alt} />
+        <FillImage
+          src={introPhoto.src}
+          alt={introPhoto.alt}
+          width={700}
+          height={525}
+          widths={[320, 480, 700]}
+          sizes="(max-width: 768px) 100vw, 440px"
+          quality={68}
+        />
       </div>
     </div>
   </section>
@@ -106,30 +167,66 @@ const related = [
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Retaining Wall Material Options</h2>
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          Retaining Wall Material Options
+        </h2>
       </div>
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8">
-        {subServices.map(({ title, href, description }) => (
-          <a href={href} class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-8">
-            <h3 class="font-display text-[20px] font-semibold leading-6 tracking-[0.2px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[22px]">{title}</h3>
-            <p class="mt-3 flex-1 font-body text-[15px] font-normal leading-6 text-banner-note">{description}</p>
-            <span class="mt-6 inline-flex items-center gap-1.5 font-display text-[13px] font-bold leading-4 tracking-[0.5px] text-nav-cta uppercase">
-              View {title}
-              <svg width="11" height="11" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/></svg>
-            </span>
-          </a>
-        ))}
+        {
+          subServices.map(({ title, href, description }) => (
+            <a
+              href={href}
+              class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-8"
+            >
+              <h3 class="font-display text-[20px] font-semibold leading-6 tracking-[0.2px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[22px]">
+                {title}
+              </h3>
+              <p class="mt-3 flex-1 font-body text-[15px] font-normal leading-6 text-banner-note">{description}</p>
+              <span class="mt-6 inline-flex items-center gap-1.5 font-display text-[13px] font-bold leading-4 tracking-[0.5px] text-nav-cta uppercase">
+                View {title}
+                <svg
+                  width="11"
+                  height="11"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                  class="shrink-0 transition-transform group-hover:translate-x-0.5"
+                >
+                  <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor" />
+                </svg>
+              </span>
+            </a>
+          ))
+        }
       </div>
       {/* Project photo + View Our Work */}
-      <div class="flex flex-col gap-0 border border-banner-line bg-page overflow-hidden md:flex-row md:items-stretch min-h-[320px] md:min-h-[400px]">
+      <div
+        class="flex flex-col gap-0 border border-banner-line bg-page overflow-hidden md:flex-row md:items-stretch min-h-[320px] md:min-h-[400px]"
+      >
         {/* Left — image (50%) */}
         <div class="relative w-full md:w-1/2" style="aspect-ratio: 4/3;">
-          <FillImage src={photos.veneer.src} alt={photos.veneer.alt} />
+          <FillImage
+            src={projectPhoto.src}
+            alt={projectPhoto.alt}
+            width={800}
+            height={600}
+            widths={[320, 480, 700, 900]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            quality={68}
+          />
         </div>
         {/* Right — text + CTA (50%) */}
         <div class="flex w-full flex-col justify-center gap-5 p-8 md:w-1/2 md:p-12">
-          <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[17px]">Real photo of a completed retaining wall project on O'ahu, showcasing either CMU or rock, labeled by location.</p>
-          <a href="/projects/" class="self-start inline-flex items-center bg-nav-cta px-6 py-3 font-display text-[13px] font-bold leading-4 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading">
+          <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[17px]">
+            Real photo of a completed retaining wall project on O'ahu, showcasing either CMU or rock, labeled by
+            location.
+          </p>
+          <a
+            href="/projects/"
+            class="self-start inline-flex items-center bg-nav-cta px-6 py-3 font-display text-[13px] font-bold leading-4 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading"
+          >
             View Our Work
           </a>
         </div>
@@ -141,16 +238,24 @@ const related = [
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
     <div class="site-frame flex flex-col gap-10 md:gap-14">
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">The Construction Process</h2>
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          The Construction Process
+        </h2>
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-8">
-        {steps.map(({ n, title, body }) => (
-          <div class="flex flex-col gap-3 border-l-2 border-nav-cta pl-5">
-            <span class="font-display text-[32px] font-bold leading-none tracking-[-0.5px] text-nav-cta/30">{n}</span>
-            <h3 class="font-display text-[18px] font-bold leading-5 tracking-[0.3px] text-heading uppercase">{title}</h3>
-            <p class="font-body text-[14px] font-normal leading-6 text-banner-note">{body}</p>
-          </div>
-        ))}
+        {
+          steps.map(({ n, title, body }) => (
+            <div class="flex flex-col gap-3 border-l-2 border-nav-cta pl-5">
+              <span class="font-display text-[32px] font-bold leading-none tracking-[-0.5px] text-nav-cta/30">{n}</span>
+              <h3 class="font-display text-[18px] font-bold leading-5 tracking-[0.3px] text-heading uppercase">
+                {title}
+              </h3>
+              <p class="font-body text-[14px] font-normal leading-6 text-banner-note">{body}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -159,20 +264,43 @@ const related = [
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-10 md:gap-14">
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Retaining Wall Construction FAQs</h2>
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          Retaining Wall Construction FAQs
+        </h2>
       </div>
       <div class="flex flex-col divide-y divide-banner-line">
-        {faqs.map(({ q, a }) => (
-          <details class="group py-1">
-            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4">
-              <span class="font-display text-[17px] font-semibold leading-6 tracking-[0.17px] text-heading uppercase md:text-[19px]">{q}</span>
-              <span class="flex size-8 shrink-0 items-center justify-center border border-banner-line bg-white text-heading/50 transition-transform duration-200 group-open:rotate-45" aria-hidden="true">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
-              </span>
-            </summary>
-            <p class="pb-5 font-body text-[15px] font-normal leading-7 text-banner-note md:max-w-[80%]">{a}</p>
-          </details>
-        ))}
+        {
+          faqs.map(({ q, a }) => (
+            <details class="group py-1">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4">
+                <span class="font-display text-[17px] font-semibold leading-6 tracking-[0.17px] text-heading uppercase md:text-[19px]">
+                  {q}
+                </span>
+                <span
+                  class="flex size-8 shrink-0 items-center justify-center border border-banner-line bg-white text-heading/50 transition-transform duration-200 group-open:rotate-45"
+                  aria-hidden="true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                </span>
+              </summary>
+              <p class="pb-5 font-body text-[15px] font-normal leading-7 text-banner-note md:max-w-[80%]">{a}</p>
+            </details>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -180,16 +308,32 @@ const related = [
   {/* ── RELATED SERVICES ─────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-20">
     <div class="site-frame flex flex-col gap-8">
-      <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+      <h2
+        class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+      >
         Explore Related Masonry Services
       </h2>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-        {related.map(({ title, href }) => (
-          <a href={href} class="group flex items-center justify-between border border-banner-line bg-card px-6 py-5 font-display text-[16px] font-semibold leading-5 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:bg-section-grey/40 hover:text-nav-cta focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:text-[18px]">
-            {title}
-            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor"/></svg>
-          </a>
-        ))}
+        {
+          related.map(({ title, href }) => (
+            <a
+              href={href}
+              class="group flex items-center justify-between border border-banner-line bg-card px-6 py-5 font-display text-[16px] font-semibold leading-5 tracking-[0.5px] text-heading uppercase transition-colors hover:border-nav-cta hover:bg-section-grey/40 hover:text-nav-cta focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:text-[18px]"
+            >
+              {title}
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+                class="shrink-0 transition-transform group-hover:translate-x-0.5"
+              >
+                <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor" />
+              </svg>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -197,18 +341,40 @@ const related = [
   {/* ── CTA BANNER ───────────────────────────────────────────── */}
   <section class="w-full bg-card py-6 md:py-24">
     <div class="site-frame">
-      <div class="@container relative w-full overflow-hidden border border-banner-line bg-section-grey p-4 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.1),0_8px_10px_-6px_rgb(0_0_0/0.1)] md:p-24">
-        <Image src={brickMotif} alt="" width={2560} height={1200} class="pointer-events-none absolute inset-0 h-full w-full object-cover object-left-top" aria-hidden="true" />
+      <div
+        class="@container relative w-full overflow-hidden border border-banner-line bg-section-grey p-4 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.1),0_8px_10px_-6px_rgb(0_0_0/0.1)] md:p-24"
+      >
+        <Image
+          src={brickMotif}
+          alt=""
+          width={2560}
+          height={1200}
+          class="pointer-events-none absolute inset-0 h-full w-full object-cover object-left-top"
+          aria-hidden="true"
+        />
         <div class="relative z-10 flex max-w-[768px] flex-col items-start">
-          <h2 class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]">Start Your O'ahu Retaining Wall Project</h2>
-          <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">Connect with our team to discuss your retaining wall requirements. Please note we are closed on Sundays.</p>
+          <h2
+            class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
+          >
+            Start Your O'ahu Retaining Wall Project
+          </h2>
+          <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
+            Connect with our team to discuss your retaining wall requirements. Please note we are closed on Sundays.
+          </p>
         </div>
         <div class="relative z-10 flex flex-wrap items-center gap-4 py-16">
-          <a href={PRIMARY_CTA_HREF} class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]">{PRIMARY_CTA_LABEL}</a>
-          <a href={CONTACT.phone.href} class="inline-flex items-center justify-center gap-2 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"><PhoneIcon />Call {CONTACT.phone.display}</a>
+          <a
+            href={PRIMARY_CTA_HREF}
+            class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+            >{PRIMARY_CTA_LABEL}</a
+          >
+          <a
+            href={CONTACT.phone.href}
+            class="inline-flex items-center justify-center gap-2 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+            ><PhoneIcon />Call {CONTACT.phone.display}</a
+          >
         </div>
       </div>
     </div>
   </section>
-
 </Layout>

@@ -1,11 +1,14 @@
 import { sanityClient } from '../sanity/client';
 import { resolveContentImage, resolveContentImageOrEmpty, type SanityImageFields } from '../sanity/image';
 import type {
+  AboutPageMediaContent,
+  AudiencePageMediaContent,
   BlogContentBlock,
   BlogPost,
   Book,
   BookCta,
   BookSeries,
+  CommercialAudienceSubPageMediaContent,
   PodcastEpisode,
   PodcastEpisodeStatus,
   PodcastPartGroup,
@@ -17,8 +20,13 @@ import type {
   HomeMediaContent,
   NavigationContent,
   ReviewsPageContent,
+  ServiceAreaHubMediaContent,
+  ServiceAreaLocationMediaContent,
+  ServiceCategoryPageMediaContent,
+  ServicesHubMediaContent,
   ServicePageContent,
   ServiceSection,
+  ServiceSubPageMediaContent,
   SplitContentSection,
 } from './types';
 
@@ -168,6 +176,344 @@ export async function getSanityHomeMediaContent(): Promise<HomeMediaContent | nu
       image: resolveContentImage(card.image),
     })),
     bannerImage: resolveContentImage(page.highlightBanner?.image),
+  };
+}
+
+const SERVICES_HUB_MEDIA_QUERY = /* groq */ `
+  *[_type == "servicesHubPage" && _id == "singleton-services-hub"][0] {
+    hero {
+      "image": {
+        ${IMAGE_PROJECTION}
+      }
+    },
+    "audienceCards": audienceCards[] {
+      title,
+      href,
+      "image": {
+        ${IMAGE_PROJECTION}
+      }
+    }
+  }
+`;
+
+export async function getSanityServicesHubMediaContent(): Promise<ServicesHubMediaContent | null> {
+  const page = await sanityClient.fetch<{
+    hero?: { image?: FetchedImage };
+    audienceCards?: Array<{ title?: string; href?: string; image?: FetchedImage }>;
+  } | null>(SERVICES_HUB_MEDIA_QUERY);
+
+  if (!page) return null;
+
+  return {
+    heroImage: resolveContentImage(page.hero?.image),
+    audienceCards: (page.audienceCards ?? []).map((card) => ({
+      title: card.title,
+      href: card.href,
+      image: resolveContentImage(card.image),
+    })),
+  };
+}
+
+const ABOUT_PAGE_MEDIA_QUERY = /* groq */ `
+  *[_type == "aboutPageMedia" && _id == "singleton-about-page-media"][0] {
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    },
+    "legacyImage": {
+      "src": coalesce(legacyImage.asset->url, ""),
+      "alt": coalesce(legacyImage.alt, ""),
+      "crop": legacyImage.crop,
+      "hotspot": legacyImage.hotspot,
+      "asset": legacyImage.asset
+    },
+    "siaosiImage": {
+      "src": coalesce(siaosiImage.asset->url, ""),
+      "alt": coalesce(siaosiImage.alt, ""),
+      "crop": siaosiImage.crop,
+      "hotspot": siaosiImage.hotspot,
+      "asset": siaosiImage.asset
+    }
+  }
+`;
+
+export async function getSanityAboutPageMediaContent(): Promise<AboutPageMediaContent | null> {
+  const doc = await sanityClient.fetch<{
+    heroImage?: FetchedImage;
+    legacyImage?: FetchedImage;
+    siaosiImage?: FetchedImage;
+  } | null>(ABOUT_PAGE_MEDIA_QUERY);
+
+  if (!doc) return null;
+
+  return {
+    heroImage: resolveContentImage(doc.heroImage),
+    legacyImage: resolveContentImage(doc.legacyImage),
+    siaosiImage: resolveContentImage(doc.siaosiImage),
+  };
+}
+
+const AUDIENCE_PAGE_MEDIA_QUERY = /* groq */ `
+  *[_type == "audiencePageMedia" && path == $path][0] {
+    title,
+    path,
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    },
+    "introImage": {
+      "src": coalesce(introImage.asset->url, ""),
+      "alt": coalesce(introImage.alt, ""),
+      "crop": introImage.crop,
+      "hotspot": introImage.hotspot,
+      "asset": introImage.asset
+    },
+    "projectImage": {
+      "src": coalesce(projectImage.asset->url, ""),
+      "alt": coalesce(projectImage.alt, ""),
+      "crop": projectImage.crop,
+      "hotspot": projectImage.hotspot,
+      "asset": projectImage.asset
+    }
+  }
+`;
+
+const COMMERCIAL_AUDIENCE_SUB_PAGE_MEDIA_QUERY = /* groq */ `
+  *[_type == "commercialAudienceSubPageMedia" && path == $path][0] {
+    title,
+    path,
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    },
+    "introImage": {
+      "src": coalesce(introImage.asset->url, ""),
+      "alt": coalesce(introImage.alt, ""),
+      "crop": introImage.crop,
+      "hotspot": introImage.hotspot,
+      "asset": introImage.asset
+    }
+  }
+`;
+
+const SERVICE_AREA_HUB_MEDIA_QUERY = /* groq */ `
+  *[_type == "serviceAreaHubPageMedia" && _id == "singleton-service-area-hub"][0] {
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    },
+    "introImage": {
+      "src": coalesce(introImage.asset->url, ""),
+      "alt": coalesce(introImage.alt, ""),
+      "crop": introImage.crop,
+      "hotspot": introImage.hotspot,
+      "asset": introImage.asset
+    }
+  }
+`;
+
+const SERVICE_AREA_LOCATION_MEDIA_QUERY = /* groq */ `
+  *[_type == "serviceAreaLocationPageMedia" && path == $path][0] {
+    title,
+    path,
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    },
+    "introImage": {
+      "src": coalesce(introImage.asset->url, ""),
+      "alt": coalesce(introImage.alt, ""),
+      "crop": introImage.crop,
+      "hotspot": introImage.hotspot,
+      "asset": introImage.asset
+    },
+    "recentWorkImage": {
+      "src": coalesce(recentWorkImage.asset->url, ""),
+      "alt": coalesce(recentWorkImage.alt, ""),
+      "crop": recentWorkImage.crop,
+      "hotspot": recentWorkImage.hotspot,
+      "asset": recentWorkImage.asset
+    }
+  }
+`;
+
+const SERVICE_CATEGORY_PAGE_MEDIA_QUERY = /* groq */ `
+  *[_type == "serviceCategoryPageMedia" && path == $path][0] {
+    title,
+    path,
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    },
+    "introImage": {
+      "src": coalesce(introImage.asset->url, ""),
+      "alt": coalesce(introImage.alt, ""),
+      "crop": introImage.crop,
+      "hotspot": introImage.hotspot,
+      "asset": introImage.asset
+    },
+    "projectImage": {
+      "src": coalesce(projectImage.asset->url, ""),
+      "alt": coalesce(projectImage.alt, ""),
+      "crop": projectImage.crop,
+      "hotspot": projectImage.hotspot,
+      "asset": projectImage.asset
+    }
+  }
+`;
+
+const normalizePath = (path: string) => {
+  const trimmed = path.trim();
+  const withLeading = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  return withLeading.endsWith('/') ? withLeading : `${withLeading}/`;
+};
+
+export async function getSanityAudiencePageMedia(path: string): Promise<AudiencePageMediaContent | null> {
+  const doc = await sanityClient.fetch<
+    | (Omit<AudiencePageMediaContent, 'heroImage' | 'introImage' | 'projectImage'> & {
+        heroImage?: FetchedImage;
+        introImage?: FetchedImage;
+        projectImage?: FetchedImage;
+      })
+    | null
+  >(AUDIENCE_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
+
+  if (!doc) return null;
+
+  return {
+    title: doc.title,
+    path: doc.path,
+    heroImage: resolveContentImage(doc.heroImage),
+    introImage: resolveContentImage(doc.introImage),
+    projectImage: resolveContentImage(doc.projectImage),
+  };
+}
+
+export async function getSanityCommercialAudienceSubPageMedia(
+  path: string
+): Promise<CommercialAudienceSubPageMediaContent | null> {
+  const doc = await sanityClient.fetch<
+    | (Omit<CommercialAudienceSubPageMediaContent, 'heroImage' | 'introImage'> & {
+        heroImage?: FetchedImage;
+        introImage?: FetchedImage;
+      })
+    | null
+  >(COMMERCIAL_AUDIENCE_SUB_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
+
+  if (!doc) return null;
+
+  return {
+    title: doc.title,
+    path: doc.path,
+    heroImage: resolveContentImage(doc.heroImage),
+    introImage: resolveContentImage(doc.introImage),
+  };
+}
+
+export async function getSanityServiceAreaHubMediaContent(): Promise<ServiceAreaHubMediaContent | null> {
+  const doc = await sanityClient.fetch<{
+    heroImage?: FetchedImage;
+    introImage?: FetchedImage;
+  } | null>(SERVICE_AREA_HUB_MEDIA_QUERY);
+
+  if (!doc) return null;
+
+  return {
+    heroImage: resolveContentImage(doc.heroImage),
+    introImage: resolveContentImage(doc.introImage),
+  };
+}
+
+export async function getSanityServiceAreaLocationMedia(
+  path: string
+): Promise<ServiceAreaLocationMediaContent | null> {
+  const doc = await sanityClient.fetch<
+    | (Omit<ServiceAreaLocationMediaContent, 'heroImage' | 'introImage' | 'recentWorkImage'> & {
+        heroImage?: FetchedImage;
+        introImage?: FetchedImage;
+        recentWorkImage?: FetchedImage;
+      })
+    | null
+  >(SERVICE_AREA_LOCATION_MEDIA_QUERY, { path: normalizePath(path) });
+
+  if (!doc) return null;
+
+  return {
+    title: doc.title,
+    path: doc.path,
+    heroImage: resolveContentImage(doc.heroImage),
+    introImage: resolveContentImage(doc.introImage),
+    recentWorkImage: resolveContentImage(doc.recentWorkImage),
+  };
+}
+
+export async function getSanityServiceCategoryPageMedia(path: string): Promise<ServiceCategoryPageMediaContent | null> {
+  const doc = await sanityClient.fetch<
+    | (Omit<ServiceCategoryPageMediaContent, 'heroImage' | 'introImage' | 'projectImage'> & {
+        heroImage?: FetchedImage;
+        introImage?: FetchedImage;
+        projectImage?: FetchedImage;
+      })
+    | null
+  >(SERVICE_CATEGORY_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
+
+  if (!doc) return null;
+
+  return {
+    title: doc.title,
+    path: doc.path,
+    heroImage: resolveContentImage(doc.heroImage),
+    introImage: resolveContentImage(doc.introImage),
+    projectImage: resolveContentImage(doc.projectImage),
+  };
+}
+
+const SERVICE_SUB_PAGE_MEDIA_QUERY = /* groq */ `
+  *[
+    _type in ["rockWallSubPageMedia", "concreteServiceSubPageMedia", "serviceSubPageMedia"] &&
+    path == $path
+  ] | order(_type == "serviceSubPageMedia" asc)[0] {
+    title,
+    path,
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    }
+  }
+`;
+
+export async function getSanityServiceSubPageMedia(path: string): Promise<ServiceSubPageMediaContent | null> {
+  const doc = await sanityClient.fetch<
+    (Omit<ServiceSubPageMediaContent, 'heroImage'> & { heroImage?: FetchedImage }) | null
+  >(SERVICE_SUB_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
+
+  if (!doc) return null;
+
+  return {
+    title: doc.title,
+    path: doc.path,
+    heroImage: resolveContentImage(doc.heroImage),
   };
 }
 
@@ -948,7 +1294,8 @@ type SanityTestimonial = {
 
 function normalizeTestimonial(doc: SanityTestimonial): Testimonial | null {
   if (!doc?._id || !doc.quote?.trim() || !doc.name?.trim()) return null;
-  const platform = doc.platform === 'google' || doc.platform === 'yelp' || doc.platform === 'thumbtack' ? doc.platform : undefined;
+  const platform =
+    doc.platform === 'google' || doc.platform === 'yelp' || doc.platform === 'thumbtack' ? doc.platform : undefined;
   return {
     _id: doc._id,
     quote: doc.quote.trim(),

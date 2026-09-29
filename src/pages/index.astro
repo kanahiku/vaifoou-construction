@@ -123,16 +123,17 @@ const reviewItems =
           desktop={heroImage}
           mobile={heroImageMobile}
           class="absolute inset-0 h-full w-full max-w-none object-cover"
-          widths={[768, 1200, 1600, 1920]}
+          widths={[640, 960, 1200, 1600]}
           mobileWidths={[400, 640, 828]}
           sizes="100vw"
           mobileSizes="100vw"
           loading="eager"
           fetchpriority="high"
           width={1600}
-          height={900}
+          height={640}
           layout="cover"
           format="webp"
+          quality={72}
         />
       ) : (
         <>
@@ -202,7 +203,6 @@ const reviewItems =
           Serving All of O'ahu
         </span>
       </p>
-
     </div>
   </section>
 
@@ -260,12 +260,13 @@ const reviewItems =
                     src={image.src}
                     alt={image.alt}
                     class="absolute inset-0 h-full w-full max-w-none object-cover"
-                    widths={[400, 640, 768]}
+                    widths={[320, 480, 640]}
                     sizes="(max-width: 768px) 100vw, 50vw"
                     width={700}
                     height={288}
                     layout="cover"
                     format="webp"
+                    quality={68}
                   />
                 ) : (
                   <HeroImagePlaceholder fill class="absolute inset-0" label={`${label} image placeholder`} />
@@ -278,7 +279,7 @@ const reviewItems =
                 <div class="mt-auto pt-8 md:pt-10">
                   <a
                     href={href}
-                  class="cta-md inline-flex w-fit items-center justify-center bg-nav-cta text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[20px]"
+                    class="cta-md inline-flex w-fit items-center justify-center bg-nav-cta text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[20px]"
                   >
                     {cta}
                   </a>
@@ -335,7 +336,14 @@ const reviewItems =
                 class="mt-8 inline-flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-accent"
               >
                 {cta}
-                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5">
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                  class="shrink-0 transition-transform group-hover:translate-x-0.5"
+                >
                   <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor" />
                 </svg>
               </a>
@@ -361,12 +369,13 @@ const reviewItems =
                 src={bannerImage.src}
                 alt={bannerImage.alt}
                 class="absolute inset-0 h-full w-full max-w-none object-cover"
-                widths={[768, 1200, 1600]}
+                widths={[640, 960, 1200]}
                 sizes="(max-width: 768px) 100vw, 1200px"
                 width={1200}
                 height={420}
                 layout="cover"
                 format="webp"
+                quality={68}
               />
             ) : (
               <HeroImagePlaceholder
@@ -542,7 +551,6 @@ const reviewItems =
             Call {CONTACT.phone.display}
           </a>
         </div>
-
       </div>
     </div>
   </section>

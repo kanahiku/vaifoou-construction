@@ -7,11 +7,16 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
+import { getAudiencePageMedia } from '~/lib/content';
 
 const metadata = {
   title: `O'ahu Commercial Masonry & Concrete | ${site.name}`,
   description: `Masonry and concrete for O'ahu property owners, property managers, HOAs and contractors. We build heavy-duty CMU and retaining walls. Request an estimate.`,
 };
+
+const audienceMedia = await getAudiencePageMedia(Astro.url.pathname);
+const heroImage = audienceMedia?.heroImage ?? photos.commercial;
+const introImage = audienceMedia?.introImage ?? photos.commercial;
 
 const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
 
@@ -89,8 +94,8 @@ const faqs = [
   <SubServiceHero
     title="O'ahu Commercial Masonry & Concrete"
     body="Masonry and concrete for O'ahu property owners, property managers, HOAs and contractors."
-    image={photos.commercial.src}
-    imageAlt={photos.commercial.alt}
+    image={heroImage.src}
+    imageAlt={heroImage.alt}
   />
 
   {/* ── Intro split ───────────────────────────────────────────────── */}
@@ -109,7 +114,7 @@ const faqs = [
         </p>
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <FillImage src={photos.commercial.src} alt={photos.commercial.alt} />
+        <FillImage src={introImage.src} alt={introImage.alt} width={700} height={525} quality={68} />
       </div>
     </div>
   </section>

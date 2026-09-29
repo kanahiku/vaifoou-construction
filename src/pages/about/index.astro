@@ -10,12 +10,18 @@ import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
 import { photos } from '~/data/photos';
 import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
+import { getAboutPageMediaContent } from '~/lib/content';
 
 const metadata = {
   title: `Our Story | ${site.name}`,
   description: `Learn about Vaifoou Construction LLC, a locally and family-owned O'ahu masonry contractor built on a 25+ year legacy of quality concrete and rock wall construction.`,
   ignoreTitleTemplate: true,
 };
+
+const media = await getAboutPageMediaContent();
+const heroImage = media?.heroImage ?? photos.commercial;
+const legacyImage = media?.legacyImage ?? photos.commercial;
+const siaosiImage = media?.siaosiImage;
 
 const values = [
   {
@@ -52,6 +58,8 @@ const team = [
     bio: '[TEXT PLACEHOLDER: Short bio detailing his experience and role on the current team.]',
   },
 ];
+
+const showTeamSection = false;
 ---
 
 <Layout metadata={metadata}>
@@ -59,8 +67,8 @@ const team = [
   <SubServiceHero
     title="Vaifoou Construction LLC"
     body="A locally and family-owned masonry and concrete contractor serving O'ahu, built on a 25+ year legacy in the trade."
-    image={photos.commercial.src}
-    imageAlt={photos.commercial.alt}
+    image={heroImage.src}
+    imageAlt={heroImage.alt}
     showCtas={false}
   />
 
@@ -112,7 +120,7 @@ const team = [
 
         <div class="flex flex-col gap-3 lg:sticky lg:top-24">
           <div class="relative w-full overflow-hidden" style="aspect-ratio: 4 / 5;">
-            <FillImage src={photos.commercial.src} alt={photos.commercial.alt} />
+            <FillImage src={legacyImage.src} alt={legacyImage.alt} width={800} height={1000} quality={68} />
           </div>
         </div>
       </div>
@@ -145,41 +153,43 @@ const team = [
     </div>
   </section>
 
-  {/* ── Meet the Team ────────────────────────────────────────── */}
-  <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
-    <div class="site-frame flex flex-col gap-10">
+  {showTeamSection && (
+    /* ── Meet the Team ────────────────────────────────────────── */
+    <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
+      <div class="site-frame flex flex-col gap-10">
 
-      <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Meet the Team</h2>
-      </div>
+        <div class="flex max-w-[896px] flex-col gap-1">
+          <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Meet the Team</h2>
+        </div>
 
-      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {team.map(({ name, role, bio }) => (
-          <div class="flex flex-col gap-5">
-            {/* Photo placeholder */}
-            <div
-              class="w-full bg-section-grey"
-              style="aspect-ratio: 3 / 4;"
-              aria-hidden="true"
-            ></div>
-            {/* TODO: replace with <Image src={photo} alt={name} class="w-full object-cover" style="aspect-ratio: 3/4;" /> */}
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {team.map(({ name, role, bio }, index) => (
+            <div class="flex flex-col gap-5">
+              <div class="relative w-full overflow-hidden bg-section-grey" style="aspect-ratio: 3 / 4;">
+                {index === 0 && siaosiImage ? (
+                  <FillImage src={siaosiImage.src} alt={siaosiImage.alt} width={600} height={800} quality={68} />
+                ) : (
+                  <div class="absolute inset-0 bg-section-grey" aria-hidden="true"></div>
+                )}
+              </div>
 
-            {/* Name & role */}
-            <div class="flex flex-col gap-1 border-t-2 border-nav-cta pt-4">
-              <h3 class="font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
-                {name}
-              </h3>
-              <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
+              {/* Name & role */}
+              <div class="flex flex-col gap-1 border-t-2 border-nav-cta pt-4">
+                <h3 class="font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
+                  {name}
+                </h3>
+                <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
+              </div>
+
+              {/* Bio */}
+              <p class="font-body text-[15px] font-normal leading-7 text-banner-note italic">{bio}</p>
             </div>
+          ))}
+        </div>
 
-            {/* Bio */}
-            <p class="font-body text-[15px] font-normal leading-7 text-banner-note italic">{bio}</p>
-          </div>
-        ))}
       </div>
-
-    </div>
-  </section>
+    </section>
+  )}
 
   {/* ── CTA ──────────────────────────────────────────────────── */}
   <BrickMotifCTA

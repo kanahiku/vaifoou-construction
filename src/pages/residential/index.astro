@@ -7,11 +7,17 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
+import { getAudiencePageMedia } from '~/lib/content';
 
 const metadata = {
   title: `O'ahu Residential Masonry & Concrete | ${site.name}`,
   description: `Custom rock walls and concrete flatwork for O'ahu homeowners. We build secure property boundaries backed by a 25+ year family legacy. Request an estimate.`,
 };
+
+const audienceMedia = await getAudiencePageMedia(Astro.url.pathname);
+const heroImage = audienceMedia?.heroImage ?? photos.residential;
+const introImage = audienceMedia?.introImage ?? photos.residential;
+const projectImage = audienceMedia?.projectImage ?? photos.veneer;
 
 const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
 
@@ -83,8 +89,8 @@ const faqs = [
   <SubServiceHero
     title="O'ahu Residential Masonry & Concrete"
     body="Custom rock walls and concrete flatwork for O'ahu homeowners."
-    image={photos.residential.src}
-    imageAlt={photos.residential.alt}
+    image={heroImage.src}
+    imageAlt={heroImage.alt}
   />
 
   {/* ── Intro split ───────────────────────────────────────────────── */}
@@ -103,7 +109,7 @@ const faqs = [
         </p>
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <FillImage src={photos.residential.src} alt={photos.residential.alt} />
+        <FillImage src={introImage.src} alt={introImage.alt} width={700} height={525} quality={68} />
       </div>
     </div>
   </section>
@@ -153,7 +159,7 @@ const faqs = [
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-20">
     <div class="site-frame flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
       <div class="relative w-full shrink-0 overflow-hidden md:w-[480px]" style="aspect-ratio: 4/3;">
-        <FillImage src={photos.veneer.src} alt={photos.veneer.alt} />
+        <FillImage src={projectImage.src} alt={projectImage.alt} width={800} height={600} quality={68} />
       </div>
       <div class="flex flex-col gap-1">
         <h2 class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[36px]">Our Work on O&apos;ahu</h2>
