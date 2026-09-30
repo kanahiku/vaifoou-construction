@@ -38,8 +38,8 @@ const bodyClass: Record<CardVariant, string> = {
 
 const linkClass: Record<CardVariant, string> = {
   dark: 'text-card-link-dark hover:text-white',
-  light: 'btn-link',
-  outlined: 'btn-link',
+  light: 'text-card-link-light hover:text-accent',
+  outlined: 'text-card-link-outlined hover:text-accent',
   glass: 'text-card-link-glass hover:text-white',
 }[variant];
 ---
@@ -53,7 +53,7 @@ const linkClass: Record<CardVariant, string> = {
   </p>
   <span
     class:list={[
-      'mt-auto text-[14px] md:text-[15px] font-medium card-link',
+      'mt-auto font-display text-[15px] font-bold leading-5 tracking-[0.5px] uppercase card-link',
       linkClass,
     ]}
   >

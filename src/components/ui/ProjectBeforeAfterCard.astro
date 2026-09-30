@@ -1,0 +1,72 @@
+---
+export interface ProjectTag {
+  label: string;
+  href?: string;
+}
+
+export interface Props {
+  title: string;
+  description: string;
+  tags?: ProjectTag[];
+  beforeLabel?: string;
+  afterLabel?: string;
+}
+
+const { title, description, tags = [], beforeLabel = 'Before', afterLabel = 'After' } = Astro.props;
+
+const frames = [beforeLabel, afterLabel];
+---
+
+<article class="grid grid-cols-1 overflow-hidden border border-banner-line bg-white lg:grid-cols-[1.05fr_0.95fr]">
+  <div class="grid grid-cols-1 gap-px bg-banner-line sm:grid-cols-2 lg:grid-cols-1">
+    {
+      frames.map((label) => (
+        <div class="relative min-h-[240px] bg-section-grey md:min-h-[320px]">
+          {/* TODO: replace with <Image> when project asset is ready */}
+          <div class="absolute left-4 top-4 bg-heading px-3 py-1 font-display text-[12px] font-bold leading-4 tracking-[0.8px] text-page-end uppercase">
+            {label}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="flex flex-col justify-center gap-6 p-6 md:p-10 lg:p-12">
+    <div class="flex flex-col gap-1">
+      <h2
+        class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[40px] md:leading-[48px]"
+      >
+        {title}
+      </h2>
+      <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
+        {description}
+      </p>
+    </div>
+
+    {
+      tags.length > 0 && (
+        <div class="flex flex-col gap-3">
+          <p class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">
+            Services Tied to This Project
+          </p>
+          <div class="flex flex-wrap gap-2">
+            {tags.map(({ label, href }) =>
+              href ? (
+                <a
+                  href={href}
+                  class="border border-banner-line bg-card px-3 py-2 font-display text-[13px] font-bold leading-4 tracking-[0.6px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta"
+                >
+                  {label}
+                </a>
+              ) : (
+                <span class="border border-banner-line bg-card px-3 py-2 font-display text-[13px] font-bold leading-4 tracking-[0.6px] text-heading uppercase">
+                  {label}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</article>

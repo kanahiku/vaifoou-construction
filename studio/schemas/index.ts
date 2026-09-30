@@ -3,6 +3,7 @@ import { siteNavigation } from './singletons/navigation';
 import { siteFooter } from './singletons/footer';
 import { homePage, homeAudienceCard } from './documents/homePage';
 import { aboutPageMedia } from './documents/aboutPageMedia';
+import { contactPageMedia } from './documents/contactPageMedia';
 import { servicesHubPage, servicesHubAudienceCard } from './documents/servicesHubPage';
 import { audiencePageMedia } from './documents/audiencePageMedia';
 import { commercialAudienceSubPageMedia } from './documents/commercialAudienceSubPageMedia';
@@ -55,6 +56,7 @@ export const schemaTypes = [
   siteFooter,
   homePage,
   aboutPageMedia,
+  contactPageMedia,
   servicesHubPage,
   audiencePageMedia,
   commercialAudienceSubPageMedia,

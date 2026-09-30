@@ -129,9 +129,15 @@ const mergedTwitter = merge(
     : {}
 );
 
+const brandName = SITE?.name || METADATA?.title?.default || '';
+const titleAlreadyIncludesBrand = Boolean(
+  title && brandName && title.toLocaleLowerCase().includes(brandName.toLocaleLowerCase())
+);
+const shouldIgnoreTitleTemplate = ignoreTitleTemplate || titleAlreadyIncludesBrand;
+
 const seoProps: SEOProps = {
   title: title || METADATA?.title?.default || '',
-  titleTemplate: ignoreTitleTemplate ? '%s' : METADATA?.title?.template || '%s',
+  titleTemplate: shouldIgnoreTitleTemplate ? '%s' : METADATA?.title?.template || '%s',
   canonical: canonical,
   noindex:
     !indexable ||

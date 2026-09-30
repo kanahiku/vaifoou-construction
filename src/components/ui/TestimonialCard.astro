@@ -49,8 +49,8 @@ const platformIcon =
   displayedPlatform === 'google'
     ? 'tabler:brand-google'
     : displayedPlatform === 'thumbtack'
-      ? 'tabler:pin-filled'
-      : null;
+        ? 'tabler:pin-filled'
+        : null;
 const formattedDate = reviewedAt
   ? new Date(`${reviewedAt}T00:00:00`).toLocaleDateString('en-US', {
       month: 'short',
@@ -71,10 +71,19 @@ const formattedDate = reviewedAt
         </div>
         {platformLabel && (
           <span class="inline-flex items-center gap-1.5 text-page/80" title={`Reviewed on ${platformLabel}`}>
-            {platformIcon
-              ? <Icon name={platformIcon} class="size-5" aria-hidden="true" />
-              : <span class="font-display text-[13px] font-bold leading-none tracking-[0.5px] uppercase">{platformLabel}</span>
-            }
+            {displayedPlatform === 'yelp' ? (
+              <svg class="size-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M11.35 2.1c1.1-.18 2.05.63 2.05 1.74v6.34c0 .45-.36.82-.82.82h-1.16a.82.82 0 0 1-.81-.72L9.84 4.05c-.12-.95.56-1.78 1.51-1.95Z" />
+                <path d="M20.78 8.28c.52.98.08 2.18-.96 2.58l-5.9 2.27a.82.82 0 0 1-1.05-.47l-.4-1.08a.82.82 0 0 1 .37-1l5.46-3.09c.84-.48 2.03-.07 2.48.79Z" />
+                <path d="M19.82 18.17c-.77.8-2.05.78-2.8-.04l-4.27-4.66a.82.82 0 0 1 .05-1.15l.85-.78a.82.82 0 0 1 1.07-.03l4.9 3.92c.75.6.85 2.04.2 2.74Z" />
+                <path d="M9.94 21.74c-1.1-.16-1.82-1.22-1.56-2.3l1.47-6.15a.82.82 0 0 1 .98-.61l1.12.27c.44.1.72.54.64.98l-1.05 6.18c-.16.95-.64 1.77-1.6 1.63Z" />
+                <path d="M2.5 14.86c-.2-1.1.6-2.06 1.72-2.07l6.32-.08c.45 0 .82.35.83.8l.02 1.16c0 .45-.34.82-.78.84l-6.27.37c-.96.05-1.67-.07-1.84-1.02Z" />
+              </svg>
+            ) : platformIcon ? (
+              <Icon name={platformIcon} class="size-5" aria-hidden="true" />
+            ) : (
+              <span class="font-display text-[13px] font-bold leading-none tracking-[0.5px] uppercase">{platformLabel}</span>
+            )}
             <span class="sr-only">{platformLabel}</span>
           </span>
         )}

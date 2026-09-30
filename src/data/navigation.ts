@@ -116,7 +116,7 @@ export const navigationData: NavigationContent = {
           { text: 'Blog', href: '/blog/' },
           { text: 'About', href: '/about/' },
           { text: 'Contact', href: '/contact/' },
-          { text: 'Closed Sundays' },
+          { text: 'Closed on Sundays' },
         ],
       },
     ],

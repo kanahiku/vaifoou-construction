@@ -186,6 +186,10 @@ export interface AboutPageMediaContent {
   siaosiImage?: ContentImage;
 }
 
+export interface ContactPageMediaContent {
+  heroImage?: ContentImage;
+}
+
 export interface ServiceAreaHubMediaContent {
   heroImage?: ContentImage;
   introImage?: ContentImage;

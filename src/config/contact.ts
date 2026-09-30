@@ -21,7 +21,7 @@ export const CONTACT = {
   },
 
   /** Primary contact email shown in legal pages and schema.org. */
-  email: 'info@vaifoouconstruction.com',
+  email: 'vaifoou4@gmail.com',
 
   address: {
     street: '',

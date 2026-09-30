@@ -19,7 +19,6 @@ const thumbtackTestimonials = [
     location: undefined,
     tenure: undefined,
     platform: 'thumbtack' as const,
-    reviewedAt: '2025-11-27',
   },
   {
     quote: 'Amazing transformation. Hard workers and fast. Beautiful job',
@@ -30,7 +29,11 @@ const thumbtackTestimonials = [
     reviewedAt: '2025-02-14',
   },
 ];
-const featuredTestimonials = [...testimonials, ...thumbtackTestimonials];
+const yelpTestimonials = testimonials.slice(0, 4).map((testimonial) => ({
+  ...testimonial,
+  platform: 'yelp' as const,
+}));
+const featuredTestimonials = [...yelpTestimonials, ...thumbtackTestimonials].slice(0, 6);
 
 const metadata = {
   title: `Reviews & Testimonials | ${site.name}`,

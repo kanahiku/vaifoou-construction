@@ -17,38 +17,42 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  {/* ── Page hero ─────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-heading py-14 md:py-20">
+    <div class="site-frame flex flex-col gap-1">
+      <h1
+        class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[56px]"
+      >
+        Blogs
+      </h1>
+    </div>
+  </section>
 
   {/* ── Posts list ────────────────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
-
-      {/* Section header */}
-      <div class="flex max-w-[896px] flex-col gap-1">
-        <h1 class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-heading uppercase md:text-[72px] md:tracking-[-0.8px]">Blogs</h1>
-      </div>
-
       {/* Grid or empty state */}
-      {posts.length ? (
-        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
-            <BlogCard post={post} variant="light" />
-          ))}
-        </div>
-      ) : (
-        <div class="flex flex-col gap-4 border border-banner-line bg-white p-8 md:p-12">
-          <p class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[22px]">
-            Coming Soon
-          </p>
-          <p class="font-body text-[16px] font-normal leading-7 text-banner-note">
-            New articles from our masonry team will appear here as they are published.
-          </p>
-        </div>
-      )}
-
+      {
+        posts.length ? (
+          <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {posts.map((post) => (
+              <BlogCard post={post} variant="light" />
+            ))}
+          </div>
+        ) : (
+          <div class="flex flex-col gap-4 border border-banner-line bg-white p-8 md:p-12">
+            <p class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[22px]">
+              Coming Soon
+            </p>
+            <p class="font-body text-[16px] font-normal leading-7 text-banner-note">
+              New articles from our masonry team will appear here as they are published.
+            </p>
+          </div>
+        )
+      }
     </div>
   </section>
 
   {/* ── CTA closer ────────────────────────────────────────────────── */}
   <BrickMotifCTA heading="Start Your O'ahu Masonry Project" />
-
 </Layout>

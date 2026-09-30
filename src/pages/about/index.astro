@@ -24,7 +24,7 @@ const siaosiImage = media?.siaosiImage;
 
 const values = [
   {
-    label: 'Closed Sundays',
+    label: 'Closed on Sundays',
     icon: 'M12 2 A10 10 0 1 0 12 22 A10 10 0 1 0 12 2', // circle (placeholder path)
     body: 'Our operations are closed on Sundays every week, without exception.',
   },
@@ -56,6 +56,14 @@ const team = [
     role: '[Role]',
     bio: '[TEXT PLACEHOLDER: Short bio detailing his experience and role on the current team.]',
   },
+];
+
+const crew = [
+  { name: 'Siaosi Vaifoou', role: 'Owner' },
+  { name: 'Taliauli Vaifoou', role: 'Foreman' },
+  { name: 'Nelo Vaifoou', role: 'Mason Setter' },
+  { name: 'Tau Heimoana', role: 'Operator' },
+  { name: 'Pohaku Kaahu', role: 'Labor' },
 ];
 
 const showTeamSection = false;
@@ -149,6 +157,29 @@ const showTeamSection = false;
         ))}
       </div>
 
+    </div>
+  </section>
+
+  {/* ── Our Crew ─────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
+    <div class="site-frame flex flex-col gap-10">
+      <div class="flex max-w-[896px] flex-col gap-1">
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Our Crew</h2>
+        <p class="mt-3 max-w-3xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
+          Three Vaifoous on the crew. The people who quote your job are the people who show up to build it.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {crew.map(({ name, role }) => (
+          <div class="flex flex-col gap-1 border border-banner-line bg-white p-5">
+            <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
+              {name}
+            </h3>
+            <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 

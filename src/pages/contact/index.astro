@@ -10,7 +10,7 @@ import RemoteImage from '~/components/common/Image.astro';
 import { CONTACT } from '~/config/contact';
 import { site } from '~/config/site';
 import { FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY } from '~/lib/forms';
-import { getFooterMediaContent } from '~/lib/content';
+import { getContactPageMediaContent, getFooterMediaContent } from '~/lib/content';
 
 const metadata = {
   title: `Contact Vaifoou Construction | O'ahu Masonry & Concrete`,
@@ -58,12 +58,16 @@ const fieldClass =
 const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
 const footerMedia = await getFooterMediaContent();
 const sidebarBackground = footerMedia?.backgroundImage;
+const contactMedia = await getContactPageMediaContent();
+const heroImage = contactMedia?.heroImage;
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
     title="Contact Vaifoou Construction"
     body="Schedule a site consultation for your masonry or concrete project. We serve residential and commercial properties across O'ahu."
+    image={heroImage?.src}
+    imageAlt={heroImage?.alt}
     showCtas={false}
   />
 
@@ -71,16 +75,15 @@ const sidebarBackground = footerMedia?.backgroundImage;
   <section class="w-full border-b border-banner-line bg-page">
     <div class="site-frame py-12 md:py-20">
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_340px] lg:items-start">
-
         {/* ── Estimate Form ─────────────────────────────────── */}
         <div class="flex flex-col gap-8 border border-banner-line bg-card p-6 shadow-sm md:p-8 lg:p-10">
           <div class="flex max-w-2xl flex-col gap-2">
-            <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]">
+            <h2
+              class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]"
+            >
               Request a Free Estimate
             </h2>
-            {show24HourPromise && (
-              <p class="font-body text-[15px] leading-7 text-banner-note">{promiseText}</p>
-            )}
+            {show24HourPromise && <p class="font-body text-[15px] leading-7 text-banner-note">{promiseText}</p>}
           </div>
 
           <form
@@ -156,36 +159,42 @@ const sidebarBackground = footerMedia?.backgroundImage;
             <fieldset class="flex flex-col gap-3">
               <legend class={labelClass}>Property Type <span class="text-accent">*</span></legend>
               <div class="flex flex-wrap gap-6">
-                {['Residential', 'Commercial'].map((type) => (
-                  <label class="flex cursor-pointer items-center gap-2.5 font-sans text-body text-heading">
-                    <input
-                      type="radio"
-                      name="property_type"
-                      value={type}
-                      required
-                      class="size-4 rounded-none border border-heading/25 accent-accent"
-                    />
-                    {type}
-                  </label>
-                ))}
+                {
+                  ['Residential', 'Commercial'].map((type) => (
+                    <label class="flex cursor-pointer items-center gap-2.5 font-sans text-body text-heading">
+                      <input
+                        type="radio"
+                        name="property_type"
+                        value={type}
+                        required
+                        class="size-4 rounded-none border border-heading/25 accent-accent"
+                      />
+                      {type}
+                    </label>
+                  ))
+                }
               </div>
             </fieldset>
 
             {/* Row 5: Service checkboxes */}
             <fieldset class="flex flex-col gap-3">
-              <legend class={labelClass}>What do you need? <span class="text-muted/70 font-normal">(Select all that apply)</span></legend>
+              <legend class={labelClass}
+                >What do you need? <span class="text-muted/70 font-normal">(Select all that apply)</span></legend
+              >
               <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {services.map((service) => (
-                  <label class="flex cursor-pointer items-start gap-2.5 font-sans text-body text-heading">
-                    <input
-                      type="checkbox"
-                      name="services"
-                      value={service}
-                      class="mt-0.5 size-4 rounded-none border border-heading/25 accent-accent shrink-0"
-                    />
-                    <span>{service}</span>
-                  </label>
-                ))}
+                {
+                  services.map((service) => (
+                    <label class="flex cursor-pointer items-start gap-2.5 font-sans text-body text-heading">
+                      <input
+                        type="checkbox"
+                        name="services"
+                        value={service}
+                        class="mt-0.5 size-4 rounded-none border border-heading/25 accent-accent shrink-0"
+                      />
+                      <span>{service}</span>
+                    </label>
+                  ))
+                }
               </div>
             </fieldset>
 
@@ -197,8 +206,7 @@ const sidebarBackground = footerMedia?.backgroundImage;
                 name="message"
                 rows={5}
                 placeholder="Describe your project — scope, current state, any special requirements."
-                class={fieldClass}
-              />
+                class={fieldClass}></textarea>
             </div>
 
             {/* Row 7: Preferred Start Date */}
@@ -206,12 +214,7 @@ const sidebarBackground = footerMedia?.backgroundImage;
               <label for="start-date" class={labelClass}>
                 Preferred Start Date <span class="font-normal text-muted/70">(Optional)</span>
               </label>
-              <input
-                type="date"
-                id="start-date"
-                name="start_date"
-                class={fieldClass}
-              />
+              <input type="date" id="start-date" name="start_date" class={fieldClass} />
             </div>
 
             {/* Row 8: Site Photos */}
@@ -245,25 +248,32 @@ const sidebarBackground = footerMedia?.backgroundImage;
               </button>
             </div>
 
-            <p id="form-status" class="hidden text-left text-[14px] font-medium text-muted md:text-[15px]" aria-live="polite"></p>
+            <p
+              id="form-status"
+              class="hidden text-left text-[14px] font-medium text-muted md:text-[15px]"
+              aria-live="polite"
+            >
+            </p>
           </form>
         </div>
 
         {/* ── Direct Contact Sidebar ─────────────────────────── */}
         <aside class="relative flex flex-col gap-0 overflow-hidden bg-heading lg:sticky lg:top-24">
-          {sidebarBackground?.src && (
-            <RemoteImage
-              src={sidebarBackground.src}
-              alt=""
-              width={800}
-              height={900}
-              widths={[400, 640, 800, 960]}
-              layout="cover"
-              quality={64}
-              loading="lazy"
-              class="absolute inset-0 h-full w-full max-w-none object-cover"
-            />
-          )}
+          {
+            sidebarBackground?.src && (
+              <RemoteImage
+                src={sidebarBackground.src}
+                alt={sidebarBackground.alt || 'Vaifoou Construction masonry work contact background'}
+                width={800}
+                height={900}
+                widths={[400, 640, 800, 960]}
+                layout="cover"
+                quality={64}
+                loading="lazy"
+                class="absolute inset-0 h-full w-full max-w-none object-cover"
+              />
+            )
+          }
           <div class="absolute inset-0 bg-[rgba(14,13,12,0.88)]" aria-hidden="true"></div>
 
           <div class="relative z-10 px-6 pb-0 pt-8 md:px-8">
@@ -297,25 +307,29 @@ const sidebarBackground = footerMedia?.backgroundImage;
             </div>
 
             {/* Address — conditional */}
-            {showAddress && (
-              <div class="flex flex-col gap-1.5 py-5">
-                <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">Office Yard</p>
-                <address class="not-italic font-body text-[16px] font-normal leading-6 text-page/80">
-                  {officeAddress}
-                </address>
-              </div>
-            )}
+            {
+              showAddress && (
+                <div class="flex flex-col gap-1.5 py-5">
+                  <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">
+                    Office Yard
+                  </p>
+                  <address class="not-italic font-body text-[16px] font-normal leading-6 text-page/80">
+                    {officeAddress}
+                  </address>
+                </div>
+              )
+            }
 
             {/* Hours */}
             <div class="flex flex-col gap-2.5 py-5">
-              <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">Operating Hours</p>
+              <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">
+                Operating Hours
+              </p>
               <div class="flex flex-col gap-1">
                 <p class="font-body text-[15px] font-normal leading-6 text-page/80">
                   Monday – Saturday: 7:00 AM – 6:00 PM
                 </p>
-                <p class="font-body text-[15px] font-normal leading-6 text-page/55 italic">
-                  Sunday: Closed
-                </p>
+                <p class="font-body text-[15px] font-normal leading-6 text-page/55 italic">Closed on Sundays</p>
               </div>
             </div>
           </div>
@@ -323,20 +337,18 @@ const sidebarBackground = footerMedia?.backgroundImage;
           {/* Service area note */}
           <div class="relative z-10 border-t border-page/10 px-6 pb-8 pt-5 md:px-8">
             <p class="font-body text-[13px] leading-6 text-page/50">
-              We serve residential and commercial properties across O'ahu, Hawai'i.
-              Contractor Licence {CONTACT.license}.
+              We serve residential and commercial properties across O'ahu, Hawai'i. Contractor Licence {
+                CONTACT.license
+              }.
             </p>
           </div>
         </aside>
-
       </div>
     </div>
   </section>
 </Layout>
 
-<script
-  define:vars={{ FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY }}
->
+<script define:vars={{ FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY }}>
   // Re-exported so the inline script can reference them at runtime.
   // (define:vars serialises the values into the script tag.)
 
@@ -360,7 +372,7 @@ const sidebarBackground = footerMedia?.backgroundImage;
     if (propType) lines.push(`Property Type: ${propType}`);
 
     const services = data.getAll('services');
-    if (services.length) lines.push(`Services Requested:\n${services.map(s => `  • ${s}`).join('\n')}`);
+    if (services.length) lines.push(`Services Requested:\n${services.map((s) => `  • ${s}`).join('\n')}`);
 
     const startDate = asText(data.get('start_date'));
     if (startDate) lines.push(`Preferred Start Date: ${startDate}`);
@@ -384,7 +396,10 @@ const sidebarBackground = footerMedia?.backgroundImage;
 
       const script = document.querySelector('script[data-turnstile-api]');
       if (script) {
-        if (window.turnstile) { ready(); return; }
+        if (window.turnstile) {
+          ready();
+          return;
+        }
         script.addEventListener('load', ready, { once: true });
         script.addEventListener('error', () => reject(new Error('Turnstile failed to load')), { once: true });
         return;
@@ -432,9 +447,7 @@ const sidebarBackground = footerMedia?.backgroundImage;
       const site = form.dataset.site;
       const turnstile = window.turnstile;
       const turnstileToken =
-        widgetId && turnstile
-          ? turnstile.getResponse(widgetId)
-          : asText(data.get('cf-turnstile-response'));
+        widgetId && turnstile ? turnstile.getResponse(widgetId) : asText(data.get('cf-turnstile-response'));
 
       if (submitButton) submitButton.disabled = true;
       status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-muted';
@@ -464,7 +477,7 @@ const sidebarBackground = footerMedia?.backgroundImage;
         const payload = await res.json().catch(() => null);
 
         if (res.ok && payload?.ok) {
-          status.textContent = "Thanks! We\u2019ll review your estimate request and be in touch soon.";
+          status.textContent = 'Thanks! We\u2019ll review your estimate request and be in touch soon.';
           status.className = 'mt-4 text-left text-[14px] md:text-[15px] font-medium text-heading';
           form.reset();
           if (widgetId && turnstile) turnstile.reset(widgetId);

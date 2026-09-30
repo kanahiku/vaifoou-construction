@@ -42,6 +42,7 @@ const {
 
 const desktopSrc = desktop?.src?.trim();
 const mobileSrc = mobile?.src?.trim();
+const fallbackAlt = "Vaifoou Construction masonry and concrete work on O'ahu";
 const shared = desktopSrc && mobileSrc ? desktopSrc === mobileSrc : false;
 const showPair = Boolean(desktopSrc && mobileSrc && !shared);
 const single = desktopSrc ? desktop : mobileSrc ? mobile : undefined;
@@ -52,7 +53,7 @@ const single = desktopSrc ? desktop : mobileSrc ? mobile : undefined;
     <>
       <Image
         src={mobile.src}
-        alt={mobile.alt || desktop.alt || ''}
+        alt={mobile.alt || desktop.alt || fallbackAlt}
         class:list={['md:hidden', className]}
         widths={mobileWidths}
         sizes={mobileSizes}
@@ -66,7 +67,7 @@ const single = desktopSrc ? desktop : mobileSrc ? mobile : undefined;
       />
       <Image
         src={desktop.src}
-        alt={desktop.alt || mobile.alt || ''}
+        alt={desktop.alt || mobile.alt || fallbackAlt}
         class:list={['hidden md:block', className]}
         widths={widths}
         sizes={sizes}
@@ -83,7 +84,7 @@ const single = desktopSrc ? desktop : mobileSrc ? mobile : undefined;
     single && (
       <Image
         src={single.src}
-        alt={single.alt || ''}
+        alt={single.alt || fallbackAlt}
         class={className}
         widths={desktopSrc ? widths : mobileWidths}
         sizes={desktopSrc ? sizes : mobileSizes}

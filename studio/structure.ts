@@ -4,6 +4,7 @@ const SINGLETONS: Record<string, string> = {
   siteNavigation: 'singleton-navigation',
   siteFooter: 'singleton-footer',
   homePage: 'singleton-home',
+  contactPageMedia: 'singleton-contact-page-media',
   servicesHubPage: 'singleton-services-hub',
 };
 
@@ -27,7 +28,18 @@ export const structure = (S: StructureBuilder) =>
 
       S.listItem()
         .title('About Page Images')
-        .child(S.document().schemaType('aboutPageMedia').documentId('singleton-about-page-media').title('About Page Images')),
+        .child(
+          S.document().schemaType('aboutPageMedia').documentId('singleton-about-page-media').title('About Page Images')
+        ),
+
+      S.listItem()
+        .title('Contact Page Images')
+        .child(
+          S.document()
+            .schemaType('contactPageMedia')
+            .documentId('singleton-contact-page-media')
+            .title('Contact Page Images')
+        ),
 
       S.listItem()
         .title('Services Hub')

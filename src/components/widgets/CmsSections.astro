@@ -51,7 +51,6 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
   }
   return ['google', 'yelp'];
 }
-
 ---
 
 {
@@ -86,9 +85,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
               <p class="mt-4">
                 <a
                   href={section.linkHref}
-                  class:list={[
-                    isDark ? 'font-semibold text-page transition-colors hover:text-white' : 'btn-link',
-                  ]}
+                  class:list={[isDark ? 'font-semibold text-page transition-colors hover:text-white' : 'btn-link']}
                 >
                   {section.linkText}
                 </a>
@@ -99,7 +96,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
             {section.image?.src ? (
               <Image
                 src={section.image.src}
-                alt={section.image.alt}
+                alt={section.image.alt || `${section.heading} image`}
                 class="w-full h-full object-cover"
                 widths={[400, 768, 1200]}
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -126,9 +123,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
             <Headline isDark={isDark} title={section.heading} classes={{ container: 'mb-[20px] text-left md:mx-0' }} />
             <div class="space-y-5">
               {section.paragraphs.map((paragraph) => (
-                <p class:list={['text-[16px] md:text-[17px] font-normal leading-[160%]', introColor]}>
-                  {paragraph}
-                </p>
+                <p class:list={['text-[16px] md:text-[17px] font-normal leading-[160%]', introColor]}>{paragraph}</p>
               ))}
             </div>
           </>
@@ -211,20 +206,24 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
         {section._type === 'comparisonTableSection' && (
           <ComparisonTable
             featureLabel={section.featureLabel}
-            columns={section.column3
-              ? [section.column1, section.column2, section.column3]
-              : [section.column1, section.column2]}
+            columns={
+              section.column3 ? [section.column1, section.column2, section.column3] : [section.column1, section.column2]
+            }
             rows={section.rows.map((row) => ({
               feature: row.feature,
-              values: section.column3
-                ? [row.cell1, row.cell2, row.cell3 ?? '']
-                : [row.cell1, row.cell2],
+              values: section.column3 ? [row.cell1, row.cell2, row.cell3 ?? ''] : [row.cell1, row.cell2],
             }))}
           />
         )}
 
         {section._type === 'bulletCardsSection' && (
-          <div class={section.items.length === 2 ? 'grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6' : cardGridClass(section.items.length)}>
+          <div
+            class={
+              section.items.length === 2
+                ? 'grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6'
+                : cardGridClass(section.items.length)
+            }
+          >
             {section.items.map((card) => (
               <BulletCard title={card.title} items={card.items} variant={cardVariant(surface)} />
             ))}
@@ -240,9 +239,7 @@ function reviewSources(section: ServiceSection): ReviewSource[] {
                   class:list={['mt-0.5 shrink-0 w-5 h-5', isDark ? 'text-accent' : 'text-primary']}
                   aria-hidden="true"
                 />
-                <span
-                  class:list={['text-[16px] md:text-[17px] font-normal leading-[160%]', introColor]}
-                >
+                <span class:list={['text-[16px] md:text-[17px] font-normal leading-[160%]', introColor]}>
                   {item.text}
                 </span>
               </li>

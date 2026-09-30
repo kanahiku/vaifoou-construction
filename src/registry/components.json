@@ -26,7 +26,15 @@
     {
       "id": "A-02",
       "name": "Heading",
-      "figmaNames": ["Heading / H1", "Heading / H2", "Heading / H3", "Heading / H4", "Section Title", "Eyebrow", "Label / Eyebrow"],
+      "figmaNames": [
+        "Heading / H1",
+        "Heading / H2",
+        "Heading / H3",
+        "Heading / H4",
+        "Section Title",
+        "Eyebrow",
+        "Label / Eyebrow"
+      ],
       "shape": "All heading levels and the eyebrow label — one component",
       "component": "Heading",
       "import": "~/components/ui/Heading.astro",
@@ -97,6 +105,15 @@
       "component": "Timeline",
       "import": "~/components/ui/Timeline.astro",
       "notes": "Surface prop: grey | white | dark. Used for process/how-it-works sections."
+    },
+    {
+      "id": "A-12",
+      "name": "ProjectBeforeAfterCard",
+      "figmaNames": ["Project Card", "Before After Project", "Gallery Project Card"],
+      "shape": "Before/after image placeholders with project title, description, and linked service tags",
+      "component": "ProjectBeforeAfterCard",
+      "import": "~/components/ui/ProjectBeforeAfterCard.astro",
+      "notes": "Used on /projects/ for gallery items. Replace placeholders with Sanity images when project content is wired."
     }
   ],
 

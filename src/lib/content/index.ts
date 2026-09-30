@@ -5,6 +5,7 @@ import type {
   Book,
   BookSeries,
   CommercialAudienceSubPageMediaContent,
+  ContactPageMediaContent,
   ContactPageContent,
   FooterMediaContent,
   HomeMediaContent,
@@ -29,6 +30,7 @@ import {
   getSanityBlogPostSlugs,
   getSanityBooks,
   getSanityCommercialAudienceSubPageMedia,
+  getSanityContactPageMediaContent,
   getSanityPodcastEpisodes,
   getSanityTestimonials,
   groupEpisodesByPart,
@@ -85,6 +87,15 @@ export async function getAboutPageMediaContent(): Promise<AboutPageMediaContent 
   }
 }
 
+export async function getContactPageMediaContent(): Promise<ContactPageMediaContent | null> {
+  try {
+    return await getSanityContactPageMediaContent();
+  } catch (error) {
+    console.warn('Sanity contact page media unavailable; using placeholder fallback.', error);
+    return null;
+  }
+}
+
 export async function getAudiencePageMedia(path: string): Promise<AudiencePageMediaContent | null> {
   try {
     return await getSanityAudiencePageMedia(path);
@@ -100,7 +111,10 @@ export async function getCommercialAudienceSubPageMedia(
   try {
     return await getSanityCommercialAudienceSubPageMedia(path);
   } catch (error) {
-    console.warn(`Sanity commercial audience sub-page media unavailable for "${path}"; using placeholder fallback.`, error);
+    console.warn(
+      `Sanity commercial audience sub-page media unavailable for "${path}"; using placeholder fallback.`,
+      error
+    );
     return null;
   }
 }
@@ -254,7 +268,50 @@ export async function getBlogPostSlugs(): Promise<string[]> {
   return getSanityBlogPostSlugs().catch(() => [] as string[]);
 }
 
-const STATIC_PATHS = ['/', '/blog', '/reviews', '/privacy-policy', '/terms', '/accessibility', '/contact'];
+const STATIC_PATHS = [
+  '/',
+  '/about',
+  '/blog',
+  '/reviews',
+  '/projects',
+  '/privacy-policy',
+  '/terms',
+  '/accessibility',
+  '/contact',
+  '/services',
+  '/services/rock-walls',
+  '/services/rock-walls/planter-garden',
+  '/services/rock-walls/repair',
+  '/services/rock-walls/retaining',
+  '/services/rock-walls/veneer',
+  '/services/retaining-walls',
+  '/services/cmu-block-walls',
+  '/services/concrete',
+  '/services/concrete/driveways',
+  '/services/concrete/foundations',
+  '/services/concrete/patios',
+  '/services/concrete/sealing',
+  '/services/concrete/sidewalks',
+  '/services/concrete/stamped-decorative',
+  '/services/concrete/stem-walls',
+  '/services/concrete/steps',
+  '/service-areas',
+  '/service-areas/aiea-pearl-city',
+  '/service-areas/ewa-beach',
+  '/service-areas/honolulu',
+  '/service-areas/kailua',
+  '/service-areas/kaneohe',
+  '/service-areas/kapolei',
+  '/service-areas/mililani',
+  '/service-areas/north-shore',
+  '/service-areas/wahiawa',
+  '/service-areas/waipahu',
+  '/who-we-work-with/residential',
+  '/who-we-work-with/commercial',
+  '/who-we-work-with/commercial/contractors',
+  '/who-we-work-with/commercial/hoa',
+  '/who-we-work-with/commercial/property-managers-landlords',
+];
 
 export async function getPublicContentPaths(): Promise<string[]> {
   const [pageSlugs, postSlugs] = await Promise.all([getServicePageSlugs(), getBlogPostSlugs()]);

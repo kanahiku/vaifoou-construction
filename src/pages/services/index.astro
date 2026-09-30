@@ -70,6 +70,7 @@ const scopeRows = [
 
 const servicesHubMedia = await getServicesHubMediaContent();
 const heroImage = servicesHubMedia?.heroImage;
+const servicesImageAlt = "Vaifoou Construction masonry and concrete services on O'ahu";
 
 const findAudienceCardImage = (title: string, href: string, index: number) => {
   const cards = servicesHubMedia?.audienceCards ?? [];
@@ -93,7 +94,7 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
       heroImage?.src ? (
         <SanityImage
           src={heroImage.src}
-          alt={heroImage.alt}
+          alt={heroImage.alt || servicesImageAlt}
           class="absolute inset-0 h-full w-full max-w-none object-cover"
           widths={[640, 960, 1200, 1600]}
           sizes="100vw"
@@ -133,16 +134,18 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
         O'ahu.
       </p>
 
-      <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
+      <div
+        class="flex w-full flex-col items-stretch gap-4 pb-8 pt-2 sm:w-auto sm:flex-row sm:items-center md:pb-12 md:pt-6"
+      >
         <a
           href={PRIMARY_CTA_HREF}
-          class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          class="inline-flex w-full items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
         >
           {PRIMARY_CTA_LABEL}
         </a>
         <a
           href={CONTACT.phone.href}
-          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          class="inline-flex w-full items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
         >
           <PhoneIcon />
           Call {CONTACT.phone.display}
@@ -201,7 +204,7 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
                 {image?.src ? (
                   <SanityImage
                     src={image.src}
-                    alt={image.alt}
+                    alt={image.alt || `${label} masonry and concrete services by Vaifoou Construction`}
                     class="absolute inset-0 h-full w-full max-w-none object-cover"
                     widths={[320, 480, 640]}
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -262,13 +265,7 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
                 {/* Icon inline with title */}
                 <h3 class="flex items-center gap-2.5 font-display text-[22px] font-semibold leading-none tracking-[0.22px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
                   <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
-                    <Image
-                      src={icon}
-                      alt=""
-                      width={iconW}
-                      height={iconH}
-                      class="h-5 w-5 object-contain"
-                    />
+                    <Image src={icon} alt="" width={iconW} height={iconH} class="h-5 w-5 object-contain" />
                   </span>
                   {title}
                 </h3>

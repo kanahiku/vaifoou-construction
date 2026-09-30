@@ -103,15 +103,15 @@ const projectPhoto = serviceMedia?.projectImage;
       >
         CMU retaining walls and block fences built for long-term stability.
       </p>
-      <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
+      <div class="flex w-full flex-col items-stretch gap-4 pb-8 pt-2 sm:w-auto sm:flex-row sm:items-center md:pb-12 md:pt-6">
         <a
           href={PRIMARY_CTA_HREF}
-          class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          class="inline-flex w-full items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
           >{PRIMARY_CTA_LABEL}</a
         >
         <a
           href={CONTACT.phone.href}
-          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          class="inline-flex w-full items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
           ><PhoneIcon />Call {CONTACT.phone.display}</a
         >
       </div>
@@ -208,7 +208,7 @@ const projectPhoto = serviceMedia?.projectImage;
           ))
         }
       </div>
-      {/* Project photo + View Our Work */}
+      {/* Project photo + View Projects */}
       <div
         class="flex flex-col gap-0 border border-banner-line bg-page overflow-hidden md:flex-row md:items-stretch min-h-[320px] md:min-h-[400px]"
       >
@@ -226,14 +226,19 @@ const projectPhoto = serviceMedia?.projectImage;
         </div>
         {/* Right — text + CTA (50%) */}
         <div class="flex w-full flex-col justify-center gap-5 p-8 md:w-1/2 md:p-12">
+          <h3 class="font-display text-[24px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[32px]">
+            View Our Projects
+          </h3>
           <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[17px]">
-            Real photo of a completed CMU block wall project on O'ahu, labeled by location.
+            Explore our recent work and see the quality, care, and craftsmanship we bring to every project. From start
+            to finish, our team is committed to dependable service, careful attention to detail, and results built to
+            last.
           </p>
           <a
             href="/projects/"
             class="self-start inline-flex items-center bg-nav-cta px-6 py-3 font-display text-[13px] font-bold leading-4 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading"
           >
-            View Our Work
+            View Projects
           </a>
         </div>
       </div>

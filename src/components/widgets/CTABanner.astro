@@ -77,12 +77,13 @@ const displayTitle = eyebrow ? `${eyebrow}: ${title}` : title;
       )}
 
       {/* ── CTAs ─────────────────────────────────────────────── */}
-      <div class="flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+      <div class="flex w-full flex-col items-stretch justify-center gap-3 sm:w-auto sm:flex-row sm:items-center">
         <Button
           variant="primary"
           text={ctaText}
           href={ctaHref}
           hideNote={true}
+          class="w-full sm:w-auto"
         />
         {secondaryCtaText && secondaryCtaHref && (
           <Button
@@ -91,6 +92,7 @@ const displayTitle = eyebrow ? `${eyebrow}: ${title}` : title;
             text={secondaryCtaText}
             href={secondaryCtaHref}
             hideNote={true}
+            class="w-full sm:w-auto"
           />
         )}
       </div>

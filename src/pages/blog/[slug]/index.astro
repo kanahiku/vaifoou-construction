@@ -45,35 +45,37 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   {/* ── Article hero — dark overlay ───────────────────────────────── */}
   <section class="relative w-full overflow-hidden border-b border-banner-line">
     {/* Background image */}
-    {post.image?.src ? (
-      <Image
-        src={post.image.src}
-        alt={post.image.alt || post.title}
-        width={1440}
-        height={600}
-        widths={[640, 960, 1200, 1440, 1600]}
-        sizes="100vw"
-        layout="cover"
-        format="webp"
-        quality={72}
-        class="absolute inset-0 h-full w-full object-cover"
-        loading="eager"
-        fetchpriority="high"
-      />
-    ) : (
-      <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label={`${post.title} photo placeholder`} />
-    )}
+    {
+      post.image?.src ? (
+        <Image
+          src={post.image.src}
+          alt={post.image.alt || post.title}
+          width={1440}
+          height={600}
+          widths={[640, 960, 1200, 1440, 1600]}
+          sizes="100vw"
+          layout="cover"
+          format="webp"
+          quality={72}
+          class="absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+          fetchpriority="high"
+        />
+      ) : (
+        <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label={`${post.title} photo placeholder`} />
+      )
+    }
 
     {/* Gradient overlay */}
     <div
       class="absolute inset-0"
       style="background: linear-gradient(90deg, rgb(28 27 26 / 92%) 0%, rgb(28 27 26 / 75%) 55%, rgb(28 27 26 / 35%) 100%);"
       aria-hidden="true"
-    ></div>
+    >
+    </div>
 
     <div class="site-frame relative z-10 flex flex-col gap-4 pb-14 pt-14 md:pb-20 md:pt-20">
       {/* Back link */}
@@ -81,26 +83,37 @@ const metadata = {
         href="/blog/"
         class="inline-flex items-center gap-2 font-body text-[13px] font-semibold leading-4 tracking-[0.5px] text-page/70 uppercase transition-colors hover:text-page-end"
       >
-        <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" style="transform: rotate(180deg)">
-          <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/>
+        <svg
+          width="10"
+          height="10"
+          viewBox="0 0 16 16"
+          fill="currentColor"
+          aria-hidden="true"
+          style="transform: rotate(180deg)"
+        >
+          <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"></path>
         </svg>
         All Articles
       </a>
 
       {/* Title */}
-      <h1 class="max-w-[768px] font-display text-[32px] font-bold leading-tight tracking-[-0.3px] text-page-end uppercase md:text-[56px] md:leading-[64px] md:tracking-[-0.6px]">
+      <h1
+        class="max-w-[768px] font-display text-[32px] font-bold leading-tight tracking-[-0.3px] text-page-end uppercase md:text-[56px] md:leading-[64px] md:tracking-[-0.6px]"
+      >
         {post.category ?? 'Insights'}: {post.title}
       </h1>
 
       {/* Meta */}
       <p class="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[13px] font-medium text-page/70">
         <time datetime={post.publishDate}>{getFormattedDate(publishDate)}</time>
-        {post.author && (
-          <>
-            <span aria-hidden="true">·</span>
-            <span>{post.author}</span>
-          </>
-        )}
+        {
+          post.author && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{post.author}</span>
+            </>
+          )
+        }
         <span aria-hidden="true">·</span>
         <span>{readingMinutes} min read</span>
       </p>
@@ -111,7 +124,6 @@ const metadata = {
   <section class="w-full border-b border-banner-line bg-page py-8 md:py-16 lg:py-20">
     <div class="site-frame">
       <div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)] lg:items-start lg:gap-12 xl:gap-16">
-
         {/* Sidebar (TOC + author + tags + share + CTA) */}
         <BlogSidebar
           toc={toc}
@@ -125,48 +137,56 @@ const metadata = {
 
         {/* Article */}
         <article class="min-w-0">
-
           {/* Lead paragraphs */}
-          {leadParagraphs.length > 0 && (
-            <div class="mb-8 space-y-5">
-              {leadParagraphs.map((paragraph) => (
-                <p class="font-body text-[16px] font-normal leading-[1.8] text-banner-note md:text-[17px]">{paragraph}</p>
-              ))}
-            </div>
-          )}
+          {
+            leadParagraphs.length > 0 && (
+              <div class="mb-8 space-y-5">
+                {leadParagraphs.map((paragraph) => (
+                  <p class="font-body text-[16px] font-normal leading-[1.8] text-banner-note md:text-[17px]">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            )
+          }
 
           {/* Lead inline images */}
-          {leadImages.map((imageBlock) => (
-            <figure class="mb-8">
-              <Image
-                src={imageBlock.image.src}
-                alt={imageBlock.image.alt || ''}
-                width={800}
-                height={450}
-                widths={[320, 480, 640, 800, 960]}
-                sizes="(max-width: 1024px) 100vw, 800px"
-                layout="constrained"
-                format="webp"
-                quality={72}
-                class="w-full object-cover"
-                loading="lazy"
-              />
-              {imageBlock.caption && (
-                <figcaption class="mt-2 font-body text-[13px] text-muted/70 text-center">{imageBlock.caption}</figcaption>
-              )}
-            </figure>
-          ))}
+          {
+            leadImages.map((imageBlock) => (
+              <figure class="mb-8">
+                <Image
+                  src={imageBlock.image.src}
+                  alt={imageBlock.image.alt || imageBlock.caption || `${post.title} article image`}
+                  width={800}
+                  height={450}
+                  widths={[320, 480, 640, 800, 960]}
+                  sizes="(max-width: 1024px) 100vw, 800px"
+                  layout="constrained"
+                  format="webp"
+                  quality={72}
+                  class="w-full object-cover"
+                  loading="lazy"
+                />
+                {imageBlock.caption && (
+                  <figcaption class="mt-2 font-body text-[13px] text-muted/70 text-center">
+                    {imageBlock.caption}
+                  </figcaption>
+                )}
+              </figure>
+            ))
+          }
 
           {/* Inline TOC on mobile */}
-          {toc.length > 0 && (
-            <div class="mb-10 mt-0">
-              <BlogSidebar variant="inline" toc={toc} ctaTitle="" />
-            </div>
-          )}
+          {
+            toc.length > 0 && (
+              <div class="mb-10 mt-0">
+                <BlogSidebar variant="inline" toc={toc} ctaTitle="" />
+              </div>
+            )
+          }
 
           {/* Main body */}
           <BlogArticleBody post={post} />
-
         </article>
       </div>
     </div>
@@ -174,7 +194,6 @@ const metadata = {
 
   {/* ── CTA closer ────────────────────────────────────────────────── */}
   <BrickMotifCTA heading={`Ready to Start Your Project?`} />
-
 </Layout>
 
 <style>

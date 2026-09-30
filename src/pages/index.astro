@@ -33,8 +33,17 @@ const services = [
     title: 'Rock Walls',
     description: 'Custom boundaries built with hand-selected volcanic basalt.',
     cta: 'View Rock Wall Services',
-    href: '/services/rock-walls',
+    href: '/services/rock-walls/',
     icon: iconRockWall,
+    iconW: 20,
+    iconH: 20,
+  },
+  {
+    title: 'Retaining Wall',
+    description: "Rock and CMU retaining walls built for O'ahu hillsides and elevation changes.",
+    cta: 'View Retaining Wall Services',
+    href: '/services/retaining-walls/',
+    icon: iconRetainingWall,
     iconW: 20,
     iconH: 20,
   },
@@ -42,7 +51,7 @@ const services = [
     title: 'CMU & Block Walls',
     description: 'Retaining walls and block fences built for long-term stability.',
     cta: 'View CMU & Block Walls',
-    href: '/services/cmu-block-walls',
+    href: '/services/cmu-block-walls/',
     icon: iconWalls,
     iconW: 20,
     iconH: 20,
@@ -51,17 +60,8 @@ const services = [
     title: 'Concrete Services',
     description: 'Custom driveways, sidewalks, and flatwork poured for long-term durability.',
     cta: 'View Concrete Services',
-    href: '/services/concrete',
+    href: '/services/concrete/',
     icon: iconHammer,
-    iconW: 20,
-    iconH: 20,
-  },
-  {
-    title: 'Retaining Wall',
-    description: "Rock and CMU retaining walls built for O'ahu hillsides and elevation changes.",
-    cta: 'View Retaining Wall Services',
-    href: '/services/retaining-walls',
-    icon: iconRetainingWall,
     iconW: 20,
     iconH: 20,
   },
@@ -84,6 +84,7 @@ const homeMedia = await getHomeMediaContent();
 const heroImage = homeMedia?.heroImage;
 const heroImageMobile = homeMedia?.heroImageMobile;
 const bannerImage = homeMedia?.bannerImage;
+const homepageImageAlt = "Vaifoou Construction masonry and concrete work on O'ahu";
 
 const findAudienceCardImage = (title: string, href: string, index: number) => {
   const cards = homeMedia?.audienceCards ?? [];
@@ -168,16 +169,18 @@ const reviewItems =
         Concrete &ndash; Rockwall &ndash; CMU. Backed by a 25+ year family legacy in the masonry trade.
       </p>
 
-      <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
+      <div
+        class="flex w-full flex-col items-stretch gap-4 pb-8 pt-2 sm:w-auto sm:flex-row sm:items-center md:pb-12 md:pt-6"
+      >
         <a
           href={PRIMARY_CTA_HREF}
-          class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          class="inline-flex w-full items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
         >
           {PRIMARY_CTA_LABEL}
         </a>
         <a
           href={CONTACT.phone.href}
-          class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+          class="inline-flex w-full items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
         >
           <PhoneIcon />
           Call {CONTACT.phone.display}
@@ -259,7 +262,7 @@ const reviewItems =
                 {image?.src ? (
                   <SanityImage
                     src={image.src}
-                    alt={image.alt}
+                    alt={image.alt || `${label} masonry and concrete project by Vaifoou Construction`}
                     class="absolute inset-0 h-full w-full max-w-none object-cover"
                     widths={[320, 480, 640]}
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -320,13 +323,7 @@ const reviewItems =
                 {/* Icon inline left of title */}
                 <h3 class="flex items-center gap-2.5 font-display text-[24px] font-semibold leading-none tracking-[0.24px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
                   <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
-                    <Image
-                      src={icon}
-                      alt=""
-                      width={iconW}
-                      height={iconH}
-                      class="h-5 w-5 object-contain"
-                    />
+                    <Image src={icon} alt="" width={iconW} height={iconH} class="h-5 w-5 object-contain" />
                   </span>
                   {title}
                 </h3>
@@ -369,7 +366,7 @@ const reviewItems =
             bannerImage?.src ? (
               <SanityImage
                 src={bannerImage.src}
-                alt={bannerImage.alt}
+                alt={bannerImage.alt || homepageImageAlt}
                 class="absolute inset-0 h-full w-full max-w-none object-cover"
                 widths={[640, 960, 1200]}
                 sizes="(max-width: 768px) 100vw, 1200px"

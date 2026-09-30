@@ -1,21 +1,140 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '~/layouts/PageLayout.astro';
-import { site } from '~/config/site';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import ProjectBeforeAfterCard from '~/components/ui/ProjectBeforeAfterCard.astro';
+import iconRockWall from '~/assets/icons/rock-wall.svg';
+import iconRetainingWall from '~/assets/icons/retaining-wall.svg';
+import iconWalls from '~/assets/icons/walls.svg';
+import iconHammer from '~/assets/icons/hammer.svg';
 
 const metadata = {
-  title: `Projects & Gallery | ${site.name}`,
-  description: `Masonry & Concrete Projects — Vaifoou Construction`,
+  title: `Completed Masonry & Concrete Projects on O'ahu | Vaifoou Construction`,
+  description:
+    "View completed rock walls, retaining walls, and concrete flatwork built across O'ahu by Vaifoou Construction. Backed by a 25+ year family trade legacy.",
+  ignoreTitleTemplate: true,
 };
+
+const featuredProject = {
+  title: '6-Foot Retaining Rock Wall Repair & Reconstruction',
+  description:
+    'This approximately 6-foot-high retaining rock wall suffered heavy deterioration and structural failure caused by poor drainage. Our crew demolished and hauled away the damaged stonework, excavated behind the slope, and prepped the retaining footing. We rebuilt the wall using natural volcanic rock, installed new drainage and weep holes to relieve water pressure behind the structure, and finished the top line with a vinyl privacy fence.',
+  tags: [
+    { label: 'Rock Walls', href: '/services/rock-walls/' },
+    { label: 'Retaining Walls', href: '/services/retaining-walls/' },
+  ],
+};
+
+const services = [
+  {
+    title: 'Rock Walls',
+    description: 'Property boundaries and custom masonry built with hand-selected volcanic basalt.',
+    href: '/services/rock-walls/',
+    cta: 'View Rock Wall Services',
+    icon: iconRockWall,
+    iconW: 20,
+    iconH: 20,
+  },
+  {
+    title: 'Retaining Wall',
+    description: 'Heavy-duty structural masonry built with proper drainage to hold back hillside soil.',
+    href: '/services/retaining-walls/',
+    cta: 'View Retaining Wall Services',
+    icon: iconRetainingWall,
+    iconW: 20,
+    iconH: 20,
+  },
+  {
+    title: 'CMU & Block Walls',
+    description: 'Reinforced hollow tile perimeter walls and fences built for long-term stability.',
+    href: '/services/cmu-block-walls/',
+    cta: 'View CMU & Block Walls',
+    icon: iconWalls,
+    iconW: 20,
+    iconH: 20,
+  },
+  {
+    title: 'Concrete Services',
+    description: 'New driveways, walkways, stamped flatwork, and structural foundations poured from scratch.',
+    href: '/services/concrete/',
+    cta: 'View Concrete Services',
+    icon: iconHammer,
+    iconW: 20,
+    iconH: 20,
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <section class="site-frame py-24 text-center">
-    <p class="font-display text-[13px] font-bold uppercase tracking-[1px] text-accent mb-4">Coming Soon</p>
-    <h1 class="text-h1 text-heading mb-6">Projects & Gallery</h1>
-    <p class="text-body text-muted max-w-xl mx-auto">
-      This page is under construction. Check back soon or
-      <a href="/contact/" class="text-accent transition-colors hover:text-accent-hover">request a free estimate</a>
-      now.
-    </p>
+  <SubServiceHero
+    title="Our Masonry & Concrete Work Across O'ahu"
+    body="Real site work completed by our family crews across O'ahu."
+    imagePlaceholder="Completed masonry and concrete project photo"
+  />
+
+  {/* ── Featured project card ─────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-10 md:gap-14">
+      <ProjectBeforeAfterCard
+        title={featuredProject.title}
+        description={featuredProject.description}
+        tags={featuredProject.tags}
+        beforeLabel="Before"
+        afterLabel="After"
+      />
+    </div>
   </section>
+
+  {/* ── Explore other services ────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-10 md:gap-14">
+      <div class="flex max-w-[896px] flex-col gap-1">
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          Explore Other Services
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {
+          services.map(({ icon, iconW, iconH, title, description, cta, href }) => (
+            <article class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40">
+              <div class="flex flex-1 flex-col gap-3">
+                <h3 class="flex items-center gap-2.5 font-display text-[24px] font-semibold leading-none tracking-[0.24px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
+                  <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
+                    <Image src={icon} alt="" width={iconW} height={iconH} class="h-5 w-5 object-contain" />
+                  </span>
+                  {title}
+                </h3>
+                <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>
+              </div>
+              <a
+                href={href}
+                class="mt-8 inline-flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-accent"
+              >
+                {cta}
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  aria-hidden="true"
+                  class="shrink-0 transition-transform group-hover:translate-x-0.5"
+                >
+                  <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" fill="currentColor" />
+                </svg>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <BrickMotifCTA
+    heading="Start Your O'ahu Masonry Project"
+    note="Contact us to discuss your masonry or concrete project. Every job is backed by our workmanship guarantee."
+  />
 </Layout>

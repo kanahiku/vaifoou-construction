@@ -43,6 +43,30 @@ export default defineConfig({
     '/our-locations': '/locations',
     '/work-with-us': '/careers',
     '/terms-of-service': '/terms',
+    '/residential': {
+      status: 301,
+      destination: '/who-we-work-with/residential',
+    },
+    '/residential/': {
+      status: 301,
+      destination: '/who-we-work-with/residential/',
+    },
+    '/commercial': {
+      status: 301,
+      destination: '/who-we-work-with/commercial',
+    },
+    '/commercial/': {
+      status: 301,
+      destination: '/who-we-work-with/commercial/',
+    },
+    '/who-we-work-with': {
+      status: 301,
+      destination: '/services',
+    },
+    '/who-we-work-with/': {
+      status: 301,
+      destination: '/services/',
+    },
   },
 
   // Hover/tap only. Prefetching every nav + footer URL on load contended with

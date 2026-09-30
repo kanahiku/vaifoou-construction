@@ -14,7 +14,7 @@ import FillImage from '~/components/ui/FillImage.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
-import { getServiceAreaLocationMedia } from '~/lib/content';
+import { getServiceAreaLocationMedia, getServiceCategoryPageMedia } from '~/lib/content';
 
 export interface AreaService {
   name: string;
@@ -87,13 +87,31 @@ export interface Props {
 const { metadata, hero, intro, services, servicesHeading, recentWork, otherAreas, faqs, ctaHeading } = Astro.props;
 
 const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
-const media = await getServiceAreaLocationMedia(Astro.url.pathname);
+const [media, rockWallMedia, retainingWallMedia, cmuBlockWallMedia, concreteMedia] = await Promise.all([
+  getServiceAreaLocationMedia(Astro.url.pathname),
+  getServiceCategoryPageMedia('/services/rock-walls/'),
+  getServiceCategoryPageMedia('/services/retaining-walls/'),
+  getServiceCategoryPageMedia('/services/cmu-block-walls/'),
+  getServiceCategoryPageMedia('/services/concrete/'),
+]);
 const heroImage = media?.heroImage;
 const introImage = media?.introImage;
-const recentWorkImage = media?.recentWorkImage;
+const serviceProjectImages = [
+  rockWallMedia?.projectImage,
+  retainingWallMedia?.projectImage,
+  cmuBlockWallMedia?.projectImage,
+  concreteMedia?.projectImage,
+].filter((image) => image?.src);
+const areaImageSeed = [...Astro.url.pathname].reduce((sum, char) => sum + char.charCodeAt(0), 0);
+const recentWorkImage =
+  serviceProjectImages.length > 0
+    ? serviceProjectImages[areaImageSeed % serviceProjectImages.length]
+    : media?.recentWorkImage;
 const introHeading = intro.heading;
 const servicesSectionHeading = servicesHeading;
 const recentWorkHeading = recentWork.heading;
+const recentWorkDescription =
+  'Explore our recent work and see the quality, care, and craftsmanship we bring to every project. From start to finish, our team is committed to dependable service, careful attention to detail, and results built to last.';
 ---
 
 <Layout metadata={metadata}>
@@ -136,7 +154,7 @@ const recentWorkHeading = recentWork.heading;
               {name}
             </h3>
             <p class="font-body text-[15px] font-normal leading-7 text-banner-note">{description}</p>
-            <span class="mt-auto flex items-center gap-1.5 font-body text-[13px] font-semibold leading-4 tracking-[0.5px] text-nav-cta uppercase">
+            <span class="mt-auto flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase">
               View service <Fragment set:html={arrowIcon} />
             </span>
           </a>
@@ -155,7 +173,7 @@ const recentWorkHeading = recentWork.heading;
         <h2 class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[36px]">
           {recentWorkHeading}
         </h2>
-        <p class="mt-3 font-body text-[15px] leading-7 text-banner-note">{recentWork.description}</p>
+        <p class="mt-3 font-body text-[15px] leading-7 text-banner-note">{recentWorkDescription}</p>
         <a href="/projects/" class="mt-3 inline-flex items-center gap-2 font-display text-[14px] font-bold tracking-[0.7px] text-nav-cta uppercase hover:text-accent">
           View Our Work <Fragment set:html={arrowIcon} />
         </a>

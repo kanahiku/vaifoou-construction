@@ -9,6 +9,7 @@ import type {
   BookCta,
   BookSeries,
   CommercialAudienceSubPageMediaContent,
+  ContactPageMediaContent,
   PodcastEpisode,
   PodcastEpisodeStatus,
   PodcastPartGroup,
@@ -257,6 +258,28 @@ export async function getSanityAboutPageMediaContent(): Promise<AboutPageMediaCo
   };
 }
 
+const CONTACT_PAGE_MEDIA_QUERY = /* groq */ `
+  *[_type == "contactPageMedia" && _id == "singleton-contact-page-media"][0] {
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    }
+  }
+`;
+
+export async function getSanityContactPageMediaContent(): Promise<ContactPageMediaContent | null> {
+  const doc = await sanityClient.fetch<{ heroImage?: FetchedImage } | null>(CONTACT_PAGE_MEDIA_QUERY);
+
+  if (!doc) return null;
+
+  return {
+    heroImage: resolveContentImage(doc.heroImage),
+  };
+}
+
 const AUDIENCE_PAGE_MEDIA_QUERY = /* groq */ `
   *[_type == "audiencePageMedia" && path == $path][0] {
     title,
@@ -443,9 +466,7 @@ export async function getSanityServiceAreaHubMediaContent(): Promise<ServiceArea
   };
 }
 
-export async function getSanityServiceAreaLocationMedia(
-  path: string
-): Promise<ServiceAreaLocationMediaContent | null> {
+export async function getSanityServiceAreaLocationMedia(path: string): Promise<ServiceAreaLocationMediaContent | null> {
   const doc = await sanityClient.fetch<
     | (Omit<ServiceAreaLocationMediaContent, 'heroImage' | 'introImage' | 'recentWorkImage'> & {
         heroImage?: FetchedImage;

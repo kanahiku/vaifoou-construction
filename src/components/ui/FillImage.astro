@@ -32,6 +32,7 @@ const {
   quality = 72,
 } = Astro.props;
 
+const resolvedAlt = alt?.trim() || "Vaifoou Construction masonry and concrete work on O'ahu";
 const placeholderClass = ['absolute inset-0', className].filter(Boolean).join(' ');
 ---
 
@@ -39,7 +40,7 @@ const placeholderClass = ['absolute inset-0', className].filter(Boolean).join(' 
   src ? (
     <Image
       src={src}
-      alt={alt ?? ''}
+      alt={resolvedAlt}
       width={width}
       height={height}
       widths={widths}

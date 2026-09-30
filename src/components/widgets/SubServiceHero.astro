@@ -76,16 +76,16 @@ const trustItems = [CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu
     {/* CTAs */}
     {
       showCtas && (
-        <div class="flex flex-wrap items-center gap-4 pb-8 pt-2 md:pb-12 md:pt-6">
+        <div class="flex w-full flex-col items-stretch gap-4 pb-8 pt-2 sm:w-auto sm:flex-row sm:items-center md:pb-12 md:pt-6">
           <a
             href={PRIMARY_CTA_HREF}
-            class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+            class="inline-flex w-full items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
           >
             {PRIMARY_CTA_LABEL}
           </a>
           <a
             href={CONTACT.phone.href}
-            class="inline-flex items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
+            class="inline-flex w-full items-center justify-center gap-2 border border-muted/30 bg-banner-text px-10 py-4 text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading sm:w-auto md:text-[20px]"
           >
             <PhoneIcon />
             {CONTACT.phone.display}
