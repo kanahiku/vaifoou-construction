@@ -5,6 +5,23 @@ export interface ContentImage {
   alt: string;
 }
 
+export interface ProjectTag {
+  label: string;
+  href?: string;
+}
+
+export interface ProjectCardContent {
+  _id: string;
+  title: string;
+  description: string;
+  tags: ProjectTag[];
+  beforeImage?: ContentImage;
+  afterImage?: ContentImage;
+  beforeLabel?: string;
+  afterLabel?: string;
+  order: number;
+}
+
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export interface NavSubLink {

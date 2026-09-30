@@ -13,6 +13,8 @@ import type {
   PodcastEpisode,
   PodcastEpisodeStatus,
   PodcastPartGroup,
+  ProjectCardContent,
+  ProjectTag,
   Testimonial,
   ContactPageContent,
   ContentImage,
@@ -1355,6 +1357,72 @@ function normalizeTestimonial(doc: SanityTestimonial): Testimonial | null {
 export async function getSanityTestimonials(): Promise<Testimonial[]> {
   const docs = await sanityClient.fetch<SanityTestimonial[]>(TESTIMONIALS_QUERY);
   return (docs ?? []).map(normalizeTestimonial).filter((item): item is Testimonial => Boolean(item));
+}
+
+// ─── Projects ────────────────────────────────────────────────────────────────
+
+const PROJECTS_QUERY = /* groq */ `
+  *[_type == "project" && defined(title) && defined(description)] | order(order asc, title asc) {
+    _id,
+    title,
+    description,
+    "tags": tags[] { label, href },
+    "beforeImage": {
+      "src": coalesce(beforeImage.asset->url, ""),
+      "alt": coalesce(beforeImage.alt, ""),
+      "crop": beforeImage.crop,
+      "hotspot": beforeImage.hotspot,
+      "asset": beforeImage.asset
+    },
+    "afterImage": {
+      "src": coalesce(afterImage.asset->url, ""),
+      "alt": coalesce(afterImage.alt, ""),
+      "crop": afterImage.crop,
+      "hotspot": afterImage.hotspot,
+      "asset": afterImage.asset
+    },
+    beforeLabel,
+    afterLabel,
+    order
+  }
+`;
+
+type SanityProject = {
+  _id: string;
+  title?: string;
+  description?: string;
+  tags?: ProjectTag[];
+  beforeImage?: FetchedImage;
+  afterImage?: FetchedImage;
+  beforeLabel?: string;
+  afterLabel?: string;
+  order?: number;
+};
+
+function normalizeProject(doc: SanityProject): ProjectCardContent | null {
+  if (!doc?._id || !doc.title?.trim() || !doc.description?.trim()) return null;
+
+  return {
+    _id: doc._id,
+    title: doc.title.trim(),
+    description: doc.description.trim(),
+    tags: (doc.tags ?? [])
+      .filter((tag) => tag?.label?.trim())
+      .map((tag) => ({
+        label: tag.label.trim(),
+        href: tag.href?.trim() || undefined,
+      })),
+    beforeImage: resolveContentImage(doc.beforeImage),
+    afterImage: resolveContentImage(doc.afterImage),
+    beforeLabel: doc.beforeLabel?.trim() || 'Before',
+    afterLabel: doc.afterLabel?.trim() || 'After',
+    order: typeof doc.order === 'number' ? doc.order : 0,
+  };
+}
+
+export async function getSanityProjects(): Promise<ProjectCardContent[]> {
+  const docs = await sanityClient.fetch<SanityProject[]>(PROJECTS_QUERY);
+  return (docs ?? []).map(normalizeProject).filter((project): project is ProjectCardContent => Boolean(project));
 }
 
 /** Returns episodes grouped by part (sorted by part number, then episode order). */

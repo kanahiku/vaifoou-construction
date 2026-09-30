@@ -87,6 +87,18 @@ export const structure = (S: StructureBuilder) =>
       S.divider(),
 
       S.listItem()
+        .title('Projects')
+        .schemaType('project')
+        .child(
+          S.documentTypeList('project')
+            .title('Projects')
+            .defaultOrdering([
+              { field: 'order', direction: 'asc' },
+              { field: 'title', direction: 'asc' },
+            ])
+        ),
+
+      S.listItem()
         .title('Blog')
         .schemaType('blogPost')
         .child(

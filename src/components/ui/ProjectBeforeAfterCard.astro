@@ -1,4 +1,7 @@
 ---
+import Image from '~/components/common/Image.astro';
+import type { ContentImage } from '~/lib/content/types';
+
 export interface ProjectTag {
   label: string;
   href?: string;
@@ -8,37 +11,67 @@ export interface Props {
   title: string;
   description: string;
   tags?: ProjectTag[];
+  beforeImage?: ContentImage;
+  afterImage?: ContentImage;
   beforeLabel?: string;
   afterLabel?: string;
 }
 
-const { title, description, tags = [], beforeLabel = 'Before', afterLabel = 'After' } = Astro.props;
+const {
+  title,
+  description,
+  tags = [],
+  beforeImage,
+  afterImage,
+  beforeLabel = 'Before',
+  afterLabel = 'After',
+} = Astro.props;
 
-const frames = [beforeLabel, afterLabel];
+const frames = [
+  { label: beforeLabel, image: beforeImage },
+  { label: afterLabel, image: afterImage },
+];
 ---
 
-<article class="grid grid-cols-1 overflow-hidden border border-banner-line bg-white lg:grid-cols-[1.05fr_0.95fr]">
-  <div class="grid grid-cols-1 gap-px bg-banner-line sm:grid-cols-2 lg:grid-cols-1">
+<article class="flex flex-col overflow-hidden border border-banner-line bg-white">
+  <div class="grid grid-cols-1 gap-px bg-banner-line md:grid-cols-2">
     {
       frames.map((label) => (
-        <div class="relative min-h-[240px] bg-section-grey md:min-h-[320px]">
-          {/* TODO: replace with <Image> when project asset is ready */}
-          <div class="absolute left-4 top-4 bg-heading px-3 py-1 font-display text-[12px] font-bold leading-4 tracking-[0.8px] text-page-end uppercase">
-            {label}
+        <div class="relative bg-section-grey p-2">
+          <div class="relative aspect-[9/16] w-full overflow-hidden bg-card">
+            {label.image?.src ? (
+              <Image
+                src={label.image.src}
+                alt={label.image.alt || `${title} ${label.label.toLowerCase()} photo`}
+                class="absolute inset-0 h-full w-full max-w-none object-cover"
+                widths={[480, 640, 828, 960, 1200]}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                width={900}
+                height={1600}
+                layout="cover"
+                format="webp"
+                quality={84}
+              />
+            ) : (
+              <div class="h-full w-full bg-section-grey" aria-hidden="true" />
+            )}
+          </div>
+          <div class="absolute left-3 top-3 bg-heading px-2.5 py-1 font-display text-[11px] font-bold leading-4 tracking-[0.8px] text-page-end uppercase">
+            {label.label}
           </div>
         </div>
       ))
     }
   </div>
 
-  <div class="flex flex-col justify-center gap-6 p-6 md:p-10 lg:p-12">
+  <div class="flex flex-1 flex-col gap-5 p-6 md:p-8">
     <div class="flex flex-col gap-1">
       <h2
-        class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[40px] md:leading-[48px]"
+        class="font-display text-[24px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[28px] md:leading-8"
       >
         {title}
       </h2>
-      <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
+      <p class="mt-3 font-body text-[15px] font-normal leading-7 text-banner-note">
         {description}
       </p>
     </div>

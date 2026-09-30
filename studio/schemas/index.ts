@@ -13,6 +13,7 @@ import { serviceAreaHubPageMedia } from './documents/serviceAreaHubPageMedia';
 import { serviceAreaLocationPageMedia } from './documents/serviceAreaLocationPageMedia';
 import { blogPost } from './documents/blogPost';
 import { testimonial } from './documents/testimonial';
+import { project, projectTag } from './documents/project';
 
 // Navigation objects
 import { navLink, navSubLink } from './objects/navLink';
@@ -65,6 +66,7 @@ export const schemaTypes = [
   concreteServiceSubPageMedia,
   serviceAreaHubPageMedia,
   serviceAreaLocationPageMedia,
+  project,
   blogPost,
   testimonial,
 
@@ -85,6 +87,7 @@ export const schemaTypes = [
   faqItem,
   homeAudienceCard,
   servicesHubAudienceCard,
+  projectTag,
   linkedCard,
   quoteCardItem,
 

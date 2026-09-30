@@ -13,6 +13,7 @@ import type {
   NavigationContent,
   PodcastEpisode,
   PodcastPartGroup,
+  ProjectCardContent,
   ReviewsPageContent,
   ServiceAreaHubMediaContent,
   ServiceAreaLocationMediaContent,
@@ -41,6 +42,7 @@ import {
   getSanityHomeMediaContent,
   getSanityNavigationContent,
   getSanityReviewsPage,
+  getSanityProjects,
   getSanityServiceAreaHubMediaContent,
   getSanityServiceAreaLocationMedia,
   getSanityServiceCategoryPageMedia,
@@ -390,6 +392,7 @@ export type {
   NavigationContent,
   PodcastEpisode,
   PodcastPartGroup,
+  ProjectCardContent,
   ReviewsPageContent,
   ServiceAreaHubMediaContent,
   ServiceAreaLocationMediaContent,
@@ -423,4 +426,57 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     console.warn('Sanity testimonials unavailable.', error);
     return [];
   }
+}
+
+const PROJECT_FALLBACKS: ProjectCardContent[] = [
+  {
+    _id: 'fallback-retaining-rock-wall-repair',
+    title: '6-Foot Retaining Rock Wall Repair & Reconstruction',
+    description:
+      'This approximately 6-foot-high retaining rock wall suffered heavy deterioration and structural failure caused by poor drainage. Our crew demolished and hauled away the damaged stonework, excavated behind the slope, and prepped the retaining footing. We rebuilt the wall using natural volcanic rock, installed new drainage and weep holes to relieve water pressure behind the structure, and finished the top line with a vinyl privacy fence.',
+    tags: [
+      { label: 'Rock Walls', href: '/services/rock-walls/' },
+      { label: 'Retaining Walls', href: '/services/retaining-walls/' },
+    ],
+    beforeLabel: 'Before',
+    afterLabel: 'After',
+    order: 1,
+  },
+  {
+    _id: 'fallback-makakilo-concrete-sidewalk',
+    title: 'Makakilo Concrete Sidewalk Extension',
+    description:
+      'Our team prepped and graded the site to pour a new concrete sidewalk extension for a residential property in Makakilo, expanding the usable walkway space with a clean, durable finish that ties seamlessly into the existing layout.',
+    tags: [
+      { label: 'Concrete Services', href: '/services/concrete/' },
+      { label: 'Kapolei & Makakilo Service Area', href: '/service-areas/kapolei/' },
+    ],
+    beforeLabel: 'Before',
+    afterLabel: 'After',
+    order: 2,
+  },
+  {
+    _id: 'fallback-wahiawa-stamped-concrete',
+    title: 'Wahiawa Stamped Concrete Perimeter & Sealing',
+    description:
+      'For this project in our home base of Wahiawa, our crew demolished and removed the aging concrete around the property perimeter. Once the sub-base was graded and prepped, we poured new stamped concrete flatwork and applied a protective sealant for long-term weather durability.',
+    tags: [
+      { label: 'Concrete Services', href: '/services/concrete/' },
+      { label: 'Wahiawa Service Area', href: '/service-areas/wahiawa/' },
+    ],
+    beforeLabel: 'Before',
+    afterLabel: 'After',
+    order: 3,
+  },
+];
+
+export async function getProjects(): Promise<ProjectCardContent[]> {
+  try {
+    const projects = await getSanityProjects();
+    if (projects.length > 0) return projects;
+  } catch (error) {
+    console.warn('Sanity projects unavailable; using local fallback content.', error);
+  }
+
+  return PROJECT_FALLBACKS;
 }
