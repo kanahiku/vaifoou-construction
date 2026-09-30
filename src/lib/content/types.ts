@@ -61,6 +61,10 @@ export interface NavigationContent {
   };
 }
 
+export interface FooterMediaContent {
+  backgroundImage?: ContentImage;
+}
+
 // ─── Homepage section types ───────────────────────────────────────────────────
 
 export interface StatItem {

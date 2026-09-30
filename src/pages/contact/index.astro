@@ -6,10 +6,12 @@
 import Layout from '~/layouts/PageLayout.astro';
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import RemoteImage from '~/components/common/Image.astro';
 import { CONTACT } from '~/config/contact';
 import { site } from '~/config/site';
 import { FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY } from '~/lib/forms';
 import { photos } from '~/data/photos';
+import { getFooterMediaContent } from '~/lib/content';
 
 const metadata = {
   title: `Contact Vaifoou Construction | O'ahu Masonry & Concrete`,
@@ -55,6 +57,8 @@ const services = [
 const fieldClass =
   'block w-full rounded-none border border-heading/15 bg-page px-4 py-3 font-sans text-body text-heading placeholder:text-muted/55 transition-colors focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20';
 const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
+const footerMedia = await getFooterMediaContent();
+const sidebarBackground = footerMedia?.backgroundImage;
 ---
 
 <Layout metadata={metadata}>
@@ -72,7 +76,7 @@ const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_340px] lg:items-start">
 
         {/* ── Estimate Form ─────────────────────────────────── */}
-        <div class="flex flex-col gap-8">
+        <div class="flex flex-col gap-8 border border-banner-line bg-card p-6 shadow-sm md:p-8 lg:p-10">
           <div class="flex max-w-2xl flex-col gap-2">
             <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]">
               Request a Free Estimate
@@ -249,14 +253,29 @@ const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
         </div>
 
         {/* ── Direct Contact Sidebar ─────────────────────────── */}
-        <aside class="flex flex-col gap-0 bg-heading lg:sticky lg:top-24">
-          <div class="px-6 pb-0 pt-8 md:px-8">
+        <aside class="relative flex flex-col gap-0 overflow-hidden bg-heading lg:sticky lg:top-24">
+          {sidebarBackground?.src && (
+            <RemoteImage
+              src={sidebarBackground.src}
+              alt=""
+              width={800}
+              height={900}
+              widths={[400, 640, 800, 960]}
+              layout="cover"
+              quality={64}
+              loading="lazy"
+              class="absolute inset-0 h-full w-full max-w-none object-cover"
+            />
+          )}
+          <div class="absolute inset-0 bg-[rgba(14,13,12,0.88)]" aria-hidden="true"></div>
+
+          <div class="relative z-10 px-6 pb-0 pt-8 md:px-8">
             <p class="font-body text-[11px] font-bold leading-4 tracking-[1.2px] text-page/45 uppercase">
               Direct Contact
             </p>
           </div>
 
-          <div class="flex flex-col divide-y divide-page/10 px-6 py-6 md:px-8 md:py-8">
+          <div class="relative z-10 flex flex-col divide-y divide-page/10 px-6 py-6 md:px-8 md:py-8">
             {/* Phone */}
             <div class="flex flex-col gap-1.5 py-5 first:pt-0">
               <p class="font-body text-[11px] font-bold leading-4 tracking-[1px] text-page/45 uppercase">Phone</p>
@@ -305,7 +324,7 @@ const labelClass = 'mb-2 block font-sans text-body font-medium text-heading';
           </div>
 
           {/* Service area note */}
-          <div class="border-t border-page/10 px-6 pb-8 pt-5 md:px-8">
+          <div class="relative z-10 border-t border-page/10 px-6 pb-8 pt-5 md:px-8">
             <p class="font-body text-[13px] leading-6 text-page/50">
               We serve residential and commercial properties across O'ahu, Hawai'i.
               Contractor Licence {CONTACT.license}.

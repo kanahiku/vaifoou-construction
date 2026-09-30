@@ -11,6 +11,7 @@ import SanityImage from '~/components/common/Image.astro';
 import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
 import brickMotif from '~/assets/brick-motif-wide-light.svg';
 import iconRockWall from '~/assets/icons/rock-wall.svg';
+import iconRetainingWall from '~/assets/icons/retaining-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
 import iconHammer from '~/assets/icons/hammer.svg';
 import TestimonialCard from '~/components/ui/TestimonialCard.astro';
@@ -34,8 +35,8 @@ const services = [
     cta: 'View Rock Wall Services',
     href: '/services/rock-walls',
     icon: iconRockWall,
-    iconW: 22,
-    iconH: 12,
+    iconW: 20,
+    iconH: 20,
   },
   {
     title: 'CMU & Block Walls',
@@ -43,8 +44,8 @@ const services = [
     cta: 'View CMU & Block Walls',
     href: '/services/cmu-block-walls',
     icon: iconWalls,
-    iconW: 18,
-    iconH: 14,
+    iconW: 20,
+    iconH: 20,
   },
   {
     title: 'Concrete Services',
@@ -52,17 +53,17 @@ const services = [
     cta: 'View Concrete Services',
     href: '/services/concrete',
     icon: iconHammer,
-    iconW: 16,
-    iconH: 18,
+    iconW: 20,
+    iconH: 20,
   },
   {
     title: 'Retaining Wall',
     description: "Rock and CMU retaining walls built for O'ahu hillsides and elevation changes.",
     cta: 'View Retaining Wall Services',
     href: '/services/retaining-walls',
-    icon: iconRockWall,
-    iconW: 22,
-    iconH: 12,
+    icon: iconRetainingWall,
+    iconW: 20,
+    iconH: 20,
   },
 ];
 
@@ -318,14 +319,15 @@ const reviewItems =
               <div class="flex flex-col gap-3 flex-1">
                 {/* Icon inline left of title */}
                 <h3 class="flex items-center gap-2.5 font-display text-[24px] font-semibold leading-none tracking-[0.24px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
-                  <Image
-                    src={icon}
-                    alt=""
-                    width={iconW}
-                    height={iconH}
-                    class="h-[18px] w-auto shrink-0"
-                    aria-hidden="true"
-                  />
+                  <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
+                    <Image
+                      src={icon}
+                      alt=""
+                      width={iconW}
+                      height={iconH}
+                      class="h-5 w-5 object-contain"
+                    />
+                  </span>
                   {title}
                 </h3>
                 <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>

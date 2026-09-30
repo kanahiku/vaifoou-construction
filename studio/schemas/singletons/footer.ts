@@ -31,6 +31,21 @@ export const siteFooter = defineType({
       type: 'string',
       description: 'e.g. © 2026 Vaifoou Construction. All rights reserved.',
     }),
+    defineField({
+      name: 'backgroundImage',
+      title: 'Background image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Rock texture/photo shown behind the dark footer overlay.',
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt text',
+          type: 'string',
+          description: 'Leave blank if decorative.',
+        }),
+      ],
+    }),
   ],
   preview: {
     prepare() {

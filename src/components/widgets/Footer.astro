@@ -5,9 +5,11 @@
  */
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import RemoteImage from '~/components/common/Image.astro';
 import { getHomePermalink } from '~/utils/permalinks';
 import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
+import { getFooterMediaContent } from '~/lib/content';
 import logoDark from '~/assets/icons/logo-dark.svg';
 
 interface Link {
@@ -39,13 +41,28 @@ const servicesCol    = links.find((c) => c.title === 'SERVICES');
 const areasCol       = links.find((c) => c.title === 'SERVICE AREAS');
 const whoWeServeCol  = links.find((c) => c.title === 'WHO WE SERVE');
 const companyCol     = links.find((c) => c.title === 'COMPANY');
+const footerMedia = await getFooterMediaContent();
+const backgroundImage = footerMedia?.backgroundImage;
 ---
 
 <footer class="not-prose relative w-full overflow-hidden text-page" style="background-color: #0e0d0c;">
 
-  {/* Dark overlay — sits above the texture (added via CMS/bg image in future) */}
+  {backgroundImage?.src && (
+    <RemoteImage
+      src={backgroundImage.src}
+      alt=""
+      width={1600}
+      height={500}
+      widths={[640, 960, 1200, 1600, 1920]}
+      layout="cover"
+      quality={64}
+      loading="lazy"
+      class="absolute inset-0 h-full w-full max-w-none object-cover"
+    />
+  )}
+
+  {/* Dark overlay — sits above the texture */}
   <div class="absolute inset-0 bg-[rgba(14,13,12,0.92)]" aria-hidden="true"></div>
-  {/* TODO: add rock texture background image behind overlay when asset is ready */}
 
   <div class="site-frame relative z-10 flex flex-col gap-16 pb-10 pt-24">
 

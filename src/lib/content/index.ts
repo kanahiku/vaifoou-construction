@@ -6,6 +6,7 @@ import type {
   BookSeries,
   CommercialAudienceSubPageMediaContent,
   ContactPageContent,
+  FooterMediaContent,
   HomeMediaContent,
   HomePageContent,
   NavigationContent,
@@ -33,6 +34,7 @@ import {
   groupEpisodesByPart,
   getSanityContactHelpOptions,
   getSanityContactPage,
+  getSanityFooterMediaContent,
   getSanityHomeContent,
   getSanityHomeMediaContent,
   getSanityNavigationContent,
@@ -219,6 +221,15 @@ export async function getNavigationContent(): Promise<NavigationContent> {
   return hidePagesFromUi(ensureLegalFooterLinks(navigationData));
 }
 
+export async function getFooterMediaContent(): Promise<FooterMediaContent | null> {
+  try {
+    return await getSanityFooterMediaContent();
+  } catch (error) {
+    console.warn('Sanity footer media unavailable; using solid footer background.', error);
+    return null;
+  }
+}
+
 export async function findServicePage(slug: string): Promise<ServicePageContent | null> {
   return getSanityServicePage(slug);
 }
@@ -354,6 +365,7 @@ export type {
   BookSeries,
   CommercialAudienceSubPageMediaContent,
   ContactPageContent,
+  FooterMediaContent,
   HomeMediaContent,
   HomePageContent,
   NavigationContent,

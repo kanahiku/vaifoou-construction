@@ -15,6 +15,7 @@ import type {
   Testimonial,
   ContactPageContent,
   ContentImage,
+  FooterMediaContent,
   FormHelpOption,
   HomePageContent,
   HomeMediaContent,
@@ -488,9 +489,9 @@ export async function getSanityServiceCategoryPageMedia(path: string): Promise<S
 
 const SERVICE_SUB_PAGE_MEDIA_QUERY = /* groq */ `
   *[
-    _type in ["rockWallSubPageMedia", "concreteServiceSubPageMedia", "serviceSubPageMedia"] &&
+    _type in ["rockWallSubPageMedia", "concreteServiceSubPageMedia"] &&
     path == $path
-  ] | order(_type == "serviceSubPageMedia" asc)[0] {
+  ][0] {
     title,
     path,
     "heroImage": {
@@ -544,8 +545,29 @@ const NAVIGATION_QUERY = /* groq */ `
   }
 `;
 
+const FOOTER_MEDIA_QUERY = /* groq */ `
+  *[_type == "siteFooter" && _id == "singleton-footer"][0] {
+    "backgroundImage": {
+      "src": coalesce(backgroundImage.asset->url, ""),
+      "alt": coalesce(backgroundImage.alt, ""),
+      "crop": backgroundImage.crop,
+      "hotspot": backgroundImage.hotspot,
+      "asset": backgroundImage.asset
+    }
+  }
+`;
+
 export async function getSanityNavigationContent(): Promise<NavigationContent> {
   return sanityClient.fetch<NavigationContent>(NAVIGATION_QUERY);
+}
+
+export async function getSanityFooterMediaContent(): Promise<FooterMediaContent | null> {
+  const doc = await sanityClient.fetch<{ backgroundImage?: FetchedImage } | null>(FOOTER_MEDIA_QUERY);
+  if (!doc) return null;
+
+  return {
+    backgroundImage: resolveContentImage(doc.backgroundImage),
+  };
 }
 
 const SERVICE_PAGE_QUERY = /* groq */ `
