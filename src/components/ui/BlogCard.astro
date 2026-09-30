@@ -17,11 +17,13 @@ const publishDate = new Date(post.publishDate);
 const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
 
 const isDark = variant === 'dark';
-const cardBg   = isDark ? 'bg-section-dark border-white/10 hover:border-nav-cta' : 'bg-white border-banner-line hover:border-nav-cta hover:bg-section-grey/40';
-const dateCl   = isDark ? 'text-page/50' : 'text-muted';
-const titleCl  = isDark ? 'text-page-end group-hover:text-nav-cta' : 'text-heading group-hover:text-nav-cta';
-const bodyCl   = isDark ? 'text-page/70' : 'text-banner-note';
-const linkCl   = isDark ? 'text-nav-cta' : 'text-nav-cta';
+const cardBg = isDark
+  ? 'bg-section-dark border-white/10 hover:border-nav-cta'
+  : 'bg-white border-banner-line hover:border-nav-cta hover:bg-section-grey/40';
+const dateCl = isDark ? 'text-page/50' : 'text-muted';
+const titleCl = isDark ? 'text-page-end group-hover:text-nav-cta' : 'text-heading group-hover:text-nav-cta';
+const bodyCl = isDark ? 'text-page/70' : 'text-banner-note';
+const linkCl = isDark ? 'text-nav-cta' : 'text-nav-cta';
 ---
 
 <a
@@ -34,28 +36,25 @@ const linkCl   = isDark ? 'text-nav-cta' : 'text-nav-cta';
 >
   {/* Image */}
   <div class="relative w-full shrink-0 overflow-hidden" style="aspect-ratio: 16/9;">
-    {post.image?.src ? (
-      <Image
-        src={post.image.src}
-        alt={post.image.alt || post.title}
-        width={640}
-        height={360}
-        widths={[320, 480, 640, 828]}
-        sizes="(max-width: 768px) 100vw, 33vw"
-        layout="cover"
-        format="webp"
-        quality={68}
-        class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-        loading="lazy"
-      />
-    ) : (
-      <HeroImagePlaceholder
-        fill
-        hideLabel
-        class="absolute inset-0"
-        label={`${post.title} photo placeholder`}
-      />
-    )}
+    {
+      post.image?.src ? (
+        <Image
+          src={post.image.src}
+          alt={post.image.alt || post.title}
+          width={960}
+          height={540}
+          widths={[480, 640, 828, 960, 1200]}
+          sizes="(max-width: 768px) 100vw, 33vw"
+          layout="cover"
+          format="webp"
+          quality={82}
+          class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+        />
+      ) : (
+        <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label={`${post.title} photo placeholder`} />
+      )
+    }
   </div>
 
   {/* Content */}
@@ -67,10 +66,12 @@ const linkCl   = isDark ? 'text-nav-cta' : 'text-nav-cta';
       {getFormattedDate(publishDate)}
     </time>
 
-    <h3 class:list={[
-      'font-display text-[18px] font-bold leading-tight tracking-[-0.1px] uppercase transition-colors md:text-[20px]',
-      titleCl,
-    ]}>
+    <h3
+      class:list={[
+        'font-display text-[18px] font-bold leading-tight tracking-[-0.1px] uppercase transition-colors md:text-[20px]',
+        titleCl,
+      ]}
+    >
       {post.title}
     </h3>
 
@@ -78,10 +79,12 @@ const linkCl   = isDark ? 'text-nav-cta' : 'text-nav-cta';
       {post.excerpt}
     </p>
 
-    <span class:list={[
-      'mt-auto flex items-center gap-1.5 font-body text-[13px] font-semibold leading-4 tracking-[0.5px] uppercase',
-      linkCl,
-    ]}>
+    <span
+      class:list={[
+        'mt-auto flex items-center gap-1.5 font-body text-[13px] font-semibold leading-4 tracking-[0.5px] uppercase',
+        linkCl,
+      ]}
+    >
       Read article <Fragment set:html={arrowIcon} />
     </span>
   </div>

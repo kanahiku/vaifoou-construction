@@ -206,13 +206,13 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
                     src={image.src}
                     alt={image.alt || `${label} masonry and concrete services by Vaifoou Construction`}
                     class="absolute inset-0 h-full w-full max-w-none object-cover"
-                    widths={[320, 480, 640]}
+                    widths={[480, 640, 828, 960, 1200]}
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    width={700}
-                    height={288}
+                    width={900}
+                    height={370}
                     layout="cover"
                     format="webp"
-                    quality={68}
+                    quality={82}
                   />
                 ) : (
                   <HeroImagePlaceholder fill class="absolute inset-0" label={`${label} image placeholder`} />
