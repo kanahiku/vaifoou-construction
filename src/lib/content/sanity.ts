@@ -15,6 +15,8 @@ import type {
   PodcastPartGroup,
   ProjectCardContent,
   ProjectTag,
+  ProjectsPageMediaContent,
+  ReviewsPageMediaContent,
   Testimonial,
   ContactPageContent,
   ContentImage,
@@ -274,6 +276,50 @@ const CONTACT_PAGE_MEDIA_QUERY = /* groq */ `
 
 export async function getSanityContactPageMediaContent(): Promise<ContactPageMediaContent | null> {
   const doc = await sanityClient.fetch<{ heroImage?: FetchedImage } | null>(CONTACT_PAGE_MEDIA_QUERY);
+
+  if (!doc) return null;
+
+  return {
+    heroImage: resolveContentImage(doc.heroImage),
+  };
+}
+
+const PROJECTS_PAGE_MEDIA_QUERY = /* groq */ `
+  *[_type == "projectsPageMedia" && _id == "singleton-projects-page-media"][0] {
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    }
+  }
+`;
+
+export async function getSanityProjectsPageMediaContent(): Promise<ProjectsPageMediaContent | null> {
+  const doc = await sanityClient.fetch<{ heroImage?: FetchedImage } | null>(PROJECTS_PAGE_MEDIA_QUERY);
+
+  if (!doc) return null;
+
+  return {
+    heroImage: resolveContentImage(doc.heroImage),
+  };
+}
+
+const REVIEWS_PAGE_MEDIA_QUERY = /* groq */ `
+  *[_type == "reviewsPageMedia" && _id == "singleton-reviews-page-media"][0] {
+    "heroImage": {
+      "src": coalesce(heroImage.asset->url, ""),
+      "alt": coalesce(heroImage.alt, ""),
+      "crop": heroImage.crop,
+      "hotspot": heroImage.hotspot,
+      "asset": heroImage.asset
+    }
+  }
+`;
+
+export async function getSanityReviewsPageMediaContent(): Promise<ReviewsPageMediaContent | null> {
+  const doc = await sanityClient.fetch<{ heroImage?: FetchedImage } | null>(REVIEWS_PAGE_MEDIA_QUERY);
 
   if (!doc) return null;
 

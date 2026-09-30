@@ -8,7 +8,7 @@ import iconRockWall from '~/assets/icons/rock-wall.svg';
 import iconRetainingWall from '~/assets/icons/retaining-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
 import iconHammer from '~/assets/icons/hammer.svg';
-import { getProjects } from '~/lib/content';
+import { getProjects, getProjectsPageMediaContent } from '~/lib/content';
 
 const metadata = {
   title: `Completed Masonry & Concrete Projects on O'ahu | Vaifoou Construction`,
@@ -18,6 +18,8 @@ const metadata = {
 };
 
 const projects = await getProjects();
+const media = await getProjectsPageMediaContent();
+const heroImage = media?.heroImage;
 
 const services = [
   {
@@ -63,6 +65,8 @@ const services = [
   <SubServiceHero
     title="Our Masonry & Concrete Work Across O'ahu"
     body="Real site work completed by our family crews across O'ahu."
+    image={heroImage?.src}
+    imageAlt={heroImage?.alt}
     imagePlaceholder="Completed masonry and concrete project photo"
   />
 

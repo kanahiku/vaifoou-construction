@@ -109,13 +109,12 @@ const recentWorkImage =
     : media?.recentWorkImage;
 const introHeading = intro.heading;
 const servicesSectionHeading = servicesHeading;
-const recentWorkHeading = recentWork.heading;
+const recentWorkHeading = 'View Our Projects';
 const recentWorkDescription =
   'Explore our recent work and see the quality, care, and craftsmanship we bring to every project. From start to finish, our team is committed to dependable service, careful attention to detail, and results built to last.';
 ---
 
 <Layout metadata={metadata}>
-
   {/* ── Hero ────────────────────────────────────────────────── */}
   <SubServiceHero
     title={hero.title}
@@ -128,13 +127,24 @@ const recentWorkDescription =
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
     <div class="site-frame flex flex-col gap-10 md:flex-row md:items-center md:gap-16">
       <div class="flex flex-1 flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
           {introHeading}
         </h2>
-        <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:mt-4 md:text-[18px] md:leading-[29.25px]" set:html={intro.body} />
+        <p
+          class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:mt-4 md:text-[18px] md:leading-[29.25px]"
+          set:html={intro.body}
+        />
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <FillImage src={introImage?.src} alt={introImage?.alt ?? intro.imagePlaceholder} width={700} height={525} quality={68} />
+        <FillImage
+          src={introImage?.src}
+          alt={introImage?.alt ?? intro.imagePlaceholder}
+          width={700}
+          height={525}
+          quality={68}
+        />
       </div>
     </div>
   </section>
@@ -143,22 +153,29 @@ const recentWorkDescription =
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
     <div class="site-frame flex flex-col gap-12 md:gap-16">
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
           {servicesSectionHeading}
         </h2>
       </div>
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {services.map(({ name, href, description }) => (
-          <a href={href} class="group flex flex-col gap-3 border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-8">
-            <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[22px]">
-              {name}
-            </h3>
-            <p class="font-body text-[15px] font-normal leading-7 text-banner-note">{description}</p>
-            <span class="mt-auto flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase">
-              View service <Fragment set:html={arrowIcon} />
-            </span>
-          </a>
-        ))}
+        {
+          services.map(({ name, href, description }) => (
+            <a
+              href={href}
+              class="group flex flex-col gap-3 border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-8"
+            >
+              <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[22px]">
+                {name}
+              </h3>
+              <p class="font-body text-[15px] font-normal leading-7 text-banner-note">{description}</p>
+              <span class="mt-auto flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase">
+                View service <Fragment set:html={arrowIcon} />
+              </span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -167,14 +184,25 @@ const recentWorkDescription =
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-20">
     <div class="site-frame flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
       <div class="relative w-full shrink-0 overflow-hidden md:w-[480px]" style="aspect-ratio: 4/3;">
-        <FillImage src={recentWorkImage?.src} alt={recentWorkImage?.alt ?? recentWork.imagePlaceholder} width={800} height={600} quality={68} />
+        <FillImage
+          src={recentWorkImage?.src}
+          alt={recentWorkImage?.alt ?? recentWork.imagePlaceholder}
+          width={800}
+          height={600}
+          quality={68}
+        />
       </div>
       <div class="flex flex-col gap-1">
-        <h2 class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[36px]">
+        <h2
+          class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[36px]"
+        >
           {recentWorkHeading}
         </h2>
         <p class="mt-3 font-body text-[15px] leading-7 text-banner-note">{recentWorkDescription}</p>
-        <a href="/projects/" class="mt-3 inline-flex items-center gap-2 font-display text-[14px] font-bold tracking-[0.7px] text-nav-cta uppercase hover:text-accent">
+        <a
+          href="/projects/"
+          class="mt-3 inline-flex items-center gap-2 font-display text-[14px] font-bold tracking-[0.7px] text-nav-cta uppercase hover:text-accent"
+        >
           View Our Work <Fragment set:html={arrowIcon} />
         </a>
       </div>
@@ -191,5 +219,4 @@ const recentWorkDescription =
 
   {/* ── CTA closer ──────────────────────────────────────────── */}
   <BrickMotifCTA heading={ctaHeading} />
-
 </Layout>

@@ -45,8 +45,11 @@ export const navigationData: NavigationContent = {
             text: 'Commercial Masonry & Concrete',
             href: '/who-we-work-with/commercial/',
             links: [
-              { text: 'Property Managers & Landlords',     href: '/who-we-work-with/commercial/property-managers-landlords/' },
-              { text: 'HOA Masonry & Concrete',            href: '/who-we-work-with/commercial/hoa/' },
+              {
+                text: 'Property Managers & Landlords',
+                href: '/who-we-work-with/commercial/property-managers-landlords/',
+              },
+              { text: 'HOA Masonry & Concrete', href: '/who-we-work-with/commercial/hoa/' },
               { text: 'Masonry & Concrete Subcontracting', href: '/who-we-work-with/commercial/contractors/' },
             ],
           },
@@ -69,6 +72,7 @@ export const navigationData: NavigationContent = {
         ],
       },
       { text: 'Reviews', href: '/reviews/' },
+      { text: 'Projects', href: '/projects/' },
       { text: 'Blog', href: '/blog/' },
       { text: 'About', href: '/about/' },
       { text: 'Contact', href: '/contact/' },
@@ -105,14 +109,15 @@ export const navigationData: NavigationContent = {
       {
         title: 'WHO WE SERVE',
         links: [
-          { text: 'Residential Homeowners',      href: '/who-we-work-with/residential/' },
-          { text: 'Commercial & Civil',          href: '/who-we-work-with/commercial/' },
+          { text: 'Residential Homeowners', href: '/who-we-work-with/residential/' },
+          { text: 'Commercial & Civil', href: '/who-we-work-with/commercial/' },
         ],
       },
       {
         title: 'COMPANY',
         links: [
           { text: 'Reviews', href: '/reviews/' },
+          { text: 'Projects', href: '/projects/' },
           { text: 'Blog', href: '/blog/' },
           { text: 'About', href: '/about/' },
           { text: 'Contact', href: '/contact/' },
@@ -122,8 +127,8 @@ export const navigationData: NavigationContent = {
     ],
     secondaryLinks: [
       { text: 'Privacy Policy', href: '/privacy-policy/' },
-      { text: 'Terms',          href: '/terms/' },
-      { text: 'Accessibility',  href: '/accessibility/' },
+      { text: 'Terms', href: '/terms/' },
+      { text: 'Accessibility', href: '/accessibility/' },
     ],
     socialLinks: SOCIAL.nav as unknown as NavigationContent['footer']['socialLinks'],
     footNote: `&copy; ${new Date().getFullYear()} ${CONTACT.businessName} LLC. All rights reserved.`,

@@ -14,6 +14,8 @@ import type {
   PodcastEpisode,
   PodcastPartGroup,
   ProjectCardContent,
+  ProjectsPageMediaContent,
+  ReviewsPageMediaContent,
   ReviewsPageContent,
   ServiceAreaHubMediaContent,
   ServiceAreaLocationMediaContent,
@@ -41,7 +43,9 @@ import {
   getSanityHomeContent,
   getSanityHomeMediaContent,
   getSanityNavigationContent,
+  getSanityProjectsPageMediaContent,
   getSanityReviewsPage,
+  getSanityReviewsPageMediaContent,
   getSanityProjects,
   getSanityServiceAreaHubMediaContent,
   getSanityServiceAreaLocationMedia,
@@ -94,6 +98,24 @@ export async function getContactPageMediaContent(): Promise<ContactPageMediaCont
     return await getSanityContactPageMediaContent();
   } catch (error) {
     console.warn('Sanity contact page media unavailable; using placeholder fallback.', error);
+    return null;
+  }
+}
+
+export async function getProjectsPageMediaContent(): Promise<ProjectsPageMediaContent | null> {
+  try {
+    return await getSanityProjectsPageMediaContent();
+  } catch (error) {
+    console.warn('Sanity projects page media unavailable; using placeholder fallback.', error);
+    return null;
+  }
+}
+
+export async function getReviewsPageMediaContent(): Promise<ReviewsPageMediaContent | null> {
+  try {
+    return await getSanityReviewsPageMediaContent();
+  } catch (error) {
+    console.warn('Sanity reviews page media unavailable; using placeholder fallback.', error);
     return null;
   }
 }
@@ -185,6 +207,7 @@ const LEGAL_FOOTER_LINKS = [
 
 const HIDDEN_NAV_HREFS = new Set(['/chapters', '/guidebooks']);
 const HIDDEN_NAV_LABELS = new Set(['chapters', 'guidebooks', 'guidebook series']);
+const PROJECTS_LINK = { text: 'Projects', href: '/projects/' };
 
 function isHiddenNavLink(link: { text: string; href?: string }): boolean {
   return (link.href != null && HIDDEN_NAV_HREFS.has(link.href)) || HIDDEN_NAV_LABELS.has(link.text.toLowerCase());
@@ -224,16 +247,62 @@ function ensureLegalFooterLinks(nav: NavigationContent): NavigationContent {
   };
 }
 
+function insertLinkAfter(
+  links: Array<{ text?: string; href?: string }>,
+  link: { text: string; href: string },
+  afterHref: string
+) {
+  if (links.some((item) => item.href === link.href)) return links;
+
+  const index = links.findIndex((item) => item.href === afterHref);
+  if (index === -1) return [...links, link];
+
+  return [...links.slice(0, index + 1), link, ...links.slice(index + 1)];
+}
+
+function ensureProjectsLinks(nav: NavigationContent): NavigationContent {
+  const headerLinks = insertLinkAfter(nav.header.links ?? [], PROJECTS_LINK, '/reviews/');
+  const footerColumns = nav.footer.links ?? [];
+  const companyIndex = footerColumns.findIndex((column) => column.title.toLowerCase() === 'company');
+  const companyColumn =
+    companyIndex >= 0
+      ? footerColumns[companyIndex]
+      : {
+          title: 'COMPANY',
+          links: [],
+        };
+  const updatedCompanyColumn = {
+    ...companyColumn,
+    links: insertLinkAfter(companyColumn.links ?? [], PROJECTS_LINK, '/reviews/'),
+  };
+  const updatedFooterColumns =
+    companyIndex >= 0
+      ? footerColumns.map((column, index) => (index === companyIndex ? updatedCompanyColumn : column))
+      : [...footerColumns, updatedCompanyColumn];
+
+  return {
+    ...nav,
+    header: {
+      ...nav.header,
+      links: headerLinks as NavigationContent['header']['links'],
+    },
+    footer: {
+      ...nav.footer,
+      links: updatedFooterColumns,
+    },
+  };
+}
+
 export async function getNavigationContent(): Promise<NavigationContent> {
   try {
     const nav = await getSanityNavigationContent();
     if (nav?.header && nav?.footer) {
-      return hidePagesFromUi(ensureLegalFooterLinks(nav));
+      return hidePagesFromUi(ensureProjectsLinks(ensureLegalFooterLinks(nav)));
     }
   } catch (error) {
     console.warn('Sanity navigation unavailable; using local fallback.', error);
   }
-  return hidePagesFromUi(ensureLegalFooterLinks(navigationData));
+  return hidePagesFromUi(ensureProjectsLinks(ensureLegalFooterLinks(navigationData)));
 }
 
 export async function getFooterMediaContent(): Promise<FooterMediaContent | null> {
@@ -393,6 +462,8 @@ export type {
   PodcastEpisode,
   PodcastPartGroup,
   ProjectCardContent,
+  ProjectsPageMediaContent,
+  ReviewsPageMediaContent,
   ReviewsPageContent,
   ServiceAreaHubMediaContent,
   ServiceAreaLocationMediaContent,

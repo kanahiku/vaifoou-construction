@@ -207,6 +207,14 @@ export interface ContactPageMediaContent {
   heroImage?: ContentImage;
 }
 
+export interface ProjectsPageMediaContent {
+  heroImage?: ContentImage;
+}
+
+export interface ReviewsPageMediaContent {
+  heroImage?: ContentImage;
+}
+
 export interface ServiceAreaHubMediaContent {
   heroImage?: ContentImage;
   introImage?: ContentImage;

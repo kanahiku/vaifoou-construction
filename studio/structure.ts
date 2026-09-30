@@ -42,6 +42,24 @@ export const structure = (S: StructureBuilder) =>
         ),
 
       S.listItem()
+        .title('Projects Page Images')
+        .child(
+          S.document()
+            .schemaType('projectsPageMedia')
+            .documentId('singleton-projects-page-media')
+            .title('Projects Page Images')
+        ),
+
+      S.listItem()
+        .title('Reviews Page Images')
+        .child(
+          S.document()
+            .schemaType('reviewsPageMedia')
+            .documentId('singleton-reviews-page-media')
+            .title('Reviews Page Images')
+        ),
+
+      S.listItem()
         .title('Services Hub')
         .child(S.document().schemaType('servicesHubPage').documentId('singleton-services-hub').title('Services Hub')),
 

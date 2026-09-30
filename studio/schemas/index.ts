@@ -4,6 +4,8 @@ import { siteFooter } from './singletons/footer';
 import { homePage, homeAudienceCard } from './documents/homePage';
 import { aboutPageMedia } from './documents/aboutPageMedia';
 import { contactPageMedia } from './documents/contactPageMedia';
+import { projectsPageMedia } from './documents/projectsPageMedia';
+import { reviewsPageMedia } from './documents/reviewsPageMedia';
 import { servicesHubPage, servicesHubAudienceCard } from './documents/servicesHubPage';
 import { audiencePageMedia } from './documents/audiencePageMedia';
 import { commercialAudienceSubPageMedia } from './documents/commercialAudienceSubPageMedia';
@@ -58,6 +60,8 @@ export const schemaTypes = [
   homePage,
   aboutPageMedia,
   contactPageMedia,
+  projectsPageMedia,
+  reviewsPageMedia,
   servicesHubPage,
   audiencePageMedia,
   commercialAudienceSubPageMedia,
