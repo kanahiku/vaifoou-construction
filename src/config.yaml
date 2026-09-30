@@ -1,4 +1,4 @@
-# AstroWind plumbing (i18n, blog flags, UI). Client identity is NOT here.
+# Framework plumbing (i18n, blog flags, UI). Client identity is NOT here.
 # Edit src/config/site.ts for name, URL, GTM, and Search Console.
 
 site:
@@ -19,10 +19,7 @@ metadata:
     follow: true
   openGraph:
     site_name: Vaifoou Construction
-    images:
-      - url: '~/assets/images/og-image.jpg'
-        width: 1200
-        height: 630
+    images: []
     type: website
   twitter:
     handle: ''

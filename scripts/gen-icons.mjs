@@ -1,20 +1,16 @@
 /**
- * Regenerates favicon.svg, favicon.ico, apple-touch-icon.png, and og-image.jpg
- * from the circular crest in src/assets/icons/logo.png.
+ * Regenerates favicon.svg, favicon.ico, and apple-touch-icon.png
+ * from the circular crest in src/assets/icons/logo-light.svg.
  *
  *   node scripts/gen-icons.mjs
  */
 import sharp from 'sharp';
 import { writeFileSync } from 'fs';
 
-/** Keep in sync with src/brand.ts */
-const BRAND_DARK = '#21201F';
 const ICON_BG = '#FFFFFF';
-const BRAND_ACCENT = '#964025';
-const BRAND_CREAM = '#F2EBE6';
-const BRAND_MUTED = '#D6CCC6';
+const LOGO_SOURCE = 'src/assets/icons/logo-light.svg';
 
-const logo = sharp('src/assets/icons/logo.png').ensureAlpha();
+const logo = sharp(LOGO_SOURCE).ensureAlpha();
 const { data, info } = await logo.raw().toBuffer({ resolveWithObject: true });
 const { width, height, channels } = info;
 
@@ -42,7 +38,7 @@ for (let y = 0; y < height; y++) {
   }
 }
 
-const emblem = await sharp('src/assets/icons/logo.png')
+const emblem = await sharp(LOGO_SOURCE)
   .extract({ left: startX, top: minY, width: endX - startX, height: maxY - minY + 1 })
   .png()
   .toBuffer();
@@ -87,32 +83,12 @@ const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${canva
 `;
 writeFileSync('public/favicon.svg', faviconSvg);
 
-const ogBase = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">
-  <rect width="1200" height="630" fill="${BRAND_DARK}"/>
-  <rect x="0" y="0" width="8" height="630" fill="${BRAND_ACCENT}"/>
-  <text x="360" y="300" font-family="Arial,sans-serif" font-size="64" font-weight="700" fill="${BRAND_CREAM}">Vaifoou Construction</text>
-  <text x="362" y="358" font-family="Arial,sans-serif" font-size="28" fill="${BRAND_MUTED}">O'ahu masonry and concrete since 2000</text>
-</svg>`);
-
-const tile = await sharp(
-  Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240">
-    <rect width="240" height="240" rx="36" fill="${BRAND_CREAM}"/>
-  </svg>`),
-)
-  .composite([{ input: await sharp(mark).resize(200, 200).png().toBuffer(), left: 20, top: 20 }])
-  .png()
-  .toBuffer();
-
 const apple = await sharp(icon).resize(180, 180).png().toBuffer();
 
 await Promise.all([
   sharp(apple).png().toFile('public/apple-touch-icon.png'),
   sharp(icon).resize(32, 32).png().toFile('public/favicon.ico'),
   sharp(icon).resize(32, 32).png().toFile('public/favicon-32.png'),
-  sharp(ogBase)
-    .composite([{ input: tile, left: 72, top: 195 }])
-    .jpeg({ quality: 92 })
-    .toFile('src/assets/images/og-image.jpg'),
 ]);
 
-console.log('✓ favicon.svg ✓ favicon.ico ✓ apple-touch-icon.png ✓ og-image.jpg');
+console.log('✓ favicon.svg ✓ favicon.ico ✓ apple-touch-icon.png');

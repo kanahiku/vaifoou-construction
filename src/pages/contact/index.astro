@@ -10,7 +10,6 @@ import RemoteImage from '~/components/common/Image.astro';
 import { CONTACT } from '~/config/contact';
 import { site } from '~/config/site';
 import { FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY } from '~/lib/forms';
-import { photos } from '~/data/photos';
 import { getFooterMediaContent } from '~/lib/content';
 
 const metadata = {
@@ -65,8 +64,6 @@ const sidebarBackground = footerMedia?.backgroundImage;
   <SubServiceHero
     title="Contact Vaifoou Construction"
     body="Schedule a site consultation for your masonry or concrete project. We serve residential and commercial properties across O'ahu."
-    image={photos.hero.src}
-    imageAlt={photos.hero.alt}
     showCtas={false}
   />
 

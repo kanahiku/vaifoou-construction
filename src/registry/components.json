@@ -1,7 +1,7 @@
 {
   "version": 2,
   "name": "vaifoou-construction-patterns",
-  "description": "Inventory of reusable widgets. Restyle these after brand.ts and atoms; do not fork per page.",
+  "description": "Inventory of active reusable widgets. Restyle these after brand.ts and atoms; do not fork per page.",
   "sourceOfTruth": {
     "tokens": "src/brand.ts",
     "buildDoc": "ONBOARDING.md",
@@ -54,28 +54,6 @@
       "notes": "Work Sans for all body variants. button variant uses Barlow Condensed (display font). color=white renders the warm off-white page color."
     },
     {
-      "id": "A-04",
-      "name": "Card",
-      "figmaNames": ["Card", "Card / Bordered", "Info Card", "Testimonial Card"],
-      "shape": "Card shell with configurable variant and shadow",
-      "component": "Card",
-      "import": "~/components/ui/Card.astro",
-      "props": {
-        "variant": "bordered (default) | dark | outlined | glass",
-        "class": "override shadow utility: shadow-card (default)"
-      },
-      "notes": "Shell only — body in default slot. dark = forest green bg. outlined = white bg + subtle border. glass = frosted on dark sections."
-    },
-    {
-      "id": "A-05",
-      "name": "Form",
-      "figmaNames": ["Contact Form", "Enquiry Form", "Form"],
-      "shape": "Full contact form with Resend integration",
-      "component": "Form",
-      "import": "~/components/ui/Form.astro",
-      "notes": "Wired to Resend via /api/contact. Work Sans inputs. Primary button submit."
-    },
-    {
       "id": "A-06",
       "name": "IconPoint",
       "figmaNames": ["Icon Point", "Feature Point", "Bullet Point with Icon"],
@@ -101,15 +79,6 @@
       "component": "InfoCard",
       "import": "~/components/ui/InfoCard.astro",
       "notes": "Light or dark variant. Used for 2–4 item info rows."
-    },
-    {
-      "id": "A-09",
-      "name": "ProjectCard",
-      "figmaNames": ["Project Card", "Portfolio Card", "Work Card"],
-      "shape": "Project/portfolio card with image placeholder, title, description, tags",
-      "component": "ProjectCard",
-      "import": "~/components/ui/ProjectCard.astro",
-      "notes": "Image is a grey placeholder until the photo pass."
     },
     {
       "id": "A-10",
@@ -142,16 +111,6 @@
       "props": { "variant": "overlay | split | split-dark | words | page | title" },
       "slots": ["title", "subtitle", "content", "image", "bg", "nav"],
       "notes": "One hero component for the whole site. Do not fork per page. Pass copy and variant from the page file."
-    },
-    {
-      "id": "P-02",
-      "name": "Feature columns",
-      "figmaNames": ["Features", "Benefits", "Intro Columns", "Value Props", "Why Choose Us"],
-      "shape": "h2 + intro + 2–4 item columns or icon-point band",
-      "component": "Features / Features2 / Features3",
-      "import": "~/components/widgets/Features.astro",
-      "itemCount": [2, 3, 4],
-      "notes": "Pick the Features variant that matches Figma item count."
     },
     {
       "id": "P-03",
@@ -199,30 +158,6 @@
       "import": "~/components/ui/Timeline.astro"
     },
     {
-      "id": "P-08",
-      "name": "Stats band",
-      "figmaNames": ["Stats", "Numbers", "By The Numbers", "Key Figures"],
-      "shape": "Row of large stat numbers with labels",
-      "component": "Stats",
-      "import": "~/components/widgets/Stats.astro"
-    },
-    {
-      "id": "P-09",
-      "name": "Projects / portfolio gallery",
-      "figmaNames": ["Gallery", "Projects", "Portfolio", "Our Work", "Work Grid"],
-      "shape": "Grid of project cards",
-      "component": "ProjectsSection",
-      "import": "~/components/widgets/ProjectsSection.astro"
-    },
-    {
-      "id": "P-10",
-      "name": "Testimonials",
-      "figmaNames": ["Testimonials", "Reviews", "Quotes", "What Clients Say"],
-      "shape": "Quote cards with name and role",
-      "component": "Testimonials",
-      "import": "~/components/widgets/Testimonials.astro"
-    },
-    {
       "id": "P-11",
       "name": "Google reviews grid",
       "figmaNames": ["Reviews Grid", "Star Reviews", "Google Reviews"],
@@ -246,30 +181,6 @@
       "component": "CTABanner",
       "import": "~/components/widgets/CTABanner.astro",
       "notes": "One per page, always last section before Footer."
-    },
-    {
-      "id": "P-14",
-      "name": "Contact section",
-      "figmaNames": ["Contact", "Get In Touch", "Contact Us"],
-      "shape": "Contact form + map or address block",
-      "component": "Contact",
-      "import": "~/components/widgets/Contact.astro"
-    },
-    {
-      "id": "P-15",
-      "name": "Client logos / accreditations",
-      "figmaNames": ["Brands", "Partners", "Logos", "Certifications", "Accreditations"],
-      "shape": "Logo strip or grid",
-      "component": "Brands",
-      "import": "~/components/widgets/Brands.astro"
-    },
-    {
-      "id": "P-16",
-      "name": "Blog cards",
-      "figmaNames": ["Blog List", "Articles", "Related Posts", "Latest Posts"],
-      "shape": "Article cards in a wrapping grid",
-      "component": "BlogLatestPosts",
-      "import": "~/components/widgets/BlogLatestPosts.astro"
     },
     {
       "id": "P-17",

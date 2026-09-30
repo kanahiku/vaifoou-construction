@@ -41,7 +41,7 @@ npm run dev
 
 ## 2. Files to edit per client
 
-Do not put client details in `src/config.yaml` (that file is AstroWind plumbing). Secrets stay in `.env`, never in git.
+Do not put client details in `src/config.yaml` (that file is framework plumbing). Secrets stay in `.env`, never in git.
 
 | File | What |
 |---|---|
@@ -110,7 +110,6 @@ Restyle the shared primitives in `src/components/ui/` so they match Figma. These
 |---|---|
 | Buttons | `src/components/ui/Button.astro` (`primary`, `secondary`, `ghost-light`, `ghost-dark`, `link`) |
 | Headings | `src/components/ui/Headline.astro` |
-| Form fields | `src/components/ui/Form.astro` |
 | Cards | `InfoCard`, `ServiceCard`, `CardWrapper` |
 | Icon + text | `IconPoint.astro` |
 
@@ -124,10 +123,8 @@ One pattern = one component, used on every page that needs it.
 |---|---|---|
 | Hero / masthead | `Hero2` | Every page hero |
 | FAQ accordion | `FAQs` | Home, services, contact — same component, different `items` |
-| Quotes | `Testimonials` | |
 | Text + side image | `Content` | |
 | Steps / process | `Timeline` | |
-| Gallery | `ProjectsSection` | |
 | Linked cards | `ServiceCard` | |
 | Heading + desc cards | `InfoCard` | |
 | Page-ending CTA | `CTABanner` | Last band on pages that need it |
@@ -152,7 +149,7 @@ For each Figma page frame, top to bottom:
 
 Sanity CMS pages render through `src/pages/[...blog]/index.astro` — no new Astro file per CMS slug.
 
-Always-on routes (restyle, do not delete): `/contact`, `/reviews`, `/blog`, `/privacy-policy`, `/terms-of-service`, `/accessibility`.
+Always-on routes (restyle, do not delete): `/contact`, `/reviews`, `/blog`, `/privacy-policy`, `/terms`, `/accessibility`.
 
 ---
 
@@ -161,14 +158,14 @@ Always-on routes (restyle, do not delete): `/contact`, `/reviews`, `/blog`, `/pr
 | System | Where |
 |---|---|
 | Sanity | `studio/`, `src/lib/content/`, catch-all pages, `/api/revalidate` |
-| Forms → Resend | `/contact` → `Form.astro` → Cloudflare Worker (`services/forms/`) → Resend |
+| Forms → Resend | `/contact` → Cloudflare Worker (`services/forms/`) → Resend |
 | Turnstile | `PUBLIC_TURNSTILE_SITE_KEY` on the form; Worker secret `TURNSTILE_SECRET` |
 | GTM | `site.analytics.googleTagManagerId` → `Layout.astro` |
 | Search Console | `site.analytics.googleSiteVerificationId` |
 | JSON-LD | `src/config/schema/` + `JsonLd.astro` |
 | Reviews | `/reviews`, `/api/reviews`, daily cron in `vercel.json` |
 | Blog | `/blog`, `/blog/[slug]`, `rss.xml.ts` |
-| Legal | `/privacy-policy`, `/terms-of-service`, `/accessibility` |
+| Legal | `/privacy-policy`, `/terms`, `/accessibility` |
 
 ---
 

@@ -57,13 +57,9 @@ Extend the prop surface of the existing file instead.
 | Light brick-motif CTA closer | `BrickMotifCTA` | heading, eyebrow, note |
 | FAQ accordion | `FAQs` | title, tagline, items · `<div slot="bg">` controls surface color |
 | Split + image | `Content` | isReversed, isDark |
-| Testimonials / quotes | `Testimonials` | — |
 | Google reviews grid | `ReviewsGrid` | — |
 | Service / area cross-links | `ServiceLinks` | categoryLabel, items |
 | Service scope table | `ServiceTable` | eyebrow, heading, col1, col2, rows |
-| Stats band | `Stats` | — |
-| Projects gallery | `ProjectsSection` | — |
-| Contact form | `Contact` | — |
 
 If Figma's FAQ (or hero, CTA…) looks slightly different on one page, **restyle that widget and pass the difference as a prop**.
 Do not create `HomeFAQ.astro`, `ServicesCTA.astro`, `AboutHero.astro`, etc.

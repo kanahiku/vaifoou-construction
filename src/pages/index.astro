@@ -9,7 +9,7 @@ import { Image } from 'astro:assets';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
 import SanityImage from '~/components/common/Image.astro';
 import ArtDirectedImage from '~/components/ui/ArtDirectedImage.astro';
-import brickMotif from '~/assets/brick-motif-wide-light.svg';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import iconRockWall from '~/assets/icons/rock-wall.svg';
 import iconRetainingWall from '~/assets/icons/retaining-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
@@ -511,49 +511,9 @@ const reviewItems =
       Figma node 4:272 · h=765
   ════════════════════════════════════════════════════════════ */
   }
-  <section class="w-full bg-card py-6 md:py-24">
-    <div class="site-frame">
-      <div
-        class="@container relative w-full overflow-hidden border border-banner-line bg-section-grey p-4 shadow-[0_20px_25px_-5px_rgb(0_0_0/0.1),0_8px_10px_-6px_rgb(0_0_0/0.1)] md:p-24"
-      >
-        {/* Brick motif background */}
-        <Image
-          src={brickMotif}
-          alt=""
-          width={2560}
-          height={1200}
-          class="pointer-events-none absolute inset-0 h-full w-full object-cover object-left-top"
-          aria-hidden="true"
-        />
-
-        <div class="relative z-10 flex max-w-[768px] flex-col items-start">
-          <h2
-            class="mb-4 font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
-          >
-            Start Your O'ahu Masonry Project
-          </h2>
-          <p class="font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]">
-            Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on
-            Sundays.
-          </p>
-        </div>
-
-        <div class="relative z-10 flex flex-wrap items-center gap-4 py-16">
-          <a
-            href={PRIMARY_CTA_HREF}
-            class="inline-flex items-center justify-center bg-nav-cta px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_10px_15px_-3px_rgb(0_0_0/0.1),0_4px_6px_-4px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
-          >
-            {PRIMARY_CTA_LABEL}
-          </a>
-          <a
-            href={CONTACT.phone.href}
-            class="inline-flex items-center justify-center gap-2 bg-banner-text px-10 py-4 text-center font-display text-[18px] font-bold leading-6 tracking-[1px] text-page-end uppercase shadow-[0_4px_6px_-1px_rgb(0_0_0/0.1),0_2px_4px_-2px_rgb(0_0_0/0.1)] transition-colors hover:bg-heading md:text-[20px]"
-          >
-            <PhoneIcon />
-            Call {CONTACT.phone.display}
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  <BrickMotifCTA
+    heading="Start Your O'ahu Masonry Project"
+    note="Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays."
+    phoneLabel={`Call ${CONTACT.phone.display}`}
+  />
 </Layout>

@@ -1,6 +1,6 @@
 ---
 /**
- * AstroWind <Image /> wrapper.
+ * Shared image wrapper.
  *
  * Behaviour:
  *   • Detectable CDN URL (Unsplash, Cloudinary, Imgix…) → rewritten with
@@ -90,6 +90,17 @@ const isCdnUrl =
 
 const isRemoteImg = isCdnUrl || isSanityUrl;
 
+const sanitySourceDimensions = (): { width: number; height: number } | undefined => {
+  if (!isSanityUrl) return undefined;
+  const match = (resolved as string).match(/-(\d+)x(\d+)\.[a-z]+(?:\?|$)/i);
+  if (!match) return undefined;
+  return { width: Number(match[1]), height: Number(match[2]) };
+};
+
+const sanityDimensions = sanitySourceDimensions();
+const capToSourceWidth = (value: number): number =>
+  sanityDimensions?.width ? Math.min(value, sanityDimensions.width) : value;
+
 // Infer missing dimension(s) from ESM-imported ImageMetadata. If only one of
 // width/height is provided, derive the other from the source aspect ratio.
 if (resolved && typeof resolved === 'object' && 'width' in resolved && 'height' in resolved) {
@@ -133,19 +144,24 @@ const sanityImageUrl = (variantWidth?: number, variantHeight?: number): string =
   const url = new URL(resolved as string);
   const hasEditorCrop = url.searchParams.has('rect');
   const q = toNumber(quality);
+  const nextWidth = variantWidth ? capToSourceWidth(variantWidth) : undefined;
+  const nextHeight =
+    variantWidth && variantHeight && nextWidth && nextWidth !== variantWidth
+      ? Math.round((variantHeight * nextWidth) / variantWidth)
+      : variantHeight;
 
-  if (variantWidth) url.searchParams.set('w', String(variantWidth));
+  if (nextWidth) url.searchParams.set('w', String(nextWidth));
 
   // Studio crop is already `rect` on the URL. Don't recrop to a different
   // aspect ratio here — CSS object-fit covers the slot from that crop.
   if (hasEditorCrop) {
     url.searchParams.set('fit', 'max');
     url.searchParams.delete('h');
-  } else if (layout === 'cover' && variantWidth && variantHeight) {
-    url.searchParams.set('h', String(variantHeight));
+  } else if (layout === 'cover' && nextWidth && nextHeight) {
+    url.searchParams.set('h', String(nextHeight));
     url.searchParams.set('fit', 'crop');
-  } else if (variantWidth || variantHeight) {
-    if (variantHeight) url.searchParams.set('h', String(variantHeight));
+  } else if (nextWidth || nextHeight) {
+    if (nextHeight) url.searchParams.set('h', String(nextHeight));
     url.searchParams.set('fit', 'max');
   }
   url.searchParams.set('auto', 'format');
@@ -212,12 +228,44 @@ const buildCdnUrl = (variantWidth?: number, variantHeight?: number): string | un
  * provider-side, no local CPU cost).
  */
 const CDN_BREAKPOINTS = [320, 400, 500, 640, 720, 828, 960, 1080, 1200, 1440, 1600, 1920, 2048];
+const uniqueSortedWidths = (values: Array<number | undefined>): number[] =>
+  [...new Set(values.filter((value): value is number => Number.isFinite(value) && value > 0))].sort((a, b) => a - b);
+
 const expandWidths = (raw?: number[]): number[] | undefined => {
-  if (!Array.isArray(raw) || raw.length === 0) return raw;
-  const min = Math.min(...raw);
-  const max = Math.max(...raw);
-  const extras = CDN_BREAKPOINTS.filter((bp) => bp > min && bp < max);
-  return [...new Set([...raw, ...extras])].sort((a, b) => a - b);
+  if (Array.isArray(raw) && raw.length > 0) {
+    const min = Math.min(...raw);
+    const max = Math.max(...raw);
+    const extras = CDN_BREAKPOINTS.filter((bp) => bp > min && bp < max);
+    return uniqueSortedWidths([...raw, ...extras]);
+  }
+
+  if (!isRemoteImg) return raw;
+
+  if (layout === 'fixed' && w) {
+    return uniqueSortedWidths([capToSourceWidth(w), capToSourceWidth(w * 2)]);
+  }
+
+  const maxWidth = capToSourceWidth(w ?? (layout === 'cover' || layout === 'full-width' ? 1920 : undefined) ?? 0);
+  if (!maxWidth) return CDN_BREAKPOINTS;
+
+  return uniqueSortedWidths([...CDN_BREAKPOINTS.filter((bp) => bp <= maxWidth), maxWidth]);
+};
+
+const defaultCdnSizes = (): string | undefined => {
+  if (typeof rest.sizes === 'string' && rest.sizes.trim()) return rest.sizes;
+
+  switch (layout) {
+    case 'fixed':
+      return w ? `${w}px` : undefined;
+    case 'cover':
+    case 'full-width':
+      return '100vw';
+    case 'constrained':
+      return w ? `(max-width: ${w}px) 100vw, ${w}px` : '100vw';
+    case 'none':
+    default:
+      return undefined;
+  }
 };
 
 const heightFromWidth = (variantWidth: number): number | undefined =>
@@ -229,6 +277,7 @@ const cdnSrcSet =
   isRemoteImg && cdnWidths?.length
     ? cdnWidths.map((bw) => `${buildCdnUrl(bw, heightFromWidth(bw))} ${bw}w`).join(', ')
     : undefined;
+const cdnSizes = cdnSrcSet ? defaultCdnSizes() : undefined;
 
 const placeholderStyle =
   [
@@ -251,6 +300,7 @@ const canRenderLocal = Boolean(resolved && typeof resolved === 'object' && w && 
     <img
       src={cdnSrc}
       srcset={cdnSrcSet}
+      sizes={cdnSizes}
       width={w}
       height={h}
       alt={alt}

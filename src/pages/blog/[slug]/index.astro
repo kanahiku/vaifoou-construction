@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroImagePlaceholder from '~/components/ui/HeroImagePlaceholder.astro';
-import { Image } from 'astro:assets';
+import Image from '~/components/common/Image.astro';
 import BlogArticleBody from '~/components/blog/BlogArticleBody.astro';
 import BlogSidebar from '~/components/blog/BlogSidebar.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
@@ -55,8 +55,14 @@ const metadata = {
         alt={post.image.alt || post.title}
         width={1440}
         height={600}
+        widths={[640, 960, 1200, 1440, 1600]}
+        sizes="100vw"
+        layout="cover"
+        format="webp"
+        quality={72}
         class="absolute inset-0 h-full w-full object-cover"
         loading="eager"
+        fetchpriority="high"
       />
     ) : (
       <HeroImagePlaceholder fill hideLabel class="absolute inset-0" label={`${post.title} photo placeholder`} />
@@ -137,6 +143,11 @@ const metadata = {
                 alt={imageBlock.image.alt || ''}
                 width={800}
                 height={450}
+                widths={[320, 480, 640, 800, 960]}
+                sizes="(max-width: 1024px) 100vw, 800px"
+                layout="constrained"
+                format="webp"
+                quality={72}
                 class="w-full object-cover"
                 loading="lazy"
               />

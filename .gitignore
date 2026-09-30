@@ -25,9 +25,6 @@ studio/.env
 # macOS-specific files
 .DS_Store
 
-# local source image drops for Sanity uploads
-new-images/
-
 pnpm-lock.yaml
 
 .astro

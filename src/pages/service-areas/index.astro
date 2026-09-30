@@ -6,7 +6,6 @@
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
 import FillImage from '~/components/ui/FillImage.astro';
-import { photos } from '~/data/photos';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
@@ -18,8 +17,8 @@ const metadata = {
 };
 
 const media = await getServiceAreaHubMediaContent();
-const heroImage = media?.heroImage ?? photos.hero;
-const introImage = media?.introImage ?? photos.commercial;
+const heroImage = media?.heroImage;
+const introImage = media?.introImage;
 
 const areas = [
   { name: 'Wahiawa',               href: '/service-areas/wahiawa/' },
@@ -64,8 +63,8 @@ const faqs = [
   <SubServiceHero
     title={`O'ahu Masonry & Concrete Service Areas`}
     body={`Serving residential and commercial properties across the island of O'ahu.`}
-    image={heroImage.src}
-    imageAlt={heroImage.alt}
+    image={heroImage?.src}
+    imageAlt={heroImage?.alt}
   />
 
   {/* ── Island-Wide Description ───────────────────────────────── */}
@@ -79,7 +78,7 @@ const faqs = [
         </p>
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <FillImage src={introImage.src} alt={introImage.alt} width={700} height={525} quality={68} />
+        <FillImage src={introImage?.src} alt={introImage?.alt} width={700} height={525} quality={68} />
       </div>
     </div>
   </section>

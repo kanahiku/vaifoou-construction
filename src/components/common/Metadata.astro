@@ -8,6 +8,7 @@ import { SITE, METADATA, I18N } from 'astrowind:config';
 import type { MetaData, MetaDataOpenGraph } from '~/types';
 import { getCanonical } from '~/utils/permalinks';
 import { isIndexableHost } from '~/lib/indexing';
+import { getHomeMediaContent } from '~/lib/content';
 
 import { adaptOpenGraphImages } from '~/utils/images';
 
@@ -41,6 +42,41 @@ const mergedOg: MetaDataOpenGraph = merge(
   METADATA?.openGraph,
   { url: canonical, ...openGraph }
 );
+
+function hasOpenGraphImage(og: MetaDataOpenGraph): boolean {
+  return Boolean(og.images?.some((image) => image?.url));
+}
+
+function toSocialImageUrl(src: string): string {
+  try {
+    const url = new URL(src);
+    if (url.hostname.endsWith('cdn.sanity.io')) {
+      url.searchParams.set('w', '1200');
+      url.searchParams.set('h', '630');
+      url.searchParams.set('fit', 'crop');
+      url.searchParams.set('auto', 'format');
+    }
+    return url.toString();
+  } catch {
+    return src;
+  }
+}
+
+if (!hasOpenGraphImage(mergedOg)) {
+  const homeMedia = await getHomeMediaContent();
+  const socialImage =
+    homeMedia?.heroImage ?? homeMedia?.bannerImage ?? homeMedia?.audienceCards.find((card) => card.image?.src)?.image;
+
+  if (socialImage?.src) {
+    mergedOg.images = [
+      {
+        url: toSocialImageUrl(socialImage.src),
+        width: 1200,
+        height: 630,
+      },
+    ];
+  }
+}
 
 const adaptedOg = await adaptOpenGraphImages(mergedOg, Astro.site);
 

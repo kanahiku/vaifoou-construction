@@ -47,7 +47,6 @@ import {
   getSanityServicesHubMediaContent,
   getSanityServiceSubPageMedia,
 } from './sanity';
-import { blogPosts as localBlogPosts } from '../../data/pages/blogPosts';
 /* contact page removed */
 import { navigationData } from '../../data/navigation';
 
@@ -63,7 +62,7 @@ export async function getHomeMediaContent(): Promise<HomeMediaContent | null> {
   try {
     return await getSanityHomeMediaContent();
   } catch (error) {
-    console.warn('Sanity homepage media unavailable; using local photo fallback.', error);
+    console.warn('Sanity homepage media unavailable; using placeholder fallback.', error);
     return null;
   }
 }
@@ -81,7 +80,7 @@ export async function getAboutPageMediaContent(): Promise<AboutPageMediaContent 
   try {
     return await getSanityAboutPageMediaContent();
   } catch (error) {
-    console.warn('Sanity about page media unavailable; using fallback images.', error);
+    console.warn('Sanity about page media unavailable; using placeholder fallback.', error);
     return null;
   }
 }
@@ -90,7 +89,7 @@ export async function getAudiencePageMedia(path: string): Promise<AudiencePageMe
   try {
     return await getSanityAudiencePageMedia(path);
   } catch (error) {
-    console.warn(`Sanity audience page media unavailable for "${path}"; using fallback images.`, error);
+    console.warn(`Sanity audience page media unavailable for "${path}"; using placeholder fallback.`, error);
     return null;
   }
 }
@@ -101,7 +100,7 @@ export async function getCommercialAudienceSubPageMedia(
   try {
     return await getSanityCommercialAudienceSubPageMedia(path);
   } catch (error) {
-    console.warn(`Sanity commercial audience sub-page media unavailable for "${path}"; using fallback images.`, error);
+    console.warn(`Sanity commercial audience sub-page media unavailable for "${path}"; using placeholder fallback.`, error);
     return null;
   }
 }
@@ -110,7 +109,7 @@ export async function getServiceAreaHubMediaContent(): Promise<ServiceAreaHubMed
   try {
     return await getSanityServiceAreaHubMediaContent();
   } catch (error) {
-    console.warn('Sanity service area hub media unavailable; using fallback images.', error);
+    console.warn('Sanity service area hub media unavailable; using placeholder fallback.', error);
     return null;
   }
 }
@@ -119,7 +118,7 @@ export async function getServiceAreaLocationMedia(path: string): Promise<Service
   try {
     return await getSanityServiceAreaLocationMedia(path);
   } catch (error) {
-    console.warn(`Sanity service area location media unavailable for "${path}"; using fallback images.`, error);
+    console.warn(`Sanity service area location media unavailable for "${path}"; using placeholder fallback.`, error);
     return null;
   }
 }
@@ -128,7 +127,7 @@ export async function getServiceCategoryPageMedia(path: string): Promise<Service
   try {
     return await getSanityServiceCategoryPageMedia(path);
   } catch (error) {
-    console.warn(`Sanity service category media unavailable for "${path}"; using fallback images.`, error);
+    console.warn(`Sanity service category media unavailable for "${path}"; using placeholder fallback.`, error);
     return null;
   }
 }
@@ -137,7 +136,7 @@ export async function getServiceSubPageMedia(path: string): Promise<ServiceSubPa
   try {
     return await getSanityServiceSubPageMedia(path);
   } catch (error) {
-    console.warn(`Sanity service sub-page media unavailable for "${path}"; using fallback image.`, error);
+    console.warn(`Sanity service sub-page media unavailable for "${path}"; using placeholder fallback.`, error);
     return null;
   }
 }
@@ -252,11 +251,7 @@ export async function getServicePageSlugs(): Promise<string[]> {
 }
 
 export async function getBlogPostSlugs(): Promise<string[]> {
-  const [sanitySlugs, localSlugs] = await Promise.all([
-    getSanityBlogPostSlugs().catch(() => [] as string[]),
-    Promise.resolve(localBlogPosts.map((post) => post.slug)),
-  ]);
-  return [...new Set([...localSlugs, ...sanitySlugs])];
+  return getSanityBlogPostSlugs().catch(() => [] as string[]);
 }
 
 const STATIC_PATHS = ['/', '/blog', '/reviews', '/privacy-policy', '/terms', '/accessibility', '/contact'];
@@ -274,55 +269,22 @@ export function getBlogPermalink(slug: string): string {
   return `/blog/${slug}`;
 }
 
-function overlayCmsFields(local: BlogPost, sanity: BlogPost): BlogPost {
-  return {
-    ...local,
-    title: sanity.title || local.title,
-    excerpt: sanity.excerpt || local.excerpt,
-    publishDate: sanity.publishDate || local.publishDate,
-    author: sanity.author || local.author,
-    image: sanity.image?.src ? sanity.image : local.image,
-    relatedPages: sanity.relatedPages.length ? sanity.relatedPages : local.relatedPages,
-    contentBlocks: sanity.contentBlocks?.length ? sanity.contentBlocks : local.contentBlocks,
-  };
-}
-
-function mergeBlogPosts(sanityPosts: BlogPost[], localPosts: BlogPost[]): BlogPost[] {
-  const localBySlug = new Map(localPosts.map((post) => [post.slug, post]));
-  const sanityBySlug = new Map(sanityPosts.map((post) => [post.slug, post]));
-  const slugs = new Set([...localBySlug.keys(), ...sanityBySlug.keys()]);
-
-  return [...slugs]
-    .map((slug) => {
-      const sanity = sanityBySlug.get(slug);
-      const local = localBySlug.get(slug);
-      if (sanity && local) return overlayCmsFields(local, sanity);
-      return (sanity ?? local)!;
-    })
-    .sort((a, b) => b.publishDate.localeCompare(a.publishDate));
-}
-
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
-    const posts = await getSanityBlogPosts();
-    if (posts.length) return mergeBlogPosts(posts, localBlogPosts);
+    return await getSanityBlogPosts();
   } catch (error) {
-    console.warn('Sanity blog posts unavailable; using local articles.', error);
+    console.warn('Sanity blog posts unavailable.', error);
   }
-  return [...localBlogPosts].sort((a, b) => b.publishDate.localeCompare(a.publishDate));
+  return [];
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
-  const local = localBlogPosts.find((post) => post.slug === slug);
-  let sanity: BlogPost | undefined;
   try {
-    sanity = (await getSanityBlogPost(slug)) ?? undefined;
+    return (await getSanityBlogPost(slug)) ?? undefined;
   } catch (error) {
-    console.warn(`Sanity blog post "${slug}" unavailable; checking local articles.`, error);
+    console.warn(`Sanity blog post "${slug}" unavailable.`, error);
   }
-
-  if (sanity && local) return overlayCmsFields(local, sanity);
-  return sanity ?? local;
+  return undefined;
 }
 
 export async function getBlogPostsRelatedTo(pageSlug: string): Promise<BlogPost[]> {

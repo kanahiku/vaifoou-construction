@@ -9,7 +9,6 @@
  */
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import FillImage from '~/components/ui/FillImage.astro';
-import { photos } from '~/data/photos';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
 import { getServiceSubPageMedia } from '~/lib/content';
@@ -31,12 +30,12 @@ export interface Props {
   showCtas?: boolean;
 }
 
-const { eyebrow, title, body, image = photos.hero.src, imageAlt = photos.hero.alt, showCtas = true } = Astro.props;
+const { eyebrow, title, body, image, imageAlt, imagePlaceholder, showCtas = true } = Astro.props;
 const heroTitle = eyebrow ? `${eyebrow}: ${title}` : title;
 const media = await getServiceSubPageMedia(Astro.url.pathname);
 const heroImage = media?.heroImage;
-const resolvedImage = heroImage?.src || image;
-const resolvedImageAlt = heroImage?.alt || imageAlt;
+const resolvedImage = heroImage?.src ?? image;
+const resolvedImageAlt = heroImage?.alt ?? imageAlt ?? imagePlaceholder ?? `${title} photo`;
 
 const trustItems = [CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"];
 ---

@@ -10,7 +10,6 @@ import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
-import { photos } from '~/data/photos';
 
 const metadata = {
   title: `Concrete Driveways | ${site.name}`,
@@ -45,8 +44,6 @@ const faqs = [
   <SubServiceHero
     title="Concrete Driveways"
     body="We pour concrete driveways for residential and commercial properties across O'ahu. Our family brings a 25+ year trade legacy to every project. Your new driveway is built to handle heavy vehicle traffic. Every installation is backed by our workmanship guarantee."
-    image={photos.commercial.src}
-    imageAlt={photos.commercial.alt}
   />
   <ServiceTable
     heading="Driveway Cost Factors"

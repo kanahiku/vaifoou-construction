@@ -12,7 +12,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
 import FillImage from '~/components/ui/FillImage.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
-import { photos } from '~/data/photos';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { getServiceAreaLocationMedia } from '~/lib/content';
@@ -89,9 +88,9 @@ const { metadata, hero, intro, services, servicesHeading, recentWork, otherAreas
 
 const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
 const media = await getServiceAreaLocationMedia(Astro.url.pathname);
-const heroImage = media?.heroImage ?? photos.hero;
-const introImage = media?.introImage ?? photos.residential;
-const recentWorkImage = media?.recentWorkImage ?? photos.veneer;
+const heroImage = media?.heroImage;
+const introImage = media?.introImage;
+const recentWorkImage = media?.recentWorkImage;
 const introHeading = intro.heading;
 const servicesSectionHeading = servicesHeading;
 const recentWorkHeading = recentWork.heading;
@@ -103,8 +102,8 @@ const recentWorkHeading = recentWork.heading;
   <SubServiceHero
     title={hero.title}
     body={hero.body}
-    image={heroImage.src}
-    imageAlt={heroImage.alt}
+    image={heroImage?.src}
+    imageAlt={heroImage?.alt ?? hero.imagePlaceholder}
   />
 
   {/* ── Intro split — text left, image right ────────────────── */}
@@ -117,7 +116,7 @@ const recentWorkHeading = recentWork.heading;
         <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:mt-4 md:text-[18px] md:leading-[29.25px]" set:html={intro.body} />
       </div>
       <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
-        <FillImage src={introImage.src} alt={introImage.alt} width={700} height={525} quality={68} />
+        <FillImage src={introImage?.src} alt={introImage?.alt ?? intro.imagePlaceholder} width={700} height={525} quality={68} />
       </div>
     </div>
   </section>
@@ -150,7 +149,7 @@ const recentWorkHeading = recentWork.heading;
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-20">
     <div class="site-frame flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
       <div class="relative w-full shrink-0 overflow-hidden md:w-[480px]" style="aspect-ratio: 4/3;">
-        <FillImage src={recentWorkImage.src} alt={recentWorkImage.alt} width={800} height={600} quality={68} />
+        <FillImage src={recentWorkImage?.src} alt={recentWorkImage?.alt ?? recentWork.imagePlaceholder} width={800} height={600} quality={68} />
       </div>
       <div class="flex flex-col gap-1">
         <h2 class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[36px]">

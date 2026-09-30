@@ -27,9 +27,6 @@
     "studio": "cd studio && npm run dev"
   },
   "dependencies": {
-    "@astro-community/astro-embed-twitter": "^0.5.11",
-    "@astro-community/astro-embed-vimeo": "^0.3.12",
-    "@astro-community/astro-embed-youtube": "^0.5.10",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/vercel": "^11.0.9",
@@ -40,8 +37,6 @@
     "astro-seo": "^1.1.0",
     "limax": "4.2.3",
     "lodash.merge": "^4.6.2",
-    "resend": "^6.25.0",
-    "swiper": "^14.2.0",
     "unpic": "^4.2.2"
   },
   "devDependencies": {
@@ -50,7 +45,6 @@
     "@astrojs/mdx": "^7.0.5",
     "@astrojs/partytown": "^2.1.7",
     "@eslint/js": "^10.0.1",
-    "@iconify-json/flat-color-icons": "^1.2.3",
     "@iconify-json/tabler": "^1.2.38",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",

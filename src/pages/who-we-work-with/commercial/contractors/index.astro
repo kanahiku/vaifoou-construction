@@ -1,5 +1,96 @@
 ---
-import ContractorsPage from '../../../commercial/contractors/index.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import FillImage from '~/components/ui/FillImage.astro';
+import { site } from '~/config/site';
+import { getCommercialAudienceSubPageMedia } from '~/lib/content';
+
+const metadata = {
+  title: `Masonry & Concrete Subcontracting | ${site.name}`,
+  description: `Vaifoou Construction partners with GCs and builders as a reliable masonry and concrete subcontractor across O'ahu.`,
+};
+
+const media = await getCommercialAudienceSubPageMedia(Astro.url.pathname);
+const heroImage = media?.heroImage;
+const introImage = media?.introImage;
+
+const siblingsLinks = [
+  { title: 'Property Managers & Landlords', href: '/who-we-work-with/commercial/property-managers-landlords/' },
+  { title: 'HOA Masonry & Concrete',        href: '/who-we-work-with/commercial/hoa/' },
+];
+
+const faqs = [
+  {
+    title: 'Do you work with general contractors?',
+    description: 'Yes. We partner directly with GCs and builders to handle dedicated masonry and concrete work.',
+  },
+  {
+    title: 'How do you manage the project handoff?',
+    description: 'We maintain clear communication regarding site scheduling, crew size, and scope handoff to ensure a clean integration with your overall build phase.',
+  },
+  {
+    title: 'Are you licensed and insured?',
+    description: "Yes. Vaifoou Construction LLC holds Hawai'i contractor license CT-39534, class C-31 Masonry, and we provide license and insurance documentation for your project file.",
+  },
+];
 ---
 
-<ContractorsPage />
+<Layout metadata={metadata}>
+
+  {/* ── Hero ──────────────────────────────────────────────────────── */}
+  <SubServiceHero
+    title="Masonry & Concrete Subcontracting"
+    body="We partner with general contractors and builders across O'ahu. When you hire us as your subcontractor, we manage the specialized masonry and concrete requirements for your build."
+    image={heroImage?.src}
+    imageAlt={heroImage?.alt}
+  />
+
+  {/* ── Intro section ─────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">
+    <div class="site-frame flex flex-col gap-10 md:flex-row md:items-center md:gap-16">
+      <div class="flex flex-1 flex-col gap-1">
+        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Your Masonry & Concrete Partner</h2>
+        <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:mt-4 md:text-[18px] md:leading-[29.25px]">
+          We partner with general contractors and builders across O&apos;ahu. When you hire us as your subcontractor, we manage the specialized masonry and concrete requirements for your build. We prioritize clear communication regarding scheduling, crew size, scope handoff, and licensing compliance. Every site is backed by our workmanship guarantee.
+        </p>
+      </div>
+      <div class="relative w-full shrink-0 overflow-hidden md:w-[440px]" style="aspect-ratio: 4/3;">
+        <FillImage src={introImage?.src} alt={introImage?.alt} width={700} height={525} quality={68} />
+      </div>
+    </div>
+  </section>
+
+  {/* ── Comparison table ──────────────────────────────────────────── */}
+  <ServiceTable
+    heading="Subcontractor vs. Direct to Consumer"
+    col1="Subcontractor Role"
+    col2="Direct Client"
+    rows={[
+      { feature: 'Client',        val1: 'GCs and builders',                              val2: 'Homeowners and property managers' },
+      { feature: 'Execution',     val1: 'Seamless scope handoff',                         val2: 'Full site management' },
+      { feature: 'Requirements',  val1: 'License and insurance documentation',            val2: 'Standard residential agreements' },
+    ]}
+  />
+
+  {/* ── Sibling commercial service links ──────────────────────────── */}
+  <ServiceLinks
+    categoryLabel="Commercial Services"
+    items={siblingsLinks}
+    maxItems={3}
+    viewAllHref="/who-we-work-with/commercial/"
+    viewAllLabel="View All Commercial Services"
+  />
+
+  {/* ── FAQ accordion ─────────────────────────────────────────────── */}
+  <FAQs title="Frequently Asked Questions" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+
+  {/* ── CTA closer ────────────────────────────────────────────────── */}
+  <BrickMotifCTA heading="Request a Site Consultation" />
+
+</Layout>

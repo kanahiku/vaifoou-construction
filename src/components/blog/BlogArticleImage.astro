@@ -27,6 +27,7 @@ const { image, caption, eager = false, class: className = 'my-8' } = Astro.props
           layout="cover"
           format="webp"
           loading={eager ? 'eager' : 'lazy'}
+          fetchpriority={eager ? 'high' : 'auto'}
           decoding="async"
         />
       </div>
