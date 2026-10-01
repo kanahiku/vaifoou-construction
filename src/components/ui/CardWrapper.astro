@@ -17,15 +17,10 @@ export interface Props {
   border?: boolean;
   href?: string;
   class?: string;
+  animate?: boolean;
 }
 
-const {
-  variant = 'dark',
-  size = 'md',
-  border = true,
-  href,
-  class: className = '',
-} = Astro.props;
+const { variant = 'dark', size = 'md', border = true, href, class: className = '', animate = true } = Astro.props;
 
 const isClickable = !!href;
 
@@ -56,17 +51,21 @@ const baseClasses = [
   borderClasses[variant],
   sizeClasses[size],
   isClickable ? 'group cursor-pointer' : '',
-  'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+  animate ? 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade' : '',
   className,
-].filter(Boolean).join(' ');
+]
+  .filter(Boolean)
+  .join(' ');
 ---
 
-{isClickable ? (
-  <a href={href} class={baseClasses} data-card-variant={variant}>
-    <slot />
-  </a>
-) : (
-  <div class={baseClasses} data-card-variant={variant}>
-    <slot />
-  </div>
-)}
+{
+  isClickable ? (
+    <a href={href} class={baseClasses} data-card-variant={variant}>
+      <slot />
+    </a>
+  ) : (
+    <div class={baseClasses} data-card-variant={variant}>
+      <slot />
+    </div>
+  )
+}

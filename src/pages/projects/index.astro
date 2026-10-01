@@ -21,6 +21,48 @@ const projects = await getProjects();
 const media = await getProjectsPageMediaContent();
 const heroImage = media?.heroImage;
 
+const projectGalleries = projects
+  .map((project) => {
+    const galleryImages =
+      project.galleryImages.length > 0
+        ? project.galleryImages
+        : [project.beforeImage, project.afterImage].filter((image): image is NonNullable<typeof image> =>
+            Boolean(image?.src)
+          );
+
+    return {
+      id: project._id,
+      title: project.title,
+      location: project.location,
+      services: project.tags.map((tag) => tag.label),
+      images: galleryImages,
+    };
+  })
+  .filter((project) => project.images.length > 0);
+
+const projectFilterMeta = projects.map((project) => {
+  const serviceLabels = project.tags
+    .filter((tag) => tag.href?.startsWith('/services/'))
+    .map((tag) => tag.label)
+    .filter(Boolean);
+  const locationFromTag = project.tags.find((tag) => tag.href?.startsWith('/service-areas/'))?.label;
+  const location = project.location || locationFromTag || '';
+
+  return {
+    id: project._id,
+    location,
+    services: serviceLabels,
+  };
+});
+
+const locationOptions = Array.from(
+  new Set(projectFilterMeta.map((project) => project.location).filter(Boolean))
+).sort();
+const serviceOptions = Array.from(
+  new Set(projectFilterMeta.flatMap((project) => project.services).filter(Boolean))
+).sort();
+const projectFilterMap = new Map(projectFilterMeta.map((project) => [project.id, project]));
+
 const services = [
   {
     title: 'Rock Walls',
@@ -68,26 +110,297 @@ const services = [
     image={heroImage?.src}
     imageAlt={heroImage?.alt}
     imagePlaceholder="Completed masonry and concrete project photo"
+    imageWidth={2400}
+    imageHeight={960}
+    imageWidths={[640, 960, 1200, 1600, 2000, 2400]}
+    imageQuality={90}
   />
 
   {/* ── Project cards ──────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-page py-6 md:py-10">
+    <div class="site-frame flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div class="flex max-w-[640px] flex-col gap-1">
+        <h2
+          class="font-display text-[24px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[32px]"
+        >
+          Filter Projects
+        </h2>
+        <p class="font-body text-[15px] font-normal leading-7 text-banner-note">
+          Narrow the gallery by location or the service involved.
+        </p>
+      </div>
+
+      <div class="grid w-full grid-cols-1 gap-3 md:w-auto md:grid-cols-[220px_260px_auto]">
+        <label class="flex flex-col gap-2">
+          <span class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">Location</span>
+          <span class="relative">
+            <select
+              id="project-location-filter"
+              class="h-12 w-full cursor-pointer appearance-none border border-banner-line bg-white py-0 pl-4 pr-12 font-body text-[15px] text-heading"
+            >
+              <option value="">All locations</option>
+              {locationOptions.map((location) => <option value={location}>{location}</option>)}
+            </select>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-heading"
+              aria-hidden="true"
+            >
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </span>
+        </label>
+
+        <label class="flex flex-col gap-2">
+          <span class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">
+            Project Type / Service
+          </span>
+          <span class="relative">
+            <select
+              id="project-service-filter"
+              class="h-12 w-full cursor-pointer appearance-none border border-banner-line bg-white py-0 pl-4 pr-12 font-body text-[15px] text-heading"
+            >
+              <option value="">All services</option>
+              {serviceOptions.map((service) => <option value={service}>{service}</option>)}
+            </select>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-heading"
+              aria-hidden="true"
+            >
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </span>
+        </label>
+
+        <button
+          type="button"
+          id="project-filter-reset"
+          class="mt-auto h-12 cursor-pointer border border-banner-line bg-card px-5 font-display text-[13px] font-bold leading-4 tracking-[0.7px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta"
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  </section>
+
   <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
-    <div class="site-frame grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+    <div id="project-grid" class="site-frame grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
       {
         projects.map((project) => (
           <ProjectBeforeAfterCard
+            projectId={project._id}
             title={project.title}
             description={project.description}
+            location={projectFilterMap.get(project._id)?.location}
             tags={project.tags}
             beforeImage={project.beforeImage}
             afterImage={project.afterImage}
             beforeLabel={project.beforeLabel}
             afterLabel={project.afterLabel}
+            hasGallery={projectGalleries.some((gallery) => gallery.id === project._id)}
+            filterLocation={projectFilterMap.get(project._id)?.location}
+            filterServices={projectFilterMap.get(project._id)?.services}
           />
         ))
       }
     </div>
+    <p
+      id="project-filter-empty"
+      hidden
+      class="site-frame mt-8 font-body text-[16px] font-normal leading-7 text-banner-note"
+    >
+      No projects match the selected filters.
+    </p>
   </section>
+
+  <dialog
+    id="project-gallery-modal"
+    class="m-0 h-dvh max-h-none w-dvw max-w-none bg-transparent p-0 backdrop:bg-heading/80"
+    aria-labelledby="project-gallery-title"
+  >
+    <div class="flex min-h-dvh w-full items-center justify-center bg-heading/80 p-4 md:p-8">
+      <div
+        class="flex max-h-[92vh] w-full max-w-[1120px] flex-col overflow-hidden border border-banner-line bg-page shadow-2xl"
+      >
+        <div class="flex items-start justify-between gap-6 border-b border-banner-line p-5 md:p-6">
+          <div class="flex flex-col gap-2">
+            <p
+              id="project-gallery-location"
+              class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase"
+            >
+            </p>
+            <h2
+              id="project-gallery-title"
+              class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[36px]"
+            >
+            </h2>
+            <div id="project-gallery-services" class="flex flex-wrap gap-2"></div>
+          </div>
+          <button
+            type="button"
+            class="flex size-10 shrink-0 cursor-pointer items-center justify-center border border-banner-line bg-white text-heading transition-colors hover:border-nav-cta hover:text-nav-cta"
+            data-project-gallery-close
+            aria-label="Close gallery"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          id="project-gallery-images"
+          class="grid max-h-[68vh] grid-cols-1 gap-4 overflow-y-auto p-5 md:grid-cols-2 md:p-6"
+        >
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script id="project-gallery-data" type="application/json" set:html={JSON.stringify(projectGalleries)} />
+  <script>
+    type GalleryImage = {
+      src: string;
+      alt?: string;
+    };
+
+    type GalleryProject = {
+      id: string;
+      title: string;
+      location?: string;
+      services?: string[];
+      images?: GalleryImage[];
+    };
+
+    const dataEl = document.getElementById('project-gallery-data');
+    const dialog = document.getElementById('project-gallery-modal') as HTMLDialogElement | null;
+    const titleEl = document.getElementById('project-gallery-title');
+    const locationEl = document.getElementById('project-gallery-location');
+    const servicesEl = document.getElementById('project-gallery-services');
+    const imagesEl = document.getElementById('project-gallery-images');
+
+    const galleries = new Map<string, GalleryProject>(
+      (JSON.parse(dataEl?.textContent || '[]') as GalleryProject[]).map((project) => [project.id, project])
+    );
+
+    function clearChildren(node: Element | null) {
+      while (node?.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function openProjectGallery(projectId: string | null) {
+      if (!projectId) return;
+      const project = galleries.get(projectId);
+      if (!project || !dialog || !titleEl || !locationEl || !servicesEl || !imagesEl) return;
+
+      titleEl.textContent = project.title || 'Project gallery';
+      locationEl.textContent = project.location ? `Location: ${project.location}` : '';
+
+      clearChildren(servicesEl);
+      (project.services || []).forEach((service) => {
+        const chip = document.createElement('span');
+        chip.className =
+          'border border-banner-line bg-card px-3 py-2 font-display text-[13px] font-bold leading-4 tracking-[0.6px] text-heading uppercase';
+        chip.textContent = service;
+        servicesEl.appendChild(chip);
+      });
+
+      clearChildren(imagesEl);
+      (project.images || []).forEach((image, index) => {
+        const figure = document.createElement('figure');
+        figure.className = 'flex flex-col gap-2';
+
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = image.alt || `${project.title || 'Project'} gallery image ${index + 1}`;
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        img.className = 'h-[320px] w-full bg-section-grey object-contain md:h-[420px]';
+
+        figure.appendChild(img);
+        imagesEl.appendChild(figure);
+      });
+
+      if ('showModal' in dialog) {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute('open', '');
+      }
+    }
+
+    document.querySelectorAll<HTMLElement>('[data-project-gallery-trigger]').forEach((button) => {
+      button.addEventListener('click', () => openProjectGallery(button.getAttribute('data-project-id')));
+    });
+
+    document.querySelectorAll<HTMLElement>('[data-project-gallery-close]').forEach((button) => {
+      button.addEventListener('click', () => dialog?.close());
+    });
+
+    dialog?.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+  </script>
+
+  <script>
+    const locationFilter = document.getElementById('project-location-filter') as HTMLSelectElement | null;
+    const serviceFilter = document.getElementById('project-service-filter') as HTMLSelectElement | null;
+    const resetButton = document.getElementById('project-filter-reset');
+    const emptyState = document.getElementById('project-filter-empty');
+    const projectCards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-card]'));
+
+    function applyProjectFilters() {
+      const selectedLocation = locationFilter?.value || '';
+      const selectedService = serviceFilter?.value || '';
+      let visibleCount = 0;
+
+      projectCards.forEach((card) => {
+        const cardLocation = card.dataset.projectLocation || '';
+        const cardServices = (card.dataset.projectServices || '').split('|').filter(Boolean);
+        const matchesLocation = !selectedLocation || cardLocation === selectedLocation;
+        const matchesService = !selectedService || cardServices.includes(selectedService);
+        const isVisible = matchesLocation && matchesService;
+
+        card.hidden = !isVisible;
+        if (isVisible) visibleCount += 1;
+      });
+
+      if (emptyState) emptyState.hidden = visibleCount > 0;
+    }
+
+    locationFilter?.addEventListener('change', applyProjectFilters);
+    serviceFilter?.addEventListener('change', applyProjectFilters);
+    resetButton?.addEventListener('click', () => {
+      if (locationFilter) locationFilter.value = '';
+      if (serviceFilter) serviceFilter.value = '';
+      applyProjectFilters();
+    });
+
+    applyProjectFilters();
+  </script>
 
   {/* ── Explore other services ────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-24">

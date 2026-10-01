@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -16,22 +17,110 @@ const metadata = {
   description: `Maximize your property space with veneer rock walls. We install palletized rock veneer with flat corners across O'ahu.`,
 };
 
+const processSteps = [
+  {
+    title: 'Site Consultation',
+    description:
+      'We evaluate your property boundaries to determine the exact wall footprint. This visit allows us to plan site access for our palletized deliveries.',
+  },
+  {
+    title: 'Surface Preparation',
+    description:
+      'Our crews prepare the existing structural backing for the new facing. We clear away dirt and apply a solid bonding layer to ensure the veneer stones adhere correctly.',
+  },
+  {
+    title: 'Stone Selection and Shaping',
+    description:
+      'We sort the palletized rock upon arrival. Our masons shape individual pieces on-site to create tight joints and maintain a consistent visual flow across the structure.',
+  },
+  {
+    title: 'Application and Mortaring',
+    description:
+      'We apply a specialized mortar mix to the back of each stone and press it firmly against the structural wall. We utilize available flat corners to deliver a seamless finish.',
+  },
+  {
+    title: 'Curing and Cleanup',
+    description:
+      'The mortar cures to lock the stones permanently in place. We clean the finished surface to reveal the natural textures and remove all leftover debris.',
+  },
+];
+
+const materials = [
+  {
+    title: 'Volcanic Basalt',
+    description:
+      'We build with hand-selected volcanic basalt. This local stone provides an authentic aesthetic for island properties without the heavy structural footprint.',
+    icon: 'tabler:mountain',
+  },
+  {
+    title: 'Flat Corner Pieces',
+    description:
+      'We utilize available flat corners to wrap outside edges cleanly. This technique mimics the look of a solid block wall.',
+    icon: 'tabler:corner-up-right',
+  },
+  {
+    title: 'Palletized Delivery',
+    description:
+      'The veneer material is lighter to carry and arrives palletized. This efficient handling protects your existing landscaping during construction.',
+    icon: 'tabler:packages',
+  },
+  {
+    title: 'Joint Finishing',
+    description:
+      'We offer different mortar joint finishes to match your design. The mortar can be recessed to highlight stone edges or smoothed flush for a cleaner profile.',
+    icon: 'tabler:trowel',
+  },
+];
+
 const tableRows = [
-  { feature: 'Property Space',    val1: 'Saves roughly two feet of space',    val2: 'Requires full structural footprint' },
-  { feature: 'Material Handling', val1: 'Lighter and arrives palletized',      val2: 'Traditional heavy delivery' },
-  { feature: 'Corner Finish',     val1: 'Flat corners available',              val2: 'Standard masonry corners' },
+  { feature: 'Property Space', val1: 'Saves roughly two feet of space', val2: 'Requires full structural footprint' },
+  { feature: 'Material Handling', val1: 'Lighter and arrives palletized', val2: 'Traditional heavy delivery' },
+  { feature: 'Corner Finish', val1: 'Flat corners available', val2: 'Standard masonry corners' },
+];
+
+const applications = [
+  {
+    title: 'Concrete Upgrades',
+    description:
+      'We apply veneer facing directly over existing concrete retaining walls to provide a natural stone aesthetic without rebuilding the structure.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'Exterior Facades',
+    description:
+      'We modernize outdated residential and commercial building facades, covering plain block walls with hand-selected basalt.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Tight Boundaries',
+    description:
+      'We install these thin profiles along narrow property lines where a traditional gravity wall would consume too much of your yard space.',
+    icon: 'tabler:arrows-minimize',
+  },
 ];
 
 const links = [
-  { title: 'Rock Wall Repair',            href: '/services/rock-walls/repair/' },
-  { title: 'Rock Retaining Walls',        href: '/services/rock-walls/retaining/' },
+  { title: 'Rock Wall Repair', href: '/services/rock-walls/repair/' },
+  { title: 'Rock Retaining Walls', href: '/services/rock-walls/retaining/' },
   { title: 'Planter & Garden Rock Walls', href: '/services/rock-walls/planter-garden/' },
 ];
 
 const faqs = [
-  { title: 'How much space does a veneer wall save?',    description: 'Building with veneer saves roughly two feet of property space compared with standard block construction.' },
-  { title: 'What materials do you use?',                 description: 'We build with hand-selected volcanic basalt. The veneer material is lighter to carry and arrives palletized.' },
-  { title: 'Are your installations guaranteed?',         description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'How much space does a veneer wall save?',
+    description:
+      'Building with veneer saves roughly two feet of property space compared with standard block construction. This distinct space-saving advantage makes it ideal for tight property boundaries.',
+  },
+  {
+    title: 'What materials do you use for veneer walls?',
+    description:
+      'We build with hand-selected volcanic basalt. The veneer material is lighter to carry and arrives palletized. This allows our crews to work efficiently without bringing heavy excavation equipment onto your lawn.',
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand strictly behind our preparation, mortaring, and finishing processes.",
+  },
 ];
 ---
 
@@ -40,6 +129,8 @@ const faqs = [
     title="Veneer Rock Walls"
     body="We build veneer rock walls for residential and commercial properties across O'ahu. This application offers a distinct space-saving advantage for tight property lines. The material arrives palletized for highly efficient site handling and is lighter to carry. We utilize available flat corners to deliver a seamless finish. Every installation is backed by our workmanship guarantee."
   />
+  <ServiceDetailSection heading="Our Veneer Wall Installation Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Finishing Options" items={materials} surface="card" />
   <ServiceTable
     eyebrow="Comparison"
     heading="Veneer vs. Standard Construction"
@@ -47,9 +138,13 @@ const faqs = [
     col2="Standard Block Construction"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Rock Wall Services" items={links} />
-  <FAQs title="Veneer Rock Wall FAQs" tagline="Common Questions" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

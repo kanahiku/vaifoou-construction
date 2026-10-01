@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -16,22 +17,109 @@ const metadata = {
   description: `Structure your property with dedicated planter and garden rock walls built by Vaifoou Construction LLC on O'ahu.`,
 };
 
+const processSteps = [
+  {
+    title: 'Site Consultation and Layout',
+    description:
+      'We evaluate your exterior space to map the footprint of your new garden boundaries. This visit ensures the masonry aligns perfectly with your existing property structures.',
+  },
+  {
+    title: 'Trenching and Base Preparation',
+    description:
+      'Our crews dig a shallow trench along the approved layout lines. We establish a highly stable base layer to prevent the heavy rock structure from settling into the dirt over time.',
+  },
+  {
+    title: 'Stone Selection and Shaping',
+    description:
+      'We source natural stones and sort them upon arrival. Our masons shape individual pieces to create a tight fit and maintain structural integrity throughout the build.',
+  },
+  {
+    title: 'Wall Assembly and Mortaring',
+    description:
+      'We construct the borders carefully and apply specialized mortar to bind the stones together. This creates a solid barrier capable of retaining dense garden soil.',
+  },
+  {
+    title: 'Curing and Site Cleanup',
+    description:
+      'The mortar cures completely to lock the structure in place. We remove our masonry debris to leave a clean hardscape ready for your separate landscaping contractor.',
+  },
+];
+
+const structuralElements = [
+  {
+    title: 'Volcanic Basalt',
+    description:
+      'We build your garden borders using hand-selected volcanic basalt. This local material provides a rugged aesthetic suited for island environments.',
+    icon: 'tabler:mountain',
+  },
+  {
+    title: 'Mortar Binding',
+    description: 'We utilize professional-grade mortar mixes designed to withstand constant soil moisture.',
+    icon: 'tabler:trowel',
+  },
+  {
+    title: 'Drainage Considerations',
+    description:
+      'We incorporate necessary drainage channels into the masonry to prevent groundwater from pooling behind the structural rock boundaries.',
+    icon: 'tabler:droplets',
+  },
+  {
+    title: 'Custom Heights',
+    description:
+      'We build planter walls to specific height requirements to accommodate shallow flower beds or deep root systems.',
+    icon: 'tabler:ruler-measure',
+  },
+];
+
 const tableRows = [
-  { feature: 'Focus',        val1: 'Structural rock boundaries',  val2: 'Soil preparation and planting' },
-  { feature: 'Materials',    val1: 'Volcanic basalt',              val2: 'Vegetation and mulch' },
-  { feature: 'Installation', val1: 'Masonry construction',         val2: 'Gardening and horticulture' },
+  { feature: 'Focus', val1: 'Structural rock boundaries', val2: 'Soil preparation and planting' },
+  { feature: 'Materials', val1: 'Volcanic basalt', val2: 'Vegetation and mulch' },
+  { feature: 'Installation', val1: 'Masonry construction', val2: 'Gardening and horticulture' },
+];
+
+const applications = [
+  {
+    title: 'Tiered Gardens',
+    description:
+      'We construct multi-level stone planters to maximize usable growing space on steep residential hillsides.',
+    icon: 'tabler:stairs',
+  },
+  {
+    title: 'Property Borders',
+    description:
+      'We build low-profile rock walls to clearly define property lines and separate lawn spaces from pedestrian walkways.',
+    icon: 'tabler:border-sides',
+  },
+  {
+    title: 'Commercial Entryways',
+    description:
+      'We install structural masonry planters around commercial buildings to house large decorative vegetation elements.',
+    icon: 'tabler:building-store',
+  },
 ];
 
 const links = [
-  { title: 'Veneer Rock Walls',    href: '/services/rock-walls/veneer/' },
-  { title: 'Rock Wall Repair',     href: '/services/rock-walls/repair/' },
+  { title: 'Veneer Rock Walls', href: '/services/rock-walls/veneer/' },
+  { title: 'Rock Wall Repair', href: '/services/rock-walls/repair/' },
   { title: 'Rock Retaining Walls', href: '/services/rock-walls/retaining/' },
 ];
 
 const faqs = [
-  { title: 'Do you provide the soil and plants for the garden wall?', description: 'No. We focus strictly on the structural masonry to build your planter walls. We do not provide landscaping services or plant installation.' },
-  { title: 'What materials do you use?',                              description: 'We build your garden borders using hand-selected volcanic basalt.' },
-  { title: 'Are your installations guaranteed?',                      description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'Do you provide the soil and plants for the garden wall?',
+    description:
+      'No. We focus strictly on the structural masonry to build your planter walls. We do not provide landscaping services or plant installation. You will need to hire a separate landscaper to fill the beds and handle all horticulture work.',
+  },
+  {
+    title: 'What materials do you use for planter and garden walls?',
+    description:
+      'We build your garden borders using hand-selected volcanic basalt. This natural stone creates a highly durable boundary capable of holding back heavy wet soil.',
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand firmly behind our complete hardscaping and masonry process.",
+  },
 ];
 ---
 
@@ -40,6 +128,8 @@ const faqs = [
     title="Planter & Garden Rock Walls"
     body="We build dedicated planter and garden rock walls to structure exterior spaces for residential and commercial properties across O'ahu. We strictly handle the hardscape masonry to prepare your site boundary. We do not provide landscaping services, soil grading, or plant installation."
   />
+  <ServiceDetailSection heading="Our Planter Wall Construction Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Structural Elements" items={structuralElements} surface="card" />
   <ServiceTable
     eyebrow="Scope of Work"
     heading="Hardscaping vs. Landscaping"
@@ -47,9 +137,13 @@ const faqs = [
     col2="Landscaping (Not Provided)"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Rock Wall Services" items={links} />
-  <FAQs title="Planter Rock Wall FAQs" tagline="Common Questions" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

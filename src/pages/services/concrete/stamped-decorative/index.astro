@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -12,9 +13,53 @@ import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
 import { site } from '~/config/site';
 
 const metadata = {
-  title: `Stamped & Decorative Concrete | Vaifoou Construction LLC`,
+  title: `Stamped & Decorative Concrete | ${site.name}`,
   description: `Vaifoou Construction pours stamped and decorative concrete with various pattern and finish options across O'ahu. Contact us for an estimate.`,
 };
+
+const processSteps = [
+  {
+    title: 'Site Consultation',
+    description:
+      'We evaluate the project footprint and discuss your design goals. This visit helps us determine the appropriate texture patterns for your property architecture.',
+  },
+  {
+    title: 'Preparation and Grading',
+    description:
+      'Our crews demolish existing surfaces and haul the debris away. We prepare a stable sub-base and establish the proper grade for rainwater runoff.',
+  },
+  {
+    title: 'Pouring and Coloring',
+    description:
+      'We set perimeter forms and pour the ready-mix concrete. We apply specialized coloring agents to the wet surface to create the desired base shade.',
+  },
+  {
+    title: 'Stamping and Sealing',
+    description:
+      'We press polyurethane mats into the wet material to imprint the chosen texture. We allow the slab to cure fully before applying a protective sealer to lock in the color.',
+  },
+];
+
+const materials = [
+  {
+    title: 'Pattern Selections',
+    description:
+      'We use professional stamping mats to replicate the visual texture of natural materials like cobblestone, slate, or brick.',
+    icon: 'tabler:border-sides',
+  },
+  {
+    title: 'Coloring Agents',
+    description:
+      'We apply integral color hardeners and release agents to create realistic tonal variations across the slab.',
+    icon: 'tabler:trowel',
+  },
+  {
+    title: 'Surface Protection',
+    description:
+      'A decorative finish requires a robust topcoat. We apply premium sealers to repel moisture and block ultraviolet rays.',
+    icon: 'tabler:wall',
+  },
+];
 
 const tableRows = [
   { feature: 'Aesthetic', val1: 'Custom patterns and textures', val2: 'Traditional textured surface' },
@@ -22,20 +67,51 @@ const tableRows = [
   { feature: 'Application', val1: 'Patios, driveways, and entries', val2: 'High-traffic utility pathways' },
 ];
 
+const applications = [
+  {
+    title: 'Front Entryways',
+    description: 'We install decorative finishes to elevate the visual appeal of your main residential approach.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Custom Driveways',
+    description: 'We pour high-visibility driveways using durable stamped patterns that mimic premium stone or brick.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'Outdoor Living',
+    description:
+      'We create custom backyard patios and lanai extensions with textured finishes for premium outdoor gathering spaces.',
+    icon: 'tabler:home',
+  },
+];
+
 const links = [
-  { title: 'Concrete Driveways',         href: '/services/concrete/driveways/' },
-  { title: 'Sidewalks & Walkways',       href: '/services/concrete/sidewalks/' },
-  { title: 'Concrete Patios',            href: '/services/concrete/patios/' },
+  { title: 'Concrete Driveways', href: '/services/concrete/driveways/' },
+  { title: 'Sidewalks & Walkways', href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios', href: '/services/concrete/patios/' },
   { title: 'Concrete Steps & Stairways', href: '/services/concrete/steps/' },
-  { title: 'Concrete Foundations',       href: '/services/concrete/foundations/' },
-  { title: 'Stem Walls',                 href: '/services/concrete/stem-walls/' },
-  { title: 'Concrete Sealing',           href: '/services/concrete/sealing/' },
+  { title: 'Concrete Foundations', href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls', href: '/services/concrete/stem-walls/' },
+  { title: 'Concrete Sealing', href: '/services/concrete/sealing/' },
 ];
 
 const faqs = [
-  { title: 'What pattern and finish options do you offer?', description: 'We provide a variety of decorative patterns and custom finish options designed to complement your property style.' },
-  { title: 'Does decorative concrete require special maintenance?', description: 'Yes. Stamped surfaces require routine maintenance to maintain their color and texture. We handle this directly through our Concrete Sealing service.' },
-  { title: 'Are your installations guaranteed?',                            description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'What pattern and finish options do you offer?',
+    description:
+      'We provide a variety of decorative patterns and custom finish options designed to complement your property style. We work with you during the initial site visit to select textures and colors that align with your vision.',
+  },
+  {
+    title: 'Does decorative concrete require special maintenance?',
+    description:
+      "Yes. Stamped surfaces require routine maintenance to maintain their color and texture. We handle this directly through our Concrete Sealing service. A regular sealing schedule prevents the vibrant colors from fading under the harsh O'ahu sun.",
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We ensure precise stamping alignment and correct sealer application.",
+  },
 ];
 ---
 
@@ -44,6 +120,12 @@ const faqs = [
     title="Stamped & Decorative Concrete"
     body="We pour stamped and decorative concrete for residential and commercial properties across O'ahu. Our crews provide multiple pattern and finish options to match your exact design requirements. Every installation is backed by our family's 25+ year trade legacy and workmanship guarantee."
   />
+  <ServiceDetailSection
+    heading="Our Decorative Concrete Installation Process"
+    items={processSteps}
+    variant="timeline"
+  />
+  <ServiceDetailSection heading="Materials and Finishing Options" items={materials} surface="card" />
   <ServiceTable
     heading="Finish Options"
     note="Choosing a decorative finish allows you to elevate the look of standard flatwork. To protect these specialized finishes over time, we strongly recommend establishing a regular maintenance schedule through our dedicated Concrete Sealing service."
@@ -51,8 +133,9 @@ const faqs = [
     col2="Standard Broom Finish"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Concrete Services" items={links} maxItems={links.length} />
-  <FAQs title="Frequently Asked Questions" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
   <BrickMotifCTA

@@ -1412,6 +1412,7 @@ const PROJECTS_QUERY = /* groq */ `
     _id,
     title,
     description,
+    location,
     "tags": tags[] { label, href },
     "beforeImage": {
       "src": coalesce(beforeImage.asset->url, ""),
@@ -1427,6 +1428,13 @@ const PROJECTS_QUERY = /* groq */ `
       "hotspot": afterImage.hotspot,
       "asset": afterImage.asset
     },
+    "galleryImages": galleryImages[] {
+      "src": coalesce(asset->url, ""),
+      "alt": coalesce(alt, ""),
+      "crop": crop,
+      "hotspot": hotspot,
+      "asset": asset
+    },
     beforeLabel,
     afterLabel,
     order
@@ -1437,9 +1445,11 @@ type SanityProject = {
   _id: string;
   title?: string;
   description?: string;
+  location?: string;
   tags?: ProjectTag[];
   beforeImage?: FetchedImage;
   afterImage?: FetchedImage;
+  galleryImages?: FetchedImage[];
   beforeLabel?: string;
   afterLabel?: string;
   order?: number;
@@ -1452,6 +1462,7 @@ function normalizeProject(doc: SanityProject): ProjectCardContent | null {
     _id: doc._id,
     title: doc.title.trim(),
     description: doc.description.trim(),
+    location: doc.location?.trim() || undefined,
     tags: (doc.tags ?? [])
       .filter((tag) => tag?.label?.trim())
       .map((tag) => ({
@@ -1460,6 +1471,9 @@ function normalizeProject(doc: SanityProject): ProjectCardContent | null {
       })),
     beforeImage: resolveContentImage(doc.beforeImage),
     afterImage: resolveContentImage(doc.afterImage),
+    galleryImages: (doc.galleryImages ?? [])
+      .map((image) => resolveContentImage(image))
+      .filter((image): image is ContentImage => Boolean(image)),
     beforeLabel: doc.beforeLabel?.trim() || 'Before',
     afterLabel: doc.afterLabel?.trim() || 'After',
     order: typeof doc.order === 'number' ? doc.order : 0,

@@ -14,9 +14,11 @@ export interface ProjectCardContent {
   _id: string;
   title: string;
   description: string;
+  location?: string;
   tags: ProjectTag[];
   beforeImage?: ContentImage;
   afterImage?: ContentImage;
+  galleryImages: ContentImage[];
   beforeLabel?: string;
   afterLabel?: string;
   order: number;

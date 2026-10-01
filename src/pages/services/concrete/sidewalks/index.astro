@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -16,43 +17,138 @@ const metadata = {
   description: `We pour residential walkways and commercial sidewalks across O'ahu. Contact Vaifoou Construction to schedule a concrete site estimate.`,
 };
 
+const processSteps = [
+  {
+    title: 'Site Consultation',
+    description:
+      'We map out the pedestrian route and assess the ground slope. This initial visit ensures the new path navigates property lines effectively without disrupting existing landscaping.',
+  },
+  {
+    title: 'Demolition and Excavation',
+    description:
+      'Our crews break up existing uneven concrete and haul the debris away. We dig a shallow trench to accommodate the new sub-base.',
+  },
+  {
+    title: 'Sub-Base Preparation',
+    description:
+      'We lay base material and compact the soil tightly. We establish a slight slope so heavy rainwater runs off the path naturally.',
+  },
+  {
+    title: 'Forming and Pouring',
+    description:
+      'We stake rigid wooden forms along the path layout. Our team pours the ready-mix concrete continuously to form a solid pedestrian surface.',
+  },
+  {
+    title: 'Finishing and Curing',
+    description:
+      'We apply the final texture and cut necessary control joints. The concrete cures fully before we remove the wooden forms and clean the area.',
+  },
+];
+
+const materials = [
+  {
+    title: 'Surface Traction',
+    description:
+      'We apply a standard broom finish to exterior paths. This texture provides necessary foot grip during wet island weather.',
+    icon: 'tabler:trowel',
+  },
+  {
+    title: 'Edge Detailing',
+    description:
+      'We utilize edging tools along the sides of the path. This creates a clean transition between the concrete and your lawn.',
+    icon: 'tabler:border-sides',
+  },
+  {
+    title: 'Moisture Control',
+    description:
+      'We tool straight control joints into the wet concrete. These grooves guide natural expansion to limit random cracking.',
+    icon: 'tabler:droplets',
+  },
+  {
+    title: 'Commercial Upgrades',
+    description:
+      'For public paths, we pour integrated structural curbs and swales to handle heavy water runoff and continuous foot traffic.',
+    icon: 'tabler:building-store',
+  },
+];
+
 const tableRows = [
-  { feature: 'Project Scope',     val1: 'Pathways and home entries',                        val2: 'High-traffic public paths' },
-  { feature: 'Site Requirements', val1: 'Property line navigation',                          val2: 'Public access layouts and structural curbs' },
-  { feature: 'Example Work',      val1: 'Backyard access',                                   val2: 'Mililani Town Center curb and swale' },
+  { feature: 'Project Scope', val1: 'Pathways and home entries', val2: 'High-traffic public paths' },
+  {
+    feature: 'Site Requirements',
+    val1: 'Property line navigation',
+    val2: 'Public access layouts and structural curbs',
+  },
+  { feature: 'Example Work', val1: 'Backyard access', val2: 'Mililani Town Center curb and swale' },
+];
+
+const applications = [
+  {
+    title: 'Residential Access',
+    description: 'We pour backyard access paths and front home entryways to provide safe footing across your lawn.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Commercial Sidewalks',
+    description: 'We execute high-traffic public access layouts to meet strict commercial property requirements.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'Water Management Paths',
+    description: 'We pour integrated structural curbs and swales to handle heavy water runoff along pedestrian routes.',
+    icon: 'tabler:droplets',
+  },
 ];
 
 const links = [
-  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
-  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
-  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
-  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
-  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Concrete Driveways', href: '/services/concrete/driveways/' },
+  { title: 'Concrete Patios', href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways', href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations', href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls', href: '/services/concrete/stem-walls/' },
   { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
-  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+  { title: 'Concrete Sealing', href: '/services/concrete/sealing/' },
 ];
 
 const faqs = [
-  { title: 'Do you handle both residential and commercial projects?', description: 'Yes. We pour residential walkways and execute commercial sidewalk work across the island.' },
-  { title: 'What materials do you use?',                             description: 'We use high-quality concrete mixtures designed for structural longevity.' },
-  { title: 'Are your installations guaranteed?',                     description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'Do you handle both residential and commercial projects?',
+    description:
+      'Yes. We pour residential walkways and execute commercial sidewalk work across the island. Our team scales up for high-traffic public access layouts and structural curbs.',
+  },
+  {
+    title: 'What concrete do you use for sidewalks and walkways?',
+    description:
+      'We source fresh ready-mix concrete from local suppliers to ensure the flatwork withstands constant foot traffic and heavy rainfall.',
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand by our complete installation and finishing process.",
+  },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
     title="Sidewalks & Walkways"
-    body="We pour residential walkways and manage commercial sidewalk work across O'ahu. Our family brings a 25+ year trade legacy to every project. Every installation is backed by our workmanship guarantee."
+    body="We pour residential walkways and manage commercial sidewalk work across O'ahu. Our family brings a 25+ year trade legacy to every project. Cracked or uneven paths create tripping hazards for homeowners and businesses. We handle the complete demolition of failing paths and pour smooth flatwork. Every installation is backed by our workmanship guarantee."
   />
+  <ServiceDetailSection heading="Our Walkway Installation Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Finishing Options" items={materials} surface="card" />
   <ServiceTable
     heading="Residential vs. Commercial Applications"
     col1="Residential Walkways"
     col2="Commercial Sidewalks"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Concrete Services" items={links} maxItems={links.length} />
-  <FAQs title="Sidewalks & Walkways FAQs" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

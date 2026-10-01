@@ -59,14 +59,42 @@ export const project = defineType({
       validation: (r) => r.required(),
     }),
     defineField({
+      name: 'location',
+      title: 'Location',
+      type: 'string',
+      description: 'Assign one location to this project, for example Mililani or Waipahu.',
+      validation: (r) => r.required().warning('Add the project location.'),
+    }),
+    defineField({
       name: 'tags',
       title: 'Services tied to this project',
       type: 'array',
       of: [defineArrayMember({ type: 'projectTag' })],
-      validation: (r) => r.min(1).warning('Add at least one service or area tag.'),
+      description: 'Add one or more services connected to this project.',
+      validation: (r) => r.min(1).warning('Add at least one service.'),
     }),
     imageWithAlt('beforeImage', 'Before image', 'Optional photo shown in the before panel.'),
     imageWithAlt('afterImage', 'After image', 'Optional photo shown in the after panel.'),
+    defineField({
+      name: 'galleryImages',
+      title: 'Gallery images',
+      type: 'array',
+      description: 'Additional images shown in the project gallery modal.',
+      of: [
+        defineArrayMember({
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt text',
+              type: 'string',
+              validation: (r) => r.required().warning('Describe the photo for accessibility and SEO.'),
+            }),
+          ],
+        }),
+      ],
+    }),
     defineField({
       name: 'beforeLabel',
       title: 'Before label',

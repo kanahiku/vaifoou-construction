@@ -229,6 +229,7 @@
         "eyebrow?": "string",
         "heading": "string",
         "note?": "string (HTML)",
+        "footerNote?": "string (HTML)",
         "col1": "string",
         "col2?": "string (omit for 2-col)",
         "rows": "{ feature, val1, val2? }[]"
@@ -252,6 +253,24 @@
       "import": "~/components/widgets/BrickMotifCTA.astro",
       "props": { "heading": "string", "eyebrow?": "string", "note?": "string (HTML)" },
       "notes": "Distinct from the dark CTABanner widget. Used on all service pages as the last section."
+    },
+    {
+      "id": "P-23",
+      "name": "Service detail section",
+      "figmaNames": ["Service Detail", "Process", "Materials", "Applications"],
+      "shape": "Service sub-page detail section with either a numbered process grid or descriptive cards",
+      "component": "ServiceDetailSection",
+      "import": "~/components/widgets/ServiceDetailSection.astro",
+      "props": {
+        "heading": "string",
+        "eyebrow?": "string",
+        "note?": "string (HTML)",
+        "items": "{ title, description, icon? }[]",
+        "variant": "timeline | cards — timeline renders the numbered process-grid style used on the retaining-walls page",
+        "surface": "page | card",
+        "animateItems?": "boolean — disable card fade-in for sections that should render immediately"
+      },
+      "notes": "Use for repeated process, materials, structural elements, finishing options, and application sections on service sub-pages."
     },
     {
       "id": "P-18",

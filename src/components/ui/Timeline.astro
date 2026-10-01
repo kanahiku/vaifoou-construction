@@ -27,6 +27,7 @@ const {
   title: titleClass = '',
   description: descriptionClass = '',
   icon: iconClass = '',
+  iconGlyph: iconGlyphOverride = '',
 } = classes;
 
 const isHorizontal = variant === 'horizontal';
@@ -35,16 +36,14 @@ const desktopGapRem = stepCount >= 6 ? 1.5 : 2;
 const iconCenter = '1.25rem';
 const railLeft = stepCount > 1 ? iconCenter : '0';
 const railRight =
-  stepCount > 1
-    ? `calc((100% - ${(stepCount - 1) * desktopGapRem}rem) / ${stepCount} - ${iconCenter})`
-    : '0';
+  stepCount > 1 ? `calc((100% - ${(stepCount - 1) * desktopGapRem}rem) / ${stepCount} - ${iconCenter})` : '0';
 
 const iconBoxClass = isDark
   ? 'bg-timeline-icon-bg-dark shadow-[0_0_0_8px_var(--aw-color-bg-section-dark)]'
   : surface === 'white'
     ? 'bg-timeline-icon-bg-light shadow-[0_0_0_8px_var(--aw-color-bg-section-white)]'
     : 'bg-timeline-icon-bg-light shadow-[0_0_0_8px_var(--aw-color-bg-section-grey)]';
-const iconGlyphClass = isDark ? 'text-timeline-icon-dark' : 'text-timeline-icon-light';
+const iconGlyphClass = iconGlyphOverride || (isDark ? 'text-timeline-icon-dark' : 'text-timeline-icon-light');
 const titleColors = isDark ? 'text-timeline-title-dark' : 'text-timeline-title-light';
 const descColors = isDark ? 'text-timeline-desc-dark' : 'text-timeline-desc-light';
 const lineColors = isDark ? 'bg-white/20' : 'bg-black/15';
@@ -104,9 +103,7 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
                     <Icon name={iconName} class:list={['size-3.5 sm:size-5', iconGlyphClass]} />
                   </div>
                 )}
-                {!isLast && (
-                  <div class={twMerge('rc-tl-connector w-px flex-1 min-h-12', lineColors)} />
-                )}
+                {!isLast && <div class={twMerge('rc-tl-connector w-px flex-1 min-h-12', lineColors)} />}
               </div>
 
               <div
@@ -127,10 +124,7 @@ const descTypography = 'text-[14px] md:text-[15px] font-normal leading-[160%] mt
                   </p>
                 )}
                 {title && (
-                  <p
-                    class={twMerge(titleTypography, titleColors, titleClass, itemClasses?.title)}
-                    set:html={title}
-                  />
+                  <p class={twMerge(titleTypography, titleColors, titleClass, itemClasses?.title)} set:html={title} />
                 )}
                 {description && (
                   <p

@@ -27,6 +27,7 @@ const {
   items = [],
   id,
   isDark = false,
+  animate = true,
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
@@ -40,122 +41,122 @@ const toggleActive = 'group-open:border-accent group-open:text-accent';
 const displayTitle = tagline ? `${tagline}: ${title}` : title;
 ---
 
-{isDark ? (
-  <section
-    {...id ? { id } : {}}
-    class="not-prose relative w-full bg-dark"
-    aria-label="Frequently asked questions"
-  >
-    <div class="mx-auto w-full max-w-container px-5 sm:px-8 md:px-16">
+{
+  isDark ? (
+    <section {...(id ? { id } : {})} class="not-prose relative w-full bg-dark" aria-label="Frequently asked questions">
+      <div class="mx-auto w-full max-w-container px-5 sm:px-8 md:px-16">
+        {/* ── Centered section header ──────────────────────────── */}
+        <div class="flex flex-col items-start gap-4 pb-12 pt-16 md:pb-16 md:pt-24">
+          {displayTitle && <h2 class="font-rough text-h2 font-normal leading-none text-page" set:html={displayTitle} />}
+          {subtitle && <p class="font-sans text-[15px] leading-relaxed text-page/50 max-w-sm mt-1">{subtitle}</p>}
+        </div>
 
-      {/* ── Centered section header ──────────────────────────── */}
-      <div class="flex flex-col items-start gap-4 pb-12 pt-16 md:pb-16 md:pt-24">
-        {displayTitle && (
-          <h2 class="font-rough text-h2 font-normal leading-none text-page" set:html={displayTitle} />
-        )}
-        {subtitle && (
-          <p class="font-sans text-[15px] leading-relaxed text-page/50 max-w-sm mt-1">{subtitle}</p>
-        )}
-      </div>
-
-      {/* ── Numbered FAQ rows ────────────────────────────────── */}
-      <div class="pb-16 md:pb-24">
-        {items.length > 0 && items.map(({ title: itemTitle, description }, index) => (
-          <details
-            class:list={[
-              'group border-b border-page/10 py-1',
-              index === 0 && 'border-t border-page/10',
-            ]}
-            name="faq-accordion"
-          >
-            <summary class="flex cursor-pointer select-none list-none items-start gap-5 py-6 md:gap-8 md:py-8">
-
-              {/* ── Number badge — large, muted accent ── */}
-              <span
-                class="shrink-0 w-10 md:w-14 font-rough text-[22px] md:text-[28px] leading-[1.1] text-accent/65 mt-0.5"
-                aria-hidden="true"
+        {/* ── Numbered FAQ rows ────────────────────────────────── */}
+        <div class="pb-16 md:pb-24">
+          {items.length > 0 &&
+            items.map(({ title: itemTitle, description }, index) => (
+              <details
+                class:list={['group border-b border-page/10 py-1', index === 0 && 'border-t border-page/10']}
+                name="faq-accordion"
               >
-                {String(index + 1).padStart(2, '0')}.
-              </span>
+                <summary class="flex cursor-pointer select-none list-none items-start gap-5 py-6 md:gap-8 md:py-8">
+                  {/* ── Number badge — large, muted accent ── */}
+                  <span
+                    class="shrink-0 w-10 md:w-14 font-rough text-[22px] md:text-[28px] leading-[1.1] text-accent/65 mt-0.5"
+                    aria-hidden="true"
+                  >
+                    {String(index + 1).padStart(2, '0')}.
+                  </span>
 
-              {/* ── Question text ── */}
-              <span class="flex-1 font-rough text-h3 leading-snug text-page pr-2 md:pr-4">
-                {itemTitle}
-              </span>
+                  {/* ── Question text ── */}
+                  <span class="flex-1 font-rough text-h3 leading-snug text-page pr-2 md:pr-4">{itemTitle}</span>
 
-              {/* ── Expand toggle ── */}
-              <span class="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-page/25 text-page/45 transition-all duration-200 group-open:border-accent group-open:text-accent">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-3.5 w-3.5 transition-transform duration-300 group-open:rotate-45"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  aria-hidden="true"
+                  {/* ── Expand toggle ── */}
+                  <span class="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-page/25 text-page/45 transition-all duration-200 group-open:border-accent group-open:text-accent">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-3.5 w-3.5 transition-transform duration-300 group-open:rotate-45"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      aria-hidden="true"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                  </span>
+                </summary>
+
+                {/* ── Answer — indented under question ── */}
+                <div class="pb-7 pl-[60px] pr-12 md:pl-[88px] md:pr-16">
+                  <p class="font-sans text-[15px] leading-relaxed text-page/50" set:html={description} />
+                </div>
+              </details>
+            ))}
+        </div>
+      </div>
+    </section>
+  ) : (
+    <WidgetWrapper
+      id={id}
+      isDark={false}
+      animate={animate}
+      containerClass={`max-w-container mx-auto ${classes?.container ?? ''}`}
+      bg={bg}
+    >
+      {(displayTitle || subtitle) && (
+        <div class="flex max-w-[896px] flex-col gap-1 mb-[30px]">
+          {displayTitle && (
+            <h2
+              class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+              set:html={displayTitle}
+            />
+          )}
+          {subtitle && <p class="mt-2 font-body text-[15px] leading-7 text-banner-note" set:html={subtitle} />}
+        </div>
+      )}
+
+      {items.length > 0 && (
+        <div
+          class:list={[
+            animate &&
+              'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+          ]}
+        >
+          {items.map(({ title: itemTitle, description }, index) => (
+            <details class:list={['group py-1', index > 0 && `border-t ${itemBorder}`]} name="faq-accordion">
+              <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none select-none">
+                <span class={`text-[16px] md:text-[18px] font-sans font-medium leading-snug pr-4 ${questionColor}`}>
+                  {itemTitle}
+                </span>
+                <span
+                  class={`flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full border transition-colors duration-200 ${toggleBase} ${toggleActive}`}
                 >
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </span>
-            </summary>
-
-            {/* ── Answer — indented under question ── */}
-            <div class="pb-7 pl-[60px] pr-12 md:pl-[88px] md:pr-16">
-              <p
-                class="font-sans text-[15px] leading-relaxed text-page/50"
-                set:html={description}
-              />
-            </div>
-          </details>
-        ))}
-      </div>
-
-    </div>
-  </section>
-) : (
-  <WidgetWrapper
-    id={id}
-    isDark={false}
-    containerClass={`max-w-container mx-auto ${classes?.container ?? ''}`}
-    bg={bg}
-  >
-    {(displayTitle || subtitle) && (
-      <div class="flex max-w-[896px] flex-col gap-1 mb-[30px]">
-        {displayTitle && (
-          <h2
-            class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
-            set:html={displayTitle}
-          />
-        )}
-        {subtitle && (
-          <p class="mt-2 font-body text-[15px] leading-7 text-banner-note" set:html={subtitle} />
-        )}
-      </div>
-    )}
-
-    {items.length > 0 && (
-      <div class="intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
-        {items.map(({ title: itemTitle, description }, index) => (
-          <details class:list={['group py-1', index > 0 && `border-t ${itemBorder}`]} name="faq-accordion">
-            <summary class="flex items-center justify-between gap-4 cursor-pointer py-4 list-none select-none">
-              <span class={`text-[16px] md:text-[18px] font-sans font-medium leading-snug pr-4 ${questionColor}`}>
-                {itemTitle}
-              </span>
-              <span class={`flex-shrink-0 w-6 h-6 flex items-center justify-center rounded-full border transition-colors duration-200 ${toggleBase} ${toggleActive}`}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-transform duration-300 group-open:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </span>
-            </summary>
-            <div class="pb-5 pr-10">
-              <p class={`text-[15px] md:text-[16px] font-normal leading-[160%] ${answerColor}`} set:html={description} />
-            </div>
-          </details>
-        ))}
-      </div>
-    )}
-  </WidgetWrapper>
-)}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-3.5 h-3.5 transition-transform duration-300 group-open:rotate-45"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                  </svg>
+                </span>
+              </summary>
+              <div class="pb-5 pr-10">
+                <p
+                  class={`text-[15px] md:text-[16px] font-normal leading-[160%] ${answerColor}`}
+                  set:html={description}
+                />
+              </div>
+            </details>
+          ))}
+        </div>
+      )}
+    </WidgetWrapper>
+  )
+}
 
 <style>
   details > summary::-webkit-details-marker {

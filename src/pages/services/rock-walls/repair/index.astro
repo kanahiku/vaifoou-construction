@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -16,22 +17,110 @@ const metadata = {
   description: `Vaifoou Construction handles the demolition and complete reconstruction of compromised or collapsed rock walls on O'ahu.`,
 };
 
+const processSteps = [
+  {
+    title: 'Structural Assessment',
+    description:
+      'We inspect the bulging or collapsed sections of your existing boundary. This evaluation helps us determine the underlying cause of the structural failure before we bring in heavy machinery.',
+  },
+  {
+    title: 'Safe Demolition',
+    description:
+      'Our heavy equipment operators carefully tear down the compromised masonry. We remove all failed stone and degraded mortar from your property to establish a completely clean workspace.',
+  },
+  {
+    title: 'Foundation Preparation',
+    description:
+      'We excavate the exposed dirt to create a highly stable base layer. We pour a new concrete footing to ensure the heavy replacement barrier will not sink into soft soil over time.',
+  },
+  {
+    title: 'Rebuilding and Mortaring',
+    description:
+      'Our masons execute a ground-up reconstruction to replace bulging or collapsed structures. We apply heavy-duty masonry mortar to bind the volcanic basalt tightly and restore complete structural integrity.',
+  },
+  {
+    title: 'Cleanup and Curing',
+    description:
+      'The fresh mortar requires a strict curing period to lock the heavy stones together permanently. We remove all demolition debris and wash the immediate work area thoroughly.',
+  },
+];
+
+const structuralUpgrades = [
+  {
+    title: 'Volcanic Basalt',
+    description:
+      'We construct the replacement structure using hand-selected volcanic basalt. This dense local stone provides the necessary physical mass to handle massive soil loads securely.',
+    icon: 'tabler:mountain',
+  },
+  {
+    title: 'Heavy-Duty Mortar',
+    description:
+      'We utilize industrial masonry mortar to fuse the joints securely. This prevents root intrusion and limits water seepage from degrading the interior cavity.',
+    icon: 'tabler:trowel',
+  },
+  {
+    title: 'Drainage Integration',
+    description:
+      'We install proper drainage channels behind the new masonry block. This relieves hydrostatic pressure to prevent future blowouts during heavy rain.',
+    icon: 'tabler:droplets',
+  },
+  {
+    title: 'Reinforced Footings',
+    description:
+      'We pour stable concrete pads beneath the heavy stone to provide a reliable load-bearing foundation along uneven terrain.',
+    icon: 'tabler:box-seam',
+  },
+];
+
 const tableRows = [
-  { feature: 'Safety',    val1: 'Removes the failed structure entirely',      val2: 'Underlying failure remains' },
-  { feature: 'Process',   val1: 'Complete demolition and reconstruction',      val2: 'Mortar added to existing cracks' },
-  { feature: 'Longevity', val1: 'Long-term stability',                         val2: 'Temporary aesthetic fix' },
+  { feature: 'Safety', val1: 'Removes the failed structure entirely', val2: 'Underlying failure remains' },
+  { feature: 'Process', val1: 'Complete demolition and reconstruction', val2: 'Mortar added to existing cracks' },
+  { feature: 'Longevity', val1: 'Long-term stability', val2: 'Temporary aesthetic fix' },
+];
+
+const applications = [
+  {
+    title: 'Collapsed Retaining Barriers',
+    description:
+      'We remove and rebuild heavy gravity walls that have given way due to severe rain or shifting hillside soil.',
+    icon: 'tabler:wall',
+  },
+  {
+    title: 'Bulging Property Boundaries',
+    description:
+      'We demolish and reconstruct freestanding borders leaning dangerously toward public sidewalks or neighboring residential lots.',
+    icon: 'tabler:alert-triangle',
+  },
+  {
+    title: 'Root-Damaged Structures',
+    description:
+      'We replace masonry boundaries fractured by expanding tree roots, digging out the underground interference completely before pouring a new structural base.',
+    icon: 'tabler:plant-2',
+  },
 ];
 
 const links = [
-  { title: 'Veneer Rock Walls',           href: '/services/rock-walls/veneer/' },
-  { title: 'Rock Retaining Walls',        href: '/services/rock-walls/retaining/' },
+  { title: 'Veneer Rock Walls', href: '/services/rock-walls/veneer/' },
+  { title: 'Rock Retaining Walls', href: '/services/rock-walls/retaining/' },
   { title: 'Planter & Garden Rock Walls', href: '/services/rock-walls/planter-garden/' },
 ];
 
 const faqs = [
-  { title: 'Do you patch cracks or rebuild the wall?',  description: 'We focus on complete demolition and structural rebuilds for failing or collapsed walls to ensure long-term safety and stability.' },
-  { title: 'What materials do you use for rebuilds?',   description: 'We construct the replacement structure using hand-selected volcanic basalt.' },
-  { title: 'Are your installations guaranteed?',        description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'Do you patch cracks or rebuild the wall?',
+    description:
+      'We focus on complete demolition and structural rebuilds for failing or collapsed walls to ensure long-term safety and stability. Surface patching merely hides the visible damage while the underlying structural failure remains active behind the mortar.',
+  },
+  {
+    title: 'What materials do you use for rebuilds?',
+    description:
+      'We construct the replacement structure using hand-selected volcanic basalt. This highly durable material ensures the rebuilt boundary possesses the immense weight necessary to resist severe soil pressure over time.',
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand firmly behind our complete demolition and reconstruction process to protect your property investment.",
+  },
 ];
 ---
 
@@ -40,6 +129,8 @@ const faqs = [
     title="Rock Wall Repair"
     body="We manage rock wall repair and structural rebuilds for residential and commercial properties across O'ahu. When a barrier fails, our crews handle the complete demolition of the compromised masonry. We then execute a ground-up reconstruction to replace bulging or collapsed structures using hand-selected volcanic basalt."
   />
+  <ServiceDetailSection heading="Our Structural Rebuild Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Structural Upgrades" items={structuralUpgrades} surface="card" />
   <ServiceTable
     eyebrow="Comparison"
     heading="Structural Rebuilds vs. Surface Patching"
@@ -47,9 +138,13 @@ const faqs = [
     col2="Surface Patching"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Rock Wall Services" items={links} />
-  <FAQs title="Rock Wall Repair FAQs" tagline="Common Questions" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

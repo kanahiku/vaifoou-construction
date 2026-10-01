@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -16,44 +17,132 @@ const metadata = {
   description: `Vaifoou Construction pours durable concrete driveways for properties on O'ahu. Contact us to schedule a site estimate.`,
 };
 
-// 2-col cost factors table (no col2)
+const processSteps = [
+  {
+    title: 'Site Consultation',
+    description:
+      'We evaluate ground conditions to determine the project footprint and plan necessary drainage adjustments.',
+  },
+  {
+    title: 'Demolition and Clearing',
+    description:
+      'Our crews break apart the damaged slab and haul the concrete away. We remove invasive roots that could undermine the new structure.',
+  },
+  {
+    title: 'Sub-Base Preparation',
+    description:
+      'We grade the exposed earth and compact the base material. We calculate the slope to direct rainwater toward the street.',
+  },
+  {
+    title: 'Forming and Pouring',
+    description:
+      'We set rigid forms along the perimeter. Our team pours the ready-mix concrete continuously and levels the wet surface for consistent thickness.',
+  },
+  {
+    title: 'Finishing and Curing',
+    description:
+      'We apply a traction finish and cut control joints. The slab cures fully before we clear the job site.',
+  },
+];
+
+const materials = [
+  {
+    title: 'Surface Traction',
+    description:
+      'We apply a standard broom finish. This texture creates ridges that provide grip for tires during wet weather.',
+    icon: 'tabler:trowel',
+  },
+  {
+    title: 'Concrete Reinforcement',
+    description:
+      'We use appropriate reinforcement materials to distribute heavy vehicle weight evenly across the slab.',
+    icon: 'tabler:box-seam',
+  },
+  {
+    title: 'Moisture Control',
+    description: 'We tool straight control joints to guide natural expansion and prevent random cracking.',
+    icon: 'tabler:droplets',
+  },
+  {
+    title: 'Water Management',
+    description: 'We grade the sub-base to establish a functional slope, preventing water from pooling.',
+    icon: 'tabler:droplets',
+  },
+];
+
 const tableRows = [
-  { feature: 'Square Footage',   val1: 'The total surface area required for the pour.' },
+  { feature: 'Square Footage', val1: 'The total surface area required for the pour.' },
   { feature: 'Site Preparation', val1: 'Ground grading and demolition of existing concrete.' },
   { feature: 'Finish Selection', val1: 'Standard broom finish or decorative stamped patterns.' },
 ];
 
+const applications = [
+  {
+    title: 'Residential Parking',
+    description: 'We replace older cracked slabs and expand single-car strips into wider parking pads.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'New Construction',
+    description: 'We pour brand-new structural driveways for ground-up construction projects across the island.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'Commercial Access',
+    description: 'We pour heavy-duty entry drives designed to handle constant commercial vehicle traffic.',
+    icon: 'tabler:building-warehouse',
+  },
+];
+
 const links = [
-  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
-  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
-  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
-  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
-  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Sidewalks & Walkways', href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios', href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways', href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations', href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls', href: '/services/concrete/stem-walls/' },
   { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
-  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+  { title: 'Concrete Sealing', href: '/services/concrete/sealing/' },
 ];
 
 const faqs = [
-  { title: 'What factors affect the cost of a new driveway?', description: 'Costs are determined by total square footage and required site preparation. Your chosen concrete finish also impacts the final estimate.' },
-  { title: 'What materials do you use?',                      description: 'We use high-quality concrete mixtures designed for structural longevity.' },
-  { title: 'Are your installations guaranteed?',              description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'What factors affect the cost of a new driveway?',
+    description:
+      'Costs are determined by total square footage and required site preparation. This includes concrete demolition and grading. Your chosen concrete finish also impacts the final estimate. We assess these variables during a site visit.',
+  },
+  {
+    title: 'What concrete do you use for driveways?',
+    description:
+      "We source fresh ready-mix concrete from local O'ahu suppliers so the material handles heavy loads and resists weathering.",
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand behind our complete installation process.",
+  },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
     title="Concrete Driveways"
-    body="We pour concrete driveways for residential and commercial properties across O'ahu. Our family brings a 25+ year trade legacy to every project. Your new driveway is built to handle heavy vehicle traffic. Every installation is backed by our workmanship guarantee."
+    body="We pour concrete driveways for residential and commercial properties across O'ahu. Our family brings a 25+ year trade legacy to every project. A cracked or settling slab creates hazards and lowers property appeal. We manage complete tear-outs and new pours to provide a stable surface. Your new driveway is built to handle heavy vehicle traffic. Every installation is backed by our workmanship guarantee."
   />
+  <ServiceDetailSection heading="Our Driveway Installation Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Finishing Options" items={materials} surface="card" />
   <ServiceTable
     heading="Driveway Cost Factors"
     note="Estimating the cost of a new concrete driveway requires an on-site consultation. We evaluate specific variables to determine the final project scope."
     col1="Description"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Concrete Services" items={links} maxItems={links.length} />
-  <FAQs title="Concrete Driveway FAQs" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

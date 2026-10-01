@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -16,43 +17,132 @@ const metadata = {
   description: `Vaifoou Construction pours new concrete foundations for residential and commercial builds across O'ahu. Contact us for a site estimate.`,
 };
 
+const processSteps = [
+  {
+    title: 'Site Evaluation and Layout',
+    description:
+      'We review your structural plans and measure the building footprint on your lot. We establish precise boundary lines to ensure the new foundation sits exactly where the architectural designs dictate.',
+  },
+  {
+    title: 'Excavation and Trenching',
+    description:
+      'Our heavy equipment operators excavate the soil to reach load-bearing earth. We dig out the perimeter trenches and interior footing spaces required for a stable structural base.',
+  },
+  {
+    title: 'Formwork and Reinforcement',
+    description:
+      'We construct heavy-duty wooden forms to hold the massive volume of wet concrete. Our team secures all required structural steel reinforcement within the trenches to provide necessary tensile strength.',
+  },
+  {
+    title: 'Continuous Pouring',
+    description:
+      'We coordinate with local ready-mix suppliers for a steady delivery of material. Pouring the foundation continuously prevents weak cold joints from forming in the structure.',
+  },
+  {
+    title: 'Leveling and Curing',
+    description:
+      'We screed the surface flat and verify all anchor points are properly set. The massive slab requires a strict curing period to achieve full structural integrity before framing begins.',
+  },
+];
+
+const structuralElements = [
+  {
+    title: 'Heavy-Duty Concrete',
+    description:
+      'We utilize structural-grade ready-mix concrete sourced locally to handle the immense weight of multi-story framing.',
+    icon: 'tabler:box-seam',
+  },
+  {
+    title: 'Steel Reinforcement',
+    description:
+      'We install industry-standard steel rebar layouts within the forms to prevent structural shifting caused by soil movement.',
+    icon: 'tabler:box-seam',
+  },
+  {
+    title: 'Moisture Barriers',
+    description:
+      'We lay down heavy vapor barriers before pouring to block ground moisture from seeping up into your finished home.',
+    icon: 'tabler:wall',
+  },
+  {
+    title: 'Anchor Placement',
+    description:
+      'We set precision anchor bolts directly into the wet concrete to provide secure attachment points for your future walls.',
+    icon: 'tabler:corner-up-right',
+  },
+];
+
 const tableRows = [
-  { feature: 'Primary Focus',        val1: 'New foundation pours',           val2: 'Structural foundation repair' },
-  { feature: 'Site Application',     val1: 'Ground-up construction',          val2: 'Retrofitting existing structures' },
-  { feature: 'Specialized Elements', val1: 'Standard structural footings',    val2: 'Micropiles and tiebacks' },
+  { feature: 'Primary Focus', val1: 'New foundation pours', val2: 'Structural foundation repair' },
+  { feature: 'Site Application', val1: 'Ground-up construction', val2: 'Retrofitting existing structures' },
+  { feature: 'Specialized Elements', val1: 'Standard structural footings', val2: 'Micropiles and tiebacks' },
+];
+
+const applications = [
+  {
+    title: 'Custom Homes',
+    description:
+      'We provide standard structural footings and slab-on-grade foundations for brand-new residential builds.',
+    icon: 'tabler:home',
+  },
+  {
+    title: 'Commercial Structures',
+    description:
+      'We pour heavy-duty foundations designed to support the immense weight of ground-up commercial buildings.',
+    icon: 'tabler:building',
+  },
+  {
+    title: 'Tract Development',
+    description:
+      'We scale our crews to pour consistent, high-quality foundational slabs for multi-home community projects.',
+    icon: 'tabler:building',
+  },
 ];
 
 const links = [
-  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
-  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
-  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
-  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
-  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Concrete Driveways', href: '/services/concrete/driveways/' },
+  { title: 'Sidewalks & Walkways', href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios', href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways', href: '/services/concrete/steps/' },
+  { title: 'Stem Walls', href: '/services/concrete/stem-walls/' },
   { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
-  { title: 'Concrete Sealing',             href: '/services/concrete/sealing/' },
+  { title: 'Concrete Sealing', href: '/services/concrete/sealing/' },
 ];
 
 const faqs = [
-  { title: 'Do you repair existing foundations?',          description: 'No. We focus exclusively on new foundation work. We do not offer structural foundation repair.' },
-  { title: 'Do you install micropiles or tiebacks?',       description: 'No. We do not handle micropiles or tiebacks. Our crews specialize in standard new concrete pours.' },
-  { title: 'Are your installations guaranteed?',           description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'Do you repair existing foundations?',
+    description:
+      'No. We focus exclusively on new foundation work. We do not offer structural foundation repair. If your current house has settling issues or cracked slabs requiring leveling, you will need to contact a dedicated structural repair contractor.',
+  },
+  {
+    title: 'Do you install micropiles or tiebacks?',
+    description:
+      'No. We do not handle micropiles or tiebacks. Our crews specialize in standard new concrete pours. Complex hillside retrofitting falls outside our core ground-up construction services.',
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand strictly by our complete foundation pouring process.",
+  },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
     title="Concrete Foundations"
-    body="We pour concrete foundations for new residential and commercial builds across O'ahu. Our crews specialize exclusively in ground-up construction. Because our expertise is dedicated entirely to new foundation pours, structural repair work falls outside our service scope. Every new installation is backed by our family's 25+ year trade legacy and workmanship guarantee."
+    body="We pour concrete foundations for new residential and commercial builds across O'ahu. A solid base is the most critical component of any new structure. Our crews specialize exclusively in ground-up construction. Every new installation is backed by our family's 25+ year trade legacy and workmanship guarantee."
   />
-  <ServiceTable
-    heading="Foundation Service Scope"
-    col1="Included Services"
-    col2="Excluded Services"
-    rows={tableRows}
-  />
+  <ServiceDetailSection heading="Our Foundation Installation Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Structural Elements" items={structuralElements} surface="card" />
+  <ServiceTable heading="Foundation Service Scope" col1="Included Services" col2="Excluded Services" rows={tableRows} />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Concrete Services" items={links} maxItems={links.length} />
-  <FAQs title="Concrete Foundation FAQs" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

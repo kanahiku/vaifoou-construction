@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -13,8 +14,58 @@ import { site } from '~/config/site';
 
 const metadata = {
   title: `Concrete Sealing | ${site.name}`,
-  description: `Protect your O'ahu concrete surfaces with professional sealing by Vaifoou Construction. Contact us to schedule a site estimate.`,
+  description: `Vaifoou Construction provides professional concrete sealing to protect flatwork and maintain decorative finishes across O'ahu. Contact us for an estimate.`,
 };
+
+const processSteps = [
+  {
+    title: 'Surface Evaluation',
+    description:
+      'We inspect the existing concrete to identify stains and determine the current porosity. This helps us select the appropriate cleaning method.',
+  },
+  {
+    title: 'Deep Cleaning and Preparation',
+    description:
+      'A sealant cannot adhere to a dirty surface. We pressure wash the flatwork to remove dirt and surface contaminants. We allow the concrete to dry completely before proceeding.',
+  },
+  {
+    title: 'Sealant Application',
+    description:
+      'Our team applies the sealant evenly across the entire surface using professional sprayers and rollers. We ensure consistent coverage to prevent pooling or dry spots.',
+  },
+  {
+    title: 'Curing and Cordoning',
+    description:
+      'We block off the area to allow the sealant to cure. The surface needs adequate drying time before it can handle foot or vehicle traffic again.',
+  },
+];
+
+const materials = [
+  {
+    title: 'Penetrating Sealers',
+    description:
+      'We use sealers that sink into the concrete pores to block moisture from the inside. This option works well for standard driveways and structural flatwork.',
+    icon: 'tabler:droplets',
+  },
+  {
+    title: 'Topical Coatings',
+    description:
+      'We apply topical sealers to create a protective film on the surface. This method repels oil stains and chemical spills effectively.',
+    icon: 'tabler:wall',
+  },
+  {
+    title: 'Color Enhancement',
+    description:
+      'For decorative concrete, we utilize sealants designed to enrich the underlying color. This restores the glossy look of faded stamped patterns.',
+    icon: 'tabler:trowel',
+  },
+  {
+    title: 'Slip Resistance',
+    description:
+      'We can add fine grit additives into the sealant mixture. This improves foot traction on smooth surfaces during heavy rain.',
+    icon: 'tabler:trowel',
+  },
+];
 
 const tableRows = [
   { feature: 'Surface Protection', val1: 'Resists moisture and stains', val2: 'Vulnerable to absorption' },
@@ -22,37 +73,74 @@ const tableRows = [
   { feature: 'Structural Lifespan', val1: 'Extends the life of the pour', val2: 'Accelerates surface wear' },
 ];
 
+const applications = [
+  {
+    title: 'New Flatwork',
+    description: 'We seal newly poured concrete after the initial curing phase to lock out moisture from day one.',
+    icon: 'tabler:box-seam',
+  },
+  {
+    title: 'Decorative Surfaces',
+    description: 'We apply specialized sealants to stamped concrete to enrich the color and prevent UV fading.',
+    icon: 'tabler:trowel',
+  },
+  {
+    title: 'Restoration Maintenance',
+    description:
+      'We clean and reseal older concrete surfaces to extend their functional lifespan and restore their protective barrier.',
+    icon: 'tabler:trowel',
+  },
+];
+
 const links = [
-  { title: 'Concrete Driveways',           href: '/services/concrete/driveways/' },
-  { title: 'Sidewalks & Walkways',         href: '/services/concrete/sidewalks/' },
-  { title: 'Concrete Patios',              href: '/services/concrete/patios/' },
-  { title: 'Concrete Steps & Stairways',   href: '/services/concrete/steps/' },
-  { title: 'Concrete Foundations',         href: '/services/concrete/foundations/' },
-  { title: 'Stem Walls',                   href: '/services/concrete/stem-walls/' },
+  { title: 'Concrete Driveways', href: '/services/concrete/driveways/' },
+  { title: 'Sidewalks & Walkways', href: '/services/concrete/sidewalks/' },
+  { title: 'Concrete Patios', href: '/services/concrete/patios/' },
+  { title: 'Concrete Steps & Stairways', href: '/services/concrete/steps/' },
+  { title: 'Concrete Foundations', href: '/services/concrete/foundations/' },
+  { title: 'Stem Walls', href: '/services/concrete/stem-walls/' },
   { title: 'Stamped & Decorative Concrete', href: '/services/concrete/stamped-decorative/' },
 ];
 
 const faqs = [
-  { title: 'Why is concrete sealing important?', description: 'It protects the structural surface from moisture and preserves the appearance of decorative work.' },
-  { title: 'How often should I seal my concrete?', description: 'We recommend a regular resealing cycle to maintain ongoing surface protection and prevent aesthetic fading.' },
-  { title: 'Are your services guaranteed?', description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'Why is concrete sealing important?',
+    description:
+      "It protects the structural surface from moisture and preserves the appearance of decorative work. O'ahu experiences heavy rainfall and harsh sun exposure. A quality sealant acts as a shield to prevent water absorption and block ultraviolet rays that cause color fading.",
+  },
+  {
+    title: 'How often should I seal my concrete?',
+    description:
+      'We recommend a regular resealing cycle to maintain ongoing surface protection and prevent aesthetic fading. Most residential driveways and patios benefit from a fresh coat every few years depending on the level of daily vehicle or foot traffic they endure.',
+  },
+  {
+    title: 'Are your services guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We ensure the surface is prepped correctly and the sealant is applied evenly for maximum protection.",
+  },
 ];
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
     title="Concrete Sealing"
-    body="We apply professional concrete sealer to protect your surfaces from moisture, UV damage, and daily wear across O'ahu. Routine sealing is one of the most cost-effective ways to preserve your concrete investment long-term. Every installation is backed by our workmanship guarantee."
+    body="We provide concrete sealing for residential and commercial properties across O'ahu. A regular resealing cycle protects standard flatwork and preserves the color of decorative stamped finishes. Unsealed concrete absorbs rainwater and motor oil. This leads to early surface degradation. Our sealing service creates a protective barrier against local weather conditions. Every site is backed by our family's 25+ year trade legacy and workmanship guarantee."
   />
+  <ServiceDetailSection heading="Our Concrete Sealing Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Finishing Options" items={materials} surface="card" />
   <ServiceTable
     heading="Routine Maintenance vs. Unsealed Concrete"
     col1="Routine Sealing"
     col2="Unsealed Concrete"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Concrete Services" items={links} maxItems={links.length} />
-  <FAQs title="Frequently Asked Questions" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="Our team is strictly closed on Sundays to put God first. Contact us to schedule your site visit."
+  />
 </Layout>

@@ -11,6 +11,9 @@ export interface Props {
   size?: 'sm' | 'md' | 'lg';
   border?: boolean;
   class?: string;
+  iconMarkClass?: string;
+  iconClass?: string;
+  animate?: boolean;
 }
 
 const {
@@ -21,6 +24,9 @@ const {
   size = 'md',
   border = true,
   class: className = '',
+  iconMarkClass,
+  iconClass = 'text-accent',
+  animate = true,
 } = Astro.props;
 
 const headingClass: Record<CardVariant, string> = {
@@ -38,19 +44,20 @@ const bodyClass: Record<CardVariant, string> = {
 }[variant];
 
 // Icon mark: dark bg square for light cards; accent-bordered square for dark/glass
-const iconMark: Record<CardVariant, string> = {
+const defaultIconMark: Record<CardVariant, string> = {
   dark: 'border border-accent/60',
   light: 'bg-card-dark',
   outlined: 'bg-card-dark',
   glass: 'border border-accent/60',
 }[variant];
+const iconMark = iconMarkClass ?? defaultIconMark;
 ---
 
-<CardWrapper variant={variant} size={size} border={border} class={className}>
+<CardWrapper variant={variant} size={size} border={border} class={className} animate={animate}>
   {
     icon && (
       <div class:list={['mb-4 size-9 sm:size-10 rounded-md flex items-center justify-center shrink-0', iconMark]}>
-        <Icon name={icon} class="size-3.5 sm:size-5 text-accent" aria-hidden="true" />
+        <Icon name={icon} class:list={['size-3.5 sm:size-5', iconClass]} aria-hidden="true" />
       </div>
     )
   }

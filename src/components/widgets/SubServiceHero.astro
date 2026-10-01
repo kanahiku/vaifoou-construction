@@ -26,11 +26,28 @@ export interface Props {
   imageAlt?: string;
   /** Kept for existing page calls. Ignored once a photo is set. */
   imagePlaceholder?: string;
+  /** Optional image quality override for pages with high-detail hero photos. */
+  imageQuality?: number;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageWidths?: number[];
   /** Hide estimate/phone buttons when the page only needs the shared hero shell. */
   showCtas?: boolean;
 }
 
-const { eyebrow, title, body, image, imageAlt, imagePlaceholder, showCtas = true } = Astro.props;
+const {
+  eyebrow,
+  title,
+  body,
+  image,
+  imageAlt,
+  imagePlaceholder,
+  imageQuality = 72,
+  imageWidth = 1600,
+  imageHeight = 640,
+  imageWidths = [400, 640, 960, 1200, 1600],
+  showCtas = true,
+} = Astro.props;
 const heroTitle = eyebrow ? `${eyebrow}: ${title}` : title;
 const media = await getServiceSubPageMedia(Astro.url.pathname);
 const heroImage = media?.heroImage;
@@ -46,9 +63,10 @@ const trustItems = [CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu
     alt={resolvedImageAlt}
     eager
     class="absolute inset-0"
-    width={1600}
-    height={640}
-    quality={72}
+    width={imageWidth}
+    height={imageHeight}
+    widths={imageWidths}
+    quality={imageQuality}
   />
   {/* Dark gradient overlay */}
   <div

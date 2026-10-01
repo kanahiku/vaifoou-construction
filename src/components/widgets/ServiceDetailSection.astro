@@ -1,0 +1,79 @@
+---
+/**
+ * ServiceDetailSection — reusable detail block for service sub-pages.
+ *
+ * Renders either a numbered process grid or a grid of descriptive cards.
+ */
+import InfoCard from '~/components/ui/InfoCard.astro';
+import type { Item } from '~/types';
+
+export interface Props {
+  eyebrow?: string;
+  heading: string;
+  note?: string;
+  items: Item[];
+  variant?: 'timeline' | 'cards';
+  surface?: 'page' | 'card';
+  animateItems?: boolean;
+}
+
+const { eyebrow, heading, note, items, variant = 'cards', surface = 'page', animateItems = true } = Astro.props;
+const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
+const isCardSurface = surface === 'card';
+const sectionBg = isCardSurface ? 'bg-card' : 'bg-page';
+const cardVariant = isCardSurface ? 'outlined' : 'light';
+const gridClass =
+  items.length === 4
+    ? 'grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-6'
+    : 'grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6';
+const processGridClass =
+  items.length === 5
+    ? 'grid grid-cols-1 gap-6 md:grid-cols-5 md:gap-6'
+    : 'grid grid-cols-1 gap-6 md:grid-cols-4 md:gap-8';
+---
+
+<section class:list={['w-full border-b border-banner-line py-6 md:py-24', sectionBg]}>
+  <div class="site-frame flex flex-col gap-12">
+    <div class="flex max-w-[896px] flex-col gap-1">
+      <h2
+        class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+      >
+        {displayHeading}
+      </h2>
+      {note && <p class="mt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:mt-4" set:html={note} />}
+    </div>
+
+    {
+      variant === 'timeline' ? (
+        <div class={processGridClass}>
+          {items.map((item, index) => (
+            <div class="flex flex-col gap-3 border-l-2 border-nav-cta pl-5">
+              <span class="font-display text-[32px] font-bold leading-none tracking-[-0.5px] text-nav-cta/30">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <h3 class="font-display text-[18px] font-bold leading-5 tracking-[0.3px] text-heading uppercase">
+                {item.title}
+              </h3>
+              <p class="font-body text-[14px] font-normal leading-6 text-banner-note">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class={gridClass}>
+          {items.map((item) => (
+            <InfoCard
+              title={item.title ?? ''}
+              description={item.description ?? ''}
+              icon={item.icon}
+              variant={cardVariant}
+              border={isCardSurface}
+              iconMarkClass="bg-nav-cta"
+              iconClass="text-white"
+              animate={animateItems}
+            />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>

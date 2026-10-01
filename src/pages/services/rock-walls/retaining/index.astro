@@ -5,6 +5,7 @@
  */
 import Layout from '~/layouts/PageLayout.astro';
 import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
 import ServiceTable from '~/components/widgets/ServiceTable.astro';
 import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -16,22 +17,109 @@ const metadata = {
   description: `Secure your hillside with a heavy-duty rock retaining wall. Vaifoou Construction builds structural basalt retaining walls across O'ahu.`,
 };
 
+const processSteps = [
+  {
+    title: 'Site Engineering and Excavation',
+    description:
+      'We review property layouts to calculate the required wall load. Our heavy equipment operators excavate the hillside to create a safe structural starting point for the new barrier.',
+  },
+  {
+    title: 'Trenching and Base Foundation',
+    description:
+      'A heavy gravity wall requires a massive base. We dig a deep footing trench and pour a continuous concrete foundation to lock the bottom course of stone securely into the earth.',
+  },
+  {
+    title: 'Drainage Installation',
+    description:
+      'Water pressure destroys retaining walls. We install perforated drainage pipes behind the base layer and utilize landscape fabric to prevent soil from clogging the channels.',
+  },
+  {
+    title: 'Rock Stacking and Mortaring',
+    description:
+      'Our masons stack hand-selected volcanic basalt carefully. We utilize professional-grade mortar to bind the heavy stones together and establish a dense structural face.',
+  },
+  {
+    title: 'Backfilling and Compaction',
+    description:
+      'We backfill the void behind the wall using clean gravel. We compact this material tightly to facilitate proper water runoff and relieve hydrostatic pressure against the masonry.',
+  },
+];
+
+const structuralElements = [
+  {
+    title: 'Volcanic Basalt',
+    description:
+      'We build heavy-duty barriers using hand-selected volcanic basalt. This material provides immense natural weight to hold back tons of earth securely.',
+    icon: 'tabler:mountain',
+  },
+  {
+    title: 'Concrete Footings',
+    description:
+      'We pour structural concrete pads beneath the rock base to prevent uneven settling along the hillside.',
+    icon: 'tabler:box-seam',
+  },
+  {
+    title: 'Hydrostatic Drainage',
+    description:
+      'We install dedicated weeping holes and gravel backfill to direct heavy island rainfall safely away from the structure.',
+    icon: 'tabler:droplets',
+  },
+  {
+    title: 'Mortar Binding',
+    description:
+      'We apply specialized heavy-duty masonry mortar to fuse the rock joints and establish absolute structural rigidity.',
+    icon: 'tabler:trowel',
+  },
+];
+
 const tableRows = [
-  { feature: 'Aesthetic',      val1: 'Natural volcanic basalt',   val2: 'Clean and uniform block' },
+  { feature: 'Aesthetic', val1: 'Natural volcanic basalt', val2: 'Clean and uniform block' },
   { feature: 'Surface Finish', val1: 'Exposed natural rock face', val2: 'Can be plastered or painted' },
-  { feature: 'Material',       val1: 'Hand-selected local stone', val2: 'Concrete masonry units' },
+  { feature: 'Material', val1: 'Hand-selected local stone', val2: 'Concrete masonry units' },
+];
+
+const applications = [
+  {
+    title: 'Hillside Stabilization',
+    description:
+      'We construct massive gravity walls to prevent mudslides and hold back steep earth on sloped residential lots.',
+    icon: 'tabler:mountain',
+  },
+  {
+    title: 'Property Terracing',
+    description: 'We build segmented retaining barriers to turn unusable steep grades into flat yard spaces.',
+    icon: 'tabler:stairs',
+  },
+  {
+    title: 'Commercial Elevation Control',
+    description:
+      'We install heavy-duty rock structures to manage significant elevation drops around commercial parking lots and building foundations.',
+    icon: 'tabler:building-warehouse',
+  },
 ];
 
 const links = [
-  { title: 'Veneer Rock Walls',           href: '/services/rock-walls/veneer/' },
-  { title: 'Rock Wall Repair',            href: '/services/rock-walls/repair/' },
+  { title: 'Veneer Rock Walls', href: '/services/rock-walls/veneer/' },
+  { title: 'Rock Wall Repair', href: '/services/rock-walls/repair/' },
   { title: 'Planter & Garden Rock Walls', href: '/services/rock-walls/planter-garden/' },
 ];
 
 const faqs = [
-  { title: 'What materials do you use for rock retaining walls?', description: 'We build heavy-duty barriers using hand-selected volcanic basalt to secure your property elevation.' },
-  { title: 'Do you offer other retaining wall options?',          description: 'Yes. We also construct CMU block retaining walls. You can choose the material that best fits your site requirements.' },
-  { title: 'Are your installations guaranteed?',                  description: "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee." },
+  {
+    title: 'What materials do you use for rock retaining walls?',
+    description:
+      'We build heavy-duty barriers using hand-selected volcanic basalt to secure your property elevation. This dense local stone provides the immense structural weight required to hold back massive amounts of soil during heavy island rainstorms.',
+  },
+  {
+    title: 'Do you offer other retaining wall options?',
+    description:
+      'Yes. We also construct CMU block retaining walls. You can choose the material that best fits your site requirements. CMU blocks offer a uniform footprint for a modern finish, while natural basalt provides a traditional, rugged aesthetic.',
+  },
+  {
+    title: 'Are your installations guaranteed?',
+    description:
+      "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand firmly behind our complete excavation and mortaring processes to ensure long-term structural stability for your hillside.",
+  },
 ];
 ---
 
@@ -40,17 +128,24 @@ const faqs = [
     title="Rock Retaining Walls"
     body="We construct rock retaining walls for residential and commercial properties across O'ahu. Our crews build these heavy-duty barriers to secure hillsides and manage property elevation differences. We build every structure using hand-selected volcanic basalt, and every installation is backed by our workmanship guarantee."
   />
+  <ServiceDetailSection heading="Our Retaining Wall Construction Process" items={processSteps} variant="timeline" />
+  <ServiceDetailSection heading="Materials and Structural Elements" items={structuralElements} surface="card" />
   <ServiceTable
     eyebrow="Comparison"
     heading="Rock vs. CMU Block Retaining Walls"
     note="We maintain a dedicated page for CMU block retaining walls so you can easily compare materials with one click. Here is how the two options differ:"
+    footerNote='Looking for concrete block instead? <a class="font-display font-bold tracking-[0.5px] text-nav-cta uppercase hover:text-heading" href="/services/cmu-block-walls/">Explore our CMU Block Walls</a>'
     col1="Rock Retaining Wall"
     col2="CMU Block Retaining Wall"
     rows={tableRows}
   />
+  <ServiceDetailSection heading="Applications" items={applications} animateItems={false} />
   <ServiceLinks categoryLabel="Rock Wall Services" items={links} />
-  <FAQs title="Rock Retaining Wall FAQs" tagline="Common Questions" items={faqs}>
+  <FAQs title="Frequently Asked Questions" items={faqs} animate={false}>
     <div slot="bg" class="absolute inset-0 bg-card"></div>
   </FAQs>
-  <BrickMotifCTA heading="Request a Site Consultation" />
+  <BrickMotifCTA
+    heading="Request a Site Consultation"
+    note="We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+  />
 </Layout>

@@ -47,12 +47,12 @@ const team = [
     bio: '[TEXT PLACEHOLDER: Short bio detailing Siaosi leaving his full-time job to obtain his licence and formally take over the family business.]',
   },
   {
-    name: '[Brother\'s Name]',
+    name: "[Brother's Name]",
     role: '[Role]',
     bio: '[TEXT PLACEHOLDER: Short bio detailing his experience and role on the current team.]',
   },
   {
-    name: '[Brother\'s Name]',
+    name: "[Brother's Name]",
     role: '[Role]',
     bio: '[TEXT PLACEHOLDER: Short bio detailing his experience and role on the current team.]',
   },
@@ -70,24 +70,32 @@ const showTeamSection = false;
 ---
 
 <Layout metadata={metadata}>
-
   <SubServiceHero
     title="Vaifoou Construction LLC"
     body="A locally and family-owned masonry and concrete contractor serving O'ahu, built on a 25+ year legacy in the trade."
     image={heroImage?.src}
     imageAlt={heroImage?.alt}
+    imageWidth={2400}
+    imageHeight={960}
+    imageWidths={[640, 960, 1200, 1600, 2000, 2400]}
+    imageQuality={90}
     showCtas={false}
   />
 
   {/* ── Our Story ────────────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-page py-12 md:py-24">
     <div class="site-frame flex flex-col gap-10 md:gap-16">
-
       {/* Intro */}
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Our Story</h2>
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          Our Story
+        </h2>
         <p class="mt-3 max-w-3xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
-          Vaifoou Construction LLC is a locally and family-owned masonry and concrete contractor serving O'ahu. While our company operates under a modern structure today, our foundation is built on a family legacy spanning more than 25 years in the trade.
+          Vaifoou Construction LLC is a locally and family-owned masonry and concrete contractor serving O'ahu. While
+          our company operates under a modern structure today, our foundation is built on a family legacy spanning more
+          than 25 years in the trade.
         </p>
       </div>
 
@@ -95,33 +103,44 @@ const showTeamSection = false;
       <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_400px] lg:items-start">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-1">
-            <h2 class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]">A 25+ Year Family Legacy</h2>
+            <h2
+              class="font-display text-[26px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[38px]"
+            >
+              A 25+ Year Family Legacy
+            </h2>
           </div>
           <div class="flex flex-col gap-5 font-body text-[17px] font-normal leading-[1.75] text-banner-note">
             <p>
-              Our roots in the masonry trade began around 2000 when our father first started running the business. For over two decades, the standards for heavy-duty concrete flatwork and basalt rock wall construction passed down from father to sons.
+              Our roots in the masonry trade began around 2000 when our father first started running the business. For
+              over two decades, the standards for heavy-duty concrete flatwork and basalt rock wall construction passed
+              down from father to sons.
             </p>
             <p>
-              From 2008 until September 2023, a brother carried the business forward on referrals, executing masonry projects around the Waikele Golf Course area. Siaosi Vaifoou later left his full-time career to formally take over the operations.
+              From 2008 until September 2023, a brother carried the business forward on referrals, executing masonry
+              projects around the Waikele Golf Course area. Siaosi Vaifoou later left his full-time career to formally
+              take over the operations.
             </p>
             <p>
-              Today, Vaifoou Construction LLC operates as a fully licensed entity ({CONTACT.license}) backed by a dedicated, core crew.
+              Today, Vaifoou Construction LLC operates as a fully licensed entity ({CONTACT.license}) backed by a
+              dedicated, core crew.
             </p>
           </div>
 
           {/* Timeline accent */}
           <div class="flex flex-col gap-0 border-l-2 border-nav-cta pl-5">
-            {[
-              { year: '~2000', label: 'Father founds the masonry business' },
-              { year: '2008', label: 'Brother continues operations on referrals near Waikele' },
-              { year: 'Sept 2023', label: 'Siaosi Vaifoou takes formal ownership; LLC established' },
-              { year: 'Today', label: `Fully licensed (${CONTACT.license}), core crew, serving all O'ahu` },
-            ].map(({ year, label }) => (
-              <div class="flex flex-col gap-0.5 py-4 border-b border-banner-line last:border-0">
-                <p class="font-display text-[13px] font-bold tracking-[0.65px] text-nav-cta uppercase">{year}</p>
-                <p class="font-body text-[15px] font-normal leading-6 text-heading">{label}</p>
-              </div>
-            ))}
+            {
+              [
+                { year: '~2000', label: 'Father founds the masonry business' },
+                { year: '2008', label: 'Brother continues operations on referrals near Waikele' },
+                { year: 'Sept 2023', label: 'Siaosi Vaifoou takes formal ownership; LLC established' },
+                { year: 'Today', label: `Fully licensed (${CONTACT.license}), core crew, serving all O'ahu` },
+              ].map(({ year, label }) => (
+                <div class="flex flex-col gap-0.5 py-4 border-b border-banner-line last:border-0">
+                  <p class="font-display text-[13px] font-bold tracking-[0.65px] text-nav-cta uppercase">{year}</p>
+                  <p class="font-body text-[15px] font-normal leading-6 text-heading">{label}</p>
+                </div>
+              ))
+            }
           </div>
         </div>
 
@@ -131,32 +150,35 @@ const showTeamSection = false;
           </div>
         </div>
       </div>
-
     </div>
   </section>
 
   {/* ── Our Values ───────────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-card py-12 md:py-20">
     <div class="site-frame flex flex-col gap-10">
-
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Our Values</h2>
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          Our Values
+        </h2>
         <p class="mt-3 max-w-2xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
           Our work is guided by our faith and our family.
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-3 md:gap-8">
-        {values.map(({ label, body }) => (
-          <div class="group flex flex-col gap-4 border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 sm:p-8">
-            <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[20px]">
-              {label}
-            </h3>
-            <p class="font-body text-[15px] font-normal leading-7 text-banner-note">{body}</p>
-          </div>
-        ))}
+        {
+          values.map(({ label, body }) => (
+            <div class="flex flex-col gap-4 border border-banner-line bg-white p-6 sm:p-8">
+              <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[20px]">
+                {label}
+              </h3>
+              <p class="font-body text-[15px] font-normal leading-7 text-banner-note">{body}</p>
+            </div>
+          ))
+        }
       </div>
-
     </div>
   </section>
 
@@ -164,67 +186,74 @@ const showTeamSection = false;
   <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
     <div class="site-frame flex flex-col gap-10">
       <div class="flex max-w-[896px] flex-col gap-1">
-        <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Our Crew</h2>
+        <h2
+          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+        >
+          Our Crew
+        </h2>
         <p class="mt-3 max-w-3xl font-body text-[17px] font-normal leading-[1.75] text-banner-note">
           Three Vaifoous on the crew. The people who quote your job are the people who show up to build it.
         </p>
       </div>
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        {crew.map(({ name, role }) => (
-          <div class="flex flex-col gap-1 border border-banner-line bg-white p-5">
-            <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
-              {name}
-            </h3>
-            <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
-          </div>
-        ))}
+        {
+          crew.map(({ name, role }) => (
+            <div class="flex flex-col gap-1 border border-banner-line bg-white p-5">
+              <h3 class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
+                {name}
+              </h3>
+              <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
 
-  {showTeamSection && (
-    /* ── Meet the Team ────────────────────────────────────────── */
-    <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
-      <div class="site-frame flex flex-col gap-10">
+  {
+    showTeamSection && (
+      /* ── Meet the Team ────────────────────────────────────────── */
+      <section class="w-full border-b border-banner-line bg-page py-12 md:py-20">
+        <div class="site-frame flex flex-col gap-10">
+          <div class="flex max-w-[896px] flex-col gap-1">
+            <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+              Meet the Team
+            </h2>
+          </div>
 
-        <div class="flex max-w-[896px] flex-col gap-1">
-          <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">Meet the Team</h2>
-        </div>
+          <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {team.map(({ name, role, bio }, index) => (
+              <div class="flex flex-col gap-5">
+                <div class="relative w-full overflow-hidden bg-section-grey" style="aspect-ratio: 3 / 4;">
+                  {index === 0 && siaosiImage ? (
+                    <FillImage src={siaosiImage.src} alt={siaosiImage.alt} width={600} height={800} quality={68} />
+                  ) : (
+                    <div class="absolute inset-0 bg-section-grey" aria-hidden="true" />
+                  )}
+                </div>
 
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {team.map(({ name, role, bio }, index) => (
-            <div class="flex flex-col gap-5">
-              <div class="relative w-full overflow-hidden bg-section-grey" style="aspect-ratio: 3 / 4;">
-                {index === 0 && siaosiImage ? (
-                  <FillImage src={siaosiImage.src} alt={siaosiImage.alt} width={600} height={800} quality={68} />
-                ) : (
-                  <div class="absolute inset-0 bg-section-grey" aria-hidden="true"></div>
-                )}
+                {/* Name & role */}
+                <div class="flex flex-col gap-1 border-t-2 border-nav-cta pt-4">
+                  <h3 class="font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
+                    {name}
+                  </h3>
+                  <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
+                </div>
+
+                {/* Bio */}
+                <p class="font-body text-[15px] font-normal leading-7 text-banner-note italic">{bio}</p>
               </div>
-
-              {/* Name & role */}
-              <div class="flex flex-col gap-1 border-t-2 border-nav-cta pt-4">
-                <h3 class="font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase">
-                  {name}
-                </h3>
-                <p class="font-body text-[13px] font-bold leading-4 tracking-[1px] text-nav-cta uppercase">{role}</p>
-              </div>
-
-              {/* Bio */}
-              <p class="font-body text-[15px] font-normal leading-7 text-banner-note italic">{bio}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-
-      </div>
-    </section>
-  )}
+      </section>
+    )
+  }
 
   {/* ── CTA ──────────────────────────────────────────────────── */}
   <BrickMotifCTA
     heading="Work With Vaifoou Construction"
     note="We bring our family's 25+ year trade legacy to every project site. Contact us to schedule an estimate for your masonry or concrete flatwork."
   />
-
 </Layout>

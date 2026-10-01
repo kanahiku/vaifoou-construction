@@ -8,23 +8,33 @@ export interface ProjectTag {
 }
 
 export interface Props {
+  projectId: string;
   title: string;
   description: string;
+  location?: string;
   tags?: ProjectTag[];
   beforeImage?: ContentImage;
   afterImage?: ContentImage;
   beforeLabel?: string;
   afterLabel?: string;
+  hasGallery?: boolean;
+  filterLocation?: string;
+  filterServices?: string[];
 }
 
 const {
+  projectId,
   title,
   description,
+  location,
   tags = [],
   beforeImage,
   afterImage,
   beforeLabel = 'Before',
   afterLabel = 'After',
+  hasGallery = false,
+  filterLocation = '',
+  filterServices = [],
 } = Astro.props;
 
 const frames = [
@@ -33,7 +43,12 @@ const frames = [
 ];
 ---
 
-<article class="flex flex-col overflow-hidden border border-banner-line bg-white">
+<article
+  class="flex flex-col overflow-hidden border border-banner-line bg-white"
+  data-project-card
+  data-project-location={filterLocation}
+  data-project-services={filterServices.join('|')}
+>
   <div class="grid grid-cols-1 gap-px bg-banner-line md:grid-cols-2">
     {
       frames.map((label) => (
@@ -67,18 +82,25 @@ const frames = [
   <div class="flex flex-1 flex-col gap-5 p-6 md:p-8">
     <div class="flex flex-col gap-1">
       <h2
-        class="font-display text-[24px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[28px] md:leading-8"
+        class="font-display text-[24px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:max-w-[60%] md:text-[28px] md:leading-8"
       >
         {title}
       </h2>
       <p class="mt-3 font-body text-[15px] font-normal leading-7 text-banner-note">
         {description}
       </p>
+      {
+        location && (
+          <p class="mt-3 font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">
+            Location: <span class="text-heading">{location}</span>
+          </p>
+        )
+      }
     </div>
 
     {
       tags.length > 0 && (
-        <div class="flex flex-col gap-3">
+        <div class="mt-auto flex flex-col gap-3">
           <p class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">
             Services Tied to This Project
           </p>
@@ -99,6 +121,29 @@ const frames = [
             )}
           </div>
         </div>
+      )
+    }
+
+    {
+      hasGallery && (
+        <button
+          type="button"
+          class="group inline-flex w-fit cursor-pointer items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors hover:text-accent"
+          data-project-gallery-trigger
+          data-project-id={projectId}
+        >
+          View Gallery
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            aria-hidden="true"
+            class="shrink-0 transition-transform group-hover:translate-x-0.5"
+          >
+            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z" />
+          </svg>
+        </button>
       )
     }
   </div>

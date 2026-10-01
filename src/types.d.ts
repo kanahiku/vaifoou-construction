@@ -85,6 +85,7 @@ export interface Widget {
   id?: string;
   isDark?: boolean;
   bg?: string;
+  animate?: boolean;
   classes?: Record<string, string | Record<string, string>>;
 }
 

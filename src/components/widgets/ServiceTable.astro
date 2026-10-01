@@ -25,6 +25,8 @@ export interface Props {
   heading: string;
   /** Optional introductory paragraph below the heading (supports HTML via set:html). */
   note?: string;
+  /** Optional paragraph below the table (supports HTML via set:html). */
+  footerNote?: string;
   /** Header for the first data column. */
   col1: string;
   /** Header for the second data column — omit for a 2-col table. */
@@ -33,21 +35,20 @@ export interface Props {
   rows: TableRow[];
 }
 
-const { eyebrow, heading, note, col1, col2, rows } = Astro.props;
+const { eyebrow, heading, note, footerNote, col1, col2, rows } = Astro.props;
 const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
 ---
 
 <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
   <div class="site-frame flex flex-col gap-12">
-
     {/* Section header */}
     <div class="flex max-w-[896px] flex-col gap-1">
-      <h2 class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]">
+      <h2
+        class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
+      >
         {displayHeading}
       </h2>
-      {note && (
-        <p class="pt-2 font-body text-[16px] font-normal leading-7 text-banner-note" set:html={note} />
-      )}
+      {note && <p class="pt-2 font-body text-[16px] font-normal leading-7 text-banner-note" set:html={note} />}
     </div>
 
     {/* Table — delegated to ComparisonTable */}
@@ -60,5 +61,6 @@ const displayHeading = eyebrow ? `${eyebrow}: ${heading}` : heading;
       }))}
     />
 
+    {footerNote && <p class="font-body text-[16px] font-normal leading-7 text-banner-note" set:html={footerNote} />}
   </div>
 </section>

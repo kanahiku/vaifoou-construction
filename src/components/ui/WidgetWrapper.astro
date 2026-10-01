@@ -8,7 +8,7 @@ export interface Props extends Widget {
   ['as']?: HTMLTag;
 }
 
-const { id, isDark = false, containerClass = '', bg, as = 'section' } = Astro.props;
+const { id, isDark = false, containerClass = '', bg, as = 'section', animate = true } = Astro.props;
 
 const WrapperTag = as;
 ---
@@ -28,7 +28,13 @@ const WrapperTag = as;
   <div
     class:list={[
       twMerge(
-        'relative mx-auto max-w-container px-5 py-8 text-default intersect-once intersect-quarter intersect-no-queue motion-safe:md:px-16 md:py-16 lg:py-20 motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+        [
+          'relative mx-auto max-w-container px-5 py-8 text-default motion-safe:md:px-16 md:py-16 lg:py-20',
+          animate &&
+            'intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
+        ]
+          .filter(Boolean)
+          .join(' '),
         containerClass
       ),
       { dark: isDark },
