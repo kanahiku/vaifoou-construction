@@ -7,6 +7,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import FillImage from '~/components/ui/FillImage.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
 import { getServiceCategoryPageMedia } from '~/lib/content';
@@ -49,24 +50,28 @@ const steps = [
 
 const faqs = [
   {
-    q: 'What is a CMU wall?',
-    a: 'CMU stands for Concrete Masonry Unit. These standard concrete blocks create highly durable structures for retaining soil and dividing properties.',
+    title: 'What is a CMU wall?',
+    description:
+      'CMU stands for Concrete Masonry Unit. These standard concrete blocks create highly durable structures for retaining soil and dividing properties.',
   },
   {
-    q: 'Do you repair existing block walls?',
-    a: 'Yes, we handle complete demolition and reconstruction of failing structures. Our crews remove the failed section and rebuild the wall.',
+    title: 'Do you repair existing block walls?',
+    description:
+      'Yes, we handle complete demolition and reconstruction of failing structures. Our crews remove the failed section and rebuild the wall.',
   },
   {
-    q: 'Do you handle the landscaping after the wall is built?',
-    a: 'We focus exclusively on masonry and concrete construction. We do not provide landscape design or general landscaping services.',
+    title: 'Do you handle the landscaping after the wall is built?',
+    description:
+      'We focus exclusively on masonry and concrete construction. We do not provide landscape design or general landscaping services.',
   },
   {
-    q: 'Do you install micropiles or tiebacks?',
-    a: 'No. To maintain strict quality control, we focus exclusively on our core masonry trades. We do not perform structural foundation repair, micropile drilling, or tieback installations.',
+    title: 'Do you install micropiles or tiebacks?',
+    description:
+      'No. To maintain strict quality control, we focus exclusively on our core masonry trades. We do not perform structural foundation repair, micropile drilling, or tieback installations.',
   },
   {
-    q: "Do you build block walls outside of O'ahu?",
-    a: "No, our service area is strictly limited to the island of O'ahu.",
+    title: "Do you build block walls outside of O'ahu?",
+    description: "No, our service area is strictly limited to the island of O'ahu.",
   },
 ];
 
@@ -272,49 +277,9 @@ const projectPhoto = serviceMedia?.projectImage;
   </section>
 
   {/* ── FAQs ─────────────────────────────────────────────────── */}
-  <section class="w-full border-b border-banner-line bg-card py-6 md:py-24">
-    <div class="site-frame flex flex-col gap-10 md:gap-14">
-      <div class="flex max-w-[896px] flex-col gap-1">
-        <h2
-          class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
-        >
-          CMU &amp; Block Wall FAQs
-        </h2>
-      </div>
-      <div class="flex flex-col divide-y divide-banner-line">
-        {
-          faqs.map(({ q, a }) => (
-            <details class="group py-1">
-              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-4">
-                <span class="font-display text-[17px] font-semibold leading-6 tracking-[0.17px] text-heading uppercase md:text-[19px]">
-                  {q}
-                </span>
-                <span
-                  class="flex size-8 shrink-0 items-center justify-center border border-banner-line bg-white text-heading/50 transition-transform duration-200 group-open:rotate-45"
-                  aria-hidden="true"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                </span>
-              </summary>
-              <p class="pb-5 font-body text-[15px] font-normal leading-7 text-banner-note md:max-w-[80%]">{a}</p>
-            </details>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <FAQs title="CMU &amp; Block Wall FAQs" items={faqs}>
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
 
   {/* ── RELATED SERVICES ─────────────────────────────────────── */}
   <section class="w-full border-b border-banner-line bg-page py-6 md:py-20">
