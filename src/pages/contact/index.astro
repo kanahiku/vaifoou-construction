@@ -349,14 +349,8 @@ const heroImage = contactMedia?.heroImage;
 </Layout>
 
 <script define:vars={{ FORM_ENDPOINT, SITE_SLUG, TURNSTILE_SITE_KEY }}>
-  // Re-exported so the inline script can reference them at runtime.
-  // (define:vars serialises the values into the script tag.)
-
-  type TurnstileApi = {
-    render: (el: HTMLElement, opts: Record<string, unknown>) => string;
-    reset: (id: string) => void;
-    getResponse: (id: string) => string;
-  };
+  // define:vars serialises the values into the script tag. This script is emitted
+  // as-is (not compiled), so it must stay plain JavaScript — no TypeScript syntax.
 
   function asText(value) {
     return typeof value === 'string' ? value.trim() : '';
@@ -429,7 +423,8 @@ const heroImage = contactMedia?.heroImage;
     if (slot && sitekey) {
       try {
         const turnstile = await loadTurnstile();
-        widgetId = turnstile.render(slot, { sitekey });
+        // The forms Worker requires the token's action to equal the site slug.
+        widgetId = turnstile.render(slot, { sitekey, action: form.dataset.site || SITE_SLUG });
       } catch (err) {
         console.error(err);
       }
