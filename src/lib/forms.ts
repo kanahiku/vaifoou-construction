@@ -13,6 +13,7 @@ const FORM_WORKER_ORIGIN = FORM_ENDPOINT.replace(/\/submit\/?$/, '');
 export const EMAIL_SUMMARY_ENDPOINT = `${FORM_WORKER_ORIGIN}/email-summary`;
 
 export const TURNSTILE_SITE_KEY =
-  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ||
+  (import.meta.env.PROD ? '0x4AAAAAAFPQ2QfoHk8GKMyH' : '1x00000000000000000000AA');
 
 export const SITE_SLUG = import.meta.env.PUBLIC_SITE_SLUG || site.formSlug;
