@@ -925,8 +925,14 @@ type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body' | 'conten
   body?: SanityPortableBlock[] | null;
 };
 
+function cleanPortableText(text: string): string {
+  return text.replace(/\r?\n?__BR__\r?\n?/g, ' ');
+}
+
 function portableBlockText(block: SanityPortableBlock): string {
-  return Array.isArray(block.children) ? block.children.map((child) => child.text ?? '').join('') : '';
+  return Array.isArray(block.children)
+    ? block.children.map((child) => cleanPortableText(child.text ?? '')).join('')
+    : '';
 }
 
 function escapeHtml(str: string): string {
@@ -938,9 +944,13 @@ function spansToHtml(children: SanitySpan[] | undefined, markDefs: SanityMarkDef
   const defsMap = new Map((markDefs ?? []).map((d) => [d._key, d]));
 
   return children
-    .map((span) => {
+    .map((span, index) => {
       if (span._type !== 'span') return '';
-      let html = escapeHtml(span.text ?? '');
+      let text = cleanPortableText(span.text ?? '');
+      if (index === 0) {
+        text = text.trimStart();
+      }
+      let html = escapeHtml(text);
       for (const mark of span.marks ?? []) {
         const def = defsMap.get(mark);
         if (def?._type === 'link') {
