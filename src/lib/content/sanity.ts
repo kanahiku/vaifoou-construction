@@ -1336,7 +1336,7 @@ const BLOG_POST_CARD_PROJECTION = /* groq */ `
   category,
   tags,
   "image": {
-    "src": coalesce(image.asset->url, imageUrl, ""),
+    "src": coalesce(image.asset->url, imageUrl, "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1440&q=80"),
     "alt": coalesce(image.alt, imageAlt, title),
     "crop": image.crop,
     "hotspot": image.hotspot,

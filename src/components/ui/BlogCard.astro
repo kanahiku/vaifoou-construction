@@ -14,6 +14,9 @@ const { post, variant = 'light' } = Astro.props;
 const href = getBlogPermalink(post.slug);
 const publishDate = new Date(post.publishDate);
 
+const DEFAULT_HERO_IMAGE = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1440&q=80';
+const cardImageSrc = post.image?.src || DEFAULT_HERO_IMAGE;
+
 const arrowIcon = `<svg width="12" height="12" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" class="shrink-0 transition-transform group-hover:translate-x-0.5"><path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"/></svg>`;
 
 const isDark = variant === 'dark';
@@ -37,10 +40,10 @@ const linkCl = isDark ? 'text-nav-cta' : 'text-nav-cta';
   {/* Image */}
   <div class="relative w-full shrink-0 overflow-hidden" style="aspect-ratio: 16/9;">
     {
-      post.image?.src ? (
+      cardImageSrc ? (
         <Image
-          src={post.image.src}
-          alt={post.image.alt || post.title}
+          src={cardImageSrc}
+          alt={post.image?.alt || post.title}
           width={960}
           height={540}
           widths={[480, 640, 828, 960, 1200]}

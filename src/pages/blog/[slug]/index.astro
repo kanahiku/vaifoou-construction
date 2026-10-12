@@ -37,6 +37,9 @@ const readingMinutes = Math.max(1, Math.round(wordCount / 200));
 const siteUrl = (site.url ?? '').replace(/\/$/, '');
 const canonicalUrl = `${siteUrl}/blog/${post.slug}/`;
 
+const DEFAULT_HERO_IMAGE = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1440&q=80';
+const heroImageSrc = post.image?.src || DEFAULT_HERO_IMAGE;
+
 const metadata = {
   title: post.meta.title,
   description: post.meta.description,
@@ -49,10 +52,10 @@ const metadata = {
   <section class="relative w-full overflow-hidden border-b border-banner-line">
     {/* Background image */}
     {
-      post.image?.src ? (
+      heroImageSrc ? (
         <Image
-          src={post.image.src}
-          alt={post.image.alt || post.title}
+          src={heroImageSrc}
+          alt={post.image?.alt || post.title}
           width={1440}
           height={600}
           widths={[640, 960, 1200, 1440, 1600]}
@@ -78,29 +81,41 @@ const metadata = {
     </div>
 
     <div class="site-frame relative z-10 flex flex-col gap-4 pb-14 pt-14 md:pb-20 md:pt-20">
-      {/* Back link */}
-      <a
-        href="/blog/"
-        class="inline-flex items-center gap-2 font-body text-[13px] font-semibold leading-4 tracking-[0.5px] text-page/70 uppercase transition-colors hover:text-page-end"
-      >
-        <svg
-          width="10"
-          height="10"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          aria-hidden="true"
-          style="transform: rotate(180deg)"
+      {/* Back link & Category */}
+      <div class="flex items-center gap-2">
+        <a
+          href="/blog/"
+          class="inline-flex items-center gap-2 font-body text-[13px] font-semibold leading-4 tracking-[0.5px] text-page/70 uppercase transition-colors hover:text-page-end"
         >
-          <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"></path>
-        </svg>
-        All Articles
-      </a>
+          <svg
+            width="10"
+            height="10"
+            viewBox="0 0 16 16"
+            fill="currentColor"
+            aria-hidden="true"
+            style="transform: rotate(180deg)"
+          >
+            <path d="M12.175 9H0V7H12.175L6.575 1.4L8 0L16 8L8 16L6.575 14.6L12.175 9Z"></path>
+          </svg>
+          All Articles
+        </a>
+        {
+          post.category && (
+            <>
+              <span class="text-page/40" aria-hidden="true">/</span>
+              <span class="font-body text-[13px] font-semibold leading-4 tracking-[0.5px] text-page/90 uppercase">
+                {post.category}
+              </span>
+            </>
+          )
+        }
+      </div>
 
       {/* Title */}
       <h1
         class="max-w-[768px] font-display text-[32px] font-bold leading-tight tracking-[-0.3px] text-page-end uppercase md:text-[56px] md:leading-[64px] md:tracking-[-0.6px]"
       >
-        {post.category ?? 'Insights'}: {post.title}
+        {post.title}
       </h1>
 
       {/* Meta */}
