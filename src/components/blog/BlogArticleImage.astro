@@ -7,33 +7,72 @@ export interface Props {
   caption?: string;
   eager?: boolean;
   class?: string;
+  /**
+   * If true (or if eager), treats this as the top hero cover banner:
+   * uses the standard uniform 16:9 banner aspect-ratio with cover fit.
+   * If false (default for inline body images), preserves the image's intrinsic
+   * aspect ratio and uses object-contain so infographics and diagrams are never cut off.
+   */
+  isHero?: boolean;
 }
 
-const { image, caption, eager = false, class: className = 'my-8' } = Astro.props;
+const { image, caption, eager = false, class: className = 'my-8', isHero = eager } = Astro.props;
+
+// Detect intrinsic dimensions from Sanity URL or ImageMetadata for inline images
+const srcStr = typeof image?.src === 'string' ? image.src : '';
+const dimMatch = srcStr.match(/-(\d+)x(\d+)\.[a-z]+(?:$|\?)/i);
+const intrinsicW = dimMatch
+  ? Number(dimMatch[1])
+  : typeof image?.src === 'object' && image?.src && 'width' in image.src
+    ? Number((image.src as any).width)
+    : undefined;
+const intrinsicH = dimMatch
+  ? Number(dimMatch[2])
+  : typeof image?.src === 'object' && image?.src && 'height' in image.src
+    ? Number((image.src as any).height)
+    : undefined;
+
+const aspectRatio = isHero
+  ? '16 / 9'
+  : intrinsicW && intrinsicH
+    ? `${intrinsicW} / ${intrinsicH}`
+    : undefined;
+
+const targetWidth = 1200;
+const targetHeight = isHero
+  ? 675
+  : intrinsicW && intrinsicH
+    ? Math.round(Math.min(targetWidth, intrinsicW) * (intrinsicH / intrinsicW))
+    : undefined;
+
 const resolvedAlt = image?.alt?.trim() || caption?.trim() || 'Vaifoou Construction project image';
 ---
 
 {
   image?.src && (
     <figure class={className}>
-      <div class="relative w-full aspect-[16/9] overflow-hidden rounded-md bg-[#EFEFEF]">
+      <div
+        class="relative w-full overflow-hidden rounded-md bg-[#EFEFEF]"
+        style={aspectRatio ? `aspect-ratio: ${aspectRatio};` : undefined}
+      >
         <Image
           src={image.src}
           alt={resolvedAlt}
-          class="w-full h-full object-cover"
+          class={isHero ? 'w-full h-full object-cover' : 'w-full h-full object-contain'}
           widths={[400, 768, 1200]}
           sizes="(max-width: 768px) 100vw, 70vw"
-          width={1200}
-          height={675}
-          layout="cover"
+          width={targetWidth}
+          height={targetHeight}
+          layout={isHero ? 'cover' : 'constrained'}
           format="webp"
+          quality={80}
           loading={eager ? 'eager' : 'lazy'}
           fetchpriority={eager ? 'high' : 'auto'}
           decoding="async"
         />
       </div>
       {caption && (
-        <figcaption class="mt-3 text-[14px] md:text-[15px] font-normal leading-[160%] text-muted">{caption}</figcaption>
+        <figcaption class="mt-3 text-[14px] md:text-[15px] font-normal leading-[160%] text-muted text-center">{caption}</figcaption>
       )}
     </figure>
   )

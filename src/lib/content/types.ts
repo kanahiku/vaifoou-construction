@@ -508,6 +508,8 @@ export interface BlogPost {
   tags?: string[];
   image?: ContentImage;
   imagePlaceholder?: string;
+  metaTitle?: string;
+  metaDescription?: string;
   meta: {
     title: string;
     description: string;
@@ -529,7 +531,29 @@ export type BlogContentBlock =
   | BlogContentImage
   | BlogContentList
   | BlogContentTable
-  | BlogContentCallout;
+  | BlogContentCallout
+  | BlogContentButton
+  | BlogContentFaq;
+
+export interface BlogContentButton {
+  _type: 'button';
+  _key: string;
+  text: string;
+  href: string;
+  variant?: 'ghost-light' | 'primary';
+}
+
+export interface BlogContentFaqItem {
+  _key?: string;
+  question: string;
+  answer: string;
+}
+
+export interface BlogContentFaq {
+  _type: 'faq';
+  _key: string;
+  items: BlogContentFaqItem[];
+}
 
 export interface BlogContentParagraph {
   _type: 'paragraph';

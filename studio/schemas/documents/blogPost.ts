@@ -38,6 +38,21 @@ export const blogPost = defineType({
       validation: (r) => r.required().max(280),
     }),
     defineField({
+      name: 'metaTitle',
+      title: 'Meta Title',
+      type: 'string',
+      group: 'content',
+      description: 'SEO title tag for browser tabs and search engines (falls back to Post title if empty).',
+    }),
+    defineField({
+      name: 'metaDescription',
+      title: 'Meta Description',
+      type: 'text',
+      rows: 3,
+      group: 'content',
+      description: 'SEO meta description for Google snippets (falls back to Excerpt if empty).',
+    }),
+    defineField({
       name: 'publishDate',
       title: 'Publish date',
       type: 'datetime',

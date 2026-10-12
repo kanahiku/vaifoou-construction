@@ -3,6 +3,7 @@ import type { BlogContentBlock, BlogContentImage, BlogPost, ServiceSection } fro
 export interface TocItem {
   id: string;
   title: string;
+  level?: 2 | 3;
 }
 
 export interface ArticleBlock {
@@ -94,10 +95,14 @@ export function getArticleToc(post: BlogPost): TocItem[] {
   if (shouldUsePortableBody(post)) {
     const used = new Set<string>();
     return (post.contentBlocks ?? [])
-      .filter((block): block is Extract<BlogContentBlock, { _type: 'heading' }> => block._type === 'heading' && block.level === 2)
+      .filter(
+        (block): block is Extract<BlogContentBlock, { _type: 'heading' }> =>
+          block._type === 'heading' && (block.level === 2 || block.level === 3)
+      )
       .map((block) => ({
         id: uniqueHeadingId(block.text, used),
         title: block.text,
+        level: block.level as 2 | 3,
       }));
   }
 
@@ -107,7 +112,7 @@ export function getArticleToc(post: BlogPost): TocItem[] {
   for (const section of post.sections) {
     const heading = section.heading?.trim();
     if (!heading || heading === post.title) continue;
-    items.push({ id: uniqueHeadingId(heading, used), title: heading });
+    items.push({ id: uniqueHeadingId(heading, used), title: heading, level: 2 });
   }
 
   return items;
@@ -133,7 +138,7 @@ export function getArticleBlocks(post: BlogPost): ArticleBlock[] {
 export function getPortableHeadingId(post: BlogPost, key: string): string | undefined {
   const used = new Set<string>();
   for (const block of post.contentBlocks ?? []) {
-    if (block._type !== 'heading' || block.level !== 2) continue;
+    if (block._type !== 'heading' || (block.level !== 2 && block.level !== 3)) continue;
     const id = uniqueHeadingId(block.text, used);
     if (block._key === key) return id;
   }

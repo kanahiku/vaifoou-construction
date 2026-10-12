@@ -920,6 +920,8 @@ type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body' | 'conten
   image?: ContentImage;
   relatedPages?: string[] | null;
   tags?: string[] | null;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
   body?: SanityPortableBlock[] | null;
 };
 
@@ -961,6 +963,64 @@ function spansToHtml(children: SanitySpan[] | undefined, markDefs: SanityMarkDef
     .join('');
 }
 
+const CTA_DIRECTIVE_REGEX =
+  /^\s*(?:\((?:create a )?cta button\)|\[(?:insert )?cta button(?::\s*|\s+)?\])\s*(.*)$/i;
+const FAQ_HEADING_REGEX =
+  /frequently asked|faqs?$|^faq\b|what homeowners most often want to know|questions homeowners ask|common questions/i;
+
+function detectCtaButton(
+  block: SanityPortableBlock
+): { text: string; href: string; variant?: 'ghost-light' | 'primary' } | null {
+  if (block._type === 'button' || block._type === 'ctaButton') {
+    if (block.text?.trim() && block.href?.trim()) {
+      return {
+        text: block.text.trim(),
+        href: block.href.trim(),
+        variant: block.variant === 'primary' ? 'primary' : 'ghost-light',
+      };
+    }
+    return null;
+  }
+
+  if (block._type !== 'block' || (block.style && block.style !== 'normal')) {
+    return null;
+  }
+
+  const markDefs = block.markDefs;
+  if (!markDefs || markDefs.length === 0) return null;
+
+  const children = block.children ?? [];
+  const linkDefs = new Map(
+    markDefs.filter((d) => d._type === 'link' && d.href).map((d) => [d._key, d.href as string])
+  );
+
+  if (linkDefs.size === 0) return null;
+
+  const fullText = portableBlockText(block).trim();
+  if (!fullText) return null;
+
+  const directiveMatch = fullText.match(CTA_DIRECTIVE_REGEX);
+  const rawTarget = directiveMatch ? directiveMatch[1].trim() : fullText;
+  const targetText = rawTarget.replace(/^\[+|\]+$/g, '').trim();
+
+  const linkSpans = children.filter((c) => (c.marks ?? []).some((m) => linkDefs.has(m)));
+  const linkText = linkSpans.map((c) => c.text ?? '').join('').replace(/^\[+|\]+$/g, '').trim();
+
+  if (linkText && (linkText === targetText || (directiveMatch && targetText.length === 0))) {
+    const firstLinkMark = linkSpans.flatMap((c) => c.marks ?? []).find((m) => linkDefs.has(m));
+    const href = firstLinkMark ? linkDefs.get(firstLinkMark) : undefined;
+    if (href) {
+      return {
+        text: linkText || targetText,
+        href,
+        variant: 'ghost-light',
+      };
+    }
+  }
+
+  return null;
+}
+
 function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefined): BlogContentBlock[] {
   if (!Array.isArray(body)) return [];
 
@@ -979,12 +1039,87 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
     listStartKey = '';
   }
 
+  // Buffer for explicit faqItem blocks
+  let faqBuffer: { _key?: string; question: string; answer: string }[] = [];
+  let faqStartKey = '';
+
+  function flushFaq() {
+    if (!faqBuffer.length) return;
+    result.push({
+      _type: 'faq',
+      _key: `faq-${faqStartKey}`,
+      items: faqBuffer,
+    });
+    faqBuffer = [];
+    faqStartKey = '';
+  }
+
+  // State for FAQ section authored under an FAQ H2
+  let inFaqSection = false;
+  let faqSectionStartKey = '';
+  let faqSectionItems: { _key?: string; question: string; answer: string }[] = [];
+
+  function flushFaqSection() {
+    if (!faqSectionItems.length) {
+      inFaqSection = false;
+      return;
+    }
+    result.push({
+      _type: 'faq',
+      _key: `faq-section-${faqSectionStartKey}`,
+      items: faqSectionItems,
+    });
+    faqSectionItems = [];
+    inFaqSection = false;
+    faqSectionStartKey = '';
+  }
+
   body.forEach((block, index) => {
     const key = block._key || `block-${index}`;
+
+    // ── Explicit Button / CTA ─────────────────────────────────────────────────
+    if (block._type === 'button' || block._type === 'ctaButton') {
+      flushList();
+      flushFaq();
+      flushFaqSection();
+      const btn = detectCtaButton(block);
+      if (btn) {
+        result.push({ _type: 'button', _key: key, ...btn });
+      }
+      return;
+    }
+
+    // ── Explicit FAQ item ─────────────────────────────────────────────────────
+    if (block._type === 'faqItem') {
+      flushList();
+      if (inFaqSection) {
+        if (block.question?.trim() && block.answer?.trim()) {
+          faqSectionItems.push({
+            _key: key,
+            question: block.question.trim(),
+            answer: block.answer.trim(),
+          });
+        }
+        return;
+      }
+      if (!faqBuffer.length) {
+        faqStartKey = key;
+      }
+      if (block.question?.trim() && block.answer?.trim()) {
+        faqBuffer.push({
+          _key: key,
+          question: block.question.trim(),
+          answer: block.answer.trim(),
+        });
+      }
+      return;
+    }
 
     // ── Image ─────────────────────────────────────────────────────────────────
     if (block._type === 'image') {
       flushList();
+      flushFaq();
+      flushFaqSection();
       const image = resolveContentImage({
         src: block.src,
         alt: block.alt,
@@ -1001,6 +1136,8 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
     // ── Table ─────────────────────────────────────────────────────────────────
     if (block._type === 'table') {
       flushList();
+      flushFaq();
+      flushFaqSection();
       const headerRow = (block.headerRow ?? []).filter(Boolean);
       if (headerRow.length < 2) return;
       result.push({
@@ -1019,6 +1156,8 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
     // ── Callout ───────────────────────────────────────────────────────────────
     if (block._type === 'callout') {
       flushList();
+      flushFaq();
+      flushFaqSection();
       if (!block.text?.trim()) return;
       const calloutType = (['tip', 'info', 'warning', 'note'] as const).includes(
         block.calloutType as 'tip' | 'info' | 'warning' | 'note'
@@ -1032,6 +1171,16 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
     // ── Standard block ────────────────────────────────────────────────────────
     if (block._type !== 'block') return;
 
+    // Check if the standard block is a standalone CTA button link
+    const cta = detectCtaButton(block);
+    if (cta) {
+      flushList();
+      flushFaq();
+      flushFaqSection();
+      result.push({ _type: 'button', _key: key, ...cta });
+      return;
+    }
+
     const text = portableBlockText(block).trim();
     if (!text) return;
 
@@ -1040,17 +1189,66 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
     // Headings
     if (block.style === 'h1' || block.style === 'h2') {
       flushList();
+      flushFaq();
+      flushFaqSection();
       result.push({ _type: 'heading', _key: key, level: 2, text });
+
+      if (FAQ_HEADING_REGEX.test(text)) {
+        inFaqSection = true;
+        faqSectionStartKey = key;
+      }
       return;
     }
     if (block.style === 'h3' || block.style === 'h4') {
       flushList();
+      flushFaq();
+
+      if (inFaqSection) {
+        faqSectionItems.push({ _key: key, question: text, answer: '' });
+        return;
+      }
+
+      flushFaqSection();
       result.push({ _type: 'heading', _key: key, level: 3, text });
       return;
     }
 
+    // Check for FAQ question & answer under FAQ section
+    if (inFaqSection) {
+      flushList();
+      flushFaq();
+
+      let hasBold = false;
+      let hasNonBoldText = false;
+      for (const c of block.children ?? []) {
+        const marks = c.marks ?? [];
+        if (marks.includes('strong')) {
+          hasBold = true;
+        } else if ((c.text ?? '').trim().length > 0) {
+          hasNonBoldText = true;
+        }
+      }
+      const isAllBold = hasBold && !hasNonBoldText;
+      const isQuestion = isAllBold || text.endsWith('?');
+
+      if (isQuestion) {
+        faqSectionItems.push({ _key: key, question: text, answer: '' });
+        return;
+      } else if (faqSectionItems.length > 0) {
+        const last = faqSectionItems[faqSectionItems.length - 1];
+        last.answer = last.answer ? `${last.answer}<br><br>${html}` : html;
+        return;
+      }
+    }
+
     // List items
     if (block.listItem === 'bullet' || block.listItem === 'number') {
+      flushFaq();
+      if (inFaqSection && faqSectionItems.length > 0) {
+        const last = faqSectionItems[faqSectionItems.length - 1];
+        last.answer = last.answer ? `${last.answer}<br>• ${html}` : `• ${html}`;
+        return;
+      }
       if (listType !== block.listItem) {
         flushList();
         listType = block.listItem;
@@ -1062,6 +1260,8 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
 
     // Paragraph / blockquote
     flushList();
+    flushFaq();
+    flushFaqSection();
     result.push({
       _type: 'paragraph',
       _key: key,
@@ -1072,6 +1272,8 @@ function portableTextToContentBlocks(body: SanityPortableBlock[] | null | undefi
   });
 
   flushList();
+  flushFaq();
+  flushFaqSection();
   return result;
 }
 
@@ -1089,6 +1291,8 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
     title: post.title,
     slug: post.slug,
     excerpt,
+    metaTitle: post.metaTitle?.trim() || undefined,
+    metaDescription: post.metaDescription?.trim() || undefined,
     publishDate: post.publishDate,
     author: post.author,
     category: post.category,
@@ -1096,8 +1300,8 @@ function normalizeBlogPost(post: SanityBlogPost): BlogPost {
     image: resolveContentImage(post.image as FetchedImage | undefined),
     relatedPages: (post.relatedPages ?? []).map((key) => key.replace(/^\/+/, '')).filter(Boolean),
     meta: {
-      title: post.title,
-      description: excerpt,
+      title: post.metaTitle?.trim() || post.title,
+      description: post.metaDescription?.trim() || excerpt,
     },
     heroParagraphs: body.slice(0, 2),
     sections:
@@ -1125,6 +1329,8 @@ const BLOG_POST_CARD_PROJECTION = /* groq */ `
   title,
   "slug": slug.current,
   excerpt,
+  metaTitle,
+  metaDescription,
   publishDate,
   author,
   category,
