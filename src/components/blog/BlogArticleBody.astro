@@ -382,12 +382,13 @@ const h3Class = 'text-[20px] md:text-[22px] font-sans font-medium leading-[130%]
   div :global(a) {
     color: var(--aw-color-btn-link);
     font-weight: 600;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
     transition: color 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   }
   div :global(a:hover) {
     color: var(--aw-color-btn-link-hover);
-    text-decoration: none;
+    text-decoration: underline;
   }
   div :global(strong) {
     font-weight: 600;

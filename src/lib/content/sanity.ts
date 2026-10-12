@@ -982,6 +982,11 @@ function detectCtaButton(
     return null;
   }
 
+  // List items must NEVER be converted to CTA buttons
+  if (block.listItem) {
+    return null;
+  }
+
   if (block._type !== 'block' || (block.style && block.style !== 'normal')) {
     return null;
   }
@@ -1006,12 +1011,27 @@ function detectCtaButton(
   const linkSpans = children.filter((c) => (c.marks ?? []).some((m) => linkDefs.has(m)));
   const linkText = linkSpans.map((c) => c.text ?? '').join('').replace(/^\[+|\]+$/g, '').trim();
 
-  if (linkText && (linkText === targetText || (directiveMatch && targetText.length === 0))) {
+  // If there is an explicit author directive, e.g. (Create a CTA button) ... or [Insert CTA button: ...]
+  if (directiveMatch && (linkText || targetText)) {
     const firstLinkMark = linkSpans.flatMap((c) => c.marks ?? []).find((m) => linkDefs.has(m));
     const href = firstLinkMark ? linkDefs.get(firstLinkMark) : undefined;
     if (href) {
       return {
         text: linkText || targetText,
+        href,
+        variant: 'ghost-light',
+      };
+    }
+  }
+
+  // Standalone call-to-action link paragraphs with action phrasing or bracketed prompts
+  const CTA_ACTION_WORDS = /^(schedule|contact|call|get an estimate|request a|request an|book|get a quote|explore our|view our|check out|reach out)/i;
+  if (linkText && linkText === targetText && (CTA_ACTION_WORDS.test(linkText) || (fullText.startsWith('[') && fullText.endsWith(']')))) {
+    const firstLinkMark = linkSpans.flatMap((c) => c.marks ?? []).find((m) => linkDefs.has(m));
+    const href = firstLinkMark ? linkDefs.get(firstLinkMark) : undefined;
+    if (href) {
+      return {
+        text: linkText,
         href,
         variant: 'ghost-light',
       };
