@@ -127,13 +127,12 @@ const heroImage = contactMedia?.heroImage;
                 />
               </div>
               <div>
-                <label for="email" class={labelClass}>
-                  Email <span class="font-normal text-muted/70">(Optional)</span>
-                </label>
+                <label for="email" class={labelClass}>Email <span class="text-accent">*</span></label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  required
                   autocomplete="email"
                   placeholder="you@example.com"
                   class={fieldClass}
@@ -215,24 +214,6 @@ const heroImage = contactMedia?.heroImage;
                 Preferred Start Date <span class="font-normal text-muted/70">(Optional)</span>
               </label>
               <input type="date" id="start-date" name="start_date" class={fieldClass} />
-            </div>
-
-            {/* Row 8: Site Photos */}
-            <div>
-              <label for="photos" class={labelClass}>
-                Site Photos <span class="font-normal text-muted/70">(Optional)</span>
-              </label>
-              <input
-                type="file"
-                id="photos"
-                name="photos"
-                multiple
-                accept="image/*,.pdf"
-                class="block w-full font-sans text-body text-heading file:mr-4 file:border-0 file:bg-section-grey file:px-4 file:py-2 file:font-sans file:text-[13px] file:font-semibold file:text-heading file:uppercase file:tracking-[0.5px] file:cursor-pointer hover:file:bg-heading/10"
-              />
-              <p class="mt-1.5 font-sans text-[13px] text-muted">
-                JPG, PNG, or PDF. Photos help us prepare a more accurate estimate.
-              </p>
             </div>
 
             {/* Turnstile bot check */}
@@ -453,8 +434,6 @@ const heroImage = contactMedia?.heroImage;
         if (!endpoint || !site) throw new Error('Form is not configured');
         if (!turnstileToken) throw new Error('Spam check is required');
 
-        // Note: file attachments (data.get('photos')) are not included in the
-        // JSON payload — the form worker would need multipart support for that.
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },

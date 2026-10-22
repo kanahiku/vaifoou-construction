@@ -2,18 +2,15 @@
 import Layout from '~/layouts/PageLayout.astro';
 import BlogCard from '~/components/ui/BlogCard.astro';
 import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
-import { getBlogPosts } from '~/lib/content';
-import { site } from '~/config/site';
+import { getBlogPage, getBlogPosts } from '~/lib/content';
 
 export const prerender = false;
 
 const posts = await getBlogPosts();
 
-const metadata = {
-  title: `Blog | ${site.name}`,
-  description: `Masonry tips, project spotlights and trade insights from the Vaifoou Construction team on O'ahu.`,
-  ignoreTitleTemplate: true,
-};
+const page = await getBlogPage();
+if (!page) throw new Error('Sanity blogPage document missing. Run `npm run seed:pages`.');
+const metadata = { title: page.seo.title, description: page.seo.description, ignoreTitleTemplate: true };
 ---
 
 <Layout metadata={metadata}>
@@ -23,7 +20,7 @@ const metadata = {
       <h1
         class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[56px]"
       >
-        Blogs
+        {page.hero.heading}
       </h1>
     </div>
   </section>
@@ -42,10 +39,10 @@ const metadata = {
         ) : (
           <div class="flex flex-col gap-4 border border-banner-line bg-white p-8 md:p-12">
             <p class="font-display text-[18px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[22px]">
-              Coming Soon
+              {page.empty.title}
             </p>
             <p class="font-body text-[16px] font-normal leading-7 text-banner-note">
-              New articles from our masonry team will appear here as they are published.
+              {page.empty.body}
             </p>
           </div>
         )
@@ -54,5 +51,5 @@ const metadata = {
   </section>
 
   {/* ── CTA closer ────────────────────────────────────────────────── */}
-  <BrickMotifCTA heading="Start Your O'ahu Masonry Project" />
+  <BrickMotifCTA heading={page.cta.heading} note={page.cta.note} />
 </Layout>
