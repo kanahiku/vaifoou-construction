@@ -29,6 +29,10 @@ export interface Props {
   links?: Array<MenuLink>;
   actions?: Array<CallToAction>;
   phone?: { text: string; href: string };
+  /** Left items in the top utility bar. */
+  topBarItems?: string[];
+  /** Right-hand text in the top utility bar. */
+  topBarNote?: string;
   isSticky?: boolean;
   isDark?: boolean;
   isFullWidth?: boolean;
@@ -44,6 +48,8 @@ const {
   links = [],
   actions = [],
   phone,
+  topBarItems = [],
+  topBarNote,
   isSticky = false,
   isDark = false,
   isFullWidth = false,
@@ -80,13 +86,6 @@ const mobileLinkClass =
 const mobilePanelClass =
   'absolute inset-x-0 top-full z-50 max-h-[min(24rem,calc(100dvh-5.5rem))] flex-col overflow-y-auto border-t border-heading/10 bg-card p-3';
 const navBgStyle = '';
-
-/** Top utility bar — Figma 4:436 (desktop) / 4:480 (mobile). */
-const topBarItems = [
-  CONTACT.license ? CONTACT.license : '',
-  'Licensed & Insured',
-  "Serving All of O'ahu",
-].filter(Boolean);
 
 ---
 
@@ -153,9 +152,11 @@ const topBarItems = [
             </Fragment>
           ))}
         </p>
-        <p class="font-display text-[10px] font-semibold! leading-6 tracking-[0.5px] text-banner-text uppercase md:text-[13px] md:font-bold! md:leading-4 md:tracking-[0.65px]">
-          Closed on Sundays
-        </p>
+        {topBarNote && (
+          <p class="font-display text-[10px] font-semibold! leading-6 tracking-[0.5px] text-banner-text uppercase md:text-[13px] md:font-bold! md:leading-4 md:tracking-[0.65px]">
+            {topBarNote}
+          </p>
+        )}
       </div>
     </div>
 

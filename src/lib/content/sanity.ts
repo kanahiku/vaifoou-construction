@@ -1,40 +1,32 @@
 import { sanityClient } from '../sanity/client';
 import { resolveContentImage, resolveContentImageOrEmpty, type SanityImageFields } from '../sanity/image';
 import type {
-  AboutPageMediaContent,
-  AudiencePageMediaContent,
   BlogContentBlock,
   BlogPost,
   Book,
   BookCta,
   BookSeries,
-  CommercialAudienceSubPageMediaContent,
   ContactPageMediaContent,
   PodcastEpisode,
   PodcastEpisodeStatus,
   PodcastPartGroup,
   ProjectCardContent,
   ProjectTag,
-  ProjectsPageMediaContent,
-  ReviewsPageMediaContent,
   Testimonial,
   ContactPageContent,
   ContentImage,
   FooterMediaContent,
   FormHelpOption,
   HomePageContent,
-  HomeMediaContent,
+  HomeAudienceCard,
+  HomeLink,
+  HomeServiceCard,
   NavigationContent,
-  ReviewsPageContent,
-  ServiceAreaHubMediaContent,
-  ServiceAreaLocationMediaContent,
-  ServiceCategoryPageMediaContent,
-  ServicesHubMediaContent,
   ServicePageContent,
   ServiceSection,
-  ServiceSubPageMediaContent,
   SplitContentSection,
 } from './types';
+import { HOME_DEFAULTS } from '../../data/home-defaults';
 
 const IMAGE_PROJECTION = /* groq */ `
   "src": coalesce(image.asset->url, imageUrl, ""),
@@ -54,211 +46,159 @@ const IMAGE_MOBILE_PROJECTION = /* groq */ `
 
 type FetchedImage = ContentImage & SanityImageFields;
 
+const homeImage = (field: string) => /* groq */ `
+  "src": coalesce(${field}.asset->url, ""),
+  "alt": coalesce(${field}.alt, ""),
+  "crop": ${field}.crop,
+  "hotspot": ${field}.hotspot,
+  "asset": ${field}.asset
+`;
+
 const HOME_QUERY = /* groq */ `
   *[_type == "homePage" && _id == "singleton-home"][0] {
-    meta,
+    seo { title, description },
     hero {
-      titleLine1,
-      titleLine2,
-      subtitleParagraph1,
-      ctaText,
-      ctaHref,
-      phoneCtaText,
-      phoneCtaHref,
-      "heroImage": {
-        "src": coalesce(heroImage.asset->url, heroImageUrl, ""),
-        "alt": coalesce(heroImage.alt, ""),
-        "crop": heroImage.crop,
-        "hotspot": heroImage.hotspot,
-        "asset": heroImage.asset
-      },
-      "heroImageMobile": {
-        "src": coalesce(heroImageMobile.asset->url, heroImageMobileUrl, ""),
-        "alt": coalesce(heroImageMobile.alt, heroImage.alt, ""),
-        "crop": heroImageMobile.crop,
-        "hotspot": heroImageMobile.hotspot,
-        "asset": heroImageMobile.asset
-      }
-    },
-    "statsBar": statsBar[] { stat, label },
-    whyInspect {
       heading,
-      paragraph1,
-      paragraph2,
-      ctaText,
+      subheading,
+      ctaLabel,
       ctaHref,
-      "image": {
-        ${IMAGE_PROJECTION}
+      trustBadges,
+      "image": { ${homeImage('heroImage')} },
+      "imageMobile": { ${homeImage('heroImageMobile')} }
+    },
+    intro {
+      heading,
+      body,
+      "audienceCards": coalesce(audienceCards, ^.audienceCards)[] {
+        label,
+        title,
+        ctaLabel,
+        href,
+        "image": { ${homeImage('image')} }
       }
     },
-    servicesSection {
-      title,
-      subtitle,
-      "services": services[] { title, description, linkText, linkHref }
-    },
-    faqs {
-      title,
-      "items": items[] { question, answer }
-    },
-    ctaBanner {
-      title,
-      subtitle,
-      ctaText,
-      ctaHref,
-      showAfterHoursNote
-    }
-  }
-`;
-
-export async function getSanityHomeContent(): Promise<HomePageContent> {
-  const page = await sanityClient.fetch<
-    HomePageContent & {
-      hero: HomePageContent['hero'] & { heroImage: FetchedImage; heroImageMobile?: FetchedImage };
-      whyInspect: HomePageContent['whyInspect'] & { image: FetchedImage };
-    }
-  >(HOME_QUERY);
-  return {
-    ...page,
-    hero: {
-      ...page.hero,
-      heroImage: resolveContentImageOrEmpty(page.hero?.heroImage),
-      heroImageMobile: resolveContentImage(page.hero?.heroImageMobile),
-    },
-    whyInspect: {
-      ...page.whyInspect,
-      image: resolveContentImageOrEmpty(page.whyInspect?.image),
-    },
-  };
-}
-
-const HOME_MEDIA_QUERY = /* groq */ `
-  *[_type == "homePage" && _id == "singleton-home"][0] {
-    hero {
-      "heroImage": {
-        "src": coalesce(heroImage.asset->url, ""),
-        "alt": coalesce(heroImage.alt, ""),
-        "crop": heroImage.crop,
-        "hotspot": heroImage.hotspot,
-        "asset": heroImage.asset
-      },
-      "heroImageMobile": {
-        "src": coalesce(heroImageMobile.asset->url, ""),
-        "alt": coalesce(heroImageMobile.alt, heroImage.alt, ""),
-        "crop": heroImageMobile.crop,
-        "hotspot": heroImageMobile.hotspot,
-        "asset": heroImageMobile.asset
-      }
-    },
-    "audienceCards": audienceCards[] {
-      title,
-      href,
-      "image": {
-        ${IMAGE_PROJECTION}
-      }
+    services {
+      heading,
+      "items": items[] { title, icon, description, ctaLabel, href }
     },
     highlightBanner {
-      "image": {
-        ${IMAGE_PROJECTION}
-      }
-    }
+      heading,
+      body,
+      ctaLabel,
+      ctaHref,
+      "image": { ${homeImage('image')} }
+    },
+    serviceAreas {
+      heading,
+      body,
+      ctaLabel,
+      ctaHref,
+      "areas": areas[] { label, href }
+    },
+    reviews { heading, count, ctaLabel, ctaHref },
+    cta { heading, note }
   }
 `;
 
-export async function getSanityHomeMediaContent(): Promise<HomeMediaContent | null> {
-  const page = await sanityClient.fetch<{
-    hero?: { heroImage?: FetchedImage; heroImageMobile?: FetchedImage };
-    audienceCards?: Array<{ title?: string; href?: string; image?: FetchedImage }>;
-    highlightBanner?: { image?: FetchedImage };
-  } | null>(HOME_MEDIA_QUERY);
-
-  if (!page) return null;
-
-  return {
-    heroImage: resolveContentImage(page.hero?.heroImage),
-    heroImageMobile: resolveContentImage(page.hero?.heroImageMobile),
-    audienceCards: (page.audienceCards ?? []).map((card) => ({
-      title: card.title,
-      href: card.href,
-      image: resolveContentImage(card.image),
-    })),
-    bannerImage: resolveContentImage(page.highlightBanner?.image),
+type RawHome = {
+  seo?: Partial<HomePageContent['seo']>;
+  hero?: Partial<Omit<HomePageContent['hero'], 'image' | 'imageMobile'>> & {
+    image?: FetchedImage;
+    imageMobile?: FetchedImage;
   };
-}
-
-const SERVICES_HUB_MEDIA_QUERY = /* groq */ `
-  *[_type == "servicesHubPage" && _id == "singleton-services-hub"][0] {
-    hero {
-      "image": {
-        ${IMAGE_PROJECTION}
-      }
-    },
-    "audienceCards": audienceCards[] {
-      title,
-      href,
-      "image": {
-        ${IMAGE_PROJECTION}
-      }
-    }
-  }
-`;
-
-export async function getSanityServicesHubMediaContent(): Promise<ServicesHubMediaContent | null> {
-  const page = await sanityClient.fetch<{
-    hero?: { image?: FetchedImage };
-    audienceCards?: Array<{ title?: string; href?: string; image?: FetchedImage }>;
-  } | null>(SERVICES_HUB_MEDIA_QUERY);
-
-  if (!page) return null;
-
-  return {
-    heroImage: resolveContentImage(page.hero?.image),
-    audienceCards: (page.audienceCards ?? []).map((card) => ({
-      title: card.title,
-      href: card.href,
-      image: resolveContentImage(card.image),
-    })),
+  intro?: {
+    heading?: string;
+    body?: string;
+    audienceCards?: Array<Partial<Omit<HomeAudienceCard, 'image'>> & { image?: FetchedImage }> | null;
   };
-}
+  services?: { heading?: string; items?: Array<Partial<HomeServiceCard>> | null };
+  highlightBanner?: Partial<Omit<HomePageContent['highlightBanner'], 'image'>> & { image?: FetchedImage };
+  serviceAreas?: Partial<Omit<HomePageContent['serviceAreas'], 'areas'>> & { areas?: Array<Partial<HomeLink>> | null };
+  reviews?: Partial<HomePageContent['reviews']>;
+  cta?: Partial<HomePageContent['cta']>;
+};
 
-const ABOUT_PAGE_MEDIA_QUERY = /* groq */ `
-  *[_type == "aboutPageMedia" && _id == "singleton-about-page-media"][0] {
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    },
-    "legacyImage": {
-      "src": coalesce(legacyImage.asset->url, ""),
-      "alt": coalesce(legacyImage.alt, ""),
-      "crop": legacyImage.crop,
-      "hotspot": legacyImage.hotspot,
-      "asset": legacyImage.asset
-    },
-    "siaosiImage": {
-      "src": coalesce(siaosiImage.asset->url, ""),
-      "alt": coalesce(siaosiImage.alt, ""),
-      "crop": siaosiImage.crop,
-      "hotspot": siaosiImage.hotspot,
-      "asset": siaosiImage.asset
-    }
-  }
-`;
+/** Non-empty string from Sanity, else the default. */
+const str = (value: string | null | undefined, fallback: string) => (value?.trim() ? value : fallback);
+/** Non-empty array from Sanity, else the default. */
+const list = <T>(value: T[] | null | undefined, fallback: T[]) => (value?.length ? value : fallback);
 
-export async function getSanityAboutPageMediaContent(): Promise<AboutPageMediaContent | null> {
-  const doc = await sanityClient.fetch<{
-    heroImage?: FetchedImage;
-    legacyImage?: FetchedImage;
-    siaosiImage?: FetchedImage;
-  } | null>(ABOUT_PAGE_MEDIA_QUERY);
+export async function getSanityHomeContent(): Promise<HomePageContent> {
+  const raw = (await sanityClient.fetch<RawHome | null>(HOME_QUERY)) ?? {};
+  const d = HOME_DEFAULTS;
 
-  if (!doc) return null;
+  // Pathway cards: Sanity decides the order and count; defaults only fill empty text fields by position.
+  const rawCards = raw.intro?.audienceCards ?? [];
+  const audienceCards: HomeAudienceCard[] = (rawCards.length ? rawCards : d.intro.audienceCards).map((card, i) => {
+    const fallback = d.intro.audienceCards[i];
+    return {
+      label: str(card.label, fallback?.label ?? ''),
+      title: str(card.title, fallback?.title ?? ''),
+      ctaLabel: str(card.ctaLabel, fallback?.ctaLabel ?? ''),
+      href: str(card.href, fallback?.href ?? '#'),
+      image: resolveContentImage((card as { image?: FetchedImage }).image),
+    };
+  });
 
   return {
-    heroImage: resolveContentImage(doc.heroImage),
-    legacyImage: resolveContentImage(doc.legacyImage),
-    siaosiImage: resolveContentImage(doc.siaosiImage),
+    seo: {
+      title: str(raw.seo?.title, d.seo.title),
+      description: str(raw.seo?.description, d.seo.description),
+    },
+    hero: {
+      heading: str(raw.hero?.heading, d.hero.heading),
+      subheading: str(raw.hero?.subheading, d.hero.subheading),
+      ctaLabel: raw.hero?.ctaLabel?.trim() || undefined,
+      ctaHref: raw.hero?.ctaHref?.trim() || undefined,
+      trustBadges: list(raw.hero?.trustBadges, d.hero.trustBadges),
+      image: resolveContentImage(raw.hero?.image),
+      imageMobile: resolveContentImage(raw.hero?.imageMobile),
+    },
+    intro: {
+      heading: str(raw.intro?.heading, d.intro.heading),
+      body: str(raw.intro?.body, d.intro.body),
+      audienceCards,
+    },
+    services: {
+      heading: str(raw.services?.heading, d.services.heading),
+      items: list(raw.services?.items, d.services.items).map((item, i) => {
+        const fallback = d.services.items[i];
+        return {
+          title: str(item.title, fallback?.title ?? ''),
+          icon: item.icon ?? fallback?.icon ?? 'rock-wall',
+          description: str(item.description, fallback?.description ?? ''),
+          ctaLabel: str(item.ctaLabel, fallback?.ctaLabel ?? ''),
+          href: str(item.href, fallback?.href ?? '#'),
+        };
+      }),
+    },
+    highlightBanner: {
+      heading: str(raw.highlightBanner?.heading, d.highlightBanner.heading),
+      body: str(raw.highlightBanner?.body, d.highlightBanner.body),
+      ctaLabel: str(raw.highlightBanner?.ctaLabel, d.highlightBanner.ctaLabel),
+      ctaHref: str(raw.highlightBanner?.ctaHref, d.highlightBanner.ctaHref),
+      image: resolveContentImage(raw.highlightBanner?.image),
+    },
+    serviceAreas: {
+      heading: str(raw.serviceAreas?.heading, d.serviceAreas.heading),
+      body: str(raw.serviceAreas?.body, d.serviceAreas.body),
+      ctaLabel: str(raw.serviceAreas?.ctaLabel, d.serviceAreas.ctaLabel),
+      ctaHref: str(raw.serviceAreas?.ctaHref, d.serviceAreas.ctaHref),
+      areas: list(raw.serviceAreas?.areas, d.serviceAreas.areas).map((area) => ({
+        label: area.label ?? '',
+        href: area.href ?? '#',
+      })),
+    },
+    reviews: {
+      heading: str(raw.reviews?.heading, d.reviews.heading),
+      count: raw.reviews?.count ?? d.reviews.count,
+      ctaLabel: str(raw.reviews?.ctaLabel, d.reviews.ctaLabel),
+      ctaHref: str(raw.reviews?.ctaHref, d.reviews.ctaHref),
+    },
+    cta: {
+      heading: str(raw.cta?.heading, d.cta.heading),
+      note: str(raw.cta?.note, d.cta.note),
+    },
   };
 }
 
@@ -284,325 +224,23 @@ export async function getSanityContactPageMediaContent(): Promise<ContactPageMed
   };
 }
 
-const PROJECTS_PAGE_MEDIA_QUERY = /* groq */ `
-  *[_type == "projectsPageMedia" && _id == "singleton-projects-page-media"][0] {
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    }
-  }
-`;
-
-export async function getSanityProjectsPageMediaContent(): Promise<ProjectsPageMediaContent | null> {
-  const doc = await sanityClient.fetch<{ heroImage?: FetchedImage } | null>(PROJECTS_PAGE_MEDIA_QUERY);
-
-  if (!doc) return null;
-
-  return {
-    heroImage: resolveContentImage(doc.heroImage),
-  };
-}
-
-const REVIEWS_PAGE_MEDIA_QUERY = /* groq */ `
-  *[_type == "reviewsPageMedia" && _id == "singleton-reviews-page-media"][0] {
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    }
-  }
-`;
-
-export async function getSanityReviewsPageMediaContent(): Promise<ReviewsPageMediaContent | null> {
-  const doc = await sanityClient.fetch<{ heroImage?: FetchedImage } | null>(REVIEWS_PAGE_MEDIA_QUERY);
-
-  if (!doc) return null;
-
-  return {
-    heroImage: resolveContentImage(doc.heroImage),
-  };
-}
-
-const AUDIENCE_PAGE_MEDIA_QUERY = /* groq */ `
-  *[_type == "audiencePageMedia" && path == $path][0] {
-    title,
-    path,
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    },
-    "introImage": {
-      "src": coalesce(introImage.asset->url, ""),
-      "alt": coalesce(introImage.alt, ""),
-      "crop": introImage.crop,
-      "hotspot": introImage.hotspot,
-      "asset": introImage.asset
-    },
-    "projectImage": {
-      "src": coalesce(projectImage.asset->url, ""),
-      "alt": coalesce(projectImage.alt, ""),
-      "crop": projectImage.crop,
-      "hotspot": projectImage.hotspot,
-      "asset": projectImage.asset
-    }
-  }
-`;
-
-const COMMERCIAL_AUDIENCE_SUB_PAGE_MEDIA_QUERY = /* groq */ `
-  *[_type == "commercialAudienceSubPageMedia" && path == $path][0] {
-    title,
-    path,
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    },
-    "introImage": {
-      "src": coalesce(introImage.asset->url, ""),
-      "alt": coalesce(introImage.alt, ""),
-      "crop": introImage.crop,
-      "hotspot": introImage.hotspot,
-      "asset": introImage.asset
-    }
-  }
-`;
-
-const SERVICE_AREA_HUB_MEDIA_QUERY = /* groq */ `
-  *[_type == "serviceAreaHubPageMedia" && _id == "singleton-service-area-hub"][0] {
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    },
-    "introImage": {
-      "src": coalesce(introImage.asset->url, ""),
-      "alt": coalesce(introImage.alt, ""),
-      "crop": introImage.crop,
-      "hotspot": introImage.hotspot,
-      "asset": introImage.asset
-    }
-  }
-`;
-
-const SERVICE_AREA_LOCATION_MEDIA_QUERY = /* groq */ `
-  *[_type == "serviceAreaLocationPageMedia" && path == $path][0] {
-    title,
-    path,
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    },
-    "introImage": {
-      "src": coalesce(introImage.asset->url, ""),
-      "alt": coalesce(introImage.alt, ""),
-      "crop": introImage.crop,
-      "hotspot": introImage.hotspot,
-      "asset": introImage.asset
-    },
-    "recentWorkImage": {
-      "src": coalesce(recentWorkImage.asset->url, ""),
-      "alt": coalesce(recentWorkImage.alt, ""),
-      "crop": recentWorkImage.crop,
-      "hotspot": recentWorkImage.hotspot,
-      "asset": recentWorkImage.asset
-    }
-  }
-`;
-
-const SERVICE_CATEGORY_PAGE_MEDIA_QUERY = /* groq */ `
-  *[_type == "serviceCategoryPageMedia" && path == $path][0] {
-    title,
-    path,
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    },
-    "introImage": {
-      "src": coalesce(introImage.asset->url, ""),
-      "alt": coalesce(introImage.alt, ""),
-      "crop": introImage.crop,
-      "hotspot": introImage.hotspot,
-      "asset": introImage.asset
-    },
-    "projectImage": {
-      "src": coalesce(projectImage.asset->url, ""),
-      "alt": coalesce(projectImage.alt, ""),
-      "crop": projectImage.crop,
-      "hotspot": projectImage.hotspot,
-      "asset": projectImage.asset
-    }
-  }
-`;
-
-const normalizePath = (path: string) => {
-  const trimmed = path.trim();
-  const withLeading = trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
-  return withLeading.endsWith('/') ? withLeading : `${withLeading}/`;
-};
-
-export async function getSanityAudiencePageMedia(path: string): Promise<AudiencePageMediaContent | null> {
-  const doc = await sanityClient.fetch<
-    | (Omit<AudiencePageMediaContent, 'heroImage' | 'introImage' | 'projectImage'> & {
-        heroImage?: FetchedImage;
-        introImage?: FetchedImage;
-        projectImage?: FetchedImage;
-      })
-    | null
-  >(AUDIENCE_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
-
-  if (!doc) return null;
-
-  return {
-    title: doc.title,
-    path: doc.path,
-    heroImage: resolveContentImage(doc.heroImage),
-    introImage: resolveContentImage(doc.introImage),
-    projectImage: resolveContentImage(doc.projectImage),
-  };
-}
-
-export async function getSanityCommercialAudienceSubPageMedia(
-  path: string
-): Promise<CommercialAudienceSubPageMediaContent | null> {
-  const doc = await sanityClient.fetch<
-    | (Omit<CommercialAudienceSubPageMediaContent, 'heroImage' | 'introImage'> & {
-        heroImage?: FetchedImage;
-        introImage?: FetchedImage;
-      })
-    | null
-  >(COMMERCIAL_AUDIENCE_SUB_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
-
-  if (!doc) return null;
-
-  return {
-    title: doc.title,
-    path: doc.path,
-    heroImage: resolveContentImage(doc.heroImage),
-    introImage: resolveContentImage(doc.introImage),
-  };
-}
-
-export async function getSanityServiceAreaHubMediaContent(): Promise<ServiceAreaHubMediaContent | null> {
-  const doc = await sanityClient.fetch<{
-    heroImage?: FetchedImage;
-    introImage?: FetchedImage;
-  } | null>(SERVICE_AREA_HUB_MEDIA_QUERY);
-
-  if (!doc) return null;
-
-  return {
-    heroImage: resolveContentImage(doc.heroImage),
-    introImage: resolveContentImage(doc.introImage),
-  };
-}
-
-export async function getSanityServiceAreaLocationMedia(path: string): Promise<ServiceAreaLocationMediaContent | null> {
-  const doc = await sanityClient.fetch<
-    | (Omit<ServiceAreaLocationMediaContent, 'heroImage' | 'introImage' | 'recentWorkImage'> & {
-        heroImage?: FetchedImage;
-        introImage?: FetchedImage;
-        recentWorkImage?: FetchedImage;
-      })
-    | null
-  >(SERVICE_AREA_LOCATION_MEDIA_QUERY, { path: normalizePath(path) });
-
-  if (!doc) return null;
-
-  return {
-    title: doc.title,
-    path: doc.path,
-    heroImage: resolveContentImage(doc.heroImage),
-    introImage: resolveContentImage(doc.introImage),
-    recentWorkImage: resolveContentImage(doc.recentWorkImage),
-  };
-}
-
-export async function getSanityServiceCategoryPageMedia(path: string): Promise<ServiceCategoryPageMediaContent | null> {
-  const doc = await sanityClient.fetch<
-    | (Omit<ServiceCategoryPageMediaContent, 'heroImage' | 'introImage' | 'projectImage'> & {
-        heroImage?: FetchedImage;
-        introImage?: FetchedImage;
-        projectImage?: FetchedImage;
-      })
-    | null
-  >(SERVICE_CATEGORY_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
-
-  if (!doc) return null;
-
-  return {
-    title: doc.title,
-    path: doc.path,
-    heroImage: resolveContentImage(doc.heroImage),
-    introImage: resolveContentImage(doc.introImage),
-    projectImage: resolveContentImage(doc.projectImage),
-  };
-}
-
-const SERVICE_SUB_PAGE_MEDIA_QUERY = /* groq */ `
-  *[
-    _type in ["rockWallSubPageMedia", "concreteServiceSubPageMedia"] &&
-    path == $path
-  ][0] {
-    title,
-    path,
-    "heroImage": {
-      "src": coalesce(heroImage.asset->url, ""),
-      "alt": coalesce(heroImage.alt, ""),
-      "crop": heroImage.crop,
-      "hotspot": heroImage.hotspot,
-      "asset": heroImage.asset
-    }
-  }
-`;
-
-export async function getSanityServiceSubPageMedia(path: string): Promise<ServiceSubPageMediaContent | null> {
-  const doc = await sanityClient.fetch<
-    (Omit<ServiceSubPageMediaContent, 'heroImage'> & { heroImage?: FetchedImage }) | null
-  >(SERVICE_SUB_PAGE_MEDIA_QUERY, { path: normalizePath(path) });
-
-  if (!doc) return null;
-
-  return {
-    title: doc.title,
-    path: doc.path,
-    heroImage: resolveContentImage(doc.heroImage),
-  };
-}
-
 const NAVIGATION_QUERY = /* groq */ `
   {
     "header": *[_type == "siteNavigation" && _id == "singleton-navigation"][0] {
       "links": links[] {
         text,
         href,
-        "links": subLinks[] { text, href },
-        "columns": columns[] {
-          title,
+        "links": links[] {
+          text,
+          href,
           "links": links[] { text, href }
         }
       },
       "actions": actions[] { variant, text, href },
-      phone
+      "topBar": topBar { items, note }
     },
     "footer": *[_type == "siteFooter" && _id == "singleton-footer"][0] {
+      licensedLine,
       "links": columns[] {
         title,
         "links": links[] { text, href }
@@ -626,8 +264,39 @@ const FOOTER_MEDIA_QUERY = /* groq */ `
   }
 `;
 
-export async function getSanityNavigationContent(): Promise<NavigationContent> {
-  return sanityClient.fetch<NavigationContent>(NAVIGATION_QUERY);
+/** Drops nulls Sanity returns for empty fields so components can rely on optional props. */
+function cleanNav<T>(value: T): T {
+  if (Array.isArray(value)) return value.map(cleanNav) as T;
+  if (value && typeof value === 'object') {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value)) {
+      if (v === null || v === undefined || v === '') continue;
+      out[k] = cleanNav(v);
+    }
+    return out as T;
+  }
+  return value;
+}
+
+/** Returns `null` when the navigation or footer document has not been created yet. */
+export async function getSanityNavigationContent(): Promise<NavigationContent | null> {
+  const raw = await sanityClient.fetch<any>(NAVIGATION_QUERY);
+  if (!raw?.header || !raw?.footer) return null;
+  const nav = cleanNav(raw) as any;
+  return {
+    header: {
+      links: nav.header.links ?? [],
+      actions: nav.header.actions ?? [],
+      topBar: nav.header.topBar ? { items: nav.header.topBar.items ?? [], note: nav.header.topBar.note } : undefined,
+    },
+    footer: {
+      licensedLine: nav.footer.licensedLine,
+      links: (nav.footer.links ?? []).map((c: any) => ({ title: c.title ?? '', links: c.links ?? [] })),
+      secondaryLinks: nav.footer.secondaryLinks ?? [],
+      socialLinks: nav.footer.socialLinks ?? [],
+      footNote: nav.footer.footNote ?? '',
+    },
+  };
 }
 
 export async function getSanityFooterMediaContent(): Promise<FooterMediaContent | null> {
@@ -839,47 +508,6 @@ const CONTACT_HELP_OPTIONS_QUERY = /* groq */ `
 export async function getSanityContactHelpOptions(): Promise<FormHelpOption[]> {
   const options = await sanityClient.fetch<FormHelpOption[] | null>(CONTACT_HELP_OPTIONS_QUERY);
   return (options ?? []).filter((option) => option?.label && option?.value);
-}
-
-const REVIEWS_PAGE_QUERY = /* groq */ `
-  *[_type == "reviewsPage" && _id == "singleton-reviews"][0] {
-    meta,
-    hero { ${HERO_PROJECTION} },
-    liveReviews { heading, intro },
-    platforms {
-      heading,
-      intro,
-      "items": items[] { title, ratingNote, href, linkText, icon }
-    },
-    gallerySection {
-      heading,
-      paragraphs,
-      ctaText,
-      ctaHref,
-      "previewImages": previewImages[] {
-        ${IMAGE_PROJECTION}
-      }
-    },
-    ctaBanner { ${CTA_BANNER_PROJECTION} }
-  }
-`;
-
-export async function getSanityReviewsPage(): Promise<ReviewsPageContent> {
-  const page = await sanityClient.fetch<ReviewsPageContent | null>(REVIEWS_PAGE_QUERY);
-  if (!page) {
-    throw new Error('Sanity reviewsPage document is missing (singleton-reviews).');
-  }
-  return {
-    ...page,
-    hero: normalizeHeroImage(page.hero),
-    gallerySection: {
-      ...page.gallerySection,
-      _type: 'splitContentSection',
-      previewImages: (page.gallerySection.previewImages ?? [])
-        .map((image) => resolveContentImage(image as FetchedImage))
-        .filter((image): image is ContentImage => Boolean(image?.src)),
-    },
-  };
 }
 
 type SanityMarkDef = {

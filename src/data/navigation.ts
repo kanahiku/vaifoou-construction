@@ -1,5 +1,5 @@
 import type { NavigationContent } from '~/lib/content/types';
-import { CONTACT, PRIMARY_CTA_HREF, SOCIAL } from '~/config';
+import { CONTACT } from '~/config';
 
 export const navigationData: NavigationContent = {
   header: {
@@ -78,9 +78,11 @@ export const navigationData: NavigationContent = {
       { text: 'Contact', href: '/contact/' },
     ],
     actions: [],
+    topBar: { items: ['{license}', 'Licensed & Insured', "Serving All of O'ahu"], note: 'Closed on Sundays' },
   },
 
   footer: {
+    licensedLine: "Licensed & Insured in O\u02BBahu, Hawai\u02BBi",
     links: [
       {
         title: 'SERVICES',
@@ -130,7 +132,14 @@ export const navigationData: NavigationContent = {
       { text: 'Terms', href: '/terms/' },
       { text: 'Accessibility', href: '/accessibility/' },
     ],
-    socialLinks: SOCIAL.nav as unknown as NavigationContent['footer']['socialLinks'],
-    footNote: `&copy; ${new Date().getFullYear()} ${CONTACT.businessName} LLC. All rights reserved.`,
+    socialLinks: [
+      { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://www.instagram.com/vaifoou_construction_llc/' },
+      {
+        ariaLabel: 'Facebook',
+        icon: 'tabler:brand-facebook',
+        href: 'https://www.facebook.com/p/Vaifoou-Construction-61552740776227/',
+      },
+    ],
+    footNote: `© {year} ${CONTACT.businessName} LLC. All rights reserved.`,
   },
 };

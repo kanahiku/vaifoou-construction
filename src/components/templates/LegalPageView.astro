@@ -1,0 +1,68 @@
+---
+/**
+ * LegalPageView — template for legal pages (privacy policy, terms, accessibility).
+ * Text comes from the Sanity `legalPage` document whose `path` matches; the page file only passes the path.
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import SectionBg from '~/components/ui/SectionBg.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { getLegalPage } from '~/lib/content';
+
+export interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+const page = await getLegalPage(path);
+if (!page) throw new Error(`Sanity legalPage document missing for "${path}". Run \`npm run seed:pages\`.`);
+
+const metadata = { title: page.seo.title, description: page.seo.description, ignoreTitleTemplate: true };
+
+const h2 = 'font-display text-[20px] font-bold leading-tight tracking-[-0.1px] text-heading uppercase md:text-[24px]';
+const body = 'mt-2 font-body text-[15px] leading-7 text-banner-note md:text-[16px]';
+---
+
+<Layout metadata={metadata}>
+  {/* ── Page hero ─────────────────────────────────────────────── */}
+  <section class="w-full border-b border-banner-line bg-heading py-14 md:py-20">
+    <div class="site-frame flex flex-col gap-1">
+      <h1
+        class="font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[56px]"
+      >
+        {page.heading}
+      </h1>
+    </div>
+  </section>
+
+  {/* ── Body ───────────────────────────────────────────────────── */}
+  <WidgetWrapper containerClass="max-w-container mx-auto">
+    <div class="max-w-3xl space-y-10 md:space-y-14">
+      {
+        page.intro.length > 0 && (
+          <section>
+            {page.intro.map((html) => (
+              <p class={body} set:html={html} />
+            ))}
+          </section>
+        )
+      }
+
+      {
+        page.sections.map((section) => (
+          <section>
+            <h2 class={h2}>{section.heading}</h2>
+            {section.body.map((html) => (
+              <p class={body} set:html={html} />
+            ))}
+          </section>
+        ))
+      }
+    </div>
+    <Fragment slot="bg">
+      <SectionBg variant="grey" />
+    </Fragment>
+  </WidgetWrapper>
+
+  <BrickMotifCTA heading={page.cta.heading} note={page.cta.note} />
+</Layout>
