@@ -1,38 +1,24 @@
 import type {
-  AboutPageMediaContent,
-  AudiencePageMediaContent,
+  AboutPageContent,
   BlogPost,
   Book,
   BookSeries,
-  CommercialAudienceSubPageMediaContent,
   ContactPageMediaContent,
   ContactPageContent,
   FooterMediaContent,
-  HomeMediaContent,
   HomePageContent,
   NavigationContent,
   PodcastEpisode,
   PodcastPartGroup,
   ProjectCardContent,
-  ProjectsPageMediaContent,
-  ReviewsPageMediaContent,
-  ReviewsPageContent,
-  ServiceAreaHubMediaContent,
-  ServiceAreaLocationMediaContent,
-  ServiceCategoryPageMediaContent,
-  ServicesHubMediaContent,
   ServicePageContent,
-  ServiceSubPageMediaContent,
   Testimonial,
 } from './types';
 import {
-  getSanityAboutPageMediaContent,
-  getSanityAudiencePageMedia,
   getSanityBlogPost,
   getSanityBlogPosts,
   getSanityBlogPostSlugs,
   getSanityBooks,
-  getSanityCommercialAudienceSubPageMedia,
   getSanityContactPageMediaContent,
   getSanityPodcastEpisodes,
   getSanityTestimonials,
@@ -41,55 +27,33 @@ import {
   getSanityContactPage,
   getSanityFooterMediaContent,
   getSanityHomeContent,
-  getSanityHomeMediaContent,
   getSanityNavigationContent,
-  getSanityProjectsPageMediaContent,
-  getSanityReviewsPage,
-  getSanityReviewsPageMediaContent,
   getSanityProjects,
-  getSanityServiceAreaHubMediaContent,
-  getSanityServiceAreaLocationMedia,
-  getSanityServiceCategoryPageMedia,
   getSanityServicePage,
   getSanityServicePageSlugs,
-  getSanityServicesHubMediaContent,
-  getSanityServiceSubPageMedia,
 } from './sanity';
 /* contact page removed */
+import { CONTACT } from '../../config/contact';
+import { HOME_DEFAULTS } from '../../data/home-defaults';
 import { navigationData } from '../../data/navigation';
 
+export { getServicesHub, getServiceCategoryPage, getServiceSubPage } from './services';
+export { getServiceAreasHub, getServiceAreaPage } from './serviceAreas';
+export { getAboutPage } from './about';
+export { getReviewsPage, getProjectsPage, getBlogPage } from './listingPages';
+export { getLegalPage } from './legal';
+export { getAudienceLandingPage, getAudienceSubPage } from './audiences';
+
+/**
+ * Homepage copy + images from Sanity, with per-field fallback to `HOME_DEFAULTS`
+ * so the page still renders if Sanity is unreachable.
+ */
 export async function getHomeContent(): Promise<HomePageContent> {
-  const page = await getSanityHomeContent();
-  if (!page) {
-    throw new Error('Sanity homePage document is missing (singleton-home).');
-  }
-  return page;
-}
-
-export async function getHomeMediaContent(): Promise<HomeMediaContent | null> {
   try {
-    return await getSanityHomeMediaContent();
+    return await getSanityHomeContent();
   } catch (error) {
-    console.warn('Sanity homepage media unavailable; using placeholder fallback.', error);
-    return null;
-  }
-}
-
-export async function getServicesHubMediaContent(): Promise<ServicesHubMediaContent | null> {
-  try {
-    return await getSanityServicesHubMediaContent();
-  } catch (error) {
-    console.warn('Sanity services hub media unavailable; using placeholder fallback.', error);
-    return null;
-  }
-}
-
-export async function getAboutPageMediaContent(): Promise<AboutPageMediaContent | null> {
-  try {
-    return await getSanityAboutPageMediaContent();
-  } catch (error) {
-    console.warn('Sanity about page media unavailable; using placeholder fallback.', error);
-    return null;
+    console.warn('Sanity homepage unavailable; using default copy and placeholder images.', error);
+    return HOME_DEFAULTS;
   }
 }
 
@@ -98,83 +62,6 @@ export async function getContactPageMediaContent(): Promise<ContactPageMediaCont
     return await getSanityContactPageMediaContent();
   } catch (error) {
     console.warn('Sanity contact page media unavailable; using placeholder fallback.', error);
-    return null;
-  }
-}
-
-export async function getProjectsPageMediaContent(): Promise<ProjectsPageMediaContent | null> {
-  try {
-    return await getSanityProjectsPageMediaContent();
-  } catch (error) {
-    console.warn('Sanity projects page media unavailable; using placeholder fallback.', error);
-    return null;
-  }
-}
-
-export async function getReviewsPageMediaContent(): Promise<ReviewsPageMediaContent | null> {
-  try {
-    return await getSanityReviewsPageMediaContent();
-  } catch (error) {
-    console.warn('Sanity reviews page media unavailable; using placeholder fallback.', error);
-    return null;
-  }
-}
-
-export async function getAudiencePageMedia(path: string): Promise<AudiencePageMediaContent | null> {
-  try {
-    return await getSanityAudiencePageMedia(path);
-  } catch (error) {
-    console.warn(`Sanity audience page media unavailable for "${path}"; using placeholder fallback.`, error);
-    return null;
-  }
-}
-
-export async function getCommercialAudienceSubPageMedia(
-  path: string
-): Promise<CommercialAudienceSubPageMediaContent | null> {
-  try {
-    return await getSanityCommercialAudienceSubPageMedia(path);
-  } catch (error) {
-    console.warn(
-      `Sanity commercial audience sub-page media unavailable for "${path}"; using placeholder fallback.`,
-      error
-    );
-    return null;
-  }
-}
-
-export async function getServiceAreaHubMediaContent(): Promise<ServiceAreaHubMediaContent | null> {
-  try {
-    return await getSanityServiceAreaHubMediaContent();
-  } catch (error) {
-    console.warn('Sanity service area hub media unavailable; using placeholder fallback.', error);
-    return null;
-  }
-}
-
-export async function getServiceAreaLocationMedia(path: string): Promise<ServiceAreaLocationMediaContent | null> {
-  try {
-    return await getSanityServiceAreaLocationMedia(path);
-  } catch (error) {
-    console.warn(`Sanity service area location media unavailable for "${path}"; using placeholder fallback.`, error);
-    return null;
-  }
-}
-
-export async function getServiceCategoryPageMedia(path: string): Promise<ServiceCategoryPageMediaContent | null> {
-  try {
-    return await getSanityServiceCategoryPageMedia(path);
-  } catch (error) {
-    console.warn(`Sanity service category media unavailable for "${path}"; using placeholder fallback.`, error);
-    return null;
-  }
-}
-
-export async function getServiceSubPageMedia(path: string): Promise<ServiceSubPageMediaContent | null> {
-  try {
-    return await getSanityServiceSubPageMedia(path);
-  } catch (error) {
-    console.warn(`Sanity service sub-page media unavailable for "${path}"; using placeholder fallback.`, error);
     return null;
   }
 }
@@ -188,121 +75,36 @@ export async function getContactPage(): Promise<ContactPageContent | null> {
   }
 }
 
-export async function getReviewsPage(): Promise<ReviewsPageContent | null> {
-  try {
-    return await getSanityReviewsPage();
-  } catch (error) {
-    console.warn('Sanity reviews page unavailable; using live review feed fallback.', error);
-    return null;
-  }
-}
-
 /* getContactHelpOptions removed — contact page deleted */
 
-const LEGAL_FOOTER_LINKS = [
-  { text: 'Privacy Policy', href: '/privacy-policy' },
-  { text: 'Terms', href: '/terms' },
-  { text: 'Accessibility', href: '/accessibility' },
-];
-
-const HIDDEN_NAV_HREFS = new Set(['/chapters', '/guidebooks']);
-const HIDDEN_NAV_LABELS = new Set(['chapters', 'guidebooks', 'guidebook series']);
-const PROJECTS_LINK = { text: 'Projects', href: '/projects/' };
-
-function isHiddenNavLink(link: { text: string; href?: string }): boolean {
-  return (link.href != null && HIDDEN_NAV_HREFS.has(link.href)) || HIDDEN_NAV_LABELS.has(link.text.toLowerCase());
-}
-
-function hidePagesFromUi(nav: NavigationContent): NavigationContent {
+/** Replaces tokens editors can use in Sanity text: {license}, {year}. */
+function fillNavTokens(nav: NavigationContent): NavigationContent {
+  const fill = (v: string) => v.replaceAll('{license}', CONTACT.license ?? '').replaceAll('{year}', String(new Date().getFullYear()));
   return {
     ...nav,
     header: {
       ...nav.header,
-      links: nav.header.links.filter((link) => !isHiddenNavLink(link)),
+      topBar: nav.header.topBar
+        ? { ...nav.header.topBar, items: nav.header.topBar.items.map(fill).filter(Boolean) }
+        : undefined,
     },
-    footer: {
-      ...nav.footer,
-      links: nav.footer.links
-        .filter((column) => column.title.toLowerCase() !== 'chapters')
-        .map((column) => ({
-          ...column,
-          links: column.links.filter((link) => !isHiddenNavLink(link)),
-        })),
-    },
+    footer: { ...nav.footer, footNote: fill(nav.footer.footNote) },
   };
 }
 
-function ensureLegalFooterLinks(nav: NavigationContent): NavigationContent {
-  const existing = nav.footer.secondaryLinks ?? [];
-  const byHref = new Map(existing.map((link) => [link.href, link]));
-  const merged = LEGAL_FOOTER_LINKS.map((link) => byHref.get(link.href) ?? link);
-
-  for (const link of existing) {
-    if (!merged.some((item) => item.href === link.href)) merged.push(link);
-  }
-
-  return {
-    ...nav,
-    footer: { ...nav.footer, secondaryLinks: merged },
-  };
-}
-
-function insertLinkAfter(
-  links: Array<{ text?: string; href?: string }>,
-  link: { text: string; href: string },
-  afterHref: string
-) {
-  if (links.some((item) => item.href === link.href)) return links;
-
-  const index = links.findIndex((item) => item.href === afterHref);
-  if (index === -1) return [...links, link];
-
-  return [...links.slice(0, index + 1), link, ...links.slice(index + 1)];
-}
-
-function ensureProjectsLinks(nav: NavigationContent): NavigationContent {
-  const headerLinks = insertLinkAfter(nav.header.links ?? [], PROJECTS_LINK, '/reviews/');
-  const footerColumns = nav.footer.links ?? [];
-  const companyIndex = footerColumns.findIndex((column) => column.title.toLowerCase() === 'company');
-  const companyColumn =
-    companyIndex >= 0
-      ? footerColumns[companyIndex]
-      : {
-          title: 'COMPANY',
-          links: [],
-        };
-  const updatedCompanyColumn = {
-    ...companyColumn,
-    links: insertLinkAfter(companyColumn.links ?? [], PROJECTS_LINK, '/reviews/'),
-  };
-  const updatedFooterColumns =
-    companyIndex >= 0
-      ? footerColumns.map((column, index) => (index === companyIndex ? updatedCompanyColumn : column))
-      : [...footerColumns, updatedCompanyColumn];
-
-  return {
-    ...nav,
-    header: {
-      ...nav.header,
-      links: headerLinks as NavigationContent['header']['links'],
-    },
-    footer: {
-      ...nav.footer,
-      links: updatedFooterColumns,
-    },
-  };
-}
-
+/**
+ * Header + footer navigation from Sanity (`siteNavigation`, `siteFooter`).
+ * Falls back to `src/data/navigation.ts` only if the documents are missing or Sanity is unreachable,
+ * so the site never renders without a menu.
+ */
 export async function getNavigationContent(): Promise<NavigationContent> {
   try {
     const nav = await getSanityNavigationContent();
-    if (nav?.header && nav?.footer) {
-      return hidePagesFromUi(ensureProjectsLinks(ensureLegalFooterLinks(nav)));
-    }
+    if (nav) return fillNavTokens(nav);
   } catch (error) {
     console.warn('Sanity navigation unavailable; using local fallback.', error);
   }
-  return hidePagesFromUi(ensureProjectsLinks(ensureLegalFooterLinks(navigationData)));
+  return fillNavTokens(navigationData);
 }
 
 export async function getFooterMediaContent(): Promise<FooterMediaContent | null> {
@@ -448,29 +250,18 @@ export async function getRelatedBlogPosts(post: BlogPost, max = 3): Promise<Blog
 }
 
 export type {
-  AboutPageMediaContent,
-  AudiencePageMediaContent,
+  AboutPageContent,
   BlogPost,
   Book,
   BookSeries,
-  CommercialAudienceSubPageMediaContent,
   ContactPageContent,
   FooterMediaContent,
-  HomeMediaContent,
   HomePageContent,
   NavigationContent,
   PodcastEpisode,
   PodcastPartGroup,
   ProjectCardContent,
-  ProjectsPageMediaContent,
-  ReviewsPageMediaContent,
-  ReviewsPageContent,
-  ServiceAreaHubMediaContent,
-  ServiceAreaLocationMediaContent,
-  ServiceCategoryPageMediaContent,
-  ServicesHubMediaContent,
   ServicePageContent,
-  ServiceSubPageMediaContent,
   Testimonial,
 };
 

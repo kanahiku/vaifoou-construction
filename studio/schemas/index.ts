@@ -1,24 +1,29 @@
 // Singletons
 import { siteNavigation } from './singletons/navigation';
 import { siteFooter } from './singletons/footer';
-import { homePage, homeAudienceCard } from './documents/homePage';
-import { aboutPageMedia } from './documents/aboutPageMedia';
+import { homePage, homeAudienceCard, homeServiceCard, homeServiceArea } from './documents/homePage';
+import { reviewsPage, projectsPage, blogPage } from './documents/listingPages';
+import { legalPage } from './documents/legalPage';
+import { audienceLandingPage, audienceSubPage, audienceCard, audiencePoint } from './documents/audiencePages';
+import { aboutPage } from './documents/aboutPage';
 import { contactPageMedia } from './documents/contactPageMedia';
-import { projectsPageMedia } from './documents/projectsPageMedia';
-import { reviewsPageMedia } from './documents/reviewsPageMedia';
-import { servicesHubPage, servicesHubAudienceCard } from './documents/servicesHubPage';
-import { audiencePageMedia } from './documents/audiencePageMedia';
-import { commercialAudienceSubPageMedia } from './documents/commercialAudienceSubPageMedia';
-import { serviceCategoryPageMedia } from './documents/serviceCategoryPageMedia';
-import { concreteServiceSubPageMedia, rockWallSubPageMedia } from './documents/serviceSubPageMedia';
-import { serviceAreaHubPageMedia } from './documents/serviceAreaHubPageMedia';
-import { serviceAreaLocationPageMedia } from './documents/serviceAreaLocationPageMedia';
+import { servicesHubPage, servicesHubAudienceCard, servicesHubScopeRow } from './documents/servicesHubPage';
+import {
+  serviceCategoryPage,
+  serviceSubPage,
+  serviceTitledItem,
+  serviceFaq,
+  serviceLinkItem,
+  serviceCategoryCard,
+  serviceTableRow,
+} from './documents/servicePages';
+import { serviceAreasHubPage, serviceAreaPage, serviceAreaCard } from './documents/serviceAreaPages';
 import { blogPost } from './documents/blogPost';
 import { testimonial } from './documents/testimonial';
 import { project, projectTag } from './documents/project';
 
 // Navigation objects
-import { navLink, navSubLink } from './objects/navLink';
+import { navLink, navGroup, navSubLink } from './objects/navLink';
 import { footerColumn, footerLink, socialLink } from './objects/footerColumn';
 
 // Shared item objects
@@ -58,24 +63,28 @@ export const schemaTypes = [
   siteNavigation,
   siteFooter,
   homePage,
-  aboutPageMedia,
+  aboutPage,
+  audienceLandingPage,
+  audienceSubPage,
+  audienceCard,
+  audiencePoint,
+  reviewsPage,
+  projectsPage,
+  blogPage,
+  legalPage,
   contactPageMedia,
-  projectsPageMedia,
-  reviewsPageMedia,
   servicesHubPage,
-  audiencePageMedia,
-  commercialAudienceSubPageMedia,
-  serviceCategoryPageMedia,
-  rockWallSubPageMedia,
-  concreteServiceSubPageMedia,
-  serviceAreaHubPageMedia,
-  serviceAreaLocationPageMedia,
+  serviceCategoryPage,
+  serviceSubPage,
+  serviceAreasHubPage,
+  serviceAreaPage,
   project,
   blogPost,
   testimonial,
 
   // Objects — nav
   navLink,
+  navGroup,
   navSubLink,
 
   // Objects — footer
@@ -90,7 +99,16 @@ export const schemaTypes = [
   timelineStep,
   faqItem,
   homeAudienceCard,
+  homeServiceCard,
+  homeServiceArea,
   servicesHubAudienceCard,
+  servicesHubScopeRow,
+  serviceTitledItem,
+  serviceFaq,
+  serviceLinkItem,
+  serviceCategoryCard,
+  serviceTableRow,
+  serviceAreaCard,
   projectTag,
   linkedCard,
   quoteCardItem,

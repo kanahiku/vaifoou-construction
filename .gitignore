@@ -28,3 +28,5 @@ studio/.env
 pnpm-lock.yaml
 
 .astro
+# Sanity seed backups
+data/backups/

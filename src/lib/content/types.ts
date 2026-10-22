@@ -28,7 +28,7 @@ export interface ProjectCardContent {
 
 export interface NavSubLink {
   text: string;
-  href: string;
+  href?: string;
   /** Optional grandchildren — renders a right-side flyout on desktop, nested accordion on mobile. */
   links?: Array<{ text: string; href: string }>;
 }
@@ -52,7 +52,7 @@ export interface NavPhone {
 
 export interface FooterLink {
   text: string;
-  href: string;
+  href?: string;
 }
 
 export interface FooterColumn {
@@ -71,8 +71,10 @@ export interface NavigationContent {
     links: NavLink[];
     actions: { variant?: string; text?: string; href?: string }[];
     phone?: NavPhone;
+    topBar?: { items: string[]; note?: string };
   };
   footer: {
+    licensedLine?: string;
     links: FooterColumn[];
     secondaryLinks: FooterLink[];
     socialLinks: SocialLink[];
@@ -115,55 +117,65 @@ export interface FAQItem {
   answer: string;
 }
 
-// ─── Full homepage content ─────────────────────────────────────────────────────
+// ─── Homepage content (Sanity `homePage`, section by section) ──────────────────
+
+export type HomeServiceIcon = 'rock-wall' | 'retaining-wall' | 'walls' | 'hammer';
+
+export interface HomeAudienceCard {
+  label: string;
+  title: string;
+  ctaLabel: string;
+  href: string;
+  image?: ContentImage;
+}
+
+export interface HomeServiceCard {
+  title: string;
+  icon: HomeServiceIcon;
+  description: string;
+  ctaLabel: string;
+  href: string;
+}
+
+export interface HomeLink {
+  label: string;
+  href: string;
+}
 
 export interface HomePageContent {
-  meta: {
-    title: string;
-    description: string;
-  };
-
+  seo: { title: string; description: string };
   hero: {
-    titleLine1: string;
-    titleLine2: string;
-    subtitleParagraph1: string;
-    ctaText: string;
-    ctaHref: string;
-    phoneCtaText?: string;
-    phoneCtaHref?: string;
-    heroImage: ContentImage;
-    heroImageMobile?: ContentImage;
-  };
-
-  statsBar: StatItem[];
-
-  whyInspect: {
     heading: string;
-    paragraph1: string;
-    paragraph2: string;
-    ctaText: string;
-    ctaHref: string;
-    image: ContentImage;
-  };
-
-  servicesSection: {
-    title: string;
-    subtitle: string;
-    services: ServiceItem[];
-  };
-
-  faqs: {
-    title: string;
-    items: FAQItem[];
-  };
-
-  ctaBanner: {
-    title: string;
-    subtitle: string;
-    ctaText?: string;
+    subheading: string;
+    /** Empty → sitewide primary CTA from `src/config/cta.ts`. */
+    ctaLabel?: string;
     ctaHref?: string;
-    showAfterHoursNote: boolean;
+    trustBadges: string[];
+    image?: ContentImage;
+    imageMobile?: ContentImage;
   };
+  intro: {
+    heading: string;
+    body: string;
+    audienceCards: HomeAudienceCard[];
+  };
+  services: { heading: string; items: HomeServiceCard[] };
+  highlightBanner: {
+    heading: string;
+    body: string;
+    ctaLabel: string;
+    ctaHref: string;
+    image?: ContentImage;
+  };
+  serviceAreas: {
+    heading: string;
+    body: string;
+    ctaLabel: string;
+    ctaHref: string;
+    areas: HomeLink[];
+  };
+  reviews: { heading: string; count: number; ctaLabel: string; ctaHref: string };
+  cta: { heading: string; note: string };
 }
 
 export interface HomeMediaCard {
@@ -172,75 +184,22 @@ export interface HomeMediaCard {
   image?: ContentImage;
 }
 
-export interface HomeMediaContent {
-  heroImage?: ContentImage;
-  heroImageMobile?: ContentImage;
-  audienceCards: HomeMediaCard[];
-  bannerImage?: ContentImage;
-}
-
-export interface ServicesHubMediaContent {
-  heroImage?: ContentImage;
-  audienceCards: HomeMediaCard[];
-}
-
-export interface AudiencePageMediaContent {
-  title?: string;
-  path: string;
-  heroImage?: ContentImage;
-  introImage?: ContentImage;
-  projectImage?: ContentImage;
-}
-
-export interface CommercialAudienceSubPageMediaContent {
-  title?: string;
-  path: string;
-  heroImage?: ContentImage;
-  introImage?: ContentImage;
-}
-
-export interface AboutPageMediaContent {
-  heroImage?: ContentImage;
-  legacyImage?: ContentImage;
-  siaosiImage?: ContentImage;
+export interface AboutPageContent {
+  seo: { title: string; description: string };
+  hero: { heading: string; body: string; image?: ContentImage };
+  story: { heading: string; body: string };
+  legacy: {
+    heading: string;
+    paragraphs: string[];
+    timeline: Array<{ year: string; label: string }>;
+    image?: ContentImage;
+  };
+  values: { heading: string; body: string; items: Array<{ label: string; body: string }> };
+  crew: { heading: string; body: string; members: Array<{ name: string; role: string }> };
+  cta: { heading: string; note?: string };
 }
 
 export interface ContactPageMediaContent {
-  heroImage?: ContentImage;
-}
-
-export interface ProjectsPageMediaContent {
-  heroImage?: ContentImage;
-}
-
-export interface ReviewsPageMediaContent {
-  heroImage?: ContentImage;
-}
-
-export interface ServiceAreaHubMediaContent {
-  heroImage?: ContentImage;
-  introImage?: ContentImage;
-}
-
-export interface ServiceAreaLocationMediaContent {
-  title?: string;
-  path: string;
-  heroImage?: ContentImage;
-  introImage?: ContentImage;
-  recentWorkImage?: ContentImage;
-}
-
-export interface ServiceCategoryPageMediaContent {
-  title?: string;
-  path: string;
-  heroImage?: ContentImage;
-  introImage?: ContentImage;
-  projectImage?: ContentImage;
-}
-
-export interface ServiceSubPageMediaContent {
-  title?: string;
-  path: string;
   heroImage?: ContentImage;
 }
 
@@ -475,27 +434,6 @@ export interface ReviewPlatformItem {
   icon?: string;
 }
 
-export interface ReviewsPageContent {
-  meta: {
-    title: string;
-    description: string;
-  };
-  hero: PageHero;
-  liveReviews: {
-    heading: string;
-    intro?: string;
-  };
-  platforms: {
-    heading: string;
-    intro?: string;
-    items: ReviewPlatformItem[];
-  };
-  gallerySection: SplitContentSection & {
-    previewImages?: ContentImage[];
-  };
-  ctaBanner: CtaBannerContent;
-}
-
 // ─── Blog ─────────────────────────────────────────────────────────────────────
 
 export interface BlogPost {
@@ -676,4 +614,203 @@ export interface Testimonial {
   platform?: ReviewPlatform;
   reviewedAt?: string;
   order: number;
+}
+
+// ─── Service pages (Sanity: servicesHubPage, serviceCategoryPage, serviceSubPage) ───
+
+export interface ServiceTitledItem {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface ServiceFaqEntry {
+  question: string;
+  answer: string;
+}
+
+export interface ServiceLinkEntry {
+  title: string;
+  href: string;
+}
+
+export interface ServicesHubContent {
+  seo: { title: string; description: string };
+  hero: { heading: string; subheading: string; image?: ContentImage };
+  intro: { heading: string; body: string; audienceCards: HomeAudienceCard[] };
+  capabilities: { heading: string; items: HomeServiceCard[] };
+  scope: { heading: string; buildLabel: string; notCoverLabel: string; rows: Array<{ build: string; notCover: string }> };
+  cta: { heading: string; note: string };
+}
+
+export interface ServiceCategoryPageContent {
+  path: string;
+  seo: { title: string; description: string };
+  hero: { heading: string; subheading: string; image?: ContentImage };
+  intro: { heading: string; body: string; image?: ContentImage };
+  subServices: {
+    heading: string;
+    columns: 2 | 3 | 4;
+    cards: Array<{ title: string; description: string; href?: string; ctaLabel?: string }>;
+  };
+  projects: { heading: string; body: string; ctaLabel: string; ctaHref: string; image?: ContentImage };
+  process: { heading: string; steps: ServiceTitledItem[] };
+  faqs: { heading: string; items: ServiceFaqEntry[] };
+  related: { heading: string; links: ServiceLinkEntry[] };
+  cta: { heading: string; note: string };
+}
+
+export interface ServiceSubPageContent {
+  path: string;
+  seo: { title: string; description: string };
+  hero: { heading: string; body: string; image?: ContentImage };
+  process: { heading: string; items: ServiceTitledItem[] };
+  materials: { heading: string; items: ServiceTitledItem[] };
+  comparison: {
+    eyebrow?: string;
+    heading: string;
+    note?: string;
+    col1: string;
+    col2?: string;
+    rows: Array<{ feature: string; val1: string; val2?: string }>;
+    footerText?: string;
+    footerLinkLabel?: string;
+    footerLinkHref?: string;
+  };
+  applications: { heading: string; items: ServiceTitledItem[] };
+  related: { categoryLabel: string; links: ServiceLinkEntry[] };
+  faqs: { heading: string; items: ServiceFaqEntry[] };
+  cta: { heading: string; note: string };
+}
+
+// ─── Service areas (Sanity: serviceAreasHubPage, serviceAreaPage) ──────────────────
+
+export interface ServiceAreaListItem {
+  name: string;
+  path: string;
+}
+
+export interface ServiceAreasHubContent {
+  seo: { title: string; description: string };
+  hero: { heading: string; subheading: string; image?: ContentImage };
+  intro: { heading: string; body: string; image?: ContentImage };
+  communities: { heading: string; body: string; cardLabel: string; areas: ServiceAreaListItem[] };
+  faqs: { heading: string; items: ServiceFaqEntry[] };
+  cta: { heading: string; note?: string };
+}
+
+export interface ServiceAreaPageContent {
+  path: string;
+  name: string;
+  seo: { title: string; description: string };
+  hero: { heading: string; body: string; image?: ContentImage };
+  intro: { heading: string; body: string; image?: ContentImage };
+  services: { heading: string; cards: Array<{ name: string; href: string; description: string }> };
+  projects: { heading: string; body: string; ctaLabel: string; ctaHref: string; image?: ContentImage };
+  faqs: { heading: string; items: ServiceFaqEntry[] };
+  cta: { heading: string; note?: string };
+  /** Every other area, in order — for the cross-link grid. */
+  otherAreas: ServiceAreaListItem[];
+}
+
+// ─── Listing pages (reviews / projects / blog) and legal pages ───────────────
+
+export interface ReviewsPageContent {
+  seo: { title: string; description: string };
+  hero: { heading: string; body: string; image?: ContentImage };
+  featured: {
+    heading: string;
+    body: string;
+    emptyTitle: string;
+    emptyBody: string;
+    extraReviews: Array<{
+      quote: string;
+      name: string;
+      platform?: 'google' | 'yelp' | 'thumbtack';
+      reviewedAt?: string;
+    }>;
+  };
+  profiles: { heading: string; body: string };
+  cta: { heading: string; note?: string };
+}
+
+export interface ProjectsPageContent {
+  seo: { title: string; description: string };
+  hero: { heading: string; body: string; image?: ContentImage };
+  filters: {
+    heading: string;
+    body: string;
+    locationLabel: string;
+    allLocationsLabel: string;
+    serviceLabel: string;
+    allServicesLabel: string;
+    resetLabel: string;
+    emptyText: string;
+  };
+  services: {
+    heading: string;
+    cards: Array<{ title: string; description: string; href: string; ctaLabel: string; icon: string }>;
+  };
+  cta: { heading: string; note?: string };
+}
+
+export interface BlogPageContent {
+  seo: { title: string; description: string };
+  hero: { heading: string };
+  empty: { title: string; body: string };
+  cta: { heading: string; note?: string };
+}
+
+export interface LegalPageContent {
+  path: string;
+  seo: { title: string; description: string };
+  heading: string;
+  /** Pre-rendered, escaped HTML paragraphs (tokens already replaced). */
+  intro: string[];
+  sections: Array<{ heading: string; body: string[] }>;
+  cta: { heading: string; note?: string };
+}
+
+// ─── Who we work with ────────────────────────────────────────────────────────
+
+export interface AudienceListItem {
+  name: string;
+  path: string;
+}
+
+export interface AudienceLandingPageContent {
+  path: string;
+  seo: { title: string; description: string };
+  hero: { heading: string; body: string; image?: ContentImage };
+  intro: {
+    heading: string;
+    body: string;
+    crossPrompt?: string;
+    crossLabel?: string;
+    crossHref?: string;
+    image?: ContentImage;
+  };
+  services: { heading: string; cards: Array<{ name: string; href: string; description: string }> };
+  experience: { heading: string; items: Array<{ heading: string; body: string }> };
+  work?: { heading: string; body: string; ctaLabel: string; ctaHref: string; image?: ContentImage };
+  subPages?: { categoryLabel: string; viewAllLabel?: string; viewAllHref?: string; items: AudienceListItem[] };
+  faqs: { heading: string; items: ServiceFaqEntry[] };
+  cta: { heading: string; note?: string };
+}
+
+export interface AudienceSubPageContent {
+  path: string;
+  name: string;
+  seo: { title: string; description: string };
+  hero: { heading: string; body: string; image?: ContentImage };
+  intro: { heading: string; body: string; image?: ContentImage };
+  comparison: {
+    heading: string;
+    col1: string;
+    col2?: string;
+    rows: Array<{ feature: string; val1: string; val2?: string }>;
+  };
+  related: { categoryLabel: string; viewAllLabel?: string; viewAllHref?: string; items: AudienceListItem[] };
+  faqs: { heading: string; items: ServiceFaqEntry[] };
+  cta: { heading: string; note?: string };
 }

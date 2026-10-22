@@ -1,7 +1,7 @@
 ---
 /**
  * Services hub page — /services/
- * Content: docs/service/Vaifoou Construction Service Pages - Main.docx
+ * All text and images come from the Sanity `servicesHubPage` singleton (see getServicesHub()).
  * Design: matches homepage section patterns (H2 · body · cards · CTA banner)
  */
 import Layout from '~/layouts/PageLayout.astro';
@@ -17,69 +17,24 @@ import iconWalls from '~/assets/icons/walls.svg';
 import iconHammer from '~/assets/icons/hammer.svg';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
-import { getServicesHubMediaContent } from '~/lib/content';
+import { getServicesHub } from '~/lib/content';
 
-const metadata = {
-  title: "O'ahu Masonry & Concrete Services | Vaifoou Construction",
-  description:
-    "Masonry and concrete services for O'ahu properties. Specializing in rock walls, CMU block, and concrete flatwork. Request an estimate.",
-  ignoreTitleTemplate: true,
+const page = await getServicesHub();
+if (!page) throw new Error('Sanity servicesHubPage document missing (singleton-services-hub). Run `npm run seed:services`.');
+
+const { hero, intro, capabilities, scope, cta } = page;
+const metadata = { title: page.seo.title, description: page.seo.description, ignoreTitleTemplate: true };
+
+/* Capability card icons — local SVGs, selected per card in Sanity */
+const serviceIcons: Record<string, ImageMetadata> = {
+  'rock-wall': iconRockWall,
+  'retaining-wall': iconRetainingWall,
+  walls: iconWalls,
+  hammer: iconHammer,
 };
 
-const capabilities = [
-  {
-    icon: iconRockWall,
-    iconW: 20,
-    iconH: 20,
-    title: 'Rock Walls',
-    href: '/services/rock-walls/',
-    description: 'Custom property boundaries and retaining structures built with hand-selected volcanic basalt.',
-  },
-  {
-    icon: iconRetainingWall,
-    iconW: 20,
-    iconH: 20,
-    title: 'Retaining Walls',
-    href: '/services/retaining-walls/',
-    description: 'Rock and CMU options compared for hillside retention.',
-  },
-  {
-    icon: iconWalls,
-    iconW: 20,
-    iconH: 20,
-    title: 'CMU & Block Walls',
-    href: '/services/cmu-block-walls/',
-    description: 'Retaining walls and block fences built for long-term stability.',
-  },
-  {
-    icon: iconHammer,
-    iconW: 20,
-    iconH: 20,
-    title: 'Concrete Services',
-    href: '/services/concrete/',
-    description: 'Custom driveways, new foundations, and decorative surfaces poured for durability.',
-  },
-];
-
-const scopeRows = [
-  { build: 'Rock wall construction and repair', notCover: 'Landscaping and landscape design' },
-  { build: 'Concrete flatwork and foundations', notCover: 'Structural foundation repair' },
-  { build: 'CMU and block retaining walls', notCover: 'Micropile drilling and tiebacks' },
-  { build: 'Site preparation for concrete pours', notCover: 'General tree and shrub removal' },
-];
-
-const servicesHubMedia = await getServicesHubMediaContent();
-const heroImage = servicesHubMedia?.heroImage;
+const heroImage = hero.image;
 const servicesImageAlt = "Vaifoou Construction masonry and concrete services on O'ahu";
-
-const findAudienceCardImage = (title: string, href: string, index: number) => {
-  const cards = servicesHubMedia?.audienceCards ?? [];
-  return (
-    cards.find((card) => card.href === href)?.image ??
-    cards.find((card) => card.title === title)?.image ??
-    cards[index]?.image
-  );
-};
 ---
 
 <Layout metadata={metadata}>
@@ -124,14 +79,13 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
       <h1
         class="max-w-[896px] font-display text-[36px] font-bold leading-none tracking-[-0.4px] text-page-end uppercase md:text-[72px] md:tracking-[-0.8px]"
       >
-        O'ahu Masonry &amp; Concrete Services
+        {hero.heading}
       </h1>
 
       <p
         class="max-w-[640px] font-display text-[16px] font-semibold leading-snug tracking-[0.2px] text-page/80 md:text-[24px] md:leading-[34px] md:tracking-[0.24px]"
       >
-        We build custom rock walls, CMU and block walls, and concrete for residential and commercial properties across
-        O'ahu.
+        {hero.subheading}
       </p>
 
       <div
@@ -166,39 +120,18 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
         <h2
           class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
         >
-          Dedicated to Homeowners, Property Managers and Contractors
+          {intro.heading}
         </h2>
         <p
           class="max-w-[896px] pt-3 font-body text-[16px] font-normal leading-7 text-banner-note md:text-[18px] md:leading-[29.25px]"
         >
-          Our crews handle new construction, and demolition and rebuilds of failing walls, across the island. We work
-          directly with homeowners, commercial property owners, property managers and HOAs, and as a masonry and
-          concrete subcontractor to general contractors.
+          {intro.body}
         </p>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 md:gap-10">
         {
-          [
-            {
-              title: 'Working on your home?',
-              cta: 'View Residential Masonry & Concrete',
-              href: '/who-we-work-with/residential/',
-              label: 'Residential',
-              image: findAudienceCardImage('Working on your home?', '/who-we-work-with/residential/', 0),
-            },
-            {
-              title: 'Managing a commercial property, an HOA or a job site?',
-              cta: 'View Commercial Masonry & Concrete',
-              href: '/who-we-work-with/commercial/',
-              label: 'Commercial & civil',
-              image: findAudienceCardImage(
-                'Managing a commercial property, an HOA or a job site?',
-                '/who-we-work-with/commercial/',
-                1
-              ),
-            },
-          ].map(({ title, cta, href, label, image }) => (
+          intro.audienceCards.map(({ title, ctaLabel, href, label, image }) => (
             <article class="flex h-full flex-col overflow-hidden border border-banner-line bg-card">
               <div class="relative h-48 w-full shrink-0 md:h-[240px]">
                 {image?.src ? (
@@ -227,7 +160,7 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
                     href={href}
                     class="cta-md inline-flex w-fit items-center justify-center bg-nav-cta text-center font-display text-[16px] font-bold leading-6 tracking-[1px] text-page-end uppercase transition-colors hover:bg-heading md:text-[18px]"
                   >
-                    {cta}
+                    {ctaLabel}
                   </a>
                 </div>
               </div>
@@ -250,13 +183,13 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
         <h2
           class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[56px] md:leading-[60px] md:tracking-[-0.28px]"
         >
-          Core Masonry &amp; Concrete Capabilities
+          {capabilities.heading}
         </h2>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 md:gap-8">
         {
-          capabilities.map(({ icon, iconW, iconH, title, href, description }) => (
+          capabilities.items.map(({ icon, title, href, description }) => (
             <a
               href={href}
               class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta md:p-10"
@@ -265,7 +198,7 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
                 {/* Icon inline with title */}
                 <h3 class="flex items-center gap-2.5 font-display text-[22px] font-semibold leading-none tracking-[0.22px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
                   <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
-                    <Image src={icon} alt="" width={iconW} height={iconH} class="h-5 w-5 object-contain" />
+                    <Image src={serviceIcons[icon] ?? iconRockWall} alt="" width={20} height={20} class="h-5 w-5 object-contain" />
                   </span>
                   {title}
                 </h3>
@@ -290,14 +223,14 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
         <h2
           class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[40px] md:leading-[48px] md:tracking-[-0.2px]"
         >
-          Service Scope
+          {scope.heading}
         </h2>
       </div>
 
       <ComparisonTable
-        featureLabel="What We Build"
-        columns={['What We Do Not Cover']}
-        rows={scopeRows.map(({ build, notCover }) => ({ feature: build, values: [notCover] }))}
+        featureLabel={scope.buildLabel}
+        columns={[scope.notCoverLabel]}
+        rows={scope.rows.map(({ build, notCover }) => ({ feature: build, values: [notCover] }))}
       />
     </div>
   </section>
@@ -309,8 +242,8 @@ const findAudienceCardImage = (title: string, href: string, index: number) => {
   ════════════════════════════════════════════════════════════ */
   }
   <BrickMotifCTA
-    heading="Start Your O'ahu Masonry Project"
-    note="Connect with our team to discuss your concrete or rock wall requirements. Please note we are closed on Sundays."
+    heading={cta.heading}
+    note={cta.note}
     phoneLabel={`Call ${CONTACT.phone.display}`}
   />
 </Layout>

@@ -1,39 +1,39 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
+/**
+ * Header: top utility bar + main menu (up to 3 levels).
+ * The phone number comes from site config (src/config/contact.ts) so it stays identical everywhere.
+ */
 export const siteNavigation = defineType({
   name: 'siteNavigation',
-  title: 'Navigation',
+  title: 'Navigation (header)',
   type: 'document',
-  // Prevent creating multiple navigation documents
   __experimental_actions: ['update', 'publish'],
+  groups: [
+    { name: 'menu', title: 'Menu', default: true },
+    { name: 'topbar', title: 'Top bar' },
+  ],
   fields: [
     defineField({
       name: 'links',
-      title: 'Navigation Links',
-      description: 'Top-level nav items. Each can have sub-links for dropdown menus.',
+      title: 'Menu',
+      group: 'menu',
+      description: 'Top-level items in display order. Each can have a dropdown, and dropdown items a flyout.',
       type: 'array',
-      of: [{ type: 'navLink' }],
-    }),
-    defineField({
-      name: 'phone',
-      title: 'Header phone',
-      description: 'Phone number shown in the header.',
-      type: 'object',
-      fields: [
-        defineField({ name: 'text', title: 'Display number', type: 'string' }),
-        defineField({ name: 'href', title: 'tel: URL', type: 'string' }),
-      ],
+      of: [defineArrayMember({ type: 'navLink' })],
     }),
     defineField({
       name: 'actions',
-      title: 'CTA Buttons (optional)',
-      description: 'Buttons shown in the nav bar (e.g. "Get a Quote").',
+      title: 'Extra buttons (optional)',
+      group: 'menu',
+      description: 'Additional buttons next to the phone button.',
       type: 'array',
       of: [
-        {
+        defineArrayMember({
           type: 'object',
+          name: 'navAction',
           fields: [
-            defineField({ name: 'text', title: 'Button Label', type: 'string' }),
+            defineField({ name: 'text', title: 'Button label', type: 'string' }),
             defineField({ name: 'href', title: 'URL', type: 'string' }),
             defineField({
               name: 'variant',
@@ -43,14 +43,27 @@ export const siteNavigation = defineType({
               initialValue: 'primary',
             }),
           ],
-          preview: { select: { title: 'text' } },
-        },
+          preview: { select: { title: 'text', subtitle: 'href' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'topBar',
+      title: 'Top bar',
+      group: 'topbar',
+      type: 'object',
+      options: { collapsible: false },
+      fields: [
+        defineField({
+          name: 'items',
+          title: 'Left items',
+          type: 'array',
+          of: [defineArrayMember({ type: 'string' })],
+          description: 'Shown separated by dots. Use {license} to insert the contractor license number.',
+        }),
+        defineField({ name: 'note', title: 'Right text', type: 'string' }),
       ],
     }),
   ],
-  preview: {
-    prepare() {
-      return { title: 'Navigation' };
-    },
-  },
+  preview: { prepare: () => ({ title: 'Navigation (header)' }) },
 });

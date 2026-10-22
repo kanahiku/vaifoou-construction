@@ -7,9 +7,15 @@ export const siteFooter = defineType({
   __experimental_actions: ['update', 'publish'],
   fields: [
     defineField({
+      name: 'licensedLine',
+      title: 'Brand column line',
+      type: 'string',
+      description: 'Line under the license number, e.g. "Licensed & Insured in O\u02BBahu, Hawai\u02BBi".',
+    }),
+    defineField({
       name: 'columns',
       title: 'Link Columns',
-      description: 'Each column has a heading and a list of links.',
+      description: 'Up to four columns, shown to the right of the brand column, in this order.',
       type: 'array',
       of: [{ type: 'footerColumn' }],
     }),
@@ -29,7 +35,7 @@ export const siteFooter = defineType({
       name: 'footNote',
       title: 'Footer Note (copyright)',
       type: 'string',
-      description: 'e.g. © 2026 Vaifoou Construction. All rights reserved.',
+      description: 'Use {year} for the current year, e.g. © {year} Vaifoou Construction LLC. All rights reserved.',
     }),
     defineField({
       name: 'backgroundImage',

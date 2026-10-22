@@ -29,14 +29,11 @@ export interface Props {
   secondaryLinks?: Array<Link>;
   socialLinks?: Array<Link>;
   footNote?: string;
+  licensedLine?: string;
 }
 
-const { links = [], secondaryLinks = [], footNote = '' } = Astro.props;
+const { links = [], secondaryLinks = [], socialLinks = [], footNote = '', licensedLine } = Astro.props;
 
-const servicesCol = links.find((c) => c.title === 'SERVICES');
-const areasCol = links.find((c) => c.title === 'SERVICE AREAS');
-const whoWeServeCol = links.find((c) => c.title === 'WHO WE SERVE');
-const companyCol = links.find((c) => c.title === 'COMPANY');
 const footerMedia = await getFooterMediaContent();
 const backgroundImage = footerMedia?.backgroundImage;
 ---
@@ -82,10 +79,9 @@ const backgroundImage = footerMedia?.backgroundImage;
             <p class="font-body text-[14px] font-normal leading-[22.75px] text-page/80">
               {CONTACT.license}
             </p>
-            <p class="font-body text-[14px] font-normal leading-[22.75px] text-page/80">
-              <span class="whitespace-nowrap">Licensed &amp; Insured</span>{' '}
-              <span class="whitespace-nowrap">in O&#x02BB;ahu, Hawai&#x02BB;i</span>
-            </p>
+            {licensedLine && (
+              <p class="font-body text-[14px] font-normal leading-[22.75px] text-page/80">{licensedLine}</p>
+            )}
             <a
               href={CONTACT.phone.href}
               class="font-body text-[14px] font-normal leading-[22.75px] text-page-end transition-colors hover:text-nav-cta"
@@ -102,84 +98,15 @@ const backgroundImage = footerMedia?.backgroundImage;
         </div>
       </div>
 
-      {/* ── Col 2: Services ───────────────────────────────────── */}
+      {/* ── Link columns (order and content from Sanity) ──────── */}
       {
-        servicesCol && (
+        links.map((column) => (
           <div class="flex flex-col gap-4">
             <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
-              {servicesCol.title}
+              {column.title}
             </p>
             <ul class="flex flex-col gap-2">
-              {servicesCol.links.map(({ text, href }) => (
-                <li>
-                  <a
-                    href={href}
-                    class="font-body text-[16px] font-normal leading-6 text-page/80 transition-colors hover:text-page-end"
-                  >
-                    {text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
-
-      {/* ── Col 3: Service Areas ──────────────────────────────── */}
-      {
-        areasCol && (
-          <div class="flex flex-col gap-4">
-            <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
-              {areasCol.title}
-            </p>
-            <ul class="flex flex-col gap-2">
-              {areasCol.links.map(({ text, href }) => (
-                <li>
-                  <a
-                    href={href}
-                    class="font-body text-[16px] font-normal leading-6 text-page/80 transition-colors hover:text-page-end"
-                  >
-                    {text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
-
-      {/* ── Col 4: Who We Serve ───────────────────────────────── */}
-      {
-        whoWeServeCol && (
-          <div class="flex flex-col gap-4">
-            <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
-              {whoWeServeCol.title}
-            </p>
-            <ul class="flex flex-col gap-2">
-              {whoWeServeCol.links.map(({ text, href }) => (
-                <li>
-                  <a
-                    href={href}
-                    class="font-body text-[16px] font-normal leading-6 text-page/80 transition-colors hover:text-page-end"
-                  >
-                    {text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-      }
-
-      {/* ── Col 5: Company ────────────────────────────────────── */}
-      {
-        companyCol && (
-          <div class="flex flex-col gap-4">
-            <p class="font-display text-[20px] font-semibold leading-6 tracking-[1px] text-page-end uppercase">
-              {companyCol.title}
-            </p>
-            <ul class="flex flex-col gap-2">
-              {companyCol.links.map(({ text, href }) => (
+              {column.links.map(({ text, href }) => (
                 <li>
                   {href ? (
                     <a
@@ -195,7 +122,7 @@ const backgroundImage = footerMedia?.backgroundImage;
               ))}
             </ul>
           </div>
-        )
+        ))
       }
     </div>
 
@@ -206,24 +133,19 @@ const backgroundImage = footerMedia?.backgroundImage;
 
         {/* Social icons */}
         <div class="flex items-center gap-4">
-          <a
-            href="https://www.instagram.com/vaifoou_construction_llc/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            class="text-page/60 transition-colors hover:text-page-end"
-          >
-            <Icon name="tabler:brand-instagram" class="size-5" aria-hidden="true" />
-          </a>
-          <a
-            href="https://www.facebook.com/p/Vaifoou-Construction-61552740776227/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Facebook"
-            class="text-page/60 transition-colors hover:text-page-end"
-          >
-            <Icon name="tabler:brand-facebook" class="size-5" aria-hidden="true" />
-          </a>
+          {
+            socialLinks.map(({ href, ariaLabel, icon }) => (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={ariaLabel}
+                class="text-page/60 transition-colors hover:text-page-end"
+              >
+                <Icon name={icon ?? 'tabler:link'} class="size-5" aria-hidden="true" />
+              </a>
+            ))
+          }
         </div>
       </div>
 

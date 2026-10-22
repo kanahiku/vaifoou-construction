@@ -8,18 +8,14 @@ import iconRockWall from '~/assets/icons/rock-wall.svg';
 import iconRetainingWall from '~/assets/icons/retaining-wall.svg';
 import iconWalls from '~/assets/icons/walls.svg';
 import iconHammer from '~/assets/icons/hammer.svg';
-import { getProjects, getProjectsPageMediaContent } from '~/lib/content';
+import { getProjects, getProjectsPage } from '~/lib/content';
 
-const metadata = {
-  title: `Completed Masonry & Concrete Projects on O'ahu | Vaifoou Construction`,
-  description:
-    "View completed rock walls, retaining walls, and concrete flatwork built across O'ahu by Vaifoou Construction. Backed by a 25+ year family trade legacy.",
-  ignoreTitleTemplate: true,
-};
+const page = await getProjectsPage();
+if (!page) throw new Error('Sanity projectsPage document missing. Run `npm run seed:pages`.');
+const { hero, filters, services: otherServices, cta } = page;
+const metadata = { title: page.seo.title, description: page.seo.description, ignoreTitleTemplate: true };
 
 const projects = await getProjects();
-const media = await getProjectsPageMediaContent();
-const heroImage = media?.heroImage;
 
 const projectGalleries = projects
   .map((project) => {
@@ -63,52 +59,20 @@ const serviceOptions = Array.from(
 ).sort();
 const projectFilterMap = new Map(projectFilterMeta.map((project) => [project.id, project]));
 
-const services = [
-  {
-    title: 'Rock Walls',
-    description: 'Property boundaries and custom masonry built with hand-selected volcanic basalt.',
-    href: '/services/rock-walls/',
-    cta: 'View Rock Wall Services',
-    icon: iconRockWall,
-    iconW: 20,
-    iconH: 20,
-  },
-  {
-    title: 'Retaining Wall',
-    description: 'Heavy-duty structural masonry built with proper drainage to hold back hillside soil.',
-    href: '/services/retaining-walls/',
-    cta: 'View Retaining Wall Services',
-    icon: iconRetainingWall,
-    iconW: 20,
-    iconH: 20,
-  },
-  {
-    title: 'CMU & Block Walls',
-    description: 'Reinforced hollow tile perimeter walls and fences built for long-term stability.',
-    href: '/services/cmu-block-walls/',
-    cta: 'View CMU & Block Walls',
-    icon: iconWalls,
-    iconW: 20,
-    iconH: 20,
-  },
-  {
-    title: 'Concrete Services',
-    description: 'New driveways, walkways, stamped flatwork, and structural foundations poured from scratch.',
-    href: '/services/concrete/',
-    cta: 'View Concrete Services',
-    icon: iconHammer,
-    iconW: 20,
-    iconH: 20,
-  },
-];
+const serviceIcons: Record<string, ImageMetadata> = {
+  'rock-wall': iconRockWall,
+  'retaining-wall': iconRetainingWall,
+  walls: iconWalls,
+  hammer: iconHammer,
+};
 ---
 
 <Layout metadata={metadata}>
   <SubServiceHero
-    title="Our Masonry & Concrete Work Across O'ahu"
-    body="Real site work completed by our family crews across O'ahu."
-    image={heroImage?.src}
-    imageAlt={heroImage?.alt}
+    title={hero.heading}
+    body={hero.body}
+    image={hero.image?.src}
+    imageAlt={hero.image?.alt}
     imagePlaceholder="Completed masonry and concrete project photo"
     imageWidth={2400}
     imageHeight={960}
@@ -123,22 +87,22 @@ const services = [
         <h2
           class="font-display text-[24px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[32px]"
         >
-          Filter Projects
+          {filters.heading}
         </h2>
         <p class="font-body text-[15px] font-normal leading-7 text-banner-note">
-          Narrow the gallery by location or the service involved.
+          {filters.body}
         </p>
       </div>
 
       <div class="grid w-full grid-cols-1 gap-3 md:w-auto md:grid-cols-[220px_260px_auto]">
         <label class="flex flex-col gap-2">
-          <span class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">Location</span>
+          <span class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">{filters.locationLabel}</span>
           <span class="relative">
             <select
               id="project-location-filter"
               class="h-12 w-full cursor-pointer appearance-none border border-banner-line bg-white py-0 pl-4 pr-12 font-body text-[15px] text-heading"
             >
-              <option value="">All locations</option>
+              <option value="">{filters.allLocationsLabel}</option>
               {locationOptions.map((location) => <option value={location}>{location}</option>)}
             </select>
             <svg
@@ -160,14 +124,14 @@ const services = [
 
         <label class="flex flex-col gap-2">
           <span class="font-body text-[12px] font-bold leading-4 tracking-[1px] text-muted uppercase">
-            Project Type / Service
+            {filters.serviceLabel}
           </span>
           <span class="relative">
             <select
               id="project-service-filter"
               class="h-12 w-full cursor-pointer appearance-none border border-banner-line bg-white py-0 pl-4 pr-12 font-body text-[15px] text-heading"
             >
-              <option value="">All services</option>
+              <option value="">{filters.allServicesLabel}</option>
               {serviceOptions.map((service) => <option value={service}>{service}</option>)}
             </select>
             <svg
@@ -192,7 +156,7 @@ const services = [
           id="project-filter-reset"
           class="mt-auto h-12 cursor-pointer border border-banner-line bg-card px-5 font-display text-[13px] font-bold leading-4 tracking-[0.7px] text-heading uppercase transition-colors hover:border-nav-cta hover:text-nav-cta"
         >
-          Reset
+          {filters.resetLabel}
         </button>
       </div>
     </div>
@@ -224,7 +188,7 @@ const services = [
       hidden
       class="site-frame mt-8 font-body text-[16px] font-normal leading-7 text-banner-note"
     >
-      No projects match the selected filters.
+      {filters.emptyText}
     </p>
   </section>
 
@@ -409,13 +373,13 @@ const services = [
         <h2
           class="font-display text-[28px] font-bold leading-tight tracking-[-0.2px] text-heading uppercase md:text-[44px] md:leading-[52px]"
         >
-          Explore Other Services
+          {otherServices.heading}
         </h2>
       </div>
 
       <div class="grid grid-cols-1 items-stretch gap-6 md:grid-cols-2 lg:grid-cols-4">
         {
-          services.map(({ icon, iconW, iconH, title, description, cta, href }) => (
+          otherServices.cards.map(({ icon, title, description, ctaLabel, href }) => (
             <a
               href={href}
               class="group flex h-full flex-col border border-banner-line bg-white p-6 transition-colors hover:border-nav-cta hover:bg-section-grey/40 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-nav-cta"
@@ -423,14 +387,14 @@ const services = [
               <div class="flex flex-1 flex-col gap-3">
                 <h3 class="flex items-center gap-2.5 font-display text-[24px] font-semibold leading-none tracking-[0.24px] text-heading uppercase transition-colors group-hover:text-nav-cta md:text-[26px]">
                   <span class="flex size-5 shrink-0 items-center justify-center" aria-hidden="true">
-                    <Image src={icon} alt="" width={iconW} height={iconH} class="h-5 w-5 object-contain" />
+                    {serviceIcons[icon] && <Image src={serviceIcons[icon]} alt="" width={20} height={20} class="h-5 w-5 object-contain" />}
                   </span>
                   {title}
                 </h3>
                 <p class="font-body text-[16px] font-normal leading-6 text-banner-note">{description}</p>
               </div>
               <span class="mt-8 inline-flex items-center gap-1.5 font-display text-[15px] font-bold leading-5 tracking-[0.5px] text-nav-cta uppercase transition-colors group-hover:text-accent">
-                {cta}
+                {ctaLabel}
                 <svg
                   width="12"
                   height="12"
@@ -449,8 +413,5 @@ const services = [
     </div>
   </section>
 
-  <BrickMotifCTA
-    heading="Start Your O'ahu Masonry Project"
-    note="Contact us to discuss your masonry or concrete project. Every job is backed by our workmanship guarantee."
-  />
+  <BrickMotifCTA heading={cta.heading} note={cta.note} />
 </Layout>

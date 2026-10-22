@@ -2,8 +2,8 @@
 /**
  * SubServiceHero — dark overlay hero for service sub-pages.
  *
- * Used by every rock-wall and concrete sub-page.
- * Pass `eyebrow`, `title`, and `body` from the page file.
+ * Used by every service sub-page and service-area page.
+ * Pass `title`, `body`, and the photo (`image` / `imageAlt`) from the page data.
  * Eyebrow text is folded into the H1 instead of rendered as a separate label.
  * CTAs and trust bar are wired automatically from config.
  */
@@ -11,7 +11,6 @@ import PhoneIcon from '~/components/ui/PhoneIcon.astro';
 import FillImage from '~/components/ui/FillImage.astro';
 import { CONTACT } from '~/config/contact';
 import { PRIMARY_CTA_HREF, PRIMARY_CTA_LABEL } from '~/config/cta';
-import { getServiceSubPageMedia } from '~/lib/content';
 
 export interface Props {
   /** Short category label folded into the H1. */
@@ -49,10 +48,8 @@ const {
   showCtas = true,
 } = Astro.props;
 const heroTitle = eyebrow ? `${eyebrow}: ${title}` : title;
-const media = await getServiceSubPageMedia(Astro.url.pathname);
-const heroImage = media?.heroImage;
-const resolvedImage = heroImage?.src ?? image;
-const resolvedImageAlt = heroImage?.alt ?? imageAlt ?? imagePlaceholder ?? `${title} photo`;
+const resolvedImage = image;
+const resolvedImageAlt = imageAlt || imagePlaceholder || `${title} photo`;
 
 const trustItems = [CONTACT.license, 'Licensed & Insured', "Serving All of O'ahu"];
 ---

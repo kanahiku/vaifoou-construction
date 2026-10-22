@@ -8,7 +8,7 @@ import { SITE, METADATA, I18N } from 'astrowind:config';
 import type { MetaData, MetaDataOpenGraph } from '~/types';
 import { getCanonical } from '~/utils/permalinks';
 import { isIndexableHost } from '~/lib/indexing';
-import { getHomeMediaContent } from '~/lib/content';
+import { getHomeContent } from '~/lib/content';
 
 import { adaptOpenGraphImages } from '~/utils/images';
 
@@ -63,9 +63,11 @@ function toSocialImageUrl(src: string): string {
 }
 
 if (!hasOpenGraphImage(mergedOg)) {
-  const homeMedia = await getHomeMediaContent();
+  const home = await getHomeContent();
   const socialImage =
-    homeMedia?.heroImage ?? homeMedia?.bannerImage ?? homeMedia?.audienceCards.find((card) => card.image?.src)?.image;
+    home.hero.image ??
+    home.highlightBanner.image ??
+    home.intro.audienceCards.find((card) => card.image?.src)?.image;
 
   if (socialImage?.src) {
     mergedOg.images = [

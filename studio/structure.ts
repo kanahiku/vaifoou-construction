@@ -8,102 +8,127 @@ const SINGLETONS: Record<string, string> = {
   servicesHubPage: 'singleton-services-hub',
 };
 
+const singleton = (S: StructureBuilder, title: string, schemaType: string, documentId: string) =>
+  S.listItem().title(title).id(documentId).child(S.document().schemaType(schemaType).documentId(documentId).title(title));
+
+const list = (S: StructureBuilder, title: string, schemaType: string) =>
+  S.listItem().title(title).schemaType(schemaType).child(S.documentTypeList(schemaType).title(title));
+
 export const structure = (S: StructureBuilder) =>
   S.list()
     .title('Content')
     .items([
+      // ── Pages whose text + images are fully managed in Sanity ──────────
       S.listItem()
-        .title('Navigation')
-        .child(S.document().schemaType('siteNavigation').documentId('singleton-navigation').title('Navigation')),
+        .title('Pages')
+        .id('pages')
+        .child(
+          S.list()
+            .title('Pages')
+            .items([
+              singleton(S, 'Homepage', 'homePage', 'singleton-home'),
+              singleton(S, 'About (/about/)', 'aboutPage', 'singleton-about'),
+              singleton(S, 'Reviews (/reviews/)', 'reviewsPage', 'singleton-reviews'),
+              singleton(S, 'Projects (/projects/)', 'projectsPage', 'singleton-projects'),
+              singleton(S, 'Blog (/blog/)', 'blogPage', 'singleton-blog'),
+              S.listItem()
+                .title('Who we work with')
+                .id('audience-pages')
+                .child(
+                  S.list()
+                    .title('Who we work with')
+                    .items([
+                      S.listItem()
+                        .title('Residential & Commercial')
+                        .schemaType('audienceLandingPage')
+                        .child(S.documentTypeList('audienceLandingPage').title('Landing pages').defaultOrdering([{ field: 'path', direction: 'asc' }])),
+                      S.listItem()
+                        .title('Commercial client pages')
+                        .schemaType('audienceSubPage')
+                        .child(S.documentTypeList('audienceSubPage').title('Commercial client pages').defaultOrdering([{ field: 'order', direction: 'asc' }])),
+                    ])
+                ),
+              S.listItem()
+                .title('Legal pages')
+                .schemaType('legalPage')
+                .child(S.documentTypeList('legalPage').title('Legal pages').defaultOrdering([{ field: 'path', direction: 'asc' }])),
+              S.divider(),
+              S.listItem()
+                .title('Services')
+                .id('services-pages')
+                .child(
+                  S.list()
+                    .title('Services')
+                    .items([
+                      singleton(S, 'Services Hub (/services/)', 'servicesHubPage', 'singleton-services-hub'),
+                      S.divider(),
+                      S.listItem()
+                        .title('Service categories')
+                        .schemaType('serviceCategoryPage')
+                        .child(
+                          S.documentTypeList('serviceCategoryPage')
+                            .title('Service categories')
+                            .defaultOrdering([{ field: 'path', direction: 'asc' }])
+                        ),
+                      S.listItem()
+                        .title('Rock wall pages')
+                        .schemaType('serviceSubPage')
+                        .child(
+                          S.documentList()
+                            .title('Rock wall pages')
+                            .schemaType('serviceSubPage')
+                            .filter('_type == "serviceSubPage" && path match "/services/rock-walls/*"')
+                            .defaultOrdering([{ field: 'path', direction: 'asc' }])
+                        ),
+                      S.listItem()
+                        .title('Concrete pages')
+                        .schemaType('serviceSubPage')
+                        .child(
+                          S.documentList()
+                            .title('Concrete pages')
+                            .schemaType('serviceSubPage')
+                            .filter('_type == "serviceSubPage" && path match "/services/concrete/*"')
+                            .defaultOrdering([{ field: 'path', direction: 'asc' }])
+                        ),
+                    ])
+                ),
+              S.listItem()
+                .title('Service areas')
+                .id('service-areas-pages')
+                .child(
+                  S.list()
+                    .title('Service areas')
+                    .items([
+                      singleton(S, 'Service Areas Hub (/service-areas/)', 'serviceAreasHubPage', 'singleton-service-areas-hub'),
+                      S.divider(),
+                      S.listItem()
+                        .title('Area pages')
+                        .schemaType('serviceAreaPage')
+                        .child(
+                          S.documentTypeList('serviceAreaPage')
+                            .title('Area pages')
+                            .defaultOrdering([{ field: 'order', direction: 'asc' }])
+                        ),
+                    ])
+                ),
+            ])
+        ),
 
+      // ── Pages that are still image-only (text lives in code for now) ───
       S.listItem()
-        .title('Footer')
-        .child(S.document().schemaType('siteFooter').documentId('singleton-footer').title('Footer')),
+        .title('Contact page images')
+        .id('page-images')
+        .child(
+          S.list()
+            .title('Contact page images')
+            .items([
+              singleton(S, 'Contact Page Images', 'contactPageMedia', 'singleton-contact-page-media'),
+            ])
+        ),
 
       S.divider(),
 
-      S.listItem()
-        .title('Homepage')
-        .child(S.document().schemaType('homePage').documentId('singleton-home').title('Homepage')),
-
-      S.listItem()
-        .title('About Page Images')
-        .child(
-          S.document().schemaType('aboutPageMedia').documentId('singleton-about-page-media').title('About Page Images')
-        ),
-
-      S.listItem()
-        .title('Contact Page Images')
-        .child(
-          S.document()
-            .schemaType('contactPageMedia')
-            .documentId('singleton-contact-page-media')
-            .title('Contact Page Images')
-        ),
-
-      S.listItem()
-        .title('Projects Page Images')
-        .child(
-          S.document()
-            .schemaType('projectsPageMedia')
-            .documentId('singleton-projects-page-media')
-            .title('Projects Page Images')
-        ),
-
-      S.listItem()
-        .title('Reviews Page Images')
-        .child(
-          S.document()
-            .schemaType('reviewsPageMedia')
-            .documentId('singleton-reviews-page-media')
-            .title('Reviews Page Images')
-        ),
-
-      S.listItem()
-        .title('Services Hub')
-        .child(S.document().schemaType('servicesHubPage').documentId('singleton-services-hub').title('Services Hub')),
-
-      S.listItem()
-        .title('Who We Work With Images')
-        .schemaType('audiencePageMedia')
-        .child(S.documentTypeList('audiencePageMedia').title('Who We Work With Images')),
-
-      S.listItem()
-        .title('Commercial Audience Sub-page Images')
-        .schemaType('commercialAudienceSubPageMedia')
-        .child(S.documentTypeList('commercialAudienceSubPageMedia').title('Commercial Audience Sub-page Images')),
-
-      S.listItem()
-        .title('Service Category Images')
-        .schemaType('serviceCategoryPageMedia')
-        .child(S.documentTypeList('serviceCategoryPageMedia').title('Service Category Images')),
-
-      S.listItem()
-        .title('Rock Wall Sub-page Images')
-        .schemaType('rockWallSubPageMedia')
-        .child(S.documentTypeList('rockWallSubPageMedia').title('Rock Wall Sub-page Images')),
-
-      S.listItem()
-        .title('Concrete Service Sub-page Images')
-        .schemaType('concreteServiceSubPageMedia')
-        .child(S.documentTypeList('concreteServiceSubPageMedia').title('Concrete Service Sub-page Images')),
-
-      S.listItem()
-        .title('Service Areas Hub Images')
-        .child(
-          S.document()
-            .schemaType('serviceAreaHubPageMedia')
-            .documentId('singleton-service-area-hub')
-            .title('Service Areas Hub Images')
-        ),
-
-      S.listItem()
-        .title('Service Area Location Images')
-        .schemaType('serviceAreaLocationPageMedia')
-        .child(S.documentTypeList('serviceAreaLocationPageMedia').title('Service Area Location Images')),
-
-      S.divider(),
-
+      // ── Collections ────────────────────────────────────────────────────
       S.listItem()
         .title('Projects')
         .schemaType('project')
@@ -134,6 +159,21 @@ export const structure = (S: StructureBuilder) =>
             .defaultOrdering([
               { field: 'order', direction: 'asc' },
               { field: 'name', direction: 'asc' },
+            ])
+        ),
+
+      S.divider(),
+
+      // ── Site-wide ──────────────────────────────────────────────────────
+      S.listItem()
+        .title('Site settings')
+        .id('site-settings')
+        .child(
+          S.list()
+            .title('Site settings')
+            .items([
+              singleton(S, 'Navigation (header)', 'siteNavigation', 'singleton-navigation'),
+              singleton(S, 'Footer', 'siteFooter', 'singleton-footer'),
             ])
         ),
     ]);

@@ -1,0 +1,77 @@
+---
+/**
+ * ServiceSubPageView — template for every service sub-page
+ * (/services/rock-walls/<slug>/ and /services/concrete/<slug>/).
+ *
+ * All text and images come from the Sanity `serviceSubPage` document whose
+ * `path` matches. The page file only passes the path.
+ */
+import Layout from '~/layouts/PageLayout.astro';
+import SubServiceHero from '~/components/widgets/SubServiceHero.astro';
+import ServiceDetailSection from '~/components/widgets/ServiceDetailSection.astro';
+import ServiceTable from '~/components/widgets/ServiceTable.astro';
+import ServiceLinks from '~/components/widgets/ServiceLinks.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BrickMotifCTA from '~/components/widgets/BrickMotifCTA.astro';
+import { getServiceSubPage } from '~/lib/content';
+
+export interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+const page = await getServiceSubPage(path);
+if (!page) throw new Error(`Sanity serviceSubPage document missing for "${path}". Run \`npm run seed:services\`.`);
+
+const metadata = { title: page.seo.title, description: page.seo.description };
+
+const escapeHtml = (value: string) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const { comparison } = page;
+const footerNote =
+  comparison.footerText || comparison.footerLinkLabel
+    ? [
+        comparison.footerText ? escapeHtml(comparison.footerText) : '',
+        comparison.footerLinkLabel && comparison.footerLinkHref
+          ? `<a class="font-display font-bold tracking-[0.5px] text-nav-cta uppercase hover:text-heading" href="${escapeHtml(comparison.footerLinkHref)}">${escapeHtml(comparison.footerLinkLabel)}</a>`
+          : '',
+      ]
+        .filter(Boolean)
+        .join(' ')
+    : undefined;
+---
+
+<Layout metadata={metadata}>
+  <SubServiceHero
+    title={page.hero.heading}
+    body={page.hero.body}
+    image={page.hero.image?.src}
+    imageAlt={page.hero.image?.alt}
+  />
+  <ServiceDetailSection heading={page.process.heading} items={page.process.items} variant="timeline" />
+  <ServiceDetailSection heading={page.materials.heading} items={page.materials.items} surface="card" />
+  <ServiceTable
+    eyebrow={comparison.eyebrow}
+    heading={comparison.heading}
+    note={comparison.note}
+    footerNote={footerNote}
+    col1={comparison.col1}
+    col2={comparison.col2}
+    rows={comparison.rows.map(({ feature, val1, val2 }) => ({ feature, val1, val2 }))}
+  />
+  <ServiceDetailSection heading={page.applications.heading} items={page.applications.items} animateItems={false} />
+  <ServiceLinks
+    categoryLabel={page.related.categoryLabel}
+    items={page.related.links}
+    maxItems={page.related.links.length}
+  />
+  <FAQs
+    title={page.faqs.heading}
+    items={page.faqs.items.map(({ question, answer }) => ({ title: question, description: answer }))}
+    animate={false}
+  >
+    <div slot="bg" class="absolute inset-0 bg-card"></div>
+  </FAQs>
+  <BrickMotifCTA heading={page.cta.heading} note={page.cta.note} />
+</Layout>
