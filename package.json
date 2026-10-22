@@ -23,6 +23,13 @@
     "migrate:to-sanity": "tsx --env-file=.env scripts/migrate-to-sanity.ts",
     "migrate:services": "tsx --env-file=.env scripts/migrate-services-to-sanity.ts",
     "migrate:contact-reviews": "tsx --env-file=.env scripts/migrate-contact-reviews-to-sanity.ts",
+    "seed:home": "tsx --env-file=.env scripts/seed-home-to-sanity.ts",
+    "seed:services": "tsx --env-file=.env scripts/seed-services-to-sanity.ts",
+    "seed:areas": "tsx --env-file=.env scripts/seed-service-areas-to-sanity.ts",
+    "seed:pages": "tsx --env-file=.env scripts/seed-pages-to-sanity.ts",
+    "seed:audiences": "tsx --env-file=.env scripts/seed-audiences-to-sanity.ts",
+    "seed:nav": "tsx --env-file=.env scripts/seed-nav-to-sanity.ts",
+    "seed:about": "tsx --env-file=.env scripts/seed-about-to-sanity.ts",
     "seed:blog": "tsx --env-file=.env scripts/seed-blog.ts",
     "studio": "cd studio && npm run dev"
   },

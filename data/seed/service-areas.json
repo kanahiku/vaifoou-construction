@@ -1,0 +1,1176 @@
+{
+  "hub": {
+    "metadata": {
+      "title": "O'ahu Masonry & Concrete Service Areas | Vaifoou Construction",
+      "description": "Vaifoou Construction provides structural masonry, custom rock walls, and concrete flatwork across O'ahu. We serve homeowners, property managers, and contractors."
+    },
+    "areas": [
+      {
+        "name": "Wahiawa",
+        "href": "/service-areas/wahiawa/"
+      },
+      {
+        "name": "Honolulu",
+        "href": "/service-areas/honolulu/"
+      },
+      {
+        "name": "Mililani",
+        "href": "/service-areas/mililani/"
+      },
+      {
+        "name": "Kaneohe",
+        "href": "/service-areas/kaneohe/"
+      },
+      {
+        "name": "Kailua",
+        "href": "/service-areas/kailua/"
+      },
+      {
+        "name": "Kapolei",
+        "href": "/service-areas/kapolei/"
+      },
+      {
+        "name": "North Shore & Haleiwa",
+        "href": "/service-areas/north-shore/"
+      },
+      {
+        "name": "Aiea & Pearl City",
+        "href": "/service-areas/aiea-pearl-city/"
+      },
+      {
+        "name": "Waipahu",
+        "href": "/service-areas/waipahu/"
+      },
+      {
+        "name": "Ewa Beach",
+        "href": "/service-areas/ewa-beach/"
+      }
+    ],
+    "faqs": [
+      {
+        "title": "Where is your primary service yard located?",
+        "description": "Our equipment and crews are based in Wahiawa."
+      },
+      {
+        "title": "Are there additional Vaifoou Construction branches on O'ahu?",
+        "description": "No. All crews dispatch directly from our Wahiawa headquarters to project sites island-wide."
+      },
+      {
+        "title": "Is Vaifoou Construction fully licensed?",
+        "description": "Yes. We are a fully licensed and insured masonry and concrete contractor (CT-39534)."
+      },
+      {
+        "title": "Will your team handle foundation repairs?",
+        "description": "We specialize in pouring new concrete foundations. We do not perform structural repairs or micropile installations."
+      },
+      {
+        "title": "Do you offer landscaping services?",
+        "description": "No. We do not provide general landscaping. We remove trees and shrubs strictly as site preparation for concrete pours."
+      }
+    ]
+  },
+  "locations": {
+    "wahiawa": {
+      "path": "/service-areas/wahiawa/",
+      "metadata": {
+        "title": "Wahiawa Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction is based in Wahiawa. We provide masonry and concrete flatwork for local properties, backed by a 25+ year family legacy."
+      },
+      "hero": {
+        "eyebrow": "Central O'ahu",
+        "title": "Wahiawa Masonry & Concrete Construction",
+        "body": "Dispatched directly from our Central O'ahu yard for local residential and commercial builds.",
+        "imagePlaceholder": "Wahiawa masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Our Home Base",
+        "heading": "Our Wahiawa Home Base",
+        "body": "Wahiawa is home for Vaifoou Construction and our main equipment yard. Heavy Central O'ahu rain and shifting red clay often crack older driveways and push unreinforced lava rock walls out of alignment. Our family brings 25+ years of trade experience to rebuilding local stonework and pouring new flatwork.",
+        "imagePlaceholder": "Wahiawa masonry project photo"
+      },
+      "services": [
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Full tear-out and reconstruction of aging lava rock walls using hand-selected volcanic basalt."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Rock and CMU structures built to hold back wet Central O'ahu clay on sloped gulch lots."
+        },
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Complete removal and replacement of root-cracked driveways alongside new foundation pours."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile walls built to enclose residential lots and block street noise along busy town roads."
+        }
+      ],
+      "servicesHeading": "Wahiawa Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Wahiawa",
+        "description": "Our crews recently demolished a failing boundary wall along a gulch-side lot near Whitmore Village and rebuilt it from the footing up using hand-selected basalt, completing stone-setting and backfill in under two weeks.",
+        "imagePlaceholder": "Recent Wahiawa project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Wahiawa Masonry FAQs",
+        "items": [
+          {
+            "title": "Where are you located in Wahiawa?",
+            "description": "We operate out of our main yard right here in Wahiawa. Because our yard is an active equipment facility rather than a public showroom, our crews dispatch directly from here to your property for on-site estimates and work."
+          },
+          {
+            "title": "How do you keep Wahiawa's heavy rain from pushing over a retaining wall?",
+            "description": "Water trapped in heavy red dirt builds intense pressure behind masonry. We build our retaining walls with proper drainage paths and gravel backfill so rainwater can escape without shifting the stone."
+          },
+          {
+            "title": "Can you rebuild an old collapsing lava rock wall on my lot?",
+            "description": "Yes. Many older Wahiawa homes have original rock walls that are failing. Rather than patching unstable stone, we demolish the compromised section and rebuild it from a solid footing."
+          },
+          {
+            "title": "Tree roots cracked my concrete driveway. Can you replace it?",
+            "description": "Yes. We excavate the damaged concrete, clear out the offending roots or shrubs as part of our site preparation, and pour a brand new driveway."
+          },
+          {
+            "title": "Do you repair settling foundations on older Wahiawa homes?",
+            "description": "No. We pour new concrete foundations for ground-up builds and additions, but we do not perform structural foundation repair or install micropiles."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Wahiawa Masonry Project"
+    },
+    "honolulu": {
+      "path": "/service-areas/honolulu/",
+      "metadata": {
+        "title": "Honolulu Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Honolulu properties. We build custom rock walls and pour new concrete foundations."
+      },
+      "hero": {
+        "eyebrow": "O'ahu",
+        "title": "Honolulu Masonry & Concrete Construction",
+        "body": "Custom rock walls, concrete driveways, and structural masonry across Honolulu and the urban core.",
+        "imagePlaceholder": "Honolulu masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Honolulu",
+        "heading": "Honolulu Masonry & Concrete",
+        "body": "Honolulu's dense urban lots and older residential neighborhoods create constant demand for driveway replacements, perimeter walls, and foundation pours. Our family crew dispatches from our Wahiawa yard to serve Honolulu properties with 25+ years of trade experience behind every pour and every wall.",
+        "imagePlaceholder": "Honolulu masonry project photo"
+      },
+      "services": [
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Hand-selected volcanic basalt walls for residential boundaries and property entry features across Honolulu."
+        },
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Full demolition and replacement of aging driveways alongside new structural foundation pours."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Heavy-duty masonry built to stabilize sloped lots in Punchbowl, Pauoa, and upper Nuuanu."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile perimeter fences for residential and commercial properties citywide."
+        }
+      ],
+      "servicesHeading": "Honolulu Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Honolulu",
+        "description": "We recently handled full demolition of a cracked concrete driveway for a residential property in Kaimuki, regraded the base to correct the pitch toward the street, and poured a clean replacement slab in a single day.",
+        "imagePlaceholder": "Recent Honolulu project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Honolulu Masonry FAQs",
+        "items": [
+          {
+            "title": "Do you work on residential lots in dense urban Honolulu neighborhoods?",
+            "description": "Yes. We regularly work on narrow lots in Kaimuki, Palolo, Punchbowl, and similar neighborhoods where access is tight and properties are closely spaced."
+          },
+          {
+            "title": "Can you replace a cracked concrete driveway in Honolulu?",
+            "description": "Yes. We handle complete demolition of the existing slab, proper sub-base preparation, and a fresh concrete pour sized to your driveway."
+          },
+          {
+            "title": "Do you build retaining walls for sloped Honolulu lots?",
+            "description": "Yes. We construct heavy basalt and CMU retaining walls for hillside residential properties across upper Nuuanu, Pauoa, and Punchbowl."
+          },
+          {
+            "title": "Will you build a CMU or rock wall along a busy street in Honolulu?",
+            "description": "Yes. We construct reinforced block walls and hand-selected basalt walls for both privacy and traffic noise separation along urban streets."
+          },
+          {
+            "title": "Do you pour concrete slabs for commercial properties in Honolulu?",
+            "description": "Yes. We work as a concrete subcontractor for commercial flatwork, curbing, and structural slabs across Honolulu."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Honolulu Masonry Project"
+    },
+    "mililani": {
+      "path": "/service-areas/mililani/",
+      "metadata": {
+        "title": "Mililani Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Mililani properties. Our crews build custom rock walls and pour new foundations."
+      },
+      "hero": {
+        "eyebrow": "Central O'ahu",
+        "title": "Mililani Masonry & Concrete Construction",
+        "body": "Residential driveway replacements and commercial flatwork across Mililani.",
+        "imagePlaceholder": "Mililani masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Mililani",
+        "heading": "Mililani Masonry & Concrete",
+        "body": "Mililani properties range from planned residential neighborhoods to busy commercial centers. Operating just minutes away in Wahiawa, our crews build residential CMU boundary walls and pour commercial curb and swale installations like at the Mililani Town Center. Every job is backed by our 25+ year family legacy and our workmanship guarantee."
+      },
+      "services": [
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Full residential driveway replacements and new foundations alongside commercial curb and swale installations."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Clean hollow tile boundary fences constructed for long-term stability across planned neighborhood lots."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Heavy-duty masonry built to stabilize sloped rim lots bordering local gulches."
+        },
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom property boundaries and front entry walls built with hand-selected volcanic basalt."
+        }
+      ],
+      "servicesHeading": "Mililani Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Mililani",
+        "description": "Our crew recently poured commercial curb and swale work for a property near the Mililani Town Center, coordinating directly with the general contractor to meet a tight framing schedule without a day of delay.",
+        "imagePlaceholder": "Recent Mililani project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Mililani Masonry FAQs",
+        "items": [
+          {
+            "title": "Do you maintain a local office in Mililani?",
+            "description": "No. Our crews drive directly from our main yard in neighboring Wahiawa to all Mililani projects."
+          },
+          {
+            "title": "Can you provide documentation for Mililani HOA or design committee approvals?",
+            "description": "We provide a written estimate with the scope, materials and dimensions, which is what most boards and design committees ask to see."
+          },
+          {
+            "title": "Do you handle commercial concrete work in Mililani?",
+            "description": "Yes. We work as a concrete subcontractor for commercial properties and general contractors, including curb and swale installations at the Mililani Town Center."
+          },
+          {
+            "title": "What materials do you use for retaining walls in Mililani?",
+            "description": "We build them in CMU block or hand-selected volcanic basalt, depending on the slope and the finish you want for your property."
+          },
+          {
+            "title": "Will your crew handle the landscaping around a new wall or driveway?",
+            "description": "We do not offer landscaping services. Our team clears brush and trees only if necessary to pour concrete or set stone."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Mililani Masonry Project"
+    },
+    "kaneohe": {
+      "path": "/service-areas/kaneohe/",
+      "metadata": {
+        "title": "Kaneohe Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Kaneohe properties. Our crews build custom rock walls and pour new concrete foundations."
+      },
+      "hero": {
+        "eyebrow": "Windward O'ahu",
+        "title": "Kaneohe Masonry & Concrete Construction",
+        "body": "Hillside retaining walls, basalt rockwork, and concrete flatwork built for Windward properties.",
+        "imagePlaceholder": "Kaneohe masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Kaneohe",
+        "heading": "Kaneohe Masonry & Concrete",
+        "body": "Kaneohe properties sit against the steep Ko'olaU range, where frequent Windward rain saturates sloped lots and tests older masonry. Our crews travel across the H-3 from our Wahiawa yard to build heavy-duty retaining walls and pour durable concrete driveways for local homeowners and commercial builders. Every build is backed by our 25+ year family trade legacy."
+      },
+      "services": [
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Structural masonry built with proper drainage to hold back rain-heavy Windward soil on sloped lots."
+        },
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom property lines and terraced hillside barriers constructed with hand-selected volcanic basalt."
+        },
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Full replacement of weather-worn driveways alongside new structural foundations for residential and commercial builds."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile walls and perimeter fences built for privacy and long-term structural stability."
+        }
+      ],
+      "servicesHeading": "Kaneohe Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Kaneohe",
+        "description": "We recently built a heavy-duty basalt retaining wall to secure a sloped residential lot above Kaneohe Bay, cutting drainage channels into the hillside and packing gravel backfill so the wall can manage Windward rainfall without building pressure.",
+        "imagePlaceholder": "Recent Kaneohe project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Kaneohe Masonry FAQs",
+        "items": [
+          {
+            "title": "Are your masonry crews based in Kaneohe?",
+            "description": "No. Our teams travel from our Wahiawa home base across the H-3 to service all Windward Coast job sites."
+          },
+          {
+            "title": "How do your retaining walls handle Kaneohe's heavy rainfall?",
+            "description": "Wet Windward soil puts heavy pressure on hillside walls. We build structural basalt and CMU retaining walls with proper drainage paths so water relieves safely instead of pushing the wall forward."
+          },
+          {
+            "title": "Will you fix a collapsing rock wall on a sloped lot?",
+            "description": "We do not patch failing walls. When a hillside wall begins to bulge or collapse, we completely demolish the unstable structure and build a secure replacement from the footing up."
+          },
+          {
+            "title": "Do you offer tieback installations for steep Kaneohe lots?",
+            "description": "No. We do not install micropiles or tiebacks. Our focus remains strictly on traditional structural masonry and concrete flatwork."
+          },
+          {
+            "title": "Do you pour new concrete driveways and slabs in Kaneohe?",
+            "description": "Yes. We handle full site preparation, old slab demolition, and concrete pouring for new residential driveways and commercial slabs."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Kaneohe Masonry Project"
+    },
+    "kailua": {
+      "path": "/service-areas/kailua/",
+      "metadata": {
+        "title": "Kailua Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Kailua properties. Our crews build custom rock walls and pour new concrete foundations."
+      },
+      "hero": {
+        "eyebrow": "Windward O'ahu",
+        "title": "Kailua Masonry & Concrete Construction",
+        "body": "Coastal driveway pours, basalt boundary walls, and hillside masonry across Kailua.",
+        "imagePlaceholder": "Kailua masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Kailua",
+        "heading": "Kailua Masonry & Concrete",
+        "body": "Kailua properties span from sandy coastal lots exposed to constant salt air up to the sloped hillside ridges of Enchanted Lake and Maunawili. Our crews dispatch from Wahiawa to build custom basalt privacy walls, pour replacement concrete driveways, and support Windward commercial developments. Every build carries our 25+ year family legacy."
+      },
+      "services": [
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom privacy walls, entry columns, and property boundaries crafted with hand-selected volcanic basalt."
+        },
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Driveways, coastal walkways, and new foundations poured to last in salt air."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile perimeter fences built to secure coastal and neighborhood residential lots."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Heavy-duty rock and block retaining walls built for sloped lots in Kailua's hillside neighborhoods."
+        }
+      ],
+      "servicesHeading": "Kailua Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Kailua",
+        "description": "Our crew recently poured a replacement concrete driveway and built a hand-selected basalt entry wall for a coastal property near Lanikai, over-excavating the sandy sub-base and adding compacted gravel to prevent future settling in the salt air environment.",
+        "imagePlaceholder": "Recent Kailua project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Kailua Masonry FAQs",
+        "items": [
+          {
+            "title": "Do you have a branch office in Kailua?",
+            "description": "No. We dispatch directly from our Wahiawa yard to all Kailua job sites."
+          },
+          {
+            "title": "How do you prep coastal Kailua lots before pouring a concrete driveway?",
+            "description": "Sandy coastal soils require thorough grading and base compaction before concrete is poured. We demolish the old slab, clear any encroaching roots or vegetation, and compact a solid sub-base so the new driveway resists settling."
+          },
+          {
+            "title": "Will you build a basalt rock wall for street privacy?",
+            "description": "Yes. Many Kailua homeowners hire us to build front boundary walls and entry pillars using hand-selected volcanic basalt to block beach traffic and secure their yard."
+          },
+          {
+            "title": "Do you handle foundation leveling for older Kailua homes?",
+            "description": "No. We exclusively pour new concrete foundations for tear-downs, ground-up builds, and additions. We do not perform structural leveling or foundation repair."
+          },
+          {
+            "title": "Do you handle both residential and commercial concrete work on the Windward side?",
+            "description": "Yes. Alongside custom residential work, we serve as a concrete and masonry subcontractor for commercial properties across Kailua."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Kailua Masonry Project"
+    },
+    "kapolei": {
+      "path": "/service-areas/kapolei/",
+      "metadata": {
+        "title": "Kapolei Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Kapolei properties. We build custom rock walls and pour new concrete foundations."
+      },
+      "hero": {
+        "eyebrow": "West O'ahu",
+        "title": "Kapolei Masonry & Concrete Construction",
+        "body": "CMU perimeter walls, residential driveway expansions, and commercial slabs across West O'ahu.",
+        "imagePlaceholder": "Kapolei masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Kapolei",
+        "heading": "Kapolei Masonry & Concrete",
+        "body": "Kapolei features master-planned residential tracts and rapidly expanding commercial centers built across dry, sun-baked Leeward terrain. Our crews travel down the H-2 and H-1 from our Wahiawa yard to build clean CMU block fences, pour concrete driveway extensions for homeowners, and execute heavy-duty commercial slabs for West O'ahu general contractors. A 25+ year family track record stands behind all our workmanship."
+      },
+      "services": [
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile perimeter fences built for privacy and clean property lines across newer Kapolei subdivisions."
+        },
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Residential driveway replacements, backyard patio slabs, and new structural foundations poured for West O'ahu builds."
+        },
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom property boundaries and front entry features built with hand-selected volcanic basalt."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Structural masonry built to manage grade changes on sloped Makakilo and upper Kapolei ridge lots."
+        }
+      ],
+      "servicesHeading": "Kapolei Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Kapolei",
+        "description": "We recently built a CMU block perimeter fence for a tract home in Kapolei, working to the HOA-approved height and finish and completing the job before the homeowner's landscaping crew arrived to seed the yard.",
+        "imagePlaceholder": "Recent Kapolei project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Kapolei Masonry FAQs",
+        "items": [
+          {
+            "title": "Do you have a physical office in Kapolei?",
+            "description": "No. We dispatch our crews directly from our Wahiawa yard to service all West O'ahu job sites."
+          },
+          {
+            "title": "Do you build CMU block fences for newer Kapolei tract homes?",
+            "description": "Yes. Many Kapolei homeowners hire us to enclose their yards with reinforced CMU block walls, as well as custom volcanic basalt walls. Tell us the dimensions and finish your association asks for and we will build to it."
+          },
+          {
+            "title": "Can you widen or replace my existing concrete driveway?",
+            "description": "Yes. We handle the demolition of existing concrete and pour full driveway replacements, parking pad extensions, and backyard lanai slabs for residential properties."
+          },
+          {
+            "title": "Can you repair a settling foundation in Kapolei?",
+            "description": "No. We only pour new concrete foundations for new builds and additions, and we do not handle structural repairs or house leveling."
+          },
+          {
+            "title": "Do your crews lay sod after building a boundary wall or patio?",
+            "description": "No. We do not provide landscaping services. We only clear the vegetation required to complete our concrete and masonry work."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Kapolei Masonry Project"
+    },
+    "north-shore": {
+      "path": "/service-areas/north-shore/",
+      "metadata": {
+        "title": "North Shore & Haleiwa Masonry & Concrete | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for North Shore properties. We build custom rock walls and pour new concrete foundations."
+      },
+      "hero": {
+        "eyebrow": "North Shore O'ahu",
+        "title": "North Shore & Haleiwa Masonry & Concrete Construction",
+        "body": "Custom basalt rock walls, coastal driveway pours, and structural masonry across Haleiwa and the North Shore.",
+        "imagePlaceholder": "North Shore masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "North Shore & Haleiwa",
+        "heading": "North Shore & Haleiwa Masonry & Concrete",
+        "body": "North Shore properties face constant salt air, sandy coastal soils, and heavy winter rain. Located just up Kamehameha Highway in Wahiawa, our crews head down to Haleiwa to build heavy-duty basalt boundary walls and pour durable concrete flatwork. A 25+ year family legacy stands behind every wall and every pour."
+      },
+      "services": [
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom entry pillars and perimeter walls built with hand-selected volcanic basalt for coastal and country lots."
+        },
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "New structural foundations and replacement concrete driveways poured over properly compacted sub-bases."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Heavy-duty rock and block structures built to hold back soil on sloped Pupukea and hillside properties."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Structural hollow tile walls and privacy fences built to secure residential and commercial property lines."
+        }
+      ],
+      "servicesHeading": "North Shore & Haleiwa Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work on the North Shore",
+        "description": "Our crews recently built a long basalt boundary wall for an agricultural lot off Kamehameha Highway outside Haleiwa, hand-selecting coastal volcanic stone and setting each course to manage the sandy soil shift that comes with winter surf season.",
+        "imagePlaceholder": "Recent North Shore project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "North Shore Masonry FAQs",
+        "items": [
+          {
+            "title": "Is your equipment yard located in Haleiwa?",
+            "description": "No. Our crews deploy directly down Kamehameha Highway from our central Wahiawa yard to all North Shore locations."
+          },
+          {
+            "title": "Can you repair a cracked concrete slab on my coastal property?",
+            "description": "We do not patch or repair existing concrete. When salt air or shifting sand cracks an older slab, we handle complete demolition and pour brand new concrete."
+          },
+          {
+            "title": "Do you build boundary walls for larger country lots in Haleiwa?",
+            "description": "Yes. We construct structural CMU block walls and hand-selected volcanic basalt walls for residential boundaries, agricultural lots, and local businesses."
+          },
+          {
+            "title": "Will you build a retaining wall to manage sloped terrain?",
+            "description": "Yes. We construct heavy basalt and CMU retaining walls designed to hold back soil on sloped lots, though we do not install micropiles or tiebacks."
+          },
+          {
+            "title": "Do you clear the land before building a wall or pouring concrete?",
+            "description": "We only remove trees and brush necessary to complete the concrete or masonry installation. We do not provide general landscape design."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your North Shore Masonry Project"
+    },
+    "aiea-pearl-city": {
+      "path": "/service-areas/aiea-pearl-city/",
+      "metadata": {
+        "title": "Aiea & Pearl City Masonry & Concrete | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Aiea and Pearl City properties. We build custom rock walls and pour new foundations."
+      },
+      "hero": {
+        "eyebrow": "Central O'ahu",
+        "title": "Aiea & Pearl City Masonry & Concrete Construction",
+        "body": "Hillside retaining walls, residential driveway replacements, and commercial slabs overlooking Pearl Harbor.",
+        "imagePlaceholder": "Aiea and Pearl City masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Aiea & Pearl City",
+        "heading": "Aiea & Pearl City Masonry & Concrete",
+        "body": "Neighborhoods in Aiea and Pearl City climb steeply from the commercial corridor along Kamehameha Highway up into the residential ridges of Aiea Heights and Pacific Palisades. Older hillside lots here frequently deal with cracked multi-car driveways and aging masonry retaining walls that need full replacement. Dispatched from our central Wahiawa yard, our family crew brings 25+ years of trade experience to residential slope retention and commercial concrete pours."
+      },
+      "services": [
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Heavy-duty structural masonry built to hold back hillside soil across sloped Aiea Heights and Pearl City ridge lots."
+        },
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Full tear-out and replacement of steep residential driveways alongside commercial slabs near the harbor corridor."
+        },
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom terraced stonework and property boundaries crafted with hand-selected volcanic basalt."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile perimeter walls built to separate narrow residential lots and commercial properties."
+        }
+      ],
+      "servicesHeading": "Aiea & Pearl City Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Aiea & Pearl City",
+        "description": "We recently demolished a settling driveway on a steep hillside lot in Aiea Heights, regraded the slope to correct drainage away from the foundation, and poured a new reinforced concrete driveway built to handle the grade long-term.",
+        "imagePlaceholder": "Recent Aiea & Pearl City project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Aiea & Pearl City Masonry FAQs",
+        "items": [
+          {
+            "title": "Do you operate a branch office in Pearl City?",
+            "description": "No. Our equipment and crews are based at our Wahiawa yard and dispatch directly down the H-2 to your job site."
+          },
+          {
+            "title": "Can you build a retaining wall for a sloped ridge lot in Aiea Heights or Pacific Palisades?",
+            "description": "Yes. We construct heavy-duty basalt and CMU retaining walls designed specifically to hold back soil on steep residential properties."
+          },
+          {
+            "title": "Will your team install tiebacks or micropiles for a failing slope?",
+            "description": "No. We do not install micropiles or tiebacks. We exclusively build traditional structural masonry walls from a solid concrete footing."
+          },
+          {
+            "title": "Do you replace older cracked concrete driveways in Pearl City?",
+            "description": "Yes. Many older homes in the area have steep or settling driveways. We handle the complete demolition of the existing slab and pour a durable new concrete driveway."
+          },
+          {
+            "title": "Do you pour concrete for commercial businesses along Kamehameha Highway?",
+            "description": "Yes. We act as a concrete subcontractor for commercial flatwork, curbing, and structural slab pouring across Aiea and Pearl City."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Aiea & Pearl City Masonry Project"
+    },
+    "waipahu": {
+      "path": "/service-areas/waipahu/",
+      "metadata": {
+        "title": "Waipahu Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Waipahu properties. We build custom rock walls and pour new foundations."
+      },
+      "hero": {
+        "eyebrow": "Central O'ahu",
+        "title": "Waipahu Masonry & Concrete Construction",
+        "body": "Multi-car driveway pours, foundation slabs, and CMU boundary walls across Waipahu.",
+        "imagePlaceholder": "Waipahu masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Waipahu",
+        "heading": "Waipahu Masonry & Concrete",
+        "body": "Waipahu mixes older plantation-era lots and multi-generational homes with newer residential subdivisions in Waikele and Royal Kunia. Property owners here frequently expand parking with wider concrete driveways, pour new foundation slabs for home additions, and enclose busy street lots with solid masonry walls. Dispatched directly down the H-2 from our Wahiawa yard, our family crew brings 25+ years of hands-on experience to every residential and commercial pour."
+      },
+      "services": [
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Multi-car driveway expansions, tear-outs of aging slabs, and new structural foundations poured for home additions."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile perimeter walls built to block street noise and secure residential property lines."
+        },
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom property boundaries and front entry barriers constructed with hand-selected volcanic basalt."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Heavy-duty rock and block walls built to hold back soil on sloped Waikele and upper Waipahu lots."
+        }
+      ],
+      "servicesHeading": "Waipahu Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Waipahu",
+        "description": "Our crew recently built a 60-foot CMU block boundary wall along a busy street-facing lot near Waipahu District Park, giving the homeowners a solid privacy barrier and a clean property line that cuts road noise significantly.",
+        "imagePlaceholder": "Recent Waipahu project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Ewa Beach",
+          "href": "/service-areas/ewa-beach/"
+        }
+      ],
+      "faqs": {
+        "title": "Waipahu Masonry FAQs",
+        "items": [
+          {
+            "title": "Do you have a branch office in Waipahu?",
+            "description": "No. Our equipment and crews are based at our main yard in Wahiawa and travel directly down the H-2 to service Waipahu job sites."
+          },
+          {
+            "title": "Can you pour a new concrete foundation for an ADU or home addition?",
+            "description": "Yes. Many multi-generational households in Waipahu expand their living space, and we pour new structural concrete foundations for additions and ground-up builds. We do not perform structural repairs on existing foundations."
+          },
+          {
+            "title": "Can you widen my existing concrete driveway for extra parking?",
+            "description": "Yes. Instead of patching onto old cracked concrete, we handle complete demolition as needed, grade the expanded parking area, and pour a clean, durable concrete driveway."
+          },
+          {
+            "title": "Do you build noise-blocking walls along busy Waipahu streets?",
+            "description": "Yes. We construct solid CMU block fences and custom volcanic basalt walls to give homeowners privacy and separation from road traffic."
+          },
+          {
+            "title": "Do you handle commercial concrete work for Waipahu businesses and warehouses?",
+            "description": "Yes. We work with commercial property owners and general contractors to pour heavy-duty slabs, sidewalks, and curbing across Waipahu."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Waipahu Masonry Project"
+    },
+    "ewa-beach": {
+      "path": "/service-areas/ewa-beach/",
+      "metadata": {
+        "title": "Ewa Beach Masonry & Concrete Contractor | Vaifoou Construction",
+        "description": "Vaifoou Construction provides structural masonry and concrete flatwork for Ewa Beach properties. We build custom rock walls and pour new foundations."
+      },
+      "hero": {
+        "eyebrow": "West O'ahu",
+        "title": "Ewa Beach Masonry & Concrete Construction",
+        "body": "Driveway extensions, backyard patio slabs, and CMU boundary walls across the Ewa plain.",
+        "imagePlaceholder": "Ewa Beach masonry project photo"
+      },
+      "intro": {
+        "eyebrow": "Ewa Beach",
+        "heading": "Ewa Beach Masonry & Concrete",
+        "body": "Ewa Beach sits on a flat, dry coral plain filled with master-planned neighborhoods and expanding commercial sites. Local homeowners most often hire us to pour wider concrete driveways, add backyard lanai slabs, and build clean CMU perimeter fences. Our family crew dispatches directly from Wahiawa, backing every job with 25+ years of trade experience."
+      },
+      "services": [
+        {
+          "name": "Concrete Services",
+          "href": "/services/concrete/",
+          "description": "Driveway extensions, backyard patio slabs, and new structural foundations poured for flat Ewa Beach lots."
+        },
+        {
+          "name": "CMU & Block Walls",
+          "href": "/services/cmu-block-walls/",
+          "description": "Reinforced hollow tile fences built to enclose residential tract yards and match neighborhood standards."
+        },
+        {
+          "name": "Rock Walls",
+          "href": "/services/rock-walls/",
+          "description": "Custom property boundaries and front entry accents constructed with hand-selected volcanic basalt."
+        },
+        {
+          "name": "Retaining Walls",
+          "href": "/services/retaining-walls/",
+          "description": "Low-profile structural masonry built to level out grade transitions between neighboring lots."
+        }
+      ],
+      "servicesHeading": "Ewa Beach Masonry & Concrete Services",
+      "recentWork": {
+        "heading": "Recent Work in Ewa Beach",
+        "description": "Our crew recently graded and poured a new structural foundation for a ground-up residential build in Ewa Beach, working ahead of the framing crew and coordinating the pour timing around the site's coral base to ensure a flat, level slab throughout.",
+        "imagePlaceholder": "Recent Ewa Beach project photo"
+      },
+      "otherAreas": [
+        {
+          "title": "Wahiawa",
+          "href": "/service-areas/wahiawa/"
+        },
+        {
+          "title": "Honolulu",
+          "href": "/service-areas/honolulu/"
+        },
+        {
+          "title": "Mililani",
+          "href": "/service-areas/mililani/"
+        },
+        {
+          "title": "Kaneohe",
+          "href": "/service-areas/kaneohe/"
+        },
+        {
+          "title": "Kailua",
+          "href": "/service-areas/kailua/"
+        },
+        {
+          "title": "Kapolei",
+          "href": "/service-areas/kapolei/"
+        },
+        {
+          "title": "North Shore & Haleiwa",
+          "href": "/service-areas/north-shore/"
+        },
+        {
+          "title": "Aiea & Pearl City",
+          "href": "/service-areas/aiea-pearl-city/"
+        },
+        {
+          "title": "Waipahu",
+          "href": "/service-areas/waipahu/"
+        }
+      ],
+      "faqs": {
+        "title": "Ewa Beach Masonry FAQs",
+        "items": [
+          {
+            "title": "Do you maintain a branch office in Ewa Beach?",
+            "description": "No. All crews travel directly from our Wahiawa yard down the H-1 and Fort Weaver Road to service Ewa Beach job sites."
+          },
+          {
+            "title": "Can you pour a backyard patio slab or widen my tract driveway?",
+            "description": "Yes. Many Ewa Beach homes come with narrow driveways or small lanais. We handle full site preparation, grade the flat coral soil, and pour durable new concrete driveways, walkways, and patio slabs."
+          },
+          {
+            "title": "Do you patch cracks in old concrete driveways?",
+            "description": "No. We do not patch or repair existing slabs. When an older slab cracks or settles, we manage complete demolition and pour brand new concrete."
+          },
+          {
+            "title": "Will you build a block fence or rock wall for my property line?",
+            "description": "Yes. We construct reinforced CMU block walls and hand-selected basalt walls for privacy and security. If your HOA needs to review the work first, we provide a written estimate with the scope, materials and dimensions."
+          },
+          {
+            "title": "Are foundation repairs included in your Ewa Beach services?",
+            "description": "We do not provide structural foundation repair. We specialize strictly in pouring new foundations for home additions, ground-up residential builds, and commercial contractors."
+          }
+        ]
+      },
+      "ctaHeading": "Start Your Ewa Beach Masonry Project"
+    }
+  }
+}

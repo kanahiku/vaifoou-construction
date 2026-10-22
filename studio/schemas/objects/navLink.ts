@@ -1,8 +1,10 @@
-import { defineField, defineType } from 'sanity';
+import { defineArrayMember, defineField, defineType } from 'sanity';
+
+/** Header menu: top-level item → group (dropdown) → leaf (flyout). */
 
 export const navSubLink = defineType({
   name: 'navSubLink',
-  title: 'Sub-link',
+  title: 'Link',
   type: 'object',
   fields: [
     defineField({ name: 'text', title: 'Label', type: 'string', validation: (r) => r.required() }),
@@ -11,41 +13,54 @@ export const navSubLink = defineType({
   preview: { select: { title: 'text', subtitle: 'href' } },
 });
 
-export const navLink = defineType({
-  name: 'navLink',
-  title: 'Nav Link',
+export const navGroup = defineType({
+  name: 'navGroup',
+  title: 'Dropdown item',
   type: 'object',
   fields: [
     defineField({ name: 'text', title: 'Label', type: 'string', validation: (r) => r.required() }),
-    defineField({ name: 'href', title: 'URL (optional if has sub-links)', type: 'string' }),
+    defineField({ name: 'href', title: 'URL', type: 'string', description: 'Optional if it has a flyout of links.' }),
     defineField({
-      name: 'subLinks',
-      title: 'Sub-links',
+      name: 'links',
+      title: 'Flyout links',
+      description: 'Optional third level, shown as a side flyout (desktop) or nested list (mobile).',
       type: 'array',
-      of: [{ type: 'navSubLink' }],
-    }),
-    defineField({
-      name: 'columns',
-      title: 'Mega-menu columns',
-      description: 'Optional mega-menu columns (used by Services). Takes precedence over Sub-links.',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          name: 'navColumn',
-          fields: [
-            defineField({ name: 'title', title: 'Column title', type: 'string', validation: (r) => r.required() }),
-            defineField({
-              name: 'links',
-              title: 'Links',
-              type: 'array',
-              of: [{ type: 'navSubLink' }],
-            }),
-          ],
-          preview: { select: { title: 'title' } },
-        },
-      ],
+      of: [defineArrayMember({ type: 'navSubLink' })],
     }),
   ],
-  preview: { select: { title: 'text', subtitle: 'href' } },
+  preview: {
+    select: { title: 'text', subtitle: 'href', links: 'links' },
+    prepare: ({ title, subtitle, links }) => ({
+      title,
+      subtitle: links?.length ? `${links.length} links` : subtitle,
+    }),
+  },
+});
+
+export const navLink = defineType({
+  name: 'navLink',
+  title: 'Menu item',
+  type: 'object',
+  fields: [
+    defineField({ name: 'text', title: 'Label', type: 'string', validation: (r) => r.required() }),
+    defineField({
+      name: 'href',
+      title: 'URL',
+      type: 'string',
+      description: 'Leave empty for a dropdown label that is not itself a link.',
+    }),
+    defineField({
+      name: 'links',
+      title: 'Dropdown',
+      type: 'array',
+      of: [defineArrayMember({ type: 'navGroup' })],
+    }),
+  ],
+  preview: {
+    select: { title: 'text', subtitle: 'href', links: 'links' },
+    prepare: ({ title, subtitle, links }) => ({
+      title,
+      subtitle: links?.length ? `Dropdown · ${links.length} items` : subtitle,
+    }),
+  },
 });

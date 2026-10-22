@@ -1,0 +1,2437 @@
+{
+  "categories": {
+    "rock-walls": {
+      "path": "/services/rock-walls/",
+      "seo": {
+        "title": "O'ahu Rock Wall Construction | Vaifoou Construction",
+        "description": "Custom rock walls and retaining structures built with hand-selected volcanic basalt. Serving homes and businesses across O'ahu. Request an estimate."
+      },
+      "hero": {
+        "heading": "O'ahu Rock Wall Construction",
+        "subheading": "Custom property boundaries and retaining structures built with hand-selected volcanic basalt."
+      },
+      "intro": {
+        "heading": "Built Strong For Hawaii’s Land",
+        "body": "Our masonry crews construct custom property boundaries and rock retaining walls using hand-selected volcanic basalt. A well-built rock wall gives you a lasting property boundary and holds back soil on hillside terrain. Every build is backed by a 25+ year family legacy in the O'ahu masonry trade and comes with our workmanship guarantee."
+      },
+      "subServices": {
+        "heading": "Custom Rock Wall Services",
+        "columns": 2,
+        "cards": [
+          {
+            "title": "Veneer Rock Walls",
+            "description": "Space-saving palletised stone featuring flat corners and a clean finish.",
+            "href": "/services/rock-walls/veneer/"
+          },
+          {
+            "title": "Rock Wall Repair",
+            "description": "Demolition and rebuilds of failing, bulging or collapsed rock walls.",
+            "href": "/services/rock-walls/repair/"
+          },
+          {
+            "title": "Rock Retaining Walls",
+            "description": "Hillside retaining walls built with natural volcanic stone.",
+            "href": "/services/rock-walls/retaining/"
+          },
+          {
+            "title": "Planter & Garden Rock Walls",
+            "description": "Custom masonry borders for residential property layouts.",
+            "href": "/services/rock-walls/planter-garden/"
+          }
+        ]
+      },
+      "projects": {
+        "heading": "View Our Projects",
+        "body": "Explore our recent work and see the quality, care, and craftsmanship we bring to every project. From start to finish, our team is committed to dependable service, careful attention to detail, and results built to last.",
+        "ctaLabel": "View Projects",
+        "ctaHref": "/projects/"
+      },
+      "process": {
+        "heading": "The Construction Process",
+        "steps": [
+          {
+            "title": "Consultation",
+            "description": "We review your property and define the exact project requirements."
+          },
+          {
+            "title": "Excavation",
+            "description": "Our team prepares the site and hillside foundation for structural stability."
+          },
+          {
+            "title": "Construction",
+            "description": "We hand-select volcanic basalt and set each stone in place."
+          },
+          {
+            "title": "Finishing",
+            "description": "The team details the final build for a clean presentation."
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "Rock Wall Construction FAQs",
+        "items": [
+          {
+            "question": "What materials do you use for custom walls?",
+            "answer": "We construct our rock walls using hand-selected volcanic basalt. This dense natural stone makes a heavy, durable wall with a classic local finish."
+          },
+          {
+            "question": "Do you repair existing rock walls?",
+            "answer": "Yes, we handle complete demolition and reconstruction of failing structures. Our crews remove the failed section and rebuild the wall. See Rock Wall Repair."
+          },
+          {
+            "question": "What is a veneer rock wall?",
+            "answer": "Veneer rock walls arrive on pallets and feature flat corners. The material is lighter to carry, and compared with standard block, it can save roughly two feet of property space."
+          },
+          {
+            "question": "Do you handle the landscaping around the new wall?",
+            "answer": "We focus exclusively on masonry and concrete construction. We do not provide landscape design or general landscaping services."
+          },
+          {
+            "question": "Do you build walls outside of O'ahu?",
+            "answer": "No, our service area is strictly limited to the island of O'ahu."
+          }
+        ]
+      },
+      "related": {
+        "heading": "Explore Related Masonry Services",
+        "links": [
+          {
+            "title": "Retaining Walls",
+            "href": "/services/retaining-walls/"
+          },
+          {
+            "title": "CMU & Block Walls",
+            "href": "/services/cmu-block-walls/"
+          },
+          {
+            "title": "Concrete Services",
+            "href": "/services/concrete/"
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Start Your O'ahu Rock Wall Project",
+        "note": "Connect with our team to discuss your rock wall requirements. Please note we are closed on Sundays."
+      },
+      "_debug": {
+        "h2": [
+          "Built Strong For Hawaii’s Land",
+          "Custom Rock Wall Services",
+          "The Construction Process",
+          "Explore Related Masonry Services"
+        ],
+        "h3": 3
+      }
+    },
+    "retaining-walls": {
+      "path": "/services/retaining-walls/",
+      "seo": {
+        "title": "O'ahu Retaining Wall Construction | Vaifoou Construction",
+        "description": "Structural retaining walls built for O'ahu's hillside terrain. We build durable retaining walls in CMU block and volcanic basalt. Request an estimate."
+      },
+      "hero": {
+        "heading": "O'ahu Retaining Wall Construction",
+        "subheading": "Rock and CMU retaining walls built for O'ahu's hillsides."
+      },
+      "intro": {
+        "heading": "Built For O'ahu's Hillsides",
+        "body": "We build heavy-duty retaining walls for residential and commercial properties. Our crews build them in CMU block and natural volcanic basalt. Every build is backed by a 25+ year family legacy in the masonry trade and comes with our workmanship guarantee."
+      },
+      "subServices": {
+        "heading": "Retaining Wall Material Options",
+        "columns": 2,
+        "cards": [
+          {
+            "title": "CMU Block Retaining Walls",
+            "description": "Heavy-duty CMU block walls for retaining soil on sloped lots.",
+            "href": "/services/cmu-block-walls/"
+          },
+          {
+            "title": "Rock Retaining Walls",
+            "description": "Natural boundary support built with hand-selected volcanic basalt.",
+            "href": "/services/rock-walls/retaining/"
+          }
+        ]
+      },
+      "projects": {
+        "heading": "View Our Projects",
+        "body": "Explore our recent work and see the quality, care, and craftsmanship we bring to every project. From start to finish, our team is committed to dependable service, careful attention to detail, and results built to last.",
+        "ctaLabel": "View Projects",
+        "ctaHref": "/projects/"
+      },
+      "process": {
+        "heading": "The Construction Process",
+        "steps": [
+          {
+            "title": "Consultation",
+            "description": "We review your property and define the exact structural requirements."
+          },
+          {
+            "title": "Excavation",
+            "description": "Our team prepares the site and hillside foundation for maximum stability."
+          },
+          {
+            "title": "Construction",
+            "description": "We build the wall in hand-selected volcanic basalt or CMU block."
+          },
+          {
+            "title": "Finishing",
+            "description": "The team details the final build for a clean presentation."
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "Retaining Wall Construction FAQs",
+        "items": [
+          {
+            "question": "What materials do you use for retaining walls?",
+            "answer": "We construct retaining walls using structural CMU block and hand-selected volcanic basalt. The best material depends on your specific terrain and structural requirements."
+          },
+          {
+            "question": "Do you repair existing retaining walls?",
+            "answer": "Yes, we handle complete demolition and reconstruction of failing structures. Our crews remove the failed section and rebuild the wall."
+          },
+          {
+            "question": "Do you install micropiles or tiebacks?",
+            "answer": "No. To maintain strict quality control, we focus exclusively on our core masonry trades. We do not perform structural foundation repair, micropile drilling, or tieback installations."
+          },
+          {
+            "question": "Do you handle the landscaping after the wall is built?",
+            "answer": "We focus exclusively on masonry and concrete construction. We do not provide landscape design or general landscaping services."
+          },
+          {
+            "question": "Do you build retaining walls outside of O'ahu?",
+            "answer": "No, our service area is strictly limited to the island of O'ahu."
+          }
+        ]
+      },
+      "related": {
+        "heading": "Explore Related Masonry Services",
+        "links": [
+          {
+            "title": "Rock Walls",
+            "href": "/services/rock-walls/"
+          },
+          {
+            "title": "CMU & Block Walls",
+            "href": "/services/cmu-block-walls/"
+          },
+          {
+            "title": "Concrete Services",
+            "href": "/services/concrete/"
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Start Your O'ahu Retaining Wall Project",
+        "note": "Connect with our team to discuss your retaining wall requirements. Please note we are closed on Sundays."
+      },
+      "_debug": {
+        "h2": [
+          "Built For O'ahu's Hillsides",
+          "Retaining Wall Material Options",
+          "The Construction Process",
+          "Explore Related Masonry Services"
+        ],
+        "h3": 3
+      }
+    },
+    "cmu-block-walls": {
+      "path": "/services/cmu-block-walls/",
+      "seo": {
+        "title": "O'ahu CMU & Block Wall Construction | Vaifoou Construction",
+        "description": "Structural CMU and block walls engineered for O'ahu properties. We build retaining walls and block fences backed by a 25+ year family legacy. Request an estimate."
+      },
+      "hero": {
+        "heading": "O'ahu CMU & Block Wall Construction",
+        "subheading": "CMU retaining walls and block fences built for long-term stability."
+      },
+      "intro": {
+        "heading": "Heavy-Duty Structural Masonry",
+        "body": "We construct structural CMU (Concrete Masonry Unit) walls for residential and commercial applications across the island. Our masonry crews build heavy-duty retaining walls and secure block fences. We back our work with a 25+ year family legacy in the local masonry trade and our workmanship guarantee."
+      },
+      "subServices": {
+        "heading": "CMU Construction Services",
+        "columns": 3,
+        "cards": [
+          {
+            "title": "CMU Retaining Walls",
+            "description": "CMU retaining walls built to hold back soil on hillside terrain.",
+            "href": "/services/retaining-walls/",
+            "ctaLabel": "View Retaining Wall Services"
+          },
+          {
+            "title": "CMU Block Fences",
+            "description": "Property division and security fences built for long-term structural stability."
+          },
+          {
+            "title": "Commercial CMU Work",
+            "description": "CMU work for commercial property owners, property managers, HOAs, and as a subcontractor to general contractors.",
+            "href": "/who-we-work-with/commercial/",
+            "ctaLabel": "View Commercial Services"
+          }
+        ]
+      },
+      "projects": {
+        "heading": "View Our Projects",
+        "body": "Explore our recent work and see the quality, care, and craftsmanship we bring to every project. From start to finish, our team is committed to dependable service, careful attention to detail, and results built to last.",
+        "ctaLabel": "View Projects",
+        "ctaHref": "/projects/"
+      },
+      "process": {
+        "heading": "The Construction Process",
+        "steps": [
+          {
+            "title": "Consultation",
+            "description": "We review your property and define the exact structural requirements."
+          },
+          {
+            "title": "Excavation",
+            "description": "Our team prepares the site and foundation layout."
+          },
+          {
+            "title": "Construction",
+            "description": "We lay the CMU block course by course to the agreed layout."
+          },
+          {
+            "title": "Finishing",
+            "description": "The team details the final build for a clean presentation."
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "CMU & Block Wall FAQs",
+        "items": [
+          {
+            "question": "What is a CMU wall?",
+            "answer": "CMU stands for Concrete Masonry Unit. These standard concrete blocks create highly durable structures for retaining soil and dividing properties."
+          },
+          {
+            "question": "Do you repair existing block walls?",
+            "answer": "Yes, we handle complete demolition and reconstruction of failing structures. Our crews remove the failed section and rebuild the wall."
+          },
+          {
+            "question": "Do you handle the landscaping after the wall is built?",
+            "answer": "We focus exclusively on masonry and concrete construction. We do not provide landscape design or general landscaping services."
+          },
+          {
+            "question": "Do you install micropiles or tiebacks?",
+            "answer": "No. To maintain strict quality control, we focus exclusively on our core masonry trades. We do not perform structural foundation repair, micropile drilling, or tieback installations."
+          },
+          {
+            "question": "Do you build block walls outside of O'ahu?",
+            "answer": "No, our service area is strictly limited to the island of O'ahu."
+          }
+        ]
+      },
+      "related": {
+        "heading": "Explore Related Masonry Services",
+        "links": [
+          {
+            "title": "Rock Walls",
+            "href": "/services/rock-walls/"
+          },
+          {
+            "title": "Retaining Walls",
+            "href": "/services/retaining-walls/"
+          },
+          {
+            "title": "Concrete Services",
+            "href": "/services/concrete/"
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Start Your O'ahu CMU Project",
+        "note": "Connect with our team to discuss your block wall requirements. Please note we are closed on Sundays."
+      },
+      "_debug": {
+        "h2": [
+          "Heavy-Duty Structural Masonry",
+          "CMU Construction Services",
+          "The Construction Process",
+          "Explore Related Masonry Services"
+        ],
+        "h3": 3
+      }
+    },
+    "concrete": {
+      "path": "/services/concrete/",
+      "seo": {
+        "title": "O'ahu Concrete Contractor | Vaifoou Construction",
+        "description": "Concrete driveways, patios, walkways, steps, foundations and stamped concrete for homes and businesses across O'ahu. Request an estimate."
+      },
+      "hero": {
+        "heading": "O'ahu Concrete & Flatwork Services",
+        "subheading": "Driveways, patios, walkways, steps, foundations and decorative concrete poured for long-term durability."
+      },
+      "intro": {
+        "heading": "Poured For Long-Term Durability",
+        "body": "We pour custom concrete layouts for residential and commercial properties across the island. Our crews handle flatwork, new foundations and decorative concrete. Every project is backed by a 25+ year family legacy in the O'ahu masonry trade and comes with our workmanship guarantee."
+      },
+      "subServices": {
+        "heading": "Custom Concrete Services",
+        "columns": 4,
+        "cards": [
+          {
+            "title": "Concrete Driveways",
+            "description": "New driveway installations built for daily vehicle traffic.",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Sidewalks & Walkways",
+            "description": "Residential pathways and commercial curb layouts.",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Patios",
+            "description": "Custom patios and lanai extensions.",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Steps & Stairways",
+            "description": "Structural access steps and custom stairway construction.",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "description": "New foundation pours only. We do not do foundation repair.",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "description": "Custom patterns and finish options for decorative flatwork.",
+            "href": "/services/concrete/stamped-decorative/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "description": "Surface protection for new pours and stamped layouts.",
+            "href": "/services/concrete/sealing/"
+          }
+        ]
+      },
+      "projects": {
+        "heading": "View Our Projects",
+        "body": "Explore our recent work and see the quality, care, and craftsmanship we bring to every project. From start to finish, our team is committed to dependable service, careful attention to detail, and results built to last.",
+        "ctaLabel": "View Projects",
+        "ctaHref": "/projects/"
+      },
+      "process": {
+        "heading": "The Construction Process",
+        "steps": [
+          {
+            "title": "Consultation",
+            "description": "We review your property and define the exact project requirements."
+          },
+          {
+            "title": "Site Preparation",
+            "description": "Our team prepares the ground and sets the forms for structural accuracy. We handle necessary tree and shrub removal strictly for site preparation."
+          },
+          {
+            "title": "The Pour",
+            "description": "We pour and place the concrete within the forms."
+          },
+          {
+            "title": "Finishing",
+            "description": "The team finishes the surface, and seals stamped and decorative work."
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "Concrete Construction FAQs",
+        "items": [
+          {
+            "question": "What types of concrete finishes do you offer?",
+            "answer": "We provide standard flatwork finishes and custom stamped concrete layouts. We will help you select the best surface option during your initial consultation."
+          },
+          {
+            "question": "Do you repair existing structural foundations?",
+            "answer": "No. We pour new foundations but we do not perform structural foundation repair. We also do not perform micropile drilling or tieback installations."
+          },
+          {
+            "question": "Do you handle tree removal before pouring a driveway?",
+            "answer": "Tree and shrub removal is only available as necessary site preparation prior to our concrete pours. We do not provide general landscaping services."
+          },
+          {
+            "question": "Do you offer concrete sealing?",
+            "answer": "Yes. We seal new stamped and decorative concrete, and reseal it as a return service to keep the finish protected."
+          },
+          {
+            "question": "Do you pour concrete outside of O'ahu?",
+            "answer": "No, our service area is strictly limited to the island of O'ahu."
+          }
+        ]
+      },
+      "related": {
+        "heading": "Explore Related Masonry Services",
+        "links": [
+          {
+            "title": "Rock Walls",
+            "href": "/services/rock-walls/"
+          },
+          {
+            "title": "Retaining Walls",
+            "href": "/services/retaining-walls/"
+          },
+          {
+            "title": "CMU & Block Walls",
+            "href": "/services/cmu-block-walls/"
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Start Your O'ahu Concrete Project",
+        "note": "Connect with our team to discuss your concrete flatwork requirements. Please note we are closed on Sundays."
+      },
+      "_debug": {
+        "h2": [
+          "Poured For Long-Term Durability",
+          "Custom Concrete Services",
+          "The Construction Process",
+          "Explore Related Masonry Services"
+        ],
+        "h3": 3
+      }
+    }
+  },
+  "subPages": {
+    "rock-walls/veneer": {
+      "path": "/services/rock-walls/veneer/",
+      "category": "rock-walls",
+      "seo": {
+        "title": "Veneer Rock Walls | Vaifoou Construction",
+        "description": "Maximize your property space with veneer rock walls. We install palletized rock veneer with flat corners across O'ahu."
+      },
+      "hero": {
+        "heading": "Veneer Rock Walls",
+        "body": "We build veneer rock walls for residential and commercial properties across O'ahu. This application offers a distinct space-saving advantage for tight property lines. The material arrives palletized for highly efficient site handling and is lighter to carry. We utilize available flat corners to deliver a seamless finish. Every installation is backed by our workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Veneer Wall Installation Process",
+        "items": [
+          {
+            "title": "Site Consultation",
+            "description": "We evaluate your property boundaries to determine the exact wall footprint. This visit allows us to plan site access for our palletized deliveries."
+          },
+          {
+            "title": "Surface Preparation",
+            "description": "Our crews prepare the existing structural backing for the new facing. We clear away dirt and apply a solid bonding layer to ensure the veneer stones adhere correctly."
+          },
+          {
+            "title": "Stone Selection and Shaping",
+            "description": "We sort the palletized rock upon arrival. Our masons shape individual pieces on-site to create tight joints and maintain a consistent visual flow across the structure."
+          },
+          {
+            "title": "Application and Mortaring",
+            "description": "We apply a specialized mortar mix to the back of each stone and press it firmly against the structural wall. We utilize available flat corners to deliver a seamless finish."
+          },
+          {
+            "title": "Curing and Cleanup",
+            "description": "The mortar cures to lock the stones permanently in place. We clean the finished surface to reveal the natural textures and remove all leftover debris."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Finishing Options",
+        "items": [
+          {
+            "title": "Volcanic Basalt",
+            "description": "We build with hand-selected volcanic basalt. This local stone provides an authentic aesthetic for island properties without the heavy structural footprint.",
+            "icon": "tabler:mountain"
+          },
+          {
+            "title": "Flat Corner Pieces",
+            "description": "We utilize available flat corners to wrap outside edges cleanly. This technique mimics the look of a solid block wall.",
+            "icon": "tabler:corner-up-right"
+          },
+          {
+            "title": "Palletized Delivery",
+            "description": "The veneer material is lighter to carry and arrives palletized. This efficient handling protects your existing landscaping during construction.",
+            "icon": "tabler:packages"
+          },
+          {
+            "title": "Joint Finishing",
+            "description": "We offer different mortar joint finishes to match your design. The mortar can be recessed to highlight stone edges or smoothed flush for a cleaner profile.",
+            "icon": "tabler:trowel"
+          }
+        ]
+      },
+      "comparison": {
+        "eyebrow": "Comparison",
+        "heading": "Veneer vs. Standard Construction",
+        "col1": "Veneer Rock Wall",
+        "col2": "Standard Block Construction",
+        "rows": [
+          {
+            "feature": "Property Space",
+            "val1": "Saves roughly two feet of space",
+            "val2": "Requires full structural footprint"
+          },
+          {
+            "feature": "Material Handling",
+            "val1": "Lighter and arrives palletized",
+            "val2": "Traditional heavy delivery"
+          },
+          {
+            "feature": "Corner Finish",
+            "val1": "Flat corners available",
+            "val2": "Standard masonry corners"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Concrete Upgrades",
+            "description": "We apply veneer facing directly over existing concrete retaining walls to provide a natural stone aesthetic without rebuilding the structure.",
+            "icon": "tabler:building"
+          },
+          {
+            "title": "Exterior Facades",
+            "description": "We modernize outdated residential and commercial building facades, covering plain block walls with hand-selected basalt.",
+            "icon": "tabler:home"
+          },
+          {
+            "title": "Tight Boundaries",
+            "description": "We install these thin profiles along narrow property lines where a traditional gravity wall would consume too much of your yard space.",
+            "icon": "tabler:arrows-minimize"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Rock Wall Services",
+        "links": [
+          {
+            "title": "Rock Wall Repair",
+            "href": "/services/rock-walls/repair/"
+          },
+          {
+            "title": "Rock Retaining Walls",
+            "href": "/services/rock-walls/retaining/"
+          },
+          {
+            "title": "Planter & Garden Rock Walls",
+            "href": "/services/rock-walls/planter-garden/"
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "How much space does a veneer wall save?",
+            "answer": "Building with veneer saves roughly two feet of property space compared with standard block construction. This distinct space-saving advantage makes it ideal for tight property boundaries."
+          },
+          {
+            "question": "What materials do you use for veneer walls?",
+            "answer": "We build with hand-selected volcanic basalt. The veneer material is lighter to carry and arrives palletized. This allows our crews to work efficiently without bringing heavy excavation equipment onto your lawn."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand strictly behind our preparation, mortaring, and finishing processes."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:eyebrow,heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "rock-walls/repair": {
+      "path": "/services/rock-walls/repair/",
+      "category": "rock-walls",
+      "seo": {
+        "title": "Rock Wall Repair & Rebuilds | Vaifoou Construction",
+        "description": "Vaifoou Construction handles the demolition and complete reconstruction of compromised or collapsed rock walls on O'ahu."
+      },
+      "hero": {
+        "heading": "Rock Wall Repair",
+        "body": "We manage rock wall repair and structural rebuilds for residential and commercial properties across O'ahu. When a barrier fails, our crews handle the complete demolition of the compromised masonry. We then execute a ground-up reconstruction to replace bulging or collapsed structures using hand-selected volcanic basalt."
+      },
+      "process": {
+        "heading": "Our Structural Rebuild Process",
+        "items": [
+          {
+            "title": "Structural Assessment",
+            "description": "We inspect the bulging or collapsed sections of your existing boundary. This evaluation helps us determine the underlying cause of the structural failure before we bring in heavy machinery."
+          },
+          {
+            "title": "Safe Demolition",
+            "description": "Our heavy equipment operators carefully tear down the compromised masonry. We remove all failed stone and degraded mortar from your property to establish a completely clean workspace."
+          },
+          {
+            "title": "Foundation Preparation",
+            "description": "We excavate the exposed dirt to create a highly stable base layer. We pour a new concrete footing to ensure the heavy replacement barrier will not sink into soft soil over time."
+          },
+          {
+            "title": "Rebuilding and Mortaring",
+            "description": "Our masons execute a ground-up reconstruction to replace bulging or collapsed structures. We apply heavy-duty masonry mortar to bind the volcanic basalt tightly and restore complete structural integrity."
+          },
+          {
+            "title": "Cleanup and Curing",
+            "description": "The fresh mortar requires a strict curing period to lock the heavy stones together permanently. We remove all demolition debris and wash the immediate work area thoroughly."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Structural Upgrades",
+        "items": [
+          {
+            "title": "Volcanic Basalt",
+            "description": "We construct the replacement structure using hand-selected volcanic basalt. This dense local stone provides the necessary physical mass to handle massive soil loads securely.",
+            "icon": "tabler:mountain"
+          },
+          {
+            "title": "Heavy-Duty Mortar",
+            "description": "We utilize industrial masonry mortar to fuse the joints securely. This prevents root intrusion and limits water seepage from degrading the interior cavity.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Drainage Integration",
+            "description": "We install proper drainage channels behind the new masonry block. This relieves hydrostatic pressure to prevent future blowouts during heavy rain.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Reinforced Footings",
+            "description": "We pour stable concrete pads beneath the heavy stone to provide a reliable load-bearing foundation along uneven terrain.",
+            "icon": "tabler:box-seam"
+          }
+        ]
+      },
+      "comparison": {
+        "eyebrow": "Comparison",
+        "heading": "Structural Rebuilds vs. Surface Patching",
+        "col1": "Full Structural Rebuild",
+        "col2": "Surface Patching",
+        "rows": [
+          {
+            "feature": "Safety",
+            "val1": "Removes the failed structure entirely",
+            "val2": "Underlying failure remains"
+          },
+          {
+            "feature": "Process",
+            "val1": "Complete demolition and reconstruction",
+            "val2": "Mortar added to existing cracks"
+          },
+          {
+            "feature": "Longevity",
+            "val1": "Long-term stability",
+            "val2": "Temporary aesthetic fix"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Collapsed Retaining Barriers",
+            "description": "We remove and rebuild heavy gravity walls that have given way due to severe rain or shifting hillside soil.",
+            "icon": "tabler:wall"
+          },
+          {
+            "title": "Bulging Property Boundaries",
+            "description": "We demolish and reconstruct freestanding borders leaning dangerously toward public sidewalks or neighboring residential lots.",
+            "icon": "tabler:alert-triangle"
+          },
+          {
+            "title": "Root-Damaged Structures",
+            "description": "We replace masonry boundaries fractured by expanding tree roots, digging out the underground interference completely before pouring a new structural base.",
+            "icon": "tabler:plant-2"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Rock Wall Services",
+        "links": [
+          {
+            "title": "Veneer Rock Walls",
+            "href": "/services/rock-walls/veneer/"
+          },
+          {
+            "title": "Rock Retaining Walls",
+            "href": "/services/rock-walls/retaining/"
+          },
+          {
+            "title": "Planter & Garden Rock Walls",
+            "href": "/services/rock-walls/planter-garden/"
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "Do you patch cracks or rebuild the wall?",
+            "answer": "We focus on complete demolition and structural rebuilds for failing or collapsed walls to ensure long-term safety and stability. Surface patching merely hides the visible damage while the underlying structural failure remains active behind the mortar."
+          },
+          {
+            "question": "What materials do you use for rebuilds?",
+            "answer": "We construct the replacement structure using hand-selected volcanic basalt. This highly durable material ensures the rebuilt boundary possesses the immense weight necessary to resist severe soil pressure over time."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand firmly behind our complete demolition and reconstruction process to protect your property investment."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:eyebrow,heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "rock-walls/retaining": {
+      "path": "/services/rock-walls/retaining/",
+      "category": "rock-walls",
+      "seo": {
+        "title": "Rock Retaining Walls | Vaifoou Construction",
+        "description": "Secure your hillside with a heavy-duty rock retaining wall. Vaifoou Construction builds structural basalt retaining walls across O'ahu."
+      },
+      "hero": {
+        "heading": "Rock Retaining Walls",
+        "body": "We construct rock retaining walls for residential and commercial properties across O'ahu. Our crews build these heavy-duty barriers to secure hillsides and manage property elevation differences. We build every structure using hand-selected volcanic basalt, and every installation is backed by our workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Retaining Wall Construction Process",
+        "items": [
+          {
+            "title": "Site Engineering and Excavation",
+            "description": "We review property layouts to calculate the required wall load. Our heavy equipment operators excavate the hillside to create a safe structural starting point for the new barrier."
+          },
+          {
+            "title": "Trenching and Base Foundation",
+            "description": "A heavy gravity wall requires a massive base. We dig a deep footing trench and pour a continuous concrete foundation to lock the bottom course of stone securely into the earth."
+          },
+          {
+            "title": "Drainage Installation",
+            "description": "Water pressure destroys retaining walls. We install perforated drainage pipes behind the base layer and utilize landscape fabric to prevent soil from clogging the channels."
+          },
+          {
+            "title": "Rock Stacking and Mortaring",
+            "description": "Our masons stack hand-selected volcanic basalt carefully. We utilize professional-grade mortar to bind the heavy stones together and establish a dense structural face."
+          },
+          {
+            "title": "Backfilling and Compaction",
+            "description": "We backfill the void behind the wall using clean gravel. We compact this material tightly to facilitate proper water runoff and relieve hydrostatic pressure against the masonry."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Structural Elements",
+        "items": [
+          {
+            "title": "Volcanic Basalt",
+            "description": "We build heavy-duty barriers using hand-selected volcanic basalt. This material provides immense natural weight to hold back tons of earth securely.",
+            "icon": "tabler:mountain"
+          },
+          {
+            "title": "Concrete Footings",
+            "description": "We pour structural concrete pads beneath the rock base to prevent uneven settling along the hillside.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Hydrostatic Drainage",
+            "description": "We install dedicated weeping holes and gravel backfill to direct heavy island rainfall safely away from the structure.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Mortar Binding",
+            "description": "We apply specialized heavy-duty masonry mortar to fuse the rock joints and establish absolute structural rigidity.",
+            "icon": "tabler:trowel"
+          }
+        ]
+      },
+      "comparison": {
+        "eyebrow": "Comparison",
+        "heading": "Rock vs. CMU Block Retaining Walls",
+        "note": "We maintain a dedicated page for CMU block retaining walls so you can easily compare materials with one click. Here is how the two options differ:",
+        "footerNote": "Looking for concrete block instead? <a class=\"font-display font-bold tracking-[0.5px] text-nav-cta uppercase hover:text-heading\" href=\"/services/cmu-block-walls/\">Explore our CMU Block Walls</a>",
+        "col1": "Rock Retaining Wall",
+        "col2": "CMU Block Retaining Wall",
+        "rows": [
+          {
+            "feature": "Aesthetic",
+            "val1": "Natural volcanic basalt",
+            "val2": "Clean and uniform block"
+          },
+          {
+            "feature": "Surface Finish",
+            "val1": "Exposed natural rock face",
+            "val2": "Can be plastered or painted"
+          },
+          {
+            "feature": "Material",
+            "val1": "Hand-selected local stone",
+            "val2": "Concrete masonry units"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Hillside Stabilization",
+            "description": "We construct massive gravity walls to prevent mudslides and hold back steep earth on sloped residential lots.",
+            "icon": "tabler:mountain"
+          },
+          {
+            "title": "Property Terracing",
+            "description": "We build segmented retaining barriers to turn unusable steep grades into flat yard spaces.",
+            "icon": "tabler:stairs"
+          },
+          {
+            "title": "Commercial Elevation Control",
+            "description": "We install heavy-duty rock structures to manage significant elevation drops around commercial parking lots and building foundations.",
+            "icon": "tabler:building-warehouse"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Rock Wall Services",
+        "links": [
+          {
+            "title": "Veneer Rock Walls",
+            "href": "/services/rock-walls/veneer/"
+          },
+          {
+            "title": "Rock Wall Repair",
+            "href": "/services/rock-walls/repair/"
+          },
+          {
+            "title": "Planter & Garden Rock Walls",
+            "href": "/services/rock-walls/planter-garden/"
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "What materials do you use for rock retaining walls?",
+            "answer": "We build heavy-duty barriers using hand-selected volcanic basalt to secure your property elevation. This dense local stone provides the immense structural weight required to hold back massive amounts of soil during heavy island rainstorms."
+          },
+          {
+            "question": "Do you offer other retaining wall options?",
+            "answer": "Yes. We also construct CMU block retaining walls. You can choose the material that best fits your site requirements. CMU blocks offer a uniform footprint for a modern finish, while natural basalt provides a traditional, rugged aesthetic."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand firmly behind our complete excavation and mortaring processes to ensure long-term structural stability for your hillside."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:eyebrow,heading,note,footerNote,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "rock-walls/planter-garden": {
+      "path": "/services/rock-walls/planter-garden/",
+      "category": "rock-walls",
+      "seo": {
+        "title": "Planter & Garden Rock Walls | Vaifoou Construction",
+        "description": "Structure your property with dedicated planter and garden rock walls built by Vaifoou Construction LLC on O'ahu."
+      },
+      "hero": {
+        "heading": "Planter & Garden Rock Walls",
+        "body": "We build dedicated planter and garden rock walls to structure exterior spaces for residential and commercial properties across O'ahu. We strictly handle the hardscape masonry to prepare your site boundary. We do not provide landscaping services, soil grading, or plant installation."
+      },
+      "process": {
+        "heading": "Our Planter Wall Construction Process",
+        "items": [
+          {
+            "title": "Site Consultation and Layout",
+            "description": "We evaluate your exterior space to map the footprint of your new garden boundaries. This visit ensures the masonry aligns perfectly with your existing property structures."
+          },
+          {
+            "title": "Trenching and Base Preparation",
+            "description": "Our crews dig a shallow trench along the approved layout lines. We establish a highly stable base layer to prevent the heavy rock structure from settling into the dirt over time."
+          },
+          {
+            "title": "Stone Selection and Shaping",
+            "description": "We source natural stones and sort them upon arrival. Our masons shape individual pieces to create a tight fit and maintain structural integrity throughout the build."
+          },
+          {
+            "title": "Wall Assembly and Mortaring",
+            "description": "We construct the borders carefully and apply specialized mortar to bind the stones together. This creates a solid barrier capable of retaining dense garden soil."
+          },
+          {
+            "title": "Curing and Site Cleanup",
+            "description": "The mortar cures completely to lock the structure in place. We remove our masonry debris to leave a clean hardscape ready for your separate landscaping contractor."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Structural Elements",
+        "items": [
+          {
+            "title": "Volcanic Basalt",
+            "description": "We build your garden borders using hand-selected volcanic basalt. This local material provides a rugged aesthetic suited for island environments.",
+            "icon": "tabler:mountain"
+          },
+          {
+            "title": "Mortar Binding",
+            "description": "We utilize professional-grade mortar mixes designed to withstand constant soil moisture.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Drainage Considerations",
+            "description": "We incorporate necessary drainage channels into the masonry to prevent groundwater from pooling behind the structural rock boundaries.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Custom Heights",
+            "description": "We build planter walls to specific height requirements to accommodate shallow flower beds or deep root systems.",
+            "icon": "tabler:ruler-measure"
+          }
+        ]
+      },
+      "comparison": {
+        "eyebrow": "Scope of Work",
+        "heading": "Hardscaping vs. Landscaping",
+        "col1": "Hardscaping (Our Service)",
+        "col2": "Landscaping (Not Provided)",
+        "rows": [
+          {
+            "feature": "Focus",
+            "val1": "Structural rock boundaries",
+            "val2": "Soil preparation and planting"
+          },
+          {
+            "feature": "Materials",
+            "val1": "Volcanic basalt",
+            "val2": "Vegetation and mulch"
+          },
+          {
+            "feature": "Installation",
+            "val1": "Masonry construction",
+            "val2": "Gardening and horticulture"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Tiered Gardens",
+            "description": "We construct multi-level stone planters to maximize usable growing space on steep residential hillsides.",
+            "icon": "tabler:stairs"
+          },
+          {
+            "title": "Property Borders",
+            "description": "We build low-profile rock walls to clearly define property lines and separate lawn spaces from pedestrian walkways.",
+            "icon": "tabler:border-sides"
+          },
+          {
+            "title": "Commercial Entryways",
+            "description": "We install structural masonry planters around commercial buildings to house large decorative vegetation elements.",
+            "icon": "tabler:building-store"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Rock Wall Services",
+        "links": [
+          {
+            "title": "Veneer Rock Walls",
+            "href": "/services/rock-walls/veneer/"
+          },
+          {
+            "title": "Rock Wall Repair",
+            "href": "/services/rock-walls/repair/"
+          },
+          {
+            "title": "Rock Retaining Walls",
+            "href": "/services/rock-walls/retaining/"
+          }
+        ]
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "Do you provide the soil and plants for the garden wall?",
+            "answer": "No. We focus strictly on the structural masonry to build your planter walls. We do not provide landscaping services or plant installation. You will need to hire a separate landscaper to fill the beds and handle all horticulture work."
+          },
+          {
+            "question": "What materials do you use for planter and garden walls?",
+            "answer": "We build your garden borders using hand-selected volcanic basalt. This natural stone creates a highly durable boundary capable of holding back heavy wet soil."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand firmly behind our complete hardscaping and masonry process."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:eyebrow,heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/driveways": {
+      "path": "/services/concrete/driveways/",
+      "category": "concrete",
+      "seo": {
+        "title": "Concrete Driveways | Vaifoou Construction",
+        "description": "Vaifoou Construction pours durable concrete driveways for properties on O'ahu. Contact us to schedule a site estimate."
+      },
+      "hero": {
+        "heading": "Concrete Driveways",
+        "body": "We pour concrete driveways for residential and commercial properties across O'ahu. Our family brings a 25+ year trade legacy to every project. A cracked or settling slab creates hazards and lowers property appeal. We manage complete tear-outs and new pours to provide a stable surface. Your new driveway is built to handle heavy vehicle traffic. Every installation is backed by our workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Driveway Installation Process",
+        "items": [
+          {
+            "title": "Site Consultation",
+            "description": "We evaluate ground conditions to determine the project footprint and plan necessary drainage adjustments."
+          },
+          {
+            "title": "Demolition and Clearing",
+            "description": "Our crews break apart the damaged slab and haul the concrete away. We remove invasive roots that could undermine the new structure."
+          },
+          {
+            "title": "Sub-Base Preparation",
+            "description": "We grade the exposed earth and compact the base material. We calculate the slope to direct rainwater toward the street."
+          },
+          {
+            "title": "Forming and Pouring",
+            "description": "We set rigid forms along the perimeter. Our team pours the ready-mix concrete continuously and levels the wet surface for consistent thickness."
+          },
+          {
+            "title": "Finishing and Curing",
+            "description": "We apply a traction finish and cut control joints. The slab cures fully before we clear the job site."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Finishing Options",
+        "items": [
+          {
+            "title": "Surface Traction",
+            "description": "We apply a standard broom finish. This texture creates ridges that provide grip for tires during wet weather.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Concrete Reinforcement",
+            "description": "We use appropriate reinforcement materials to distribute heavy vehicle weight evenly across the slab.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Moisture Control",
+            "description": "We tool straight control joints to guide natural expansion and prevent random cracking.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Water Management",
+            "description": "We grade the sub-base to establish a functional slope, preventing water from pooling.",
+            "icon": "tabler:droplets"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Driveway Cost Factors",
+        "note": "Estimating the cost of a new concrete driveway requires an on-site consultation. We evaluate specific variables to determine the final project scope.",
+        "col1": "Description",
+        "rows": [
+          {
+            "feature": "Square Footage",
+            "val1": "The total surface area required for the pour."
+          },
+          {
+            "feature": "Site Preparation",
+            "val1": "Ground grading and demolition of existing concrete."
+          },
+          {
+            "feature": "Finish Selection",
+            "val1": "Standard broom finish or decorative stamped patterns."
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Residential Parking",
+            "description": "We replace older cracked slabs and expand single-car strips into wider parking pads.",
+            "icon": "tabler:building"
+          },
+          {
+            "title": "New Construction",
+            "description": "We pour brand-new structural driveways for ground-up construction projects across the island.",
+            "icon": "tabler:building"
+          },
+          {
+            "title": "Commercial Access",
+            "description": "We pour heavy-duty entry drives designed to handle constant commercial vehicle traffic.",
+            "icon": "tabler:building-warehouse"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Sidewalks & Walkways",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Patios",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Concrete Steps & Stairways",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stem Walls",
+            "href": "/services/concrete/stem-walls/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "href": "/services/concrete/stamped-decorative/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "href": "/services/concrete/sealing/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "What factors affect the cost of a new driveway?",
+            "answer": "Costs are determined by total square footage and required site preparation. This includes concrete demolition and grading. Your chosen concrete finish also impacts the final estimate. We assess these variables during a site visit."
+          },
+          {
+            "question": "What concrete do you use for driveways?",
+            "answer": "We source fresh ready-mix concrete from local O'ahu suppliers so the material handles heavy loads and resists weathering."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand behind our complete installation process."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,note,col1,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/foundations": {
+      "path": "/services/concrete/foundations/",
+      "category": "concrete",
+      "seo": {
+        "title": "Concrete Foundations | Vaifoou Construction",
+        "description": "Vaifoou Construction pours new concrete foundations for residential and commercial builds across O'ahu. Contact us for a site estimate."
+      },
+      "hero": {
+        "heading": "Concrete Foundations",
+        "body": "We pour concrete foundations for new residential and commercial builds across O'ahu. A solid base is the most critical component of any new structure. Our crews specialize exclusively in ground-up construction. Every new installation is backed by our family's 25+ year trade legacy and workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Foundation Installation Process",
+        "items": [
+          {
+            "title": "Site Evaluation and Layout",
+            "description": "We review your structural plans and measure the building footprint on your lot. We establish precise boundary lines to ensure the new foundation sits exactly where the architectural designs dictate."
+          },
+          {
+            "title": "Excavation and Trenching",
+            "description": "Our heavy equipment operators excavate the soil to reach load-bearing earth. We dig out the perimeter trenches and interior footing spaces required for a stable structural base."
+          },
+          {
+            "title": "Formwork and Reinforcement",
+            "description": "We construct heavy-duty wooden forms to hold the massive volume of wet concrete. Our team secures all required structural steel reinforcement within the trenches to provide necessary tensile strength."
+          },
+          {
+            "title": "Continuous Pouring",
+            "description": "We coordinate with local ready-mix suppliers for a steady delivery of material. Pouring the foundation continuously prevents weak cold joints from forming in the structure."
+          },
+          {
+            "title": "Leveling and Curing",
+            "description": "We screed the surface flat and verify all anchor points are properly set. The massive slab requires a strict curing period to achieve full structural integrity before framing begins."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Structural Elements",
+        "items": [
+          {
+            "title": "Heavy-Duty Concrete",
+            "description": "We utilize structural-grade ready-mix concrete sourced locally to handle the immense weight of multi-story framing.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Steel Reinforcement",
+            "description": "We install industry-standard steel rebar layouts within the forms to prevent structural shifting caused by soil movement.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Moisture Barriers",
+            "description": "We lay down heavy vapor barriers before pouring to block ground moisture from seeping up into your finished home.",
+            "icon": "tabler:wall"
+          },
+          {
+            "title": "Anchor Placement",
+            "description": "We set precision anchor bolts directly into the wet concrete to provide secure attachment points for your future walls.",
+            "icon": "tabler:corner-up-right"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Foundation Service Scope",
+        "col1": "Included Services",
+        "col2": "Excluded Services",
+        "rows": [
+          {
+            "feature": "Primary Focus",
+            "val1": "New foundation pours",
+            "val2": "Structural foundation repair"
+          },
+          {
+            "feature": "Site Application",
+            "val1": "Ground-up construction",
+            "val2": "Retrofitting existing structures"
+          },
+          {
+            "feature": "Specialized Elements",
+            "val1": "Standard structural footings",
+            "val2": "Micropiles and tiebacks"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Custom Homes",
+            "description": "We provide standard structural footings and slab-on-grade foundations for brand-new residential builds.",
+            "icon": "tabler:home"
+          },
+          {
+            "title": "Commercial Structures",
+            "description": "We pour heavy-duty foundations designed to support the immense weight of ground-up commercial buildings.",
+            "icon": "tabler:building"
+          },
+          {
+            "title": "Tract Development",
+            "description": "We scale our crews to pour consistent, high-quality foundational slabs for multi-home community projects.",
+            "icon": "tabler:building"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Concrete Driveways",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Sidewalks & Walkways",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Patios",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Concrete Steps & Stairways",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Stem Walls",
+            "href": "/services/concrete/stem-walls/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "href": "/services/concrete/stamped-decorative/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "href": "/services/concrete/sealing/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "Do you repair existing foundations?",
+            "answer": "No. We focus exclusively on new foundation work. We do not offer structural foundation repair. If your current house has settling issues or cracked slabs requiring leveling, you will need to contact a dedicated structural repair contractor."
+          },
+          {
+            "question": "Do you install micropiles or tiebacks?",
+            "answer": "No. We do not handle micropiles or tiebacks. Our crews specialize in standard new concrete pours. Complex hillside retrofitting falls outside our core ground-up construction services."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand strictly by our complete foundation pouring process."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/patios": {
+      "path": "/services/concrete/patios/",
+      "category": "concrete",
+      "seo": {
+        "title": "Concrete Patios & Lanai Extensions | Vaifoou Construction",
+        "description": "Vaifoou Construction pours custom concrete patios and lanai extensions for properties across O'ahu. Contact us to schedule a site estimate."
+      },
+      "hero": {
+        "heading": "Concrete Patios",
+        "body": "We pour concrete patios to expand your usable outdoor living space. Our crews handle everything from standard backyard patios to structural lanai extensions. We bring our family's 25+ year trade legacy to every project across O'ahu. Every installation is backed by our workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Patio Installation Process",
+        "items": [
+          {
+            "title": "Site Consultation",
+            "description": "We assess your backyard space to determine the exact footprint for your new outdoor living area. This visit ensures we plan for proper drainage away from your home."
+          },
+          {
+            "title": "Excavation and Prep",
+            "description": "Our crews dig out grass and topsoil to reach a stable base layer. We haul the excavated dirt away to keep the property clean before pouring."
+          },
+          {
+            "title": "Sub-Base Compaction",
+            "description": "We compact base aggregate tightly to create a solid foundation. We establish a slight slope so heavy rain flows safely into the yard rather than pooling against your house."
+          },
+          {
+            "title": "Forming and Pouring",
+            "description": "We stake rigid wooden forms along the perimeter. Our team pours ready-mix concrete continuously and levels the wet surface for a flat seating area."
+          },
+          {
+            "title": "Finishing and Curing",
+            "description": "We apply the chosen surface texture and cut necessary control joints. The slab cures fully before we remove the forms."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Finishing Options",
+        "items": [
+          {
+            "title": "Surface Traction",
+            "description": "We apply a standard broom finish to provide solid foot grip for traditional patios.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Moisture Control",
+            "description": "We tool straight control joints into the wet concrete. These deliberate grooves guide natural expansion to prevent random surface cracking.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Decorative Upgrades",
+            "description": "We can apply stamped patterns to replicate natural stone for premium outdoor living spaces.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Water Management",
+            "description": "We grade the sub-base to direct water correctly, preventing heavy rain from flooding your attached lanai.",
+            "icon": "tabler:droplets"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Standard Patios vs. Lanai Extensions",
+        "col1": "Standard Concrete Patio",
+        "col2": "Lanai Extension",
+        "rows": [
+          {
+            "feature": "Application",
+            "val1": "Independent outdoor seating space",
+            "val2": "Expanding existing covered living areas"
+          },
+          {
+            "feature": "Location",
+            "val1": "Open backyard or garden",
+            "val2": "Attached directly to the home structure"
+          },
+          {
+            "feature": "Finish Options",
+            "val1": "Standard broom finish or decorative",
+            "val2": "Custom matched to existing property style"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Backyard Seating",
+            "description": "We pour independent concrete pads in open backyards or gardens to create durable outdoor seating spaces.",
+            "icon": "tabler:home"
+          },
+          {
+            "title": "Lanai Extensions",
+            "description": "We pour structural slabs attached directly to the home to expand your existing covered living footprint.",
+            "icon": "tabler:home"
+          },
+          {
+            "title": "Recreational Decks",
+            "description": "We install flatwork around residential properties with proper traction finishes to create safe, usable lounge areas.",
+            "icon": "tabler:home"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Concrete Driveways",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Sidewalks & Walkways",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Steps & Stairways",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stem Walls",
+            "href": "/services/concrete/stem-walls/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "href": "/services/concrete/stamped-decorative/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "href": "/services/concrete/sealing/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "Do you pour concrete for lanai extensions?",
+            "answer": "Yes. We regularly pour concrete for lanai extensions to expand your existing living footprint. We ensure the new slab ties cleanly into your existing home foundation for a seamless transition."
+          },
+          {
+            "question": "What concrete do you use for patios and lanai extensions?",
+            "answer": "We source fresh ready-mix concrete from local suppliers to easily handle heavy outdoor furniture."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand behind our complete patio installation process."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/sealing": {
+      "path": "/services/concrete/sealing/",
+      "category": "concrete",
+      "seo": {
+        "title": "Concrete Sealing | Vaifoou Construction",
+        "description": "Vaifoou Construction provides professional concrete sealing to protect flatwork and maintain decorative finishes across O'ahu. Contact us for an estimate."
+      },
+      "hero": {
+        "heading": "Concrete Sealing",
+        "body": "We provide concrete sealing for residential and commercial properties across O'ahu. A regular resealing cycle protects standard flatwork and preserves the color of decorative stamped finishes. Unsealed concrete absorbs rainwater and motor oil. This leads to early surface degradation. Our sealing service creates a protective barrier against local weather conditions. Every site is backed by our family's 25+ year trade legacy and workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Concrete Sealing Process",
+        "items": [
+          {
+            "title": "Surface Evaluation",
+            "description": "We inspect the existing concrete to identify stains and determine the current porosity. This helps us select the appropriate cleaning method."
+          },
+          {
+            "title": "Deep Cleaning and Preparation",
+            "description": "A sealant cannot adhere to a dirty surface. We pressure wash the flatwork to remove dirt and surface contaminants. We allow the concrete to dry completely before proceeding."
+          },
+          {
+            "title": "Sealant Application",
+            "description": "Our team applies the sealant evenly across the entire surface using professional sprayers and rollers. We ensure consistent coverage to prevent pooling or dry spots."
+          },
+          {
+            "title": "Curing and Cordoning",
+            "description": "We block off the area to allow the sealant to cure. The surface needs adequate drying time before it can handle foot or vehicle traffic again."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Finishing Options",
+        "items": [
+          {
+            "title": "Penetrating Sealers",
+            "description": "We use sealers that sink into the concrete pores to block moisture from the inside. This option works well for standard driveways and structural flatwork.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Topical Coatings",
+            "description": "We apply topical sealers to create a protective film on the surface. This method repels oil stains and chemical spills effectively.",
+            "icon": "tabler:wall"
+          },
+          {
+            "title": "Color Enhancement",
+            "description": "For decorative concrete, we utilize sealants designed to enrich the underlying color. This restores the glossy look of faded stamped patterns.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Slip Resistance",
+            "description": "We can add fine grit additives into the sealant mixture. This improves foot traction on smooth surfaces during heavy rain.",
+            "icon": "tabler:trowel"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Routine Maintenance vs. Unsealed Concrete",
+        "col1": "Routine Sealing",
+        "col2": "Unsealed Concrete",
+        "rows": [
+          {
+            "feature": "Surface Protection",
+            "val1": "Resists moisture and stains",
+            "val2": "Vulnerable to absorption"
+          },
+          {
+            "feature": "Decorative Finish",
+            "val1": "Preserves color and texture",
+            "val2": "Fades over time"
+          },
+          {
+            "feature": "Structural Lifespan",
+            "val1": "Extends the life of the pour",
+            "val2": "Accelerates surface wear"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "New Flatwork",
+            "description": "We seal newly poured concrete after the initial curing phase to lock out moisture from day one.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Decorative Surfaces",
+            "description": "We apply specialized sealants to stamped concrete to enrich the color and prevent UV fading.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Restoration Maintenance",
+            "description": "We clean and reseal older concrete surfaces to extend their functional lifespan and restore their protective barrier.",
+            "icon": "tabler:trowel"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Concrete Driveways",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Sidewalks & Walkways",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Patios",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Concrete Steps & Stairways",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stem Walls",
+            "href": "/services/concrete/stem-walls/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "href": "/services/concrete/stamped-decorative/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "Why is concrete sealing important?",
+            "answer": "It protects the structural surface from moisture and preserves the appearance of decorative work. O'ahu experiences heavy rainfall and harsh sun exposure. A quality sealant acts as a shield to prevent water absorption and block ultraviolet rays that cause color fading."
+          },
+          {
+            "question": "How often should I seal my concrete?",
+            "answer": "We recommend a regular resealing cycle to maintain ongoing surface protection and prevent aesthetic fading. Most residential driveways and patios benefit from a fresh coat every few years depending on the level of daily vehicle or foot traffic they endure."
+          },
+          {
+            "question": "Are your services guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We ensure the surface is prepped correctly and the sealant is applied evenly for maximum protection."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "Our team is strictly closed on Sundays to put God first. Contact us to schedule your site visit."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/sidewalks": {
+      "path": "/services/concrete/sidewalks/",
+      "category": "concrete",
+      "seo": {
+        "title": "Sidewalks & Walkways | Vaifoou Construction",
+        "description": "We pour residential walkways and commercial sidewalks across O'ahu. Contact Vaifoou Construction to schedule a concrete site estimate."
+      },
+      "hero": {
+        "heading": "Sidewalks & Walkways",
+        "body": "We pour residential walkways and manage commercial sidewalk work across O'ahu. Our family brings a 25+ year trade legacy to every project. Cracked or uneven paths create tripping hazards for homeowners and businesses. We handle the complete demolition of failing paths and pour smooth flatwork. Every installation is backed by our workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Walkway Installation Process",
+        "items": [
+          {
+            "title": "Site Consultation",
+            "description": "We map out the pedestrian route and assess the ground slope. This initial visit ensures the new path navigates property lines effectively without disrupting existing landscaping."
+          },
+          {
+            "title": "Demolition and Excavation",
+            "description": "Our crews break up existing uneven concrete and haul the debris away. We dig a shallow trench to accommodate the new sub-base."
+          },
+          {
+            "title": "Sub-Base Preparation",
+            "description": "We lay base material and compact the soil tightly. We establish a slight slope so heavy rainwater runs off the path naturally."
+          },
+          {
+            "title": "Forming and Pouring",
+            "description": "We stake rigid wooden forms along the path layout. Our team pours the ready-mix concrete continuously to form a solid pedestrian surface."
+          },
+          {
+            "title": "Finishing and Curing",
+            "description": "We apply the final texture and cut necessary control joints. The concrete cures fully before we remove the wooden forms and clean the area."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Finishing Options",
+        "items": [
+          {
+            "title": "Surface Traction",
+            "description": "We apply a standard broom finish to exterior paths. This texture provides necessary foot grip during wet island weather.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Edge Detailing",
+            "description": "We utilize edging tools along the sides of the path. This creates a clean transition between the concrete and your lawn.",
+            "icon": "tabler:border-sides"
+          },
+          {
+            "title": "Moisture Control",
+            "description": "We tool straight control joints into the wet concrete. These grooves guide natural expansion to limit random cracking.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Commercial Upgrades",
+            "description": "For public paths, we pour integrated structural curbs and swales to handle heavy water runoff and continuous foot traffic.",
+            "icon": "tabler:building-store"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Residential vs. Commercial Applications",
+        "col1": "Residential Walkways",
+        "col2": "Commercial Sidewalks",
+        "rows": [
+          {
+            "feature": "Project Scope",
+            "val1": "Pathways and home entries",
+            "val2": "High-traffic public paths"
+          },
+          {
+            "feature": "Site Requirements",
+            "val1": "Property line navigation",
+            "val2": "Public access layouts and structural curbs"
+          },
+          {
+            "feature": "Example Work",
+            "val1": "Backyard access",
+            "val2": "Mililani Town Center curb and swale"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Residential Access",
+            "description": "We pour backyard access paths and front home entryways to provide safe footing across your lawn.",
+            "icon": "tabler:home"
+          },
+          {
+            "title": "Commercial Sidewalks",
+            "description": "We execute high-traffic public access layouts to meet strict commercial property requirements.",
+            "icon": "tabler:building"
+          },
+          {
+            "title": "Water Management Paths",
+            "description": "We pour integrated structural curbs and swales to handle heavy water runoff along pedestrian routes.",
+            "icon": "tabler:droplets"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Concrete Driveways",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Concrete Patios",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Concrete Steps & Stairways",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stem Walls",
+            "href": "/services/concrete/stem-walls/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "href": "/services/concrete/stamped-decorative/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "href": "/services/concrete/sealing/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "Do you handle both residential and commercial projects?",
+            "answer": "Yes. We pour residential walkways and execute commercial sidewalk work across the island. Our team scales up for high-traffic public access layouts and structural curbs."
+          },
+          {
+            "question": "What concrete do you use for sidewalks and walkways?",
+            "answer": "We source fresh ready-mix concrete from local suppliers to ensure the flatwork withstands constant foot traffic and heavy rainfall."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand by our complete installation and finishing process."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/stamped-decorative": {
+      "path": "/services/concrete/stamped-decorative/",
+      "category": "concrete",
+      "seo": {
+        "title": "Stamped & Decorative Concrete | Vaifoou Construction",
+        "description": "Vaifoou Construction pours stamped and decorative concrete with various pattern and finish options across O'ahu. Contact us for an estimate."
+      },
+      "hero": {
+        "heading": "Stamped & Decorative Concrete",
+        "body": "We pour stamped and decorative concrete for residential and commercial properties across O'ahu. Our crews provide multiple pattern and finish options to match your exact design requirements. Every installation is backed by our family's 25+ year trade legacy and workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Decorative Concrete Installation Process",
+        "items": [
+          {
+            "title": "Site Consultation",
+            "description": "We evaluate the project footprint and discuss your design goals. This visit helps us determine the appropriate texture patterns for your property architecture."
+          },
+          {
+            "title": "Preparation and Grading",
+            "description": "Our crews demolish existing surfaces and haul the debris away. We prepare a stable sub-base and establish the proper grade for rainwater runoff."
+          },
+          {
+            "title": "Pouring and Coloring",
+            "description": "We set perimeter forms and pour the ready-mix concrete. We apply specialized coloring agents to the wet surface to create the desired base shade."
+          },
+          {
+            "title": "Stamping and Sealing",
+            "description": "We press polyurethane mats into the wet material to imprint the chosen texture. We allow the slab to cure fully before applying a protective sealer to lock in the color."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Finishing Options",
+        "items": [
+          {
+            "title": "Pattern Selections",
+            "description": "We use professional stamping mats to replicate the visual texture of natural materials like cobblestone, slate, or brick.",
+            "icon": "tabler:border-sides"
+          },
+          {
+            "title": "Coloring Agents",
+            "description": "We apply integral color hardeners and release agents to create realistic tonal variations across the slab.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Surface Protection",
+            "description": "A decorative finish requires a robust topcoat. We apply premium sealers to repel moisture and block ultraviolet rays.",
+            "icon": "tabler:wall"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Finish Options",
+        "note": "Choosing a decorative finish allows you to elevate the look of standard flatwork. To protect these specialized finishes over time, we strongly recommend establishing a regular maintenance schedule through our dedicated Concrete Sealing service.",
+        "col1": "Stamped & Decorative Finish",
+        "col2": "Standard Broom Finish",
+        "rows": [
+          {
+            "feature": "Aesthetic",
+            "val1": "Custom patterns and textures",
+            "val2": "Traditional textured surface"
+          },
+          {
+            "feature": "Maintenance",
+            "val1": "Requires regular sealing",
+            "val2": "Minimal maintenance required"
+          },
+          {
+            "feature": "Application",
+            "val1": "Patios, driveways, and entries",
+            "val2": "High-traffic utility pathways"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Front Entryways",
+            "description": "We install decorative finishes to elevate the visual appeal of your main residential approach.",
+            "icon": "tabler:home"
+          },
+          {
+            "title": "Custom Driveways",
+            "description": "We pour high-visibility driveways using durable stamped patterns that mimic premium stone or brick.",
+            "icon": "tabler:building"
+          },
+          {
+            "title": "Outdoor Living",
+            "description": "We create custom backyard patios and lanai extensions with textured finishes for premium outdoor gathering spaces.",
+            "icon": "tabler:home"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Concrete Driveways",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Sidewalks & Walkways",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Patios",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Concrete Steps & Stairways",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stem Walls",
+            "href": "/services/concrete/stem-walls/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "href": "/services/concrete/sealing/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "What pattern and finish options do you offer?",
+            "answer": "We provide a variety of decorative patterns and custom finish options designed to complement your property style. We work with you during the initial site visit to select textures and colors that align with your vision."
+          },
+          {
+            "question": "Does decorative concrete require special maintenance?",
+            "answer": "Yes. Stamped surfaces require routine maintenance to maintain their color and texture. We handle this directly through our Concrete Sealing service. A regular sealing schedule prevents the vibrant colors from fading under the harsh O'ahu sun."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We ensure precise stamping alignment and correct sealer application."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family's 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,note,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/stem-walls": {
+      "path": "/services/concrete/stem-walls/",
+      "category": "concrete",
+      "seo": {
+        "title": "Stem Walls | Vaifoou Construction",
+        "description": "Vaifoou Construction pours structural concrete stem walls for residential and commercial projects across O'ahu. Contact us for a site estimate."
+      },
+      "hero": {
+        "heading": "Stem Walls",
+        "body": "We pour concrete stem walls for residential and commercial projects across O'ahu. These structures connect your foundation directly to your building's framing, creating a perfectly level base on sloped terrain. Every installation is backed by our family's 25+ year trade legacy and workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Stem Wall Construction Process",
+        "items": [
+          {
+            "title": "Site Evaluation and Trenching",
+            "description": "We assess lot elevation and dig a trench along the building footprint to house the foundational footing."
+          },
+          {
+            "title": "Footing Installation",
+            "description": "We pour a continuous concrete footing inside the trench. This wide base spreads the heavy weight of the structure evenly across the ground."
+          },
+          {
+            "title": "Forming and Reinforcement",
+            "description": "Our crews build vertical wooden forms on top of the cured footing. We secure structural steel reinforcement inside the forms to bind the wall directly to the base."
+          },
+          {
+            "title": "Concrete Pouring",
+            "description": "We pour ready-mix concrete directly into the vertical forms. We consolidate the wet mixture to eliminate air pockets and ensure a dense structural wall."
+          },
+          {
+            "title": "Curing and Form Removal",
+            "description": "The concrete cures to achieve proper strength. We dismantle the wooden forms to expose the finished wall and verify anchor placements for framing."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Structural Elements",
+        "items": [
+          {
+            "title": "Heavy-Duty Concrete",
+            "description": "We use structural-grade ready-mix concrete formulated to handle the compressive weight of your entire house.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Structural Reinforcement",
+            "description": "We install metal reinforcement within the wooden forms to provide the tensile strength needed against soil pressure.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Moisture Protection",
+            "description": "Elevating the base structure above ground level provides moisture control.",
+            "icon": "tabler:wall"
+          },
+          {
+            "title": "Anchor Systems",
+            "description": "We embed anchor bolts into the top of the wet concrete wall to provide a rigid attachment point for your floor joists.",
+            "icon": "tabler:corner-up-right"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Stem Wall Support Structure",
+        "col1": "Role of a Stem Wall",
+        "rows": [
+          {
+            "feature": "Primary Function",
+            "val1": "Transfers the load of the house to the foundation"
+          },
+          {
+            "feature": "Site Application",
+            "val1": "Ideal for lots with slopes or uneven elevation"
+          },
+          {
+            "feature": "Moisture Control",
+            "val1": "Elevates the base structure above ground level"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Sloped Lots",
+            "description": "We build vertical supports to create a completely level platform for framing on uneven hillside terrain.",
+            "icon": "tabler:mountain"
+          },
+          {
+            "title": "Flood Zone Elevation",
+            "description": "We construct stem walls to lift the ground floor of a new home safely above required flood lines.",
+            "icon": "tabler:droplets"
+          },
+          {
+            "title": "Utility Access",
+            "description": "We use this structural base to elevate the floor joists, providing necessary crawlspace access for sub-floor plumbing and electrical routing.",
+            "icon": "tabler:trowel"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Concrete Driveways",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Sidewalks & Walkways",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Patios",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Concrete Steps & Stairways",
+            "href": "/services/concrete/steps/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "href": "/services/concrete/stamped-decorative/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "href": "/services/concrete/sealing/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "What is the purpose of a stem wall?",
+            "answer": "It is the structural base that connects your foundation pad to the vertical walls of the building, often used to manage uneven lot elevations. It elevates your living space above the dirt and provides a completely level platform for framing."
+          },
+          {
+            "question": "Do you offer this as a standalone service?",
+            "answer": "Yes. We maintain stem walls as a dedicated service separate from standard slab foundations to meet specific structural requirements. We can build these specific structures even if we are not pouring a traditional flat monolithic slab for the main floor."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand strictly by our forming and pouring procedures."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "Our team is strictly closed on Sundays to put God first. Contact us to schedule your site visit."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,col1,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    },
+    "concrete/steps": {
+      "path": "/services/concrete/steps/",
+      "category": "concrete",
+      "seo": {
+        "title": "Concrete Steps & Stairways | Vaifoou Construction",
+        "description": "Vaifoou Construction pours durable concrete steps and custom stairways for properties across O'ahu. Contact us to schedule a site estimate."
+      },
+      "hero": {
+        "heading": "Concrete Steps & Stairways",
+        "body": "We pour concrete steps and construct custom stairways to safely manage elevation changes on your property. We build for both residential and commercial applications across O'ahu. A stable set of stairs prevents tripping hazards on uneven terrain. Our family brings a 25+ year trade legacy to every project site, and every installation is backed by our workmanship guarantee."
+      },
+      "process": {
+        "heading": "Our Stairway Installation Process",
+        "items": [
+          {
+            "title": "Site Consultation and Measurement",
+            "description": "We evaluate your property to map out the exact elevation changes. This allows us to calculate the precise rise and run required to build safe and comfortable steps."
+          },
+          {
+            "title": "Excavation and Grading",
+            "description": "Our crews dig out the hillside or remove your existing damaged stairs. We compact the exposed dirt to create a highly stable base for the heavy concrete structure."
+          },
+          {
+            "title": "Forming and Pouring",
+            "description": "We build rigid wooden forms to shape each individual riser and tread. We pour the ready-mix concrete continuously from the bottom up to ensure complete structural integrity."
+          },
+          {
+            "title": "Finishing and Curing",
+            "description": "We apply a traction finish to the wet treads. The concrete cures fully inside the wooden forms before we dismantle them and clear the job site."
+          }
+        ]
+      },
+      "materials": {
+        "heading": "Materials and Finishing Options",
+        "items": [
+          {
+            "title": "Surface Traction",
+            "description": "We apply a heavy broom finish to all stair treads. This creates deep ridges that provide essential foot grip during wet island weather.",
+            "icon": "tabler:trowel"
+          },
+          {
+            "title": "Structural Reinforcement",
+            "description": "We install metal reinforcement within the wooden forms before pouring. This strengthens the concrete to handle constant pedestrian weight.",
+            "icon": "tabler:box-seam"
+          },
+          {
+            "title": "Custom Dimensions",
+            "description": "We build treads and risers to fit your specific property elevation perfectly. This provides a much safer alternative to generic pre-cast steps.",
+            "icon": "tabler:ruler-measure"
+          }
+        ]
+      },
+      "comparison": {
+        "heading": "Standard Steps vs. Custom Stairways",
+        "col1": "Standard Concrete Steps",
+        "col2": "Custom Stairways",
+        "rows": [
+          {
+            "feature": "Application",
+            "val1": "Simple entryways or porches",
+            "val2": "Significant property elevation changes"
+          },
+          {
+            "feature": "Design",
+            "val1": "Basic functional treads",
+            "val2": "Custom dimensions and landings"
+          },
+          {
+            "feature": "Proof of Work",
+            "val1": "Available upon request",
+            "val2": "Viewable in our project gallery"
+          }
+        ]
+      },
+      "applications": {
+        "heading": "Applications",
+        "items": [
+          {
+            "title": "Entryway Porches",
+            "description": "We build functional steps to safely connect your front door to the main walkway.",
+            "icon": "tabler:home"
+          },
+          {
+            "title": "Hillside Access",
+            "description": "We construct extended stairways with custom landings to navigate steep slopes and significant property elevation changes.",
+            "icon": "tabler:stairs"
+          },
+          {
+            "title": "Commercial Transitions",
+            "description": "We pour heavy-duty concrete stairs engineered for high-traffic commercial environments.",
+            "icon": "tabler:building"
+          }
+        ]
+      },
+      "related": {
+        "categoryLabel": "Concrete Services",
+        "links": [
+          {
+            "title": "Concrete Driveways",
+            "href": "/services/concrete/driveways/"
+          },
+          {
+            "title": "Sidewalks & Walkways",
+            "href": "/services/concrete/sidewalks/"
+          },
+          {
+            "title": "Concrete Patios",
+            "href": "/services/concrete/patios/"
+          },
+          {
+            "title": "Concrete Foundations",
+            "href": "/services/concrete/foundations/"
+          },
+          {
+            "title": "Stem Walls",
+            "href": "/services/concrete/stem-walls/"
+          },
+          {
+            "title": "Stamped & Decorative Concrete",
+            "href": "/services/concrete/stamped-decorative/"
+          },
+          {
+            "title": "Concrete Sealing",
+            "href": "/services/concrete/sealing/"
+          }
+        ],
+        "maxItems": 7
+      },
+      "faqs": {
+        "heading": "Frequently Asked Questions",
+        "items": [
+          {
+            "question": "Do you build custom stairways?",
+            "answer": "Yes. We pour standard steps and construct custom stairways to fit your specific property elevation. We measure the exact slope to calculate the safest step height for your layout."
+          },
+          {
+            "question": "Can I see examples of your previous stairway work?",
+            "answer": "Yes. Stairways are a dedicated category in our project gallery where you can review our previous installations. This allows you to see real results from our local O'ahu sites."
+          },
+          {
+            "question": "Are your installations guaranteed?",
+            "answer": "Yes. Every site we manage across O'ahu is backed by a workmanship guarantee. We stand strictly by our forming, pouring, and finishing processes."
+          }
+        ]
+      },
+      "cta": {
+        "heading": "Request a Site Consultation",
+        "note": "We bring our family’s 25+ year trade legacy to every project site. Contact us to schedule an estimate."
+      },
+      "_debug": [
+        "SubServiceHero:title,body",
+        "ServiceDetailSection:heading,items,variant",
+        "ServiceDetailSection:heading,items,surface",
+        "ServiceTable:heading,col1,col2,rows",
+        "ServiceDetailSection:heading,items,animateItems",
+        "ServiceLinks:categoryLabel,items,maxItems",
+        "FAQs:title,items,animate",
+        "BrickMotifCTA:heading,note"
+      ]
+    }
+  }
+}

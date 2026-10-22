@@ -6,7 +6,12 @@ export const footerLink = defineType({
   type: 'object',
   fields: [
     defineField({ name: 'text', title: 'Label', type: 'string', validation: (r) => r.required() }),
-    defineField({ name: 'href', title: 'URL', type: 'string', validation: (r) => r.required() }),
+    defineField({
+      name: 'href',
+      title: 'URL',
+      type: 'string',
+      description: 'Leave empty to show plain (non-clickable) text, e.g. "Closed on Sundays".',
+    }),
   ],
   preview: { select: { title: 'text', subtitle: 'href' } },
 });
