@@ -11,6 +11,11 @@
   html {
     font-synthesis: none;
   }
+  em,
+  i {
+    font-style: italic;
+    font-synthesis: style;
+  }
 }
 
 @theme {
