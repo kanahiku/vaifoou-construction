@@ -1,0 +1,27 @@
+---
+description: Security requirements for all Astro+Sanity sites. Apply to all infrastructure and deployment decisions.
+alwaysApply: true
+---
+
+# Security Rules (7 Rules)
+
+## 1. Cloudflare Protection
+Put Cloudflare in front of every site: DNS, CDN, DDoS, Bot Fight Mode, WAF rules, rate limit on forms. SSL mode must be Full (strict).
+
+## 2. Cloudflare + Vercel Acknowledgment
+Vercel recommends against proxy setups. Confirm the team accepts this configuration.
+
+## 3. Security Headers
+Set in vercel.json: HSTS, X-Content-Type-Options: nosniff, Referrer-Policy, Permissions-Policy, X-Frame-Options.
+
+## 4. Secrets Management
+Secrets ONLY in Vercel env vars and 1Password. NEVER in Git or frontend code.
+
+## 5. Sanity CORS
+Limit CORS to production domains only. Read token ONLY on server side.
+
+## 6. GitHub Security
+2FA required, protect main branch, secret scanning on, Dependabot enabled, npm audit in CI.
+
+## 7. No Leftovers
+Remove test endpoints, staging links, unused packages before launch.

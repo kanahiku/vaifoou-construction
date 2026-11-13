@@ -8,7 +8,6 @@ export const siteNavigation = defineType({
   name: 'siteNavigation',
   title: 'Navigation (header)',
   type: 'document',
-  __experimental_actions: ['update', 'publish'],
   groups: [
     { name: 'menu', title: 'Menu', default: true },
     { name: 'topbar', title: 'Top bar' },

@@ -49,6 +49,13 @@ export interface MetaData {
 
   openGraph?: MetaDataOpenGraph;
   twitter?: MetaDataTwitter;
+
+  /** Social share text from the Sanity SEO panel (falls back to title / description). */
+  ogTitle?: string;
+  ogDescription?: string;
+
+  /** Blog posts: feeds BlogPosting JSON-LD. */
+  article?: { datePublished?: string; dateModified?: string; author?: string; image?: string };
 }
 
 export interface MetaDataRobots {

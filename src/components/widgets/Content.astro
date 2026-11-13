@@ -158,7 +158,7 @@ const isBleed = hasImage && imageFit === 'bleed';
                   <Fragment set:html={image} />
                 ) : (
                   <Image
-                    {...image}
+                    {...(image as Record<string, unknown>)}
                     class="w-full h-full object-cover"
                     width={700}
                     height={700}
@@ -182,7 +182,7 @@ const isBleed = hasImage && imageFit === 'bleed';
                     sizes="(max-width: 768px) 100vw, 500px"
                     layout="cover"
                     format="webp"
-                    {...image}
+                    {...(image as Record<string, unknown>)}
                   />
                 )}
               </div>

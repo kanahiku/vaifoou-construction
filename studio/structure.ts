@@ -6,6 +6,7 @@ const SINGLETONS: Record<string, string> = {
   homePage: 'singleton-home',
   contactPageMedia: 'singleton-contact-page-media',
   servicesHubPage: 'singleton-services-hub',
+  siteSettings: 'singleton-site-settings',
 };
 
 const singleton = (S: StructureBuilder, title: string, schemaType: string, documentId: string) =>
@@ -174,6 +175,8 @@ export const structure = (S: StructureBuilder) =>
             .items([
               singleton(S, 'Navigation (header)', 'siteNavigation', 'singleton-navigation'),
               singleton(S, 'Footer', 'siteFooter', 'singleton-footer'),
+              singleton(S, 'Business info (LocalBusiness schema)', 'siteSettings', 'singleton-site-settings'),
+              list(S, 'Redirects (301)', 'slugRedirect'),
             ])
         ),
     ]);

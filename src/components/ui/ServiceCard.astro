@@ -22,26 +22,26 @@ const {
   class: className = '',
 } = Astro.props;
 
-const headingClass: Record<CardVariant, string> = {
+const headingClass = ({
   dark: 'text-card-heading-dark',
   light: 'text-card-heading-light',
   outlined: 'text-card-heading-outlined',
   glass: 'text-card-heading-glass',
-}[variant];
+} satisfies Record<CardVariant, string>)[variant];
 
-const bodyClass: Record<CardVariant, string> = {
+const bodyClass = ({
   dark: 'text-card-body-dark',
   light: 'text-card-body-light',
   outlined: 'text-card-body-outlined',
   glass: 'text-card-body-glass',
-}[variant];
+} satisfies Record<CardVariant, string>)[variant];
 
-const linkClass: Record<CardVariant, string> = {
+const linkClass = ({
   dark: 'text-card-link-dark hover:text-white',
   light: 'text-card-link-light hover:text-accent',
   outlined: 'text-card-link-outlined hover:text-accent',
   glass: 'text-card-link-glass hover:text-white',
-}[variant];
+} satisfies Record<CardVariant, string>)[variant];
 ---
 
 <CardWrapper variant={variant} size={size} href={href} class={className}>

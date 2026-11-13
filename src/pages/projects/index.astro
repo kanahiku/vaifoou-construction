@@ -312,7 +312,7 @@ const serviceIcons: Record<string, ImageMetadata> = {
       if ('showModal' in dialog) {
         dialog.showModal();
       } else {
-        dialog.setAttribute('open', '');
+        (dialog as HTMLElement).setAttribute('open', '');
       }
     }
 

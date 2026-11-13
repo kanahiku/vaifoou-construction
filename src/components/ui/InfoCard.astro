@@ -29,27 +29,27 @@ const {
   animate = true,
 } = Astro.props;
 
-const headingClass: Record<CardVariant, string> = {
+const headingClass = ({
   dark: 'text-card-heading-dark',
   light: 'text-card-heading-light',
   outlined: 'text-card-heading-outlined',
   glass: 'text-card-heading-glass',
-}[variant];
+} satisfies Record<CardVariant, string>)[variant];
 
-const bodyClass: Record<CardVariant, string> = {
+const bodyClass = ({
   dark: 'text-card-body-dark',
   light: 'text-card-body-light',
   outlined: 'text-card-body-outlined',
   glass: 'text-card-body-glass',
-}[variant];
+} satisfies Record<CardVariant, string>)[variant];
 
 // Icon mark: dark bg square for light cards; accent-bordered square for dark/glass
-const defaultIconMark: Record<CardVariant, string> = {
+const defaultIconMark = ({
   dark: 'border border-accent/60',
   light: 'bg-card-dark',
   outlined: 'bg-card-dark',
   glass: 'border border-accent/60',
-}[variant];
+} satisfies Record<CardVariant, string>)[variant];
 const iconMark = iconMarkClass ?? defaultIconMark;
 ---
 

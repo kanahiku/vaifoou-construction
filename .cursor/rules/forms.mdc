@@ -1,0 +1,15 @@
+---
+description: Form handling with Cloudflare Workers, Turnstile, and email delivery.
+alwaysApply: false
+---
+
+# Forms Rules (3 Rules)
+
+## 42. Turnstile + Honeypot
+Every form: Turnstile widget (client), token verification (server), honeypot field.
+
+## 43. Form Validation
+Worker must: Validate Turnstile, rate limit, validate fields, NOT be open relay.
+
+## 44. Resend Email Config
+reply-to = visitor email. Recipients in Worker config. HTML email template.

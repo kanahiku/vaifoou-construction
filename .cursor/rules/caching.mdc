@@ -1,0 +1,18 @@
+---
+description: Caching and rebuild configuration for performance and content freshness.
+alwaysApply: false
+---
+
+# Caching Rules (4 Rules)
+
+## 8. Static Assets
+Cache /_astro/* for 1 year immutable. Other public files 1 day to 1 week. HTML NOT cached.
+
+## 9. No Cloudflare HTML Cache
+No Cache Everything on HTML unless purge-on-deploy configured.
+
+## 10. Sanity Webhook Rebuild
+Site is static. Sanity publish calls a Vercel Deploy Hook that rebuilds pages and sitemap. Content updates without developer.
+
+## 11. Test Auto-Update
+Before launch: Edit in Sanity, publish, verify production updates after the rebuild (about 2 minutes).

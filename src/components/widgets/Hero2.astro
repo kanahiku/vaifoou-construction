@@ -342,7 +342,7 @@ const wordAlignClass = {
                   <Fragment set:html={image} />
                 ) : (
                   <Image
-                    {...image}
+                    {...(image as Record<string, unknown>)}
                     class="w-full h-full object-cover"
                     widths={[400, 768, 1200]}
                     sizes="(max-width: 768px) 100vw, 50vw"

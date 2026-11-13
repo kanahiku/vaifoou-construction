@@ -1,0 +1,18 @@
+---
+description: Image optimization and handling requirements.
+alwaysApply: false
+---
+
+# Image Rules (4 Rules)
+
+## 12. Optimize Before Upload
+Crop, resize (max 2000px), compress. Under 100KB general, hero under 250KB.
+
+## 13. Astro Image
+Use Astro Image for local, urlFor() with auto=format for Sanity. Responsive srcset.
+
+## 14. Dimensions + Lazy
+Always set width/height. Lazy load below fold. Hero loads first, never lazy.
+
+## 15. Self-Host Fonts
+WOFF2 with font-display: swap. Text shows immediately.

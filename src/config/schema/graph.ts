@@ -1,6 +1,7 @@
 import { business } from './business';
 import { pages } from './pages';
-import type { BusinessSchema, JsonLdNode, PageSchema } from './types';
+import { derivePageSchema } from './auto';
+import type { BusinessSchema, JsonLdContext, JsonLdNode, PageSchema } from './types';
 import { absoluteUrl, businessId, normalizePath, siteOrigin } from './urls';
 
 function buildWebsiteJson(entity: BusinessSchema): JsonLdNode {
@@ -38,6 +39,10 @@ function buildBusinessJson(entity: BusinessSchema): JsonLdNode {
   if (entity.award?.length) out.award = entity.award;
   if (entity.sameAs?.length) out.sameAs = entity.sameAs;
   if (entity.areaServed) out.areaServed = entity.areaServed;
+  if (entity.logo) out.logo = entity.logo;
+  if (entity.logo) out.image = entity.logo;
+  if (entity.hasMap) out.hasMap = entity.hasMap;
+  if (entity.geo) out.geo = { '@type': 'GeoCoordinates', ...entity.geo };
 
   return out;
 }
@@ -54,10 +59,24 @@ function buildPageNodes(page: PageSchema, entity: BusinessSchema): JsonLdNode[] 
       description: page.description,
     };
 
+    if (page.schemaType === 'BlogPosting') {
+      main.headline = page.name;
+      main.mainEntityOfPage = absoluteUrl(page.path);
+      main.author = { '@type': 'Organization', name: page.article?.author || entity.name };
+      main.publisher = { '@id': businessId(entity.idFragment) };
+      if (page.article?.datePublished) main.datePublished = page.article.datePublished;
+      main.dateModified = page.article?.dateModified || page.article?.datePublished;
+      if (page.article?.image) main.image = page.article.image;
+    } else if (page.schemaType !== 'Service') {
+      main.isPartOf = { '@id': `${siteOrigin()}/#website` };
+    }
+
     if (page.schemaType === 'Service') {
       main.serviceType = page.serviceType;
       main.provider = { '@id': businessId(entity.idFragment) };
-      main.areaServed = entity.areaServed || { '@type': 'AdministrativeArea', name: 'Oahu, Hawaii' };
+      main.areaServed = page.areaName
+        ? { '@type': 'City', name: `${page.areaName}, Hawaii` }
+        : entity.areaServed || { '@type': 'AdministrativeArea', name: 'Oahu, Hawaii' };
     }
 
     nodes.push(main);
@@ -93,30 +112,42 @@ function buildBreadcrumbJson(page: PageSchema): JsonLdNode {
 
 const pagesByPath = new Map(pages.map((page) => [normalizePath(page.path), page]));
 
+function parseOverride(raw: string | undefined): JsonLdNode[] {
+  if (!raw?.trim()) return [];
+  try {
+    const parsed = JSON.parse(raw) as JsonLdNode | JsonLdNode[];
+    return (Array.isArray(parsed) ? parsed : [parsed]).filter((node) => node && typeof node === 'object');
+  } catch {
+    return [];
+  }
+}
+
 /**
  * JSON-LD blocks for the current request path.
- * Homepage always includes WebSite + business type; other pages emit
- * their Service/WebPage/etc. node, FAQ when present, and breadcrumbs.
+ * Homepage always includes WebSite + business type. Every other page emits its
+ * Service/WebPage/etc. node (hand-written in pages.ts, otherwise derived from the URL) plus breadcrumbs.
+ * A Sanity `seo.schemaOverride` can append to or replace the automatic output.
  */
-export function getJsonLdBlocks(pathname: string): JsonLdNode[] {
+export function getJsonLdBlocks(pathname: string, ctx: JsonLdContext = {}): JsonLdNode[] {
   if (!siteOrigin()) return [];
 
   const path = normalizePath(pathname);
+  const entity: BusinessSchema = { ...business, ...(ctx.business ?? {}) };
   const blocks: JsonLdNode[] = [];
-  const page = pagesByPath.get(path);
+  const page = pagesByPath.get(path) ?? derivePageSchema(path, ctx);
 
   if (path === '/') {
-    blocks.push(buildWebsiteJson(business));
-    blocks.push(buildBusinessJson(business));
+    blocks.push(buildWebsiteJson(entity));
+    blocks.push(buildBusinessJson(entity));
   }
 
-  if (!page) return blocks;
-
-  blocks.push(...buildPageNodes(page, business));
-
-  if (page.breadcrumb.length > 1) {
-    blocks.push(buildBreadcrumbJson(page));
+  if (page) {
+    blocks.push(...buildPageNodes(page, entity));
+    if (page.breadcrumb.length > 1) blocks.push(buildBreadcrumbJson(page));
   }
 
+  const custom = parseOverride(ctx.schemaOverride);
+  if (ctx.schemaMode === 'replace' && custom.length) return custom;
+  if (ctx.schemaMode === 'append') return [...blocks, ...custom];
   return blocks;
 }

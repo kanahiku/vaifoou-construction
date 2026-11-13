@@ -1,0 +1,61 @@
+---
+description: Monitoring, DNS, SSL, speed, and miscellaneous rules.
+alwaysApply: false
+---
+
+# SSL Rules (2)
+## 16. HTTPS Everywhere
+HTTP redirects to HTTPS. HSTS on. No mixed content.
+
+## 17. No Extra Certs
+No additional certs unless client needs them.
+
+# Monitoring Rules (3)
+## 36. HetrixTools Uptime
+Uptime monitoring from launch. Define alert recipients and response SLA.
+
+## 37. Strix Scan
+Run before launch, after big changes, every few months.
+
+## 38. Deploy Alerts
+Vercel notifications to team Slack.
+
+# Automated Checks (3)
+## 39. SEO Check Script
+npm run seo:check validates titles, H1s, descriptions, canonicals, alt text, schema.
+
+## 40. Links Check Script
+npm run links:check finds 404s, broken links, staging URLs.
+
+## 41. CI Integration
+Run both checks on PR to main.
+
+# Blog (1)
+## 48. Common Blog Template
+/blog index and /blog/[slug] detail. Same structure every site.
+
+# DNS Rules (4)
+## 49. DNS Backup
+Save zone export before changes.
+
+## 50. Cloudflare DNS
+Copy all records. Point apex + www to Vercel.
+
+## 51. Test After Switch
+301 redirects tested. Email delivery tested.
+
+## 52. Keep Old Hosting
+Keep active 48 hours for rollback. Track domain expiry.
+
+# Speed Rules (4)
+## 64. Prerender Default
+Astro prefetch enabled. Static where possible.
+
+## 65. Form UX
+Loading state on submit. No double-submit.
+
+## 66. Real Device Testing
+Throttled mobile. Lighthouse mobile > 90. Core Web Vitals pass.
+
+## 67. Sitemap Caching
+s-maxage=300, stale-while-revalidate.

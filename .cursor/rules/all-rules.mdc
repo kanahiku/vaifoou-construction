@@ -1,0 +1,136 @@
+---
+description: Complete 67 rules reference for Astro+Sanity site builds. This is the master rules file.
+alwaysApply: true
+---
+
+# Astro + Sanity Boilerplate - Complete 67 Rules
+
+## Quick Reference
+
+| Area | Rules | Key Files |
+|------|-------|-----------|
+| Security | 1-7 | vercel.json, .env |
+| Caching | 8-11 | vercel.json, api/revalidate |
+| Images | 12-15 | src/components/common/Image.astro |
+| SSL | 16-17 | Cloudflare settings |
+| Backups | 18-21 | scripts/sanity-export.ts |
+| SEO | 22-35 | src/components/common/Metadata.astro |
+| Monitoring | 36-38 | HetrixTools, Slack |
+| Automated Checks | 39-41 | scripts/seo-check.ts, links-check.ts |
+| Forms | 42-44 | Worker config |
+| Cookies | 45-47 | src/components/common/CookieConsent.astro |
+| Blog | 48 | src/pages/blog/ |
+| DNS | 49-52 | Cloudflare DNS |
+| Code | 53-58 | This file, eslint, prettier |
+| Sanity | 59-63 | studio/schemas/ |
+| Speed | 64-67 | astro.config.ts |
+
+---
+
+## Security (1-7)
+1. Cloudflare: DNS, CDN, DDoS, WAF, Bot Fight, rate limits, Full (strict) SSL
+2. Cloudflare+Vercel: Team acknowledges proxy setup
+3. Headers: HSTS, nosniff, Referrer-Policy, Permissions-Policy, X-Frame-Options
+4. Secrets: Vercel env + 1Password only. Never Git.
+5. Sanity CORS: Production domains only, server-side tokens
+6. GitHub: 2FA, protected main, secret scanning, Dependabot, npm audit CI
+7. No Leftovers: Remove test endpoints, staging links, unused packages
+
+## Caching (8-11)
+8. Static: /_astro/* 1yr immutable. HTML not cached.
+9. No Cloudflare HTML cache unless purge-on-deploy
+10. Sanity webhook triggers Vercel deploy hook (static rebuild)
+11. Test that publish updates page within 60s
+
+## Images (12-15)
+12. Before upload: max 2000px, <100KB, hero <250KB
+13. Astro Image + urlFor auto=format, responsive srcset
+14. Set width/height, lazy below fold, hero not lazy
+15. Self-host fonts WOFF2, font-display: swap
+
+## SSL (16-17)
+16. HTTPS everywhere, HTTP->HTTPS redirect, HSTS on
+17. No extra certs unless needed
+
+## Backups (18-21)
+18. (removed)
+19. Rollback: Vercel Instant or redeploy a previous deployment
+20. Sanity export: weekly, before schema changes, on release
+21. Single S3 bucket for backups
+
+## SEO (22-35)
+22. Shared components: build once, reuse everywhere
+23. GTM base layout only, GSC via DNS TXT
+24. Unique title/description/canonical per page
+25. ONE fallback approach (site.ts or Sanity)
+26. robots.txt in code, staging noindex
+27. Sitemap auto via import.meta.glob + Sanity
+28. Sitemap with _updatedAt lastmod
+29. Schema: Organization, WebSite, WebPage, Breadcrumb, BlogPosting, Service, LocalBusiness, FAQ
+30. Schema override field in Sanity
+31. SEO panel: title, desc, canonical, noindex, OG image
+32. Site settings for LocalBusiness schema
+33. OG + Twitter tags every page
+34. Alt text required on all images
+35. One H1, headings in order
+
+## Monitoring (36-38)
+36. HetrixTools uptime from launch
+37. Strix scan before launch, after changes
+38. Deploy alerts to Slack
+
+## Automated Checks (39-41)
+39. npm run seo:check
+40. npm run links:check
+41. (removed)
+
+## Forms (42-44)
+42. Turnstile + honeypot, server validation
+43. Rate limit, no open relay
+44. Resend with reply-to as visitor email
+
+## Cookies (45-47)
+45. Banner: Necessary, Analytics, Marketing, Preferences
+46. GTM Consent Mode v2: denied by default
+47. EU/UK strict, US notice OK
+
+## Blog (48)
+48. /blog and /blog/[slug] templates
+
+## DNS (49-52)
+49. Save zone before changes
+50. Cloudflare DNS, apex + www to Vercel
+51. Test 301s and email after switch
+52. Keep old hosting 48hrs
+
+## Code (53-58)
+53. Rules files: CLAUDE.md, .cursor/rules/, AGENTS.md
+54. Size: components 200, pages 150, functions 50 lines
+55. No copied blocks, use design tokens + props
+56. Zero JS default, Astro islands only when needed
+57. (removed)
+58. Single config source per value
+
+## Sanity (59-63)
+59. Shared schemas: seo, imageWithAlt, portableText, cta
+60. Block publish if title/slug/alt missing
+61. All queries in src/lib/content/sanity.ts
+62. Handle slug changes (301 or flag)
+63. Separate production/staging datasets
+
+## Speed (64-67)
+64. Astro prefetch on, static where possible
+65. Form loading state, no double-submit
+66. Test throttled mobile, Lighthouse > 90
+67. Sitemap: s-maxage=300
+
+---
+
+## Commands
+npm run dev           # Dev server
+npm run build         # Production build
+npm run check         # Astro + ESLint + Prettier
+npm run seo:check     # SEO validation
+npm run links:check   # Broken link check
+npm run prelaunch     # Build + all checks
+npm run sanity:export # Backup Sanity

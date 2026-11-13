@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { imageWithAlt, link, longText, text } from '../helpers';
+import { imageWithAlt, link, longText, seoField, text } from '../helpers';
 
 /**
  * Homepage singleton (`singleton-home`).
@@ -81,17 +81,7 @@ export const homePage = defineType({
   groups: GROUPS,
   fields: [
     // ── SEO ───────────────────────────────────────────────────────────────
-    defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'object',
-      group: 'seo',
-      options: { collapsible: false },
-      fields: [
-        text('title', 'Page title', 'Shown in the browser tab and search results (aim for under 60 characters).'),
-        longText('description', 'Meta description', 3, 'Aim for 140–160 characters.'),
-      ],
-    }),
+    seoField(),
 
     // ── 1. Hero ───────────────────────────────────────────────────────────
     defineField({

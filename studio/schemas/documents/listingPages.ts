@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { imageWithAlt, link, longText, seoFields, text } from '../helpers';
+import { imageWithAlt, link, longText, seoField, text } from '../helpers';
 
 /**
  * Listing pages — the copy around the testimonials, projects and blog posts.
@@ -13,7 +13,7 @@ import { imageWithAlt, link, longText, seoFields, text } from '../helpers';
 const section = (name: string, title: string, group: string, fields: any[]) =>
   defineField({ name, title, type: 'object', group, options: { collapsible: false }, fields });
 
-const seoSection = () => section('seo', 'SEO', 'seo', seoFields());
+const seoSection = () => seoField();
 const ctaSection = () =>
   section('cta', 'Closing CTA', 'cta', [
     text('heading', 'Heading', undefined, true),

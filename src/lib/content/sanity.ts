@@ -542,6 +542,12 @@ type SanityPortableBlock = {
   // callout fields (projected as calloutType from the "type" Sanity field)
   calloutType?: string;
   text?: string;
+  // button / ctaButton fields
+  href?: string;
+  variant?: string;
+  // faqItem fields
+  question?: string;
+  answer?: string;
 } & SanityImageFields;
 
 type SanityBlogPost = Omit<BlogPost, 'image' | 'relatedPages' | 'body' | 'contentBlocks' | 'tags'> & {
@@ -1378,4 +1384,109 @@ export function groupEpisodesByPart(episodes: PodcastEpisode[]): PodcastPartGrou
     map.get(ep.part)!.episodes.push(ep);
   }
   return [...map.values()].sort((a, b) => a.part - b.part);
+}
+
+// ─── SEO panel, Site Settings, slug redirects ────────────────────────────────
+
+export interface PageSeoOverrides {
+  canonical?: string;
+  noIndex?: boolean;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  schemaMode?: 'auto' | 'append' | 'replace';
+  schemaOverride?: string;
+}
+
+const SINGLETON_IDS: Record<string, string> = {
+  '/': 'singleton-home',
+  '/about/': 'singleton-about',
+  '/reviews/': 'singleton-reviews',
+  '/projects/': 'singleton-projects',
+  '/blog/': 'singleton-blog',
+  '/services/': 'singleton-services-hub',
+  '/service-areas/': 'singleton-service-areas-hub',
+};
+
+const withTrailingSlash = (path: string) => (path.endsWith('/') ? path : `${path}/`);
+
+const PAGE_SEO_QUERY = /* groq */ `
+  *[defined(seo) && (
+    path == $path ||
+    _id == $singletonId ||
+    (_type == "blogPost" && slug.current == $slug)
+  )][0].seo {
+    canonical,
+    noIndex,
+    ogTitle,
+    ogDescription,
+    "ogImage": ogImage.asset->url,
+    schemaMode,
+    schemaOverride
+  }
+`;
+
+/** SEO-panel extras (canonical, noindex, social, custom schema) for the page at `pathname`. */
+export async function getSanityPageSeo(pathname: string): Promise<PageSeoOverrides | null> {
+  const path = withTrailingSlash(pathname);
+  const blogSlug = path.match(/^\/blog\/([^/]+)\/$/)?.[1] ?? '';
+  try {
+    return await sanityClient.fetch<PageSeoOverrides | null>(PAGE_SEO_QUERY, {
+      path,
+      singletonId: SINGLETON_IDS[path] ?? '__none__',
+      slug: blogSlug || '__none__',
+    });
+  } catch {
+    return null;
+  }
+}
+
+export interface SiteSettingsContent {
+  businessName?: string;
+  businessType?: string;
+  description?: string;
+  phone?: string;
+  email?: string;
+  priceRange?: string;
+  address?: { street?: string; city?: string; state?: string; zip?: string; country?: string };
+  hours?: Array<{ days?: string[]; opens?: string; closes?: string }>;
+  serviceAreas?: string[];
+  logo?: string;
+  geo?: { latitude?: number; longitude?: number };
+  mapUrl?: string;
+  socialLinks?: string[];
+}
+
+const SITE_SETTINGS_QUERY = /* groq */ `
+  *[_id == "singleton-site-settings"][0] {
+    businessName, businessType, description, phone, email, priceRange,
+    address { street, city, state, zip, country },
+    hours[] { days, opens, closes },
+    serviceAreas,
+    "logo": logo.asset->url,
+    geo { latitude, longitude },
+    mapUrl,
+    socialLinks
+  }
+`;
+
+export async function getSanitySiteSettings(): Promise<SiteSettingsContent | null> {
+  try {
+    return await sanityClient.fetch<SiteSettingsContent | null>(SITE_SETTINGS_QUERY);
+  } catch {
+    return null;
+  }
+}
+
+const REDIRECT_QUERY = /* groq */ `
+  *[_type == "slugRedirect" && from == $path][0] { to, permanent }
+`;
+
+/** 301/302 target for a path whose slug changed in Studio. */
+export async function getSanityRedirect(pathname: string): Promise<{ to: string; permanent?: boolean } | null> {
+  try {
+    return await sanityClient.fetch(REDIRECT_QUERY, { path: withTrailingSlash(pathname) });
+  } catch {
+    return null;
+  }
 }

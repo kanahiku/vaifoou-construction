@@ -1,0 +1,21 @@
+---
+description: Code quality standards for components, pages, and configuration.
+alwaysApply: true
+---
+
+# Code Standards (5 Rules)
+
+## 53. Agent Rules File
+Every repo MUST have CLAUDE.md at root, .cursor/rules/*.mdc, and AGENTS.md.
+
+## 54. Size Limits
+Components ~200 lines max, Pages ~150 lines max, Functions ~50 lines max. Split larger files.
+
+## 55. Structure
+NO copied blocks - use design tokens. NO duplicate components for variants. Extend with props.
+
+## 56. Zero JS Default
+Astro components by default. React/Vue ONLY for real interactivity. Use Astro islands sparingly.
+
+## 58. Single Config Source
+ONE place for each config: site name in site.ts, phone in contact.ts, colors in brand.ts.

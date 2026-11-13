@@ -1,0 +1,48 @@
+---
+description: SEO requirements for every page. Apply when creating pages, components, or Sanity schemas.
+alwaysApply: true
+---
+
+# SEO Rules (14 Rules)
+
+## 22. Shared SEO Components
+Build SEO, Schema, GTM components ONCE in shared starter. Use src/components/common/Metadata.astro and JsonLd.astro.
+
+## 23. GTM Placement
+GTM in base layout ONLY. GSC verified by DNS TXT record. Sitemap submitted after launch.
+
+## 24. Unique Meta
+Every page MUST have unique title (50-60 chars), unique description (120-160 chars), correct canonical URL.
+
+## 25. Fallback Strategy
+Pick ONE approach for defaults: Either site.ts OR Sanity siteSettings, NOT both.
+
+## 26. robots.txt
+Generated in code (src/pages/robots.txt.ts). Staging sites get noindex automatically.
+
+## 27. Sitemap Auto-Discovery
+NEVER hand-edit. Use import.meta.glob for static pages + Sanity queries for dynamic content.
+
+## 28. SSR Sitemap with lastmod
+Query Sanity with _updatedAt for lastmod dates. Production URLs only.
+
+## 29. Default Schema Types
+JSON-LD for: Organization, WebSite, WebPage, Breadcrumb, BlogPosting, Service, LocalBusiness, FAQPage.
+
+## 30. Schema Override
+Sanity SEO object includes schemaOverride field for custom JSON-LD per page.
+
+## 31. SEO Panel in Sanity
+Every document needs SEO object: title, description, canonical, noIndex, ogImage.
+
+## 32. Site Settings Schema
+Sanity siteSettings contains business info for LocalBusiness schema.
+
+## 33. Open Graph
+Every page needs og:title, og:description, og:image (1200x630), og:url, twitter:card.
+
+## 34. Alt Text Required
+imageWithAlt schema requires alt text. Validation blocks publish if missing.
+
+## 35. Heading Structure
+ONE h1 per page. H2, H3 in order (no skipping levels).

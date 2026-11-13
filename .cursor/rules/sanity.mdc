@@ -1,0 +1,21 @@
+---
+description: Sanity CMS schema design and query patterns.
+alwaysApply: true
+---
+
+# Sanity Setup (5 Rules)
+
+## 59. Shared Schema Objects
+Reuse: seo.ts, imageWithAlt.ts, portableText.ts, cta.ts across document types.
+
+## 60. Publish Validation
+Block publish if missing: Title, Slug, Required alt text. Use studio/lib/validation.ts.
+
+## 61. Centralized Queries
+ALL GROQ queries in ONE file: src/lib/content/sanity.ts. One file to maintain.
+
+## 62. Slug Change Handling
+When slug changes: Auto 301 redirect OR flag for manual review. Never break URLs.
+
+## 63. Separate Datasets
+production = Live content, staging = Testing. NEVER test on production.

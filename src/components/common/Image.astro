@@ -229,7 +229,7 @@ const buildCdnUrl = (variantWidth?: number, variantHeight?: number): string | un
  */
 const CDN_BREAKPOINTS = [320, 400, 500, 640, 720, 828, 960, 1080, 1200, 1440, 1600, 1920, 2048];
 const uniqueSortedWidths = (values: Array<number | undefined>): number[] =>
-  [...new Set(values.filter((value): value is number => Number.isFinite(value) && value > 0))].sort((a, b) => a - b);
+  [...new Set(values.filter((value): value is number => value !== undefined && Number.isFinite(value) && value > 0))].sort((a, b) => a - b);
 
 const expandWidths = (raw?: number[]): number[] | undefined => {
   if (Array.isArray(raw) && raw.length > 0) {

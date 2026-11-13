@@ -166,7 +166,7 @@ async function plan(doc: Json) {
   const legacyCards: Json[] = existing?.audienceCards ?? [];
   const currentCards: Json[] = existing?.intro?.audienceCards ?? legacyCards;
   const cards = (currentCards.length ? currentCards : HUB.intro.cards).map((card, i) => ({
-    _key: card._key ?? `hubcard-${i}`,
+    _key: (card as { _key?: string })._key ?? `hubcard-${i}`,
     _type: 'servicesHubAudienceCard',
     ...fillMissing(card, HUB.intro.cards[i] ?? {}),
   }));

@@ -1,0 +1,15 @@
+---
+description: Cookie consent and GDPR compliance.
+alwaysApply: false
+---
+
+# Cookie Consent Rules (3 Rules)
+
+## 45. Cookie Banner
+Categories: Necessary (always on), Analytics, Marketing, Preferences. Banner on first visit.
+
+## 46. GTM Consent Mode v2
+Denied by default. GTM/GA4 blocked before consent. Fire only after consent.
+
+## 47. Regional Compliance
+Strict opt-in for EU/UK. Notice-only acceptable for US. Check with client.

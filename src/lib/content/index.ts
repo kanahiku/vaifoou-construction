@@ -15,6 +15,9 @@ import type {
   Testimonial,
 } from './types';
 import {
+  getSanityPageSeo,
+  getSanitySiteSettings,
+  getSanityRedirect,
   getSanityBlogPost,
   getSanityBlogPosts,
   getSanityBlogPostSlugs,
@@ -303,6 +306,7 @@ const PROJECT_FALLBACKS: ProjectCardContent[] = [
     beforeLabel: 'Before',
     afterLabel: 'After',
     order: 1,
+    galleryImages: [],
   },
   {
     _id: 'fallback-makakilo-concrete-sidewalk',
@@ -316,6 +320,7 @@ const PROJECT_FALLBACKS: ProjectCardContent[] = [
     beforeLabel: 'Before',
     afterLabel: 'After',
     order: 2,
+    galleryImages: [],
   },
   {
     _id: 'fallback-wahiawa-stamped-concrete',
@@ -329,6 +334,7 @@ const PROJECT_FALLBACKS: ProjectCardContent[] = [
     beforeLabel: 'Before',
     afterLabel: 'After',
     order: 3,
+    galleryImages: [],
   },
 ];
 
@@ -342,3 +348,8 @@ export async function getProjects(): Promise<ProjectCardContent[]> {
 
   return PROJECT_FALLBACKS;
 }
+
+export const getPageSeo = getSanityPageSeo;
+export const getSiteSettings = getSanitySiteSettings;
+export const getRedirect = getSanityRedirect;
+export type { PageSeoOverrides, SiteSettingsContent } from './sanity';

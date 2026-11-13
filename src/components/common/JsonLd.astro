@@ -1,7 +1,10 @@
 ---
 import { getJsonLdBlocks } from '~/config/schema';
+import type { JsonLdContext } from '~/config/schema/types';
 
-const blocks = getJsonLdBlocks(Astro.url.pathname);
+const { title, description, article, schemaMode, schemaOverride, business } = Astro.props as JsonLdContext;
+
+const blocks = getJsonLdBlocks(Astro.url.pathname, { title, description, article, schemaMode, schemaOverride, business });
 ---
 
 {

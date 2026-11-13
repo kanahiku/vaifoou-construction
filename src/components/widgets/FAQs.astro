@@ -39,7 +39,26 @@ const answerColor = classes?.answer ?? 'text-faq-answer-light';
 const toggleBase = 'border-faq-toggle-light text-faq-toggle-light';
 const toggleActive = 'group-open:border-accent group-open:text-accent';
 const displayTitle = tagline ? `${tagline}: ${title}` : title;
+
+// FAQPage rich-result data, built from the same items the accordion renders.
+const plain = (html = '') => html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+const faqEntries = items
+  .map(({ title: q, description: a }) => ({ q: plain(q), a: plain(a) }))
+  .filter((entry) => entry.q && entry.a);
+const faqJsonLd = faqEntries.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqEntries.map(({ q, a }) => ({
+        '@type': 'Question',
+        name: q,
+        acceptedAnswer: { '@type': 'Answer', text: a },
+      })),
+    }
+  : null;
 ---
+
+{faqJsonLd && <script type="application/ld+json" is:inline set:html={JSON.stringify(faqJsonLd)} />}
 
 {
   isDark ? (

@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { imageWithAlt, longText, seoFields, text } from '../helpers';
+import { imageWithAlt, longText, seoField, text } from '../helpers';
 
 /**
  * About page — /about/ (singleton `singleton-about`).
@@ -23,7 +23,7 @@ export const aboutPage = defineType({
     { name: 'cta', title: 'Closing CTA' },
   ],
   fields: [
-    section('seo', 'SEO', 'seo', seoFields()),
+    seoField(),
     section('hero', 'Hero', 'hero', [
       text('heading', 'Heading (H1)', undefined, true),
       longText('body', 'Subheading', 3),

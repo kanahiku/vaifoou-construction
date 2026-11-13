@@ -1,14 +1,18 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
 import { ComposeIcon } from '@sanity/icons';
 import { relatedPageOptions } from '../objects/relatedPageOptions';
+import { requireTitleAndSlug, slugRequired, altRequired } from '../../lib/validation';
+import { seoField } from '../helpers';
 
 export const blogPost = defineType({
   name: 'blogPost',
   title: 'Blog',
   type: 'document',
   icon: ComposeIcon,
+  validation: requireTitleAndSlug,
   groups: [
     { name: 'content', title: 'Content' },
+    { name: 'seo', title: 'SEO' },
     { name: 'related', title: 'Related pages' },
   ],
   fields: [
@@ -26,7 +30,7 @@ export const blogPost = defineType({
       group: 'content',
       description: 'Used in the URL: /blog/your-slug. Publish to make the article live — no code deploy needed.',
       options: { source: 'title' },
-      validation: (r) => r.required(),
+      validation: slugRequired,
     }),
     defineField({
       name: 'excerpt',
@@ -52,6 +56,7 @@ export const blogPost = defineType({
       group: 'content',
       description: 'SEO meta description for Google snippets (falls back to Excerpt if empty).',
     }),
+    seoField(),
     defineField({
       name: 'publishDate',
       title: 'Publish date',
@@ -153,7 +158,7 @@ export const blogPost = defineType({
                   defineField({
                     name: 'href',
                     title: 'URL',
-                    type: 'string',
+                    type: 'url',
                     validation: (r) =>
                       r.uri({ scheme: ['http', 'https', 'mailto', 'tel'], allowRelative: true }),
                   }),
@@ -176,7 +181,7 @@ export const blogPost = defineType({
               name: 'alt',
               title: 'Alt text',
               type: 'string',
-              validation: (r) => r.required().warning('Describe the photo for accessibility and SEO.'),
+              validation: altRequired,
             }),
             defineField({
               name: 'caption',

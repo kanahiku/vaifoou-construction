@@ -13,6 +13,8 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import GoogleTagManager from '~/components/common/GoogleTagManager.astro';
+import { getPageSeo, getSiteSettings } from '~/lib/content';
+import { businessFromSettings } from '~/config/schema';
 import JsonLd from '~/components/common/JsonLd.astro';
 import Intersect from '~/components/common/Intersect.astro';
 
@@ -27,7 +29,22 @@ export interface Props {
   metadata?: MetaDataType;
 }
 
-const { metadata = {} } = Astro.props;
+const { metadata: pageMetadata = {} } = Astro.props;
+
+// SEO panel + Site Settings from Sanity (both optional — pages render with code defaults if empty).
+const [seo, settings] = await Promise.all([getPageSeo(Astro.url.pathname), getSiteSettings()]);
+
+const metadata: MetaDataType = {
+  ...pageMetadata,
+  canonical: pageMetadata.canonical ?? seo?.canonical ?? undefined,
+  ogTitle: pageMetadata.ogTitle ?? seo?.ogTitle ?? undefined,
+  ogDescription: pageMetadata.ogDescription ?? seo?.ogDescription ?? undefined,
+  robots: seo?.noIndex ? { index: false, follow: false } : pageMetadata.robots,
+  openGraph: seo?.ogImage
+    ? { ...pageMetadata.openGraph, images: [{ url: seo.ogImage, width: 1200, height: 630 }] }
+    : pageMetadata.openGraph,
+};
+
 const { language, textDirection } = I18N;
 const fonts = brandFontConfig();
 ---
@@ -44,7 +61,14 @@ const fonts = brandFontConfig();
     <Metadata {...metadata} />
     <SiteVerification />
     <Analytics />
-    <JsonLd />
+    <JsonLd
+      title={pageMetadata.title}
+      description={pageMetadata.description}
+      article={pageMetadata.article}
+      schemaMode={seo?.schemaMode}
+      schemaOverride={seo?.schemaOverride}
+      business={businessFromSettings(settings)}
+    />
 
     <!-- Comment the line below to disable View Transitions -->
     <ClientRouter fallback="swap" />

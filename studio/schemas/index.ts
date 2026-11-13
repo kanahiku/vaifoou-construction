@@ -21,6 +21,14 @@ import { serviceAreasHubPage, serviceAreaPage, serviceAreaCard } from './documen
 import { blogPost } from './documents/blogPost';
 import { testimonial } from './documents/testimonial';
 import { project, projectTag } from './documents/project';
+import { slugRedirect } from './documents/slugRedirect';
+import { siteSettings } from './singletons/siteSettings';
+
+// Shared objects (seo, imageWithAlt, portableText, cta)
+import { seoType } from './objects/seo';
+import { imageWithAltType } from './objects/imageWithAlt';
+import { portableTextType } from './objects/portableText';
+import { ctaType } from './objects/cta';
 
 // Navigation objects
 import { navLink, navGroup, navSubLink } from './objects/navLink';
@@ -62,6 +70,8 @@ export const schemaTypes = [
   // Documents
   siteNavigation,
   siteFooter,
+  siteSettings,
+  slugRedirect,
   homePage,
   aboutPage,
   audienceLandingPage,
@@ -81,6 +91,12 @@ export const schemaTypes = [
   project,
   blogPost,
   testimonial,
+
+  // Objects — shared
+  seoType,
+  imageWithAltType,
+  portableTextType,
+  ctaType,
 
   // Objects — nav
   navLink,

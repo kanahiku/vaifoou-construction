@@ -69,7 +69,11 @@ export interface SocialLink {
 export interface NavigationContent {
   header: {
     links: NavLink[];
-    actions: { variant?: string; text?: string; href?: string }[];
+    actions: {
+      variant?: 'primary' | 'ghost' | 'secondary' | 'tertiary' | 'ghost-light' | 'ghost-dark' | 'link';
+      text?: string;
+      href?: string;
+    }[];
     phone?: NavPhone;
     topBar?: { items: string[]; note?: string };
   };

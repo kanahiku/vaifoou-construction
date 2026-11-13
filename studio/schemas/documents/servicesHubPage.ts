@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { imageWithAlt, link, longText, seoFields, text } from '../helpers';
+import { imageWithAlt, link, longText, seoField, text } from '../helpers';
 
 /**
  * Services hub singleton (`singleton-services-hub`) — /services/
@@ -43,14 +43,7 @@ export const servicesHubPage = defineType({
   type: 'document',
   groups: GROUPS,
   fields: [
-    defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'object',
-      group: 'seo',
-      options: { collapsible: false },
-      fields: seoFields(),
-    }),
+    seoField(),
 
     defineField({
       name: 'hero',

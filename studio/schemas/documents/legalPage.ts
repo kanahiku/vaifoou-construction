@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { longText, seoFields, text } from '../helpers';
+import { longText, seoField, text } from '../helpers';
 
 /**
  * Legal pages — one document per page (privacy policy, terms, accessibility).
@@ -55,14 +55,7 @@ export const legalPage = defineType({
       description: 'URL of the page, e.g. /privacy-policy/. Do not change for existing pages.',
       validation: (r) => r.required().regex(/^\/[a-z0-9-]+\/$/, { name: 'path' }),
     }),
-    defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'object',
-      group: 'seo',
-      options: { collapsible: false },
-      fields: seoFields(),
-    }),
+    seoField(),
     { ...text('heading', 'Page heading (H1)', undefined, true), group: 'content' },
     { ...richText('intro', 'Introduction'), group: 'content' },
     defineField({

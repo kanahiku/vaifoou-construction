@@ -9,24 +9,14 @@ import NavList from '~/components/widgets/NavList.astro';
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
+import type { NavLink } from '~/lib/content/types';
 import { site } from '~/config/site';
 import { CONTACT } from '~/config/contact';
 
-interface Link {
-  text?: string;
-  href?: string;
-  ariaLabel?: string;
-  icon?: string;
-}
-
-interface MenuLink extends Link {
-  links?: Array<MenuLink>;
-  columns?: Array<{ title: string; links: Array<MenuLink> }>;
-}
 
 export interface Props {
   id?: string;
-  links?: Array<MenuLink>;
+  links?: Array<NavLink>;
   actions?: Array<CallToAction>;
   phone?: { text: string; href: string };
   /** Left items in the top utility bar. */
@@ -259,7 +249,7 @@ const navBgStyle = '';
                       </summary>
                       <ul class="mb-1 ml-2 flex flex-col border-l border-heading/10 pl-2">
                         {nested.map(({ text: nestedText, href: nestedHref, links: grandChildLinks }) => {
-                          const hasGrandChildren = Boolean((grandChildLinks as Array<unknown> | undefined)?.length);
+                          const hasGrandChildren = Boolean(grandChildLinks?.length);
                           if (!hasGrandChildren) {
                             return (
                               <li>
@@ -291,7 +281,7 @@ const navBgStyle = '';
                                   </span>
                                 </summary>
                                 <ul class="mb-1 ml-2 flex flex-col border-l border-heading/10 pl-2">
-                                  {(grandChildLinks as Array<{ text: string; href: string }>).map(({ text: gcText, href: gcHref }) => (
+                                  {(grandChildLinks ?? []).map(({ text: gcText, href: gcHref }) => (
                                     <li>
                                       <a
                                         class:list={[mobileLinkClass, 'py-2 text-[14px]', { 'aw-link-active': isPathActive(gcHref) }]}

@@ -1,0 +1,15 @@
+---
+description: Backup strategy for code and content.
+alwaysApply: false
+---
+
+# Backup Rules (3 Rules)
+
+## 19. Rollback Ready
+Options: Vercel Instant Rollback or redeploy a previous deployment.
+
+## 20. Sanity Export
+Export weekly via GitHub Actions. Before schema changes. On every release.
+
+## 21. Single Backup Location
+ALL backups in ONE S3 bucket.

@@ -40,7 +40,7 @@ export default ({ config: _themeConfig = 'src/config.yaml' } = {}): AstroIntegra
         }
         METADATA.description = site.description;
         if (METADATA.openGraph) {
-          METADATA.openGraph.site_name = site.name;
+          METADATA.openGraph.siteName = site.name;
         }
 
         ANALYTICS.vendors.googleTagManager = {

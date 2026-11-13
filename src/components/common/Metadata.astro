@@ -17,9 +17,8 @@ export interface Props extends MetaData {
 }
 
 const indexable = isIndexableHost(Astro.url.host);
-const defaultCanonical = indexable
-  ? String(getCanonical(String(Astro.url.pathname)))
-  : String(new URL(Astro.url.pathname, Astro.url.origin));
+// Always the production URL — previews (*.vercel.app) canonicalise to the live site and stay noindex.
+const defaultCanonical = String(getCanonical(String(Astro.url.pathname)));
 
 const {
   title,
@@ -27,6 +26,8 @@ const {
   canonical = defaultCanonical,
   robots = {},
   description,
+  ogTitle,
+  ogDescription,
   openGraph = {},
   twitter = {},
 } = Astro.props;
@@ -92,13 +93,13 @@ function buildOpenGraph(og: MetaDataOpenGraph): SEOProps['openGraph'] | undefine
 
   return {
     basic: {
-      title: title || METADATA?.title?.default || '',
+      title: ogTitle || title || METADATA?.title?.default || '',
       type: og.type || 'website',
       image: imageUrl,
       url: og.url,
     },
     optional: {
-      description: description || METADATA?.description,
+      description: ogDescription || description || METADATA?.description,
       locale: og.locale,
       siteName: og.siteName,
     },
