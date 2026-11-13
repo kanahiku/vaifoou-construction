@@ -56,11 +56,11 @@
       "missing": [
         {
           "type": "host",
-          "value": "example.com"
+          "value": "vaifoouconstruction.com"
         },
         {
           "type": "host",
-          "value": "www.example.com"
+          "value": "www.vaifoouconstruction.com"
         }
       ],
       "headers": [

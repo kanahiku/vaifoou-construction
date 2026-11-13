@@ -31,7 +31,9 @@ export default defineConfig({
   output: 'server',
   trailingSlash: 'always',
   adapter: vercel({
-    edgeMiddleware: true,
+    // Edge middleware crashes on every POST (undici WASM is blocked at the edge), which breaks the Sanity
+    // revalidate webhook and the contact/reviews APIs. Run middleware in the Node function instead.
+    edgeMiddleware: false,
     isr: {
       expiration: 60 * 5,
       bypassToken: isrBypassToken,
